@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bpkchjepg5rds"]
+
+[ext_resource type="Script" uid="uid://du87gobbk75b4" path="res://scripts/collectible.gd" id="1_bkg8t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_k2x07"]
+radius = 3.75
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_bkg8t"]
+radius = 7.5
+
+[node name="Collectible" type="RigidBody2D"]
+collision_layer = 68
+input_pickable = true
+can_sleep = false
+script = ExtResource("1_bkg8t")
+
+[node name="CollectibleCollision" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_k2x07")
+
+[node name="MouseDetector" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 0
+
+[node name="MouseDetectorCollision" type="CollisionShape2D" parent="MouseDetector"]
+shape = SubResource("CircleShape2D_bkg8t")
+
+[connection signal="input_event" from="MouseDetector" to="." method="_on_mouse_detector_input_event"]

@@ -55,4 +55,9 @@ position = Vector2(0, -10)
 shape = SubResource("CircleShape2D_fjrip")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
-zoom = Vector2(2, 2)
+zoom = Vector2(3, 3)
+
+[node name="Bag" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bag"]
+polygon = PackedVector2Array(10, 10, 10, -10, -10, -10, -10, 10, -7.5, 7.5, -7.5, -7.5, 7.5, -7.5, 7.5, 7.5, -7.5, 7.5, -10, 10)
