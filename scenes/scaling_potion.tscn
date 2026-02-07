@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://cw7n3rs8rqofs"]
+
+[ext_resource type="PackedScene" uid="uid://cd0jgoajcto8y" path="res://scenes/potion.tscn" id="1_c8cev"]
+[ext_resource type="Script" uid="uid://u7qguokrk4ww" path="res://scripts/scaling_potion.gd" id="2_tdmsy"]
+
+[node name="ScalingPotion" instance=ExtResource("1_c8cev")]
+script = ExtResource("2_tdmsy")

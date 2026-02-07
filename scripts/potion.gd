@@ -3,7 +3,11 @@ extends "res://scripts/collectible.gd"
 @onready var particles: GPUParticles2D = $CollectibleCollision/Particles
 @onready var timer: Timer = $CollectibleCollision/Timer
 @onready var potion_effect: Area2D = $CollectibleCollision/PotionEffect
-
+func _ready() -> void:
+	super()
+	timer.wait_time=get_meta("timer_length")
+func apply_effect(targeted, reversed: bool):
+	pass
 var prev_velocity=[0,0]
 const shatter_speed=200
 var exploded=false
@@ -15,12 +19,8 @@ func _on_body_entered(body: Node) -> void:
 		exploded=true
 		particles.emitting=true
 		affected=potion_effect.get_overlapping_bodies()
-		for targetable in affected:
-			if targetable.is_class("RigidBody2D"):
-				for child in targetable.get_children():
-					child.scale*=1.5
-			else:
-				targetable.scale*=1.5
+		affected.erase(potion)
+		apply_effect(affected, false)
 		
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	super(state)
@@ -29,10 +29,5 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 
 func _on_timer_timeout() -> void:
 	exploded=false
-	for targetable in affected:
-			if targetable.is_class("RigidBody2D"):
-				for child in targetable.get_children():
-					child.scale/=1.5
-			else:
-				targetable.scale/=1.5
+	apply_effect(affected, true)
 	affected=[]
