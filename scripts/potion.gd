@@ -8,12 +8,19 @@ func _ready() -> void:
 	timer.wait_time=get_meta("timer_length")
 func apply_effect(targeted, reversed: bool):
 	pass
-var prev_velocity=[0,0]
+var prev_velocity=[Vector2(0,0),Vector2(0,0)]
 const shatter_speed=200
 var exploded=false
 var affected=[]
 func _on_body_entered(body: Node) -> void:
-	if(prev_velocity[0]>=shatter_speed and not in_bag and affected.size()==0 and not exploded):
+	var dif_velocity=0
+	if body.is_class("RigidBody2D"):
+		dif_velocity=(body.linear_velocity-prev_velocity[0]).length()
+	elif body.is_class("CharacterBody2D"):
+		dif_velocity=(body.velocity-prev_velocity[0]).length()
+	else:
+		dif_velocity=prev_velocity[0].length()
+	if(dif_velocity>=shatter_speed and not in_bag and affected.size()==0 and not exploded):
 		print("kablooey")
 		timer.start()
 		exploded=true
@@ -24,7 +31,7 @@ func _on_body_entered(body: Node) -> void:
 		
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	super(state)
-	prev_velocity.append(linear_velocity.length())
+	prev_velocity.append(linear_velocity)
 	prev_velocity.remove_at(0)
 
 func _on_timer_timeout() -> void:
