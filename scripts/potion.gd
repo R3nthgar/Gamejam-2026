@@ -1,8 +1,8 @@
 extends "res://scripts/collectible.gd"
 @onready var potion: RigidBody2D = $"."
-@onready var particles: GPUParticles2D = $CollectibleCollision/Particles
 @onready var timer: Timer = $CollectibleCollision/Timer
 @onready var potion_effect: Area2D = $CollectibleCollision/PotionEffect
+
 func _ready() -> void:
 	super()
 	timer.wait_time=get_meta("timer_length")
@@ -23,8 +23,7 @@ func _on_body_entered(body: Node) -> void:
 	if(dif_velocity>=shatter_speed and not in_bag and affected.size()==0 and not exploded):
 		print("kablooey")
 		timer.start()
-		exploded=true
-		particles.emitting=true
+		emit_particles(Color("hotpink"), 1)
 		affected=potion_effect.get_overlapping_bodies()
 		affected.erase(potion)
 		apply_effect(affected, false)

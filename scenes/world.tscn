@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://bl3f24mqhcpvy"]
+[gd_scene load_steps=6 format=4 uid="uid://bl3f24mqhcpvy"]
 
 [ext_resource type="PackedScene" uid="uid://bf5sevjvdfpd2" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="TileSet" uid="uid://i3epakq5p5r1" path="res://assets/maptiles.tres" id="2_rwgxs"]
 [ext_resource type="PackedScene" uid="uid://b88olwn04j8oe" path="res://scenes/collectible.tscn" id="3_4wyf3"]
 [ext_resource type="PackedScene" uid="uid://cw7n3rs8rqofs" path="res://scenes/scaling_potion.tscn" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://ci8k3jtruhyx" path="res://scenes/color_potion.tscn" id="5_71j4m"]
 
 [node name="World" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [-91.0]
@@ -18,15 +19,15 @@ tile_set = ExtResource("2_rwgxs")
 
 [node name="Collectible" parent="." instance=ExtResource("3_4wyf3")]
 position = Vector2(118, -22)
-metadata/collectible = "apples"
+metadata/collectible = "red_apple"
 
 [node name="Collectible2" parent="." instance=ExtResource("3_4wyf3")]
 position = Vector2(127, -29)
-metadata/collectible = "apples"
+metadata/collectible = "red_apple"
 
 [node name="Collectible3" parent="." instance=ExtResource("3_4wyf3")]
 position = Vector2(132, -46)
-metadata/collectible = "apples"
+metadata/collectible = "red_apple"
 
 [node name="Collectible4" parent="." instance=ExtResource("3_4wyf3")]
 position = Vector2(114, -58)
@@ -42,3 +43,6 @@ metadata/collectible = "apples"
 
 [node name="ScalingPotion" parent="." instance=ExtResource("4_k0juu")]
 position = Vector2(175, -7)
+
+[node name="ColorPotion" parent="." instance=ExtResource("5_71j4m")]
+position = Vector2(153, -21)

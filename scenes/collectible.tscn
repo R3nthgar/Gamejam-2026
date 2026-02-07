@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b88olwn04j8oe"]
+[gd_scene load_steps=17 format=3 uid="uid://b88olwn04j8oe"]
 
 [ext_resource type="Script" uid="uid://du87gobbk75b4" path="res://scripts/collectible.gd" id="1_bkg8t"]
 [ext_resource type="Texture2D" uid="uid://bbnqvji3npki0" path="res://assets/brackeys_platformer_assets/sprites/fruit.png" id="2_1pg6c"]
@@ -26,13 +26,21 @@ region = Rect2(0, 16, 16, 16)
 atlas = ExtResource("2_1pg6c")
 region = Rect2(0, 0, 16, 16)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ma10x"]
+atlas = ExtResource("2_1pg6c")
+region = Rect2(0, 16, 16, 16)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_mh687"]
 atlas = ExtResource("2_1pg6c")
-region = Rect2(16, 48, 16, 16)
+region = Rect2(16, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_61c27"]
 atlas = ExtResource("2_1pg6c")
 region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fuck5"]
+atlas = ExtResource("2_1pg6c")
+region = Rect2(0, 48, 16, 16)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_61c27"]
 animations = [{
@@ -63,6 +71,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_ma10x")
+}],
+"loop": true,
+"name": &"gold_apple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_mh687")
 }],
 "loop": true,
@@ -76,7 +92,42 @@ animations = [{
 "loop": true,
 "name": &"purple_grapes",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fuck5")
+}],
+"loop": true,
+"name": &"red_apple",
+"speed": 5.0
 }]
+
+[sub_resource type="Gradient" id="Gradient_1pg6c"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_61c27"]
+gradient = SubResource("Gradient_1pg6c")
+width = 10
+height = 10
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_61c27"]
+lifetime_randomness = 0.5
+emission_shape_scale = Vector3(10, 10, 10)
+spread = 180.0
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = -1.6093254e-05
+radial_velocity_min = -2.2351742e-05
+radial_velocity_max = -2.2351742e-05
+gravity = Vector3(0, 10, 0)
+linear_accel_min = -10.000002
+linear_accel_max = 9.999997
+scale_min = 0.099999994
+scale_max = 0.19999999
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 2.0
 
 [node name="Collectible" type="RigidBody2D"]
 collision_layer = 84
@@ -96,5 +147,13 @@ scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_61c27")
 animation = &"potion"
 autoplay = "apple"
+
+[node name="Particles" type="GPUParticles2D" parent="CollectibleCollision"]
+emitting = false
+amount = 100
+texture = SubResource("GradientTexture2D_61c27")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_61c27")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]
