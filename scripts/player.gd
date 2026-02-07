@@ -23,7 +23,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("up") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		for obj in bagged:
-			obj.linear_velocity+=Vector2(0,JUMP_VELOCITY)
+			obj.linear_velocity.y+=JUMP_VELOCITY
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
@@ -34,6 +34,8 @@ func _physics_process(delta: float) -> void:
 				item.position.x+=(item.position.x-bag.global_position.x)*2
 			bag.position.x*=-1
 		velocity.x = direction * SPEED
+		for obj in bagged:
+			obj.linear_velocity.x=direction*SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	move_and_slide()

@@ -1,8 +1,7 @@
 @tool
 extends RigidBody2D
-@onready var collectible: RigidBody2D = $"."
-@onready var collectible_image: AnimatedSprite2D = $CollectibleImage
 @onready var player: CharacterBody2D = %Player
+@onready var collectible_image: AnimatedSprite2D = $CollectibleCollision/CollectibleImage
 
 const allowable_collectibles=["purple_grapes", "apple", "apples"]
 var held=false
@@ -40,7 +39,7 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		position=should_set_position
 		should_set_position=false
 
-func _on_mouse_detector_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_pressed():
 		gravity_scale=0
 		held=true
