@@ -41,4 +41,5 @@ position = Vector2(99, -22)
 metadata/collectible = "apples"
 
 [node name="Potion" parent="." instance=ExtResource("4_k0juu")]
-position = Vector2(184, -37)
+position = Vector2(185, -7)
+collision_layer = 68

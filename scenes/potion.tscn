@@ -3,6 +3,9 @@
 [ext_resource type="Script" uid="uid://bbjqoatuffl5v" path="res://scripts/potion.gd" id="1_le10y"]
 [ext_resource type="PackedScene" uid="uid://b88olwn04j8oe" path="res://scenes/collectible.tscn" id="1_ym5ma"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_le10y"]
+radius = 15.0
+
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_le10y"]
 size = Vector2(10, 10)
 
@@ -10,11 +13,10 @@ size = Vector2(10, 10)
 lifetime_randomness = 0.5
 emission_shape_scale = Vector3(10, 10, 10)
 angle_min = 1.0728835e-05
-angle_max = 360.00003
-inherit_velocity_ratio = -0.5
+angle_max = 1.0728835e-05
 spread = 180.0
-initial_velocity_min = -100.0
-initial_velocity_max = 100.0
+initial_velocity_min = 25.0
+initial_velocity_max = 50.0
 radial_velocity_min = -2.2351742e-05
 radial_velocity_max = -2.2351742e-05
 gravity = Vector3(0, 10, 0)
@@ -25,15 +27,20 @@ scale_max = 0.19999999
 scale_over_velocity_min = 1.0
 scale_over_velocity_max = 2.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_le10y"]
-
 [node name="Potion" instance=ExtResource("1_ym5ma")]
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_le10y")
 metadata/collectible = "potion"
 
-[node name="Particles" type="GPUParticles2D" parent="." index="1"]
+[node name="PotionEffect" type="Area2D" parent="CollectibleCollision" index="1"]
+collision_layer = 0
+collision_mask = 16
+
+[node name="PotionEffectCollision" type="CollisionShape2D" parent="CollectibleCollision/PotionEffect" index="0"]
+shape = SubResource("CircleShape2D_le10y")
+
+[node name="Particles" type="GPUParticles2D" parent="CollectibleCollision" index="2"]
 emitting = false
 amount = 100
 texture = SubResource("PlaceholderTexture2D_le10y")
@@ -41,13 +48,13 @@ one_shot = true
 explosiveness = 1.0
 process_material = SubResource("ParticleProcessMaterial_3mc24")
 
-[node name="RotationFixer" type="RemoteTransform2D" parent="." index="2"]
+[node name="RotationFixer" type="RemoteTransform2D" parent="CollectibleCollision" index="3"]
 remote_path = NodePath("../Particles")
 update_rotation = false
 
-[node name="PotionEffect" type="Area2D" parent="." index="3"]
-
-[node name="PotionEffectCollision" type="CollisionShape2D" parent="PotionEffect" index="0"]
-shape = SubResource("CircleShape2D_le10y")
+[node name="Timer" type="Timer" parent="CollectibleCollision" index="4"]
+wait_time = 3.0
+one_shot = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="timeout" from="CollectibleCollision/Timer" to="." method="_on_timer_timeout"]

@@ -79,7 +79,7 @@ animations = [{
 }]
 
 [node name="Collectible" type="RigidBody2D"]
-collision_layer = 68
+collision_layer = 84
 collision_mask = 7
 input_pickable = true
 can_sleep = false

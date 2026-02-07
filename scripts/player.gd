@@ -3,6 +3,7 @@ extends CharacterBody2D
 @onready var bag: Node2D = $Bag
 @onready var bag_alarm: RichTextLabel = $Bag/BagAlarm
 @onready var bag_collision_outside: StaticBody2D = $Bag/BagCollisionOutside
+@onready var player_camera: Camera2D = $PlayerCamera
 
 
 const SPEED = 150.0
@@ -14,6 +15,7 @@ func bag_full():
 	return bagged.size()>=bag_size
 
 func _physics_process(delta: float) -> void:
+	player_camera.zoom=Vector2(3,3)/scale
 	var prev_velocity=velocity
 	# Add the gravity.
 	if not is_on_floor():
