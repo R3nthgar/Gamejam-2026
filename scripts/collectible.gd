@@ -3,7 +3,7 @@ extends RigidBody2D
 @onready var player: CharacterBody2D = %Player
 @onready var collectible_image: AnimatedSprite2D = $CollectibleCollision/CollectibleImage
 
-const allowable_collectibles=["purple_grapes", "apple", "apples"]
+const allowable_collectibles=["purple_grapes", "apple", "apples", "potion"]
 var held=false
 var in_bag=false
 var should_set_position=false

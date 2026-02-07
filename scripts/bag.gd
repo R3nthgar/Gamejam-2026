@@ -26,7 +26,7 @@ func _ready() -> void:
 		new_child.rotation=vector.angle_to_point(Vector2(0,0))-PI/2*3
 		bag_collision_inside.add_child(new_child)
 	bag_area_collision.polygon=polygon2
-	bag_visual_inside.polygon=polygon2
+	bag_visual_inside.polygon=polygon4
 	bag_visual.points=polygon3
 	bag_outside_collision.polygon=polygon4
 	bag_visual.width=border_thickness

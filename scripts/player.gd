@@ -48,13 +48,18 @@ func _on_bag_area_body_entered(body: Node2D) -> void:
 			body.set_in_bag(true)
 			for child in body.get_children():
 				setScale(child, bag_scale_mod)
-			if(bagged.size()==bag_size):
+			if(bagged.size()>=bag_size-1):
 				bag_alarm.visible=true
+				if(bagged.size()>=bag_size):
+					bag_alarm.modulate=Color("red")
+				else:
+					bag_alarm.modulate=Color("yellow")
 func _on_bag_area_body_exited(body: Node2D) -> void:
-	if(body.is_held()):
+	if(body.is_held() and bagged.has(body)):
 		bagged.erase(body)
 		if(bagged.size()<bag_size):
-			bag_alarm.visible=false
+			if(bagged.size()<bag_size-1):
+				bag_alarm.visible=false
 			body.set_in_bag(false)
 			for child in body.get_children():
 				setScale(child, 1/bag_scale_mod)
