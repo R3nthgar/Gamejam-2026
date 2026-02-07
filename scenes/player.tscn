@@ -1,7 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bf5sevjvdfpd2"]
+[gd_scene load_steps=11 format=3 uid="uid://bf5sevjvdfpd2"]
 
 [ext_resource type="Texture2D" uid="uid://drp1dpik8182f" path="res://assets/brackeys_platformer_assets/sprites/knight.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bebpwsogjuf1m" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Script" uid="uid://dlcas0h2bnkd3" path="res://scripts/bag.gd" id="3_qhqgy"]
+[ext_resource type="FontFile" uid="uid://bch710uus3txx" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="4_dqkch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -57,7 +59,48 @@ shape = SubResource("CircleShape2D_fjrip")
 [node name="PlayerCamera" type="Camera2D" parent="."]
 zoom = Vector2(3, 3)
 
-[node name="Bag" type="StaticBody2D" parent="."]
+[node name="Bag" type="Node2D" parent="."]
+position = Vector2(-14, -11)
+script = ExtResource("3_qhqgy")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Bag"]
-polygon = PackedVector2Array(10, 10, 10, -10, -10, -10, -10, 10, -7.5, 7.5, -7.5, -7.5, 7.5, -7.5, 7.5, 7.5, -7.5, 7.5, -10, 10)
+[node name="BagCollisionInside" type="StaticBody2D" parent="Bag"]
+collision_layer = 8
+collision_mask = 0
+
+[node name="BagArea" type="Area2D" parent="Bag"]
+collision_layer = 0
+collision_mask = 64
+
+[node name="BagAreaCollision" type="CollisionPolygon2D" parent="Bag/BagArea"]
+polygon = PackedVector2Array(-2.0705523, 7.7274065, -5.656854, 5.656854, -7.7274065, 2.0705526, -7.7274065, -2.0705523, -5.656854, -5.656854, -2.070553, -7.7274065, 2.0705526, -7.7274065, 5.6568537, -5.6568546, 7.727407, -2.0705519, 7.7274065, 2.070552, 5.656855, 5.656853, 2.0705507, 7.727407)
+
+[node name="BagVisual" type="Line2D" parent="Bag"]
+points = PackedVector2Array(-2.3293715, 8.693333, -6.3639607, 6.3639607, -8.693333, 2.3293717, -8.693333, -2.3293715, -6.3639607, -6.3639607, -2.3293722, -8.693333, 2.3293717, -8.693333, 6.3639603, -6.363961, 8.693333, -2.329371, 8.693333, 2.3293712, 6.363962, 6.36396, 2.3293695, 8.693333)
+closed = true
+width = 2.0
+default_color = Color(0.5019608, 0.2509804, 0, 1)
+
+[node name="BagAlarm" type="RichTextLabel" parent="Bag"]
+visible = false
+z_index = 1
+offset_left = -5.0
+offset_top = -25.0
+offset_right = 5.0
+offset_bottom = -9.0
+theme_override_colors/default_color = Color(1, 1, 0, 1)
+theme_override_fonts/normal_font = ExtResource("4_dqkch")
+text = "!"
+
+[node name="BagCollisionOutside" type="StaticBody2D" parent="Bag"]
+collision_layer = 2
+collision_mask = 0
+
+[node name="BagOutsideCollision" type="CollisionPolygon2D" parent="Bag/BagCollisionOutside"]
+polygon = PackedVector2Array(-2.5881906, 9.659258, -7.071068, 7.071068, -9.659258, 2.5881908, -9.659258, -2.5881906, -7.071068, -7.071068, -2.5881913, -9.659258, 2.5881908, -9.659258, 7.071067, -7.0710683, 9.659259, -2.5881898, 9.659258, 2.58819, 7.071069, 7.0710664, 2.5881884, 9.659259)
+
+[node name="BagVisualInside" type="Polygon2D" parent="Bag"]
+color = Color(0.5019608, 0.2509804, 0, 0.5019608)
+polygon = PackedVector2Array(-2.0705523, 7.7274065, -5.656854, 5.656854, -7.7274065, 2.0705526, -7.7274065, -2.0705523, -5.656854, -5.656854, -2.070553, -7.7274065, 2.0705526, -7.7274065, 5.6568537, -5.6568546, 7.727407, -2.0705519, 7.7274065, 2.070552, 5.656855, 5.656853, 2.0705507, 7.727407)
+
+[connection signal="body_entered" from="Bag/BagArea" to="." method="_on_bag_area_body_entered"]
+[connection signal="body_exited" from="Bag/BagArea" to="." method="_on_bag_area_body_exited"]

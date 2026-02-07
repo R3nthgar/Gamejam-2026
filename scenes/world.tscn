@@ -1,50 +1,39 @@
-[gd_scene load_steps=9 format=4 uid="uid://bl3f24mqhcpvy"]
+[gd_scene load_steps=4 format=4 uid="uid://bl3f24mqhcpvy"]
 
 [ext_resource type="PackedScene" uid="uid://bf5sevjvdfpd2" path="res://scenes/player.tscn" id="1_nnsk1"]
 [ext_resource type="TileSet" uid="uid://i3epakq5p5r1" path="res://assets/maptiles.tres" id="2_rwgxs"]
-[ext_resource type="PackedScene" uid="uid://bpkchjepg5rds" path="res://scenes/collectible.tscn" id="3_4wyf3"]
-[ext_resource type="Texture2D" uid="uid://bbnqvji3npki0" path="res://assets/brackeys_platformer_assets/sprites/fruit.png" id="4_k0juu"]
-[ext_resource type="Script" uid="uid://bbg5t8ooihfnx" path="res://scripts/mouse_position.gd" id="5_71j4m"]
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_71j4m"]
-atlas = ExtResource("4_k0juu")
-region = Rect2(0, 48, 16, 16)
-
-[sub_resource type="SpriteFrames" id="SpriteFrames_qfnet"]
-animations = [{
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_71j4m")
-}],
-"loop": true,
-"name": &"default",
-"speed": 5.0
-}]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_k0juu"]
+[ext_resource type="PackedScene" uid="uid://b88olwn04j8oe" path="res://scenes/collectible.tscn" id="3_4wyf3"]
 
 [node name="World" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [-91.0]
 
 [node name="Player" parent="." instance=ExtResource("1_nnsk1")]
+unique_name_in_owner = true
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
-tile_map_data = PackedByteArray("AAD+/wAAAQAAAAAAAAD//wAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAJAAAAAAADAAAAAQAKAAAAAAAEAAAAAQALAAAAAAADAPz/AQAKAAEAAAACAPz/AQAJAAEAAAAEAPz/AQALAAEAAAABAPz/AQACAAAAAAAAAPz/AQACAAAAAAD///z/AQACAAAAAAABAP3/AQACAAEAAAAAAP3/AQACAAEAAAD///3/AQACAAEAAAAFAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAFAAEAAQAAAAEAAAABAAEAAQAAAAEAAAAAAAEAAQAAAAEAAAD//wEAAQAAAAEAAAD+/wEAAQAAAAEAAAAHAAEAAQAAAAEAAAAGAAEAAQAAAAEAAAAIAAAAAQAFAAMAAAAJAAAAAQAAAAEAAAAKAAAAAQAGAAEAAAALAAAAAQAAAAEAAAAMAAAAAQAGAAEAAAANAAAAAQAAAAEAAAAOAAAAAQAGAAEAAAAPAAAAAQAAAAEAAAAQAAAAAQAGAAEAAAARAAAAAQAAAAEAAAASAAAAAQAGAAEAAAATAAAAAQAAAAEAAAAUAAAAAQAGAAEAAAAVAAAAAQAAAAEAAAAWAAAAAQAGAAEAAAAXAAAAAQAAAAEAAAAYAAAAAQAGAAEAAAAZAAAAAQAAAAEAAAAaAAAAAQAGAAEAAAAbAAAAAQAAAAEAAAAcAAAAAQAGAAEAAAAdAAAAAQAAAAEAAAAeAAAAAQAGAAEAAAAfAAAAAQAAAAEAAAAgAAAAAQAGAAEAAAAhAAAAAQAAAAEAAAAiAAAAAQAGAAEAAAAjAAAAAQAAAAEAAAA=")
+tile_map_data = PackedByteArray("AAD+/wAAAQAAAAAAAAD//wAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAJAAAAAAADAAAAAQAKAAAAAAAEAAAAAQALAAAAAAADAPz/AQAKAAEAAAACAPz/AQAJAAEAAAAEAPz/AQALAAEAAAABAPz/AQACAAAAAAAAAPz/AQACAAAAAAD///z/AQACAAAAAAABAP3/AQACAAEAAAAAAP3/AQACAAEAAAD///3/AQACAAEAAAAFAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAFAAEAAQAAAAEAAAABAAEAAQAAAAEAAAAAAAEAAQAAAAEAAAD//wEAAQAAAAEAAAD+/wEAAQAAAAEAAAAHAAEAAQAAAAEAAAAGAAEAAQAAAAEAAAAIAAAAAQACAAAAAAALAAAAAQAAAAEAAAAMAAAAAQAGAAEAAAANAAAAAQAAAAEAAAAOAAAAAQAGAAEAAAAPAAAAAQAAAAEAAAAQAAAAAQAGAAEAAAARAAAAAQAAAAEAAAASAAAAAQAGAAEAAAATAAAAAQAAAAEAAAAUAAAAAQAGAAEAAAAVAAAAAQAAAAEAAAAWAAAAAQAGAAEAAAAXAAAAAQAAAAEAAAAYAAAAAQAGAAEAAAAZAAAAAQAAAAEAAAAaAAAAAQAGAAEAAAAbAAAAAQAAAAEAAAAcAAAAAQAGAAEAAAAdAAAAAQAAAAEAAAAeAAAAAQAGAAEAAAAfAAAAAQAAAAEAAAAgAAAAAQAGAAEAAAAhAAAAAQAAAAEAAAAiAAAAAQAGAAEAAAAjAAAAAQAAAAEAAAAKAAAAAQAGAAEAAAAJAAAAAQAAAAEAAAA=")
 tile_set = ExtResource("2_rwgxs")
 
 [node name="Collectible" parent="." instance=ExtResource("3_4wyf3")]
-position = Vector2(110, -14)
+position = Vector2(99, -22)
+metadata/collectible = "apples"
 
-[node name="Apple" type="AnimatedSprite2D" parent="Collectible"]
-position = Vector2(0, -1.75)
-scale = Vector2(0.75, 0.75)
-sprite_frames = SubResource("SpriteFrames_qfnet")
+[node name="Collectible2" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(99, -22)
+metadata/collectible = "apples"
 
-[node name="MousePosition" type="StaticBody2D" parent="."]
-unique_name_in_owner = true
-collision_layer = 128
-collision_mask = 0
-script = ExtResource("5_71j4m")
+[node name="Collectible3" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(99, -22)
+metadata/collectible = "apples"
 
-[node name="MouseCollider" type="CollisionShape2D" parent="MousePosition"]
-shape = SubResource("CircleShape2D_k0juu")
+[node name="Collectible4" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(99, -22)
+metadata/collectible = "apples"
+
+[node name="Collectible5" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(99, -22)
+metadata/collectible = "apples"
+
+[node name="Collectible6" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(99, -22)
+metadata/collectible = "apples"

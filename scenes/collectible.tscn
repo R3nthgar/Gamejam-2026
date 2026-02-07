@@ -1,18 +1,97 @@
-[gd_scene load_steps=4 format=3 uid="uid://bpkchjepg5rds"]
+[gd_scene load_steps=13 format=3 uid="uid://b88olwn04j8oe"]
 
 [ext_resource type="Script" uid="uid://du87gobbk75b4" path="res://scripts/collectible.gd" id="1_bkg8t"]
+[ext_resource type="Texture2D" uid="uid://bbnqvji3npki0" path="res://assets/brackeys_platformer_assets/sprites/fruit.png" id="2_1pg6c"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k2x07"]
 radius = 3.75
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_bkg8t"]
-radius = 7.5
+radius = 5.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71j4m"]
+atlas = ExtResource("2_1pg6c")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1pg6c"]
+atlas = ExtResource("2_1pg6c")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ga2k0"]
+atlas = ExtResource("2_1pg6c")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6gns2"]
+atlas = ExtResource("2_1pg6c")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rapul"]
+atlas = ExtResource("2_1pg6c")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61c27"]
+atlas = ExtResource("2_1pg6c")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_61c27"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71j4m")
+}],
+"loop": true,
+"name": &"apple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1pg6c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ga2k0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6gns2")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rapul")
+}],
+"loop": true,
+"name": &"apples",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61c27")
+}],
+"loop": true,
+"name": &"purple_grapes",
+"speed": 5.0
+}]
+
+[sub_resource type="GDScript" id="GDScript_1pg6c"]
+script/source = "@tool
+extends AnimatedSprite2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	animation=\"apple\"
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
 
 [node name="Collectible" type="RigidBody2D"]
 collision_layer = 68
+collision_mask = 7
 input_pickable = true
 can_sleep = false
+angular_damp = 100.0
 script = ExtResource("1_bkg8t")
+metadata/collectible = "purple_grape"
 
 [node name="CollectibleCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_k2x07")
@@ -23,5 +102,14 @@ collision_mask = 0
 
 [node name="MouseDetectorCollision" type="CollisionShape2D" parent="MouseDetector"]
 shape = SubResource("CircleShape2D_bkg8t")
+
+[node name="CollectibleImage" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_61c27")
+animation = &"apples"
+autoplay = "apple"
+frame_progress = 0.509691
+script = SubResource("GDScript_1pg6c")
 
 [connection signal="input_event" from="MouseDetector" to="." method="_on_mouse_detector_input_event"]

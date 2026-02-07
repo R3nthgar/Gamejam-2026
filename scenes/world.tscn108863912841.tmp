@@ -1,0 +1,134 @@
+[gd_scene load_steps=7 format=4 uid="uid://bl3f24mqhcpvy"]
+
+[ext_resource type="PackedScene" uid="uid://bf5sevjvdfpd2" path="res://scenes/player.tscn" id="1_nnsk1"]
+[ext_resource type="TileSet" uid="uid://i3epakq5p5r1" path="res://assets/maptiles.tres" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://b88olwn04j8oe" path="res://scenes/collectible.tscn" id="3_4wyf3"]
+[ext_resource type="Texture2D" uid="uid://bbnqvji3npki0" path="res://assets/brackeys_platformer_assets/sprites/fruit.png" id="4_k0juu"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_71j4m"]
+atlas = ExtResource("4_k0juu")
+region = Rect2(0, 48, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_qfnet"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_71j4m")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="World" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [-91.0]
+
+[node name="Player" parent="." instance=ExtResource("1_nnsk1")]
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD+/wAAAQAAAAAAAAD//wAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAJAAAAAAADAAAAAQAKAAAAAAAEAAAAAQALAAAAAAADAPz/AQAKAAEAAAACAPz/AQAJAAEAAAAEAPz/AQALAAEAAAABAPz/AQACAAAAAAAAAPz/AQACAAAAAAD///z/AQACAAAAAAABAP3/AQACAAEAAAAAAP3/AQACAAEAAAD///3/AQACAAEAAAAFAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAFAAEAAQAAAAEAAAABAAEAAQAAAAEAAAAAAAEAAQAAAAEAAAD//wEAAQAAAAEAAAD+/wEAAQAAAAEAAAAHAAEAAQAAAAEAAAAGAAEAAQAAAAEAAAAIAAAAAQACAAAAAAALAAAAAQAAAAEAAAAMAAAAAQAGAAEAAAANAAAAAQAAAAEAAAAOAAAAAQAGAAEAAAAPAAAAAQAAAAEAAAAQAAAAAQAGAAEAAAARAAAAAQAAAAEAAAASAAAAAQAGAAEAAAATAAAAAQAAAAEAAAAUAAAAAQAGAAEAAAAVAAAAAQAAAAEAAAAWAAAAAQAGAAEAAAAXAAAAAQAAAAEAAAAYAAAAAQAGAAEAAAAZAAAAAQAAAAEAAAAaAAAAAQAGAAEAAAAbAAAAAQAAAAEAAAAcAAAAAQAGAAEAAAAdAAAAAQAAAAEAAAAeAAAAAQAGAAEAAAAfAAAAAQAAAAEAAAAgAAAAAQAGAAEAAAAhAAAAAQAAAAEAAAAiAAAAAQAGAAEAAAAjAAAAAQAAAAEAAAAKAAAAAQAGAAEAAAAJAAAAAQAAAAEAAAA=")
+tile_set = ExtResource("2_rwgxs")
+
+[node name="Collectible" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(96, -24)
+
+[node name="Apple" type="AnimatedSprite2D" parent="Collectible"]
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_qfnet")
+
+[node name="Collectible2" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(124, -24)
+
+[node name="Apple" type="AnimatedSprite2D" parent="Collectible2"]
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_qfnet")
+
+[node name="Collectible3" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(158, -25)
+
+[node name="Apple" type="AnimatedSprite2D" parent="Collectible3"]
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_qfnet")
+
+[node name="Collectible4" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(186, -25)
+
+[node name="Apple" type="AnimatedSprite2D" parent="Collectible4"]
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_qfnet")
+
+[node name="Collectible5" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(210, -26)
+
+[node name="Apple" type="AnimatedSprite2D" parent="Collectible5"]
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_qfnet")
+
+[node name="Collectible6" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(235, -26)
+
+[node name="Apple" type="AnimatedSprite2D" parent="Collectible6"]
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_qfnet")
+
+[node name="Collectible7" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(263, -26)
+
+[node name="Apple" type="AnimatedSprite2D" parent="Collectible7"]
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_qfnet")
+
+[node name="Collectible8" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(228, -47)
+
+[node name="Apple" type="AnimatedSprite2D" parent="Collectible8"]
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_qfnet")
+
+[node name="Collectible9" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(204, -55)
+
+[node name="Apple" type="AnimatedSprite2D" parent="Collectible9"]
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_qfnet")
+
+[node name="Collectible10" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(191, -57)
+
+[node name="Apple" type="AnimatedSprite2D" parent="Collectible10"]
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_qfnet")
+
+[node name="Collectible11" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(165, -57)
+
+[node name="Apple" type="AnimatedSprite2D" parent="Collectible11"]
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_qfnet")
+
+[node name="Collectible12" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(146, -58)
+
+[node name="Apple" type="AnimatedSprite2D" parent="Collectible12"]
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_qfnet")
+
+[node name="Collectible13" parent="." instance=ExtResource("3_4wyf3")]
+position = Vector2(146, -58)
+
+[node name="Apple" type="AnimatedSprite2D" parent="Collectible13"]
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_qfnet")

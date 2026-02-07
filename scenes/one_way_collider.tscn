@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cl4sv4rs08pqt"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_oqwkf"]
+
+[node name="OneWayCollider" type="CollisionShape2D"]
+shape = SubResource("WorldBoundaryShape2D_oqwkf")
