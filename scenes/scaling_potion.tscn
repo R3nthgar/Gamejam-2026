@@ -5,3 +5,4 @@
 
 [node name="ScalingPotion" instance=ExtResource("1_c8cev")]
 script = ExtResource("2_tdmsy")
+metadata/collectible = "potion2"

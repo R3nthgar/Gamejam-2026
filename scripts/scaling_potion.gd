@@ -5,6 +5,13 @@ var scale_arr=[]
 var time_passed=0
 var speed=2
 func apply_effect(targeted, reversed: bool):
+	if(scale_arr.size()>0):
+		for entry in scale_arr:
+			var targetable=entry[0]
+			var old_scale=entry[1]
+			var new_scale=entry[2]
+			targetable.scale=new_scale
+		scale_arr=[]
 	time_passed=0
 	for targetable in targeted:
 		if targetable.is_class("RigidBody2D"):

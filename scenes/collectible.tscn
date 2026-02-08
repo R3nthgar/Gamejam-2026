@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://b88olwn04j8oe"]
+[gd_scene load_steps=18 format=3 uid="uid://b88olwn04j8oe"]
 
 [ext_resource type="Script" uid="uid://du87gobbk75b4" path="res://scripts/collectible.gd" id="1_bkg8t"]
 [ext_resource type="Texture2D" uid="uid://bbnqvji3npki0" path="res://assets/brackeys_platformer_assets/sprites/fruit.png" id="2_1pg6c"]
@@ -33,6 +33,10 @@ region = Rect2(0, 16, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_mh687"]
 atlas = ExtResource("2_1pg6c")
 region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_72l5o"]
+atlas = ExtResource("2_1pg6c")
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_61c27"]
 atlas = ExtResource("2_1pg6c")
@@ -83,6 +87,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"potion",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_72l5o")
+}],
+"loop": true,
+"name": &"potion2",
 "speed": 5.0
 }, {
 "frames": [{
@@ -145,7 +157,7 @@ shape = SubResource("CircleShape2D_k2x07")
 position = Vector2(0, -1.75)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_61c27")
-animation = &"potion"
+animation = &"potion2"
 autoplay = "apple"
 
 [node name="Particles" type="GPUParticles2D" parent="CollectibleCollision"]

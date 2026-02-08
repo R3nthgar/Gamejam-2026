@@ -43,6 +43,7 @@ metadata/collectible = "apples"
 
 [node name="ScalingPotion" parent="." instance=ExtResource("4_k0juu")]
 position = Vector2(175, -7)
+metadata/timer_length = 5.0
 
 [node name="ColorPotion" parent="." instance=ExtResource("5_71j4m")]
 position = Vector2(153, -21)

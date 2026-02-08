@@ -7,7 +7,7 @@ extends RigidBody2D
 var prev_velocity=[Vector2(0,0),Vector2(0,0)]
 func get_good_velocity():
 	return prev_velocity[0]
-const allowable_collectibles=["purple_grapes", "apple", "apples", "potion", "red_apple", "gold_apple"]
+const allowable_collectibles=["purple_grapes", "apple", "apples", "potion", "red_apple", "gold_apple", "potion2"]
 var held=false
 var in_bag=false
 var should_set_position=false
