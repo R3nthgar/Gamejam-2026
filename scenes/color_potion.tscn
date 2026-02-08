@@ -6,3 +6,6 @@
 [node name="ColorPotion" instance=ExtResource("1_n1b6y")]
 script = ExtResource("2_hd0s4")
 metadata/timer_length = 0.1
+
+[node name="CollectibleImage" parent="CollectibleCollision" index="0"]
+animation = &"gold_apple"
