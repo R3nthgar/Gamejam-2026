@@ -16,7 +16,9 @@ const bag_size=5
 const bag_scale_mod=0.66
 func bag_full():
 	return bagged.size()>=bag_size
-
+func set_animation(animation: String, reset: bool = false):
+	if(animated_player_sprite.animation!=animation or reset):
+		animated_player_sprite.animation=animation
 func _physics_process(delta: float) -> void:
 	player_camera.zoom=Vector2(3,3)/scale
 	# Add the gravity.
@@ -32,6 +34,7 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var direction := Input.get_axis("left", "right")
 	if direction:
+		set_animation("walk")
 		animated_player_sprite.flip_h=direction==-1
 		if (bag.position.x<0 and direction==-1) or (bag.position.x>0 and direction==1):
 			for item in bagged:
@@ -41,6 +44,7 @@ func _physics_process(delta: float) -> void:
 		for obj in bagged:
 			obj.linear_velocity.x=direction*SPEED
 	else:
+		set_animation("idle")
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	prev_velocity.append(velocity)
 	prev_velocity.remove_at(0)
@@ -64,8 +68,11 @@ func _on_bag_area_body_exited(body: Node2D) -> void:
 	if(body.is_held() and bagged.has(body)):
 		bagged.erase(body)
 		if(bagged.size()<bag_size):
-			if(bagged.size()<bag_size-1):
-				bag_alarm.visible=false
+			if(bagged.size()<bag_size):
+				if(bagged.size()<bag_size-1):
+					bag_alarm.visible=false
+				else:
+					bag_alarm.modulate=Color("yellow")
 			body.set_in_bag(false)
 			for child in body.get_children():
 				setScale(child, 1/bag_scale_mod)
