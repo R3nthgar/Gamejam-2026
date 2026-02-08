@@ -11,6 +11,7 @@ const allowable_collectibles=["purple_grapes", "apple", "apples", "potion", "red
 var held=false
 var in_bag=false
 var should_set_position=false
+const max_velocity=750.0
 # Called when the node enters the scene tree for the first time.
 func refresh_image():
 	if(allowable_collectibles.has(get_meta("collectible"))):
@@ -43,8 +44,10 @@ func _input(event):
 				set_collision_mask_value(2,true)
 			gravity_scale=1
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
+	if(linear_velocity.length()>max_velocity):
+		linear_velocity=linear_velocity.normalized()*lerp(linear_velocity.length(),max_velocity,0.5)
 	if(held):
-		linear_velocity=position.direction_to(get_global_mouse_position())*min(1000,position.distance_squared_to(get_global_mouse_position()))
+		linear_velocity=position.direction_to(get_global_mouse_position())*min(max_velocity,position.distance_squared_to(get_global_mouse_position()))
 	elif(should_set_position):
 		position=should_set_position
 		should_set_position=false

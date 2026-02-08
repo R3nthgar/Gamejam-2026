@@ -18,7 +18,7 @@ func _on_body_entered(body: Node) -> void:
 		print("kablooey")
 		exploded=true
 		timer.start()
-		emit_particles(Color("hotpink"), 1)
+		emit_particles(get_meta("color"), 1)
 		affected=potion_effect.get_overlapping_bodies()
 		affected.erase(potion)
 		apply_effect(affected, false)

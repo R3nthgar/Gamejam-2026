@@ -6,3 +6,4 @@
 [node name="ScalingPotion" instance=ExtResource("1_c8cev")]
 script = ExtResource("2_tdmsy")
 metadata/collectible = "potion2"
+metadata/color = Color(0.3019608, 0.7411765, 0.15294118, 1)
