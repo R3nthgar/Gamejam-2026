@@ -6,6 +6,9 @@ extends CharacterBody2D
 @onready var player_camera: Camera2D = $PlayerCamera
 
 
+var prev_velocity=[Vector2(0,0),Vector2(0,0)]
+func get_good_velocity():
+	return prev_velocity[0]
 const SPEED = 150.0
 const JUMP_VELOCITY = -350.0
 var bagged=[]
@@ -16,7 +19,6 @@ func bag_full():
 
 func _physics_process(delta: float) -> void:
 	player_camera.zoom=Vector2(3,3)/scale
-	var prev_velocity=velocity
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -40,6 +42,8 @@ func _physics_process(delta: float) -> void:
 			obj.linear_velocity.x=direction*SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
+	prev_velocity.append(velocity)
+	prev_velocity.remove_at(0)
 	move_and_slide()
 func setScale(object, scaleChange: float):
 	object.scale*=scaleChange

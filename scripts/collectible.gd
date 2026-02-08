@@ -4,6 +4,9 @@ extends RigidBody2D
 @onready var collectible_image: AnimatedSprite2D = $CollectibleCollision/CollectibleImage
 @onready var particles: GPUParticles2D = $CollectibleCollision/Particles
 
+var prev_velocity=[Vector2(0,0),Vector2(0,0)]
+func get_good_velocity():
+	return prev_velocity[0]
 const allowable_collectibles=["purple_grapes", "apple", "apples", "potion", "red_apple", "gold_apple"]
 var held=false
 var in_bag=false
@@ -45,7 +48,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	elif(should_set_position):
 		position=should_set_position
 		should_set_position=false
-
+	prev_velocity.append(linear_velocity)
+	prev_velocity.remove_at(0)
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_pressed():
 		gravity_scale=0

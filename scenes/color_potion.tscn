@@ -9,3 +9,6 @@ metadata/timer_length = 0.1
 
 [node name="CollectibleImage" parent="CollectibleCollision" index="0"]
 animation = &"gold_apple"
+
+[node name="Timer" parent="CollectibleCollision" index="2"]
+wait_time = 0.25
