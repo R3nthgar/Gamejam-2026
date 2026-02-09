@@ -17,6 +17,7 @@ const JUMP_VELOCITY = -350.0
 var max_jumps=1
 var jumps=0
 var is_falling=false
+
 #This makes it so you don't have to change the camera zoom in the code
 var zoom
 func _ready() -> void:

@@ -59,6 +59,7 @@ polygon = PackedVector2Array(-7.071068, 7.071068, -7.071068, -7.071068, 7.071067
 
 [node name="ContainerVisualInside" type="Polygon2D" parent="."]
 modulate = Color(1, 1, 1, 0.5019608)
+z_index = 1
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-7.071068, 7.071068, -7.071068, -7.071068, 7.071067, -7.0710683, 7.071069, 7.0710664)
 
