@@ -1,3 +1,5 @@
+#Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
+
 extends "res://scripts/potion.gd"
 const POWER_UP = preload("uid://b3bnv0bcurjfy")
 
@@ -6,7 +8,6 @@ var gravity_arr=[]
 var time_passed=0
 var speed=2
 func apply_effect(targeted, reversed: bool):
-	super(targeted,reversed)
 	if not reversed:
 		play_sound(POWER_UP)
 	if(gravity_arr.size()>0):
@@ -18,7 +19,7 @@ func apply_effect(targeted, reversed: bool):
 		gravity_arr=[]
 	time_passed=0
 	for targetable in targeted:
-		targetable.emit_particles(get_meta("color"), 0.5, -1 if reversed else 1)
+		targetable.emit_particles(get_meta("color"), -0.5 if reversed else 0.5)
 		gravity_arr.append([targetable, targetable.gravity_get(), targetable.gravity_get()*(1.0/gravity_multiplier if reversed else gravity_multiplier)])
 func _physics_process(delta: float) -> void:
 	if(gravity_arr.size()>=0):

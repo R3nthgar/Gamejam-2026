@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://cd0jgoajcto8y"]
+[gd_scene load_steps=5 format=3 uid="uid://cd0jgoajcto8y"]
 
 [ext_resource type="Script" uid="uid://bbjqoatuffl5v" path="res://scripts/potion.gd" id="1_le10y"]
 [ext_resource type="PackedScene" uid="uid://b88olwn04j8oe" path="res://scenes/collectible.tscn" id="1_ym5ma"]
@@ -6,7 +6,27 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_le10y"]
 radius = 15.0
 
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_le10y"]
+resource_local_to_scene = true
+lifetime_randomness = 0.5
+emission_shape_scale = Vector3(10, 10, 10)
+emission_shape = 1
+emission_sphere_radius = 0.01
+spread = 180.0
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = -1.6093254e-05
+radial_velocity_min = 24.999977
+radial_velocity_max = 49.999977
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -10.000002
+linear_accel_max = 9.999997
+scale_min = 0.099999994
+scale_max = 0.19999999
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 2.0
+
 [node name="Potion" instance=ExtResource("1_ym5ma")]
+collision_layer = 4
 contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_le10y")
@@ -15,17 +35,17 @@ metadata/color = Color(0, 0, 0, 1)
 
 [node name="PotionEffect" type="Area2D" parent="CollectibleCollision" index="0"]
 collision_layer = 0
-collision_mask = 16
+collision_mask = 32
 
 [node name="PotionEffectCollision" type="CollisionShape2D" parent="CollectibleCollision/PotionEffect" index="0"]
 shape = SubResource("CircleShape2D_le10y")
 
-[node name="CollectibleImage" parent="CollectibleCollision" index="1"]
-position = Vector2(0, -2)
-
 [node name="Timer" type="Timer" parent="CollectibleCollision" index="2"]
 wait_time = 3.0
 one_shot = true
+
+[node name="Particles" parent="CollectibleCollision" index="3"]
+process_material = SubResource("ParticleProcessMaterial_le10y")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="CollectibleCollision/Timer" to="." method="_on_timer_timeout"]

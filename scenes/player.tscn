@@ -189,7 +189,7 @@ scale_over_velocity_min = 1.0
 scale_over_velocity_max = 2.0
 
 [node name="Player" type="CharacterBody2D"]
-collision_layer = 17
+collision_layer = 33
 script = ExtResource("1_g2els")
 
 [node name="AnimatedPlayerSprite" type="AnimatedSprite2D" parent="."]
@@ -247,7 +247,7 @@ theme_override_fonts/normal_font = ExtResource("4_dqkch")
 text = "!"
 
 [node name="BagCollisionOutside" type="StaticBody2D" parent="Bag"]
-collision_layer = 2
+collision_layer = 16
 collision_mask = 0
 
 [node name="BagOutsideCollision" type="CollisionPolygon2D" parent="Bag/BagCollisionOutside"]
@@ -261,6 +261,7 @@ polygon = PackedVector2Array(-2.5881906, 9.659258, -7.071068, 7.071068, -9.65925
 stream = ExtResource("5_qlg0r")
 
 [node name="Particles" type="GPUParticles2D" parent="."]
+position = Vector2(0, -10)
 emitting = false
 amount = 100
 texture = SubResource("GradientTexture2D_qlg0r")

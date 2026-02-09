@@ -44,10 +44,13 @@ metadata/collectible = "apples"
 
 [node name="ScalingPotion" parent="." instance=ExtResource("4_k0juu")]
 position = Vector2(175, -7)
+collision_mask = 7
 metadata/timer_length = 5.0
 
 [node name="ColorPotion" parent="." instance=ExtResource("5_71j4m")]
 position = Vector2(153, -21)
+collision_mask = 7
 
 [node name="GravityPotion" parent="." instance=ExtResource("6_qfnet")]
 position = Vector2(199, -14)
+collision_mask = 7

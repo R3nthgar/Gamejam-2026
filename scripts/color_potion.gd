@@ -1,16 +1,18 @@
+#Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
+
+#This potion changes red apples to gold apples and vice versa
 extends "res://scripts/potion.gd"
 const EXPLOSION = preload("uid://cdu1em1a7wcpj")
 
 func apply_effect(targeted, reversed: bool):
+	#Ensures that the apples don't switch colors when the effect ends. Remove this for functions that
+	#reverse an effect
 	if not reversed:
-		emit_particles(get_meta("color"), 1)
 		play_sound(EXPLOSION)
 		for targetable in targeted:
 			if targetable.get_meta("collectible") == "red_apple":
 				targetable.set_meta("collectible", "gold_apple")
 				targetable.emit_particles(Color("goldenrod"), 0.5)
-				targetable.refresh_image()
 			elif targetable.get_meta("collectible") == "gold_apple":
 				targetable.set_meta("collectible", "red_apple")
 				targetable.emit_particles(Color("red"), 0.5)
-				targetable.refresh_image()
