@@ -3,11 +3,17 @@ extends RigidBody2D
 @onready var player: CharacterBody2D = %Player
 @onready var collectible_image: AnimatedSprite2D = $CollectibleCollision/CollectibleImage
 @onready var particles: GPUParticles2D = $CollectibleCollision/Particles
-
+@onready var audio: AudioStreamPlayer2D = $CollectibleCollision/Audio
+var gravity=1
+func set_gravity(new_gravity: float):
+	gravity=new_gravity
+	gravity_scale=new_gravity
+func gravity_get():
+	return gravity
 var prev_velocity=[Vector2(0,0),Vector2(0,0)]
 func get_good_velocity():
 	return prev_velocity[0]
-const allowable_collectibles=["purple_grapes", "apple", "apples", "potion", "red_apple", "gold_apple", "potion2"]
+const allowable_collectibles=["purple_grapes", "apple", "apples", "potion", "red_apple", "gold_apple", "potion2", "potion3"]
 var held=false
 var in_bag=false
 var should_set_position=false
@@ -18,10 +24,21 @@ func refresh_image():
 		collectible_image.animation=get_meta("collectible")
 func _ready() -> void:
 	refresh_image()
+	gravity=gravity_scale
+func play_sound(sound: AudioStream):
+	audio.stream=sound
+	audio.play()
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint() and collectible_image.animation!=get_meta("collectible"):
 		refresh_image()
-func emit_particles(color: Color, size):
+func emit_particles(color: Color, size: float = 1, speed: float = 1):
+	particles.process_material.radial_velocity_min=25*speed
+	particles.process_material.radial_velocity_max=50*speed
+	if speed <0:
+		particles.process_material.emission_sphere_radius = 5
+	else:
+		particles.process_material.emission_sphere_radius = 0.01
+		
 	particles.modulate=color
 	particles.scale=Vector2(size,size)
 	particles.emitting=true
@@ -42,7 +59,7 @@ func _input(event):
 			else:
 				set_collision_mask_value(1,true)
 				set_collision_mask_value(2,true)
-			gravity_scale=1
+			gravity_scale=gravity
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	if(linear_velocity.length()>max_velocity):
 		linear_velocity=linear_velocity.normalized()*lerp(linear_velocity.length(),max_velocity,0.5)

@@ -7,3 +7,9 @@
 script = ExtResource("2_tdmsy")
 metadata/collectible = "potion2"
 metadata/color = Color(0.3019608, 0.7411765, 0.15294118, 1)
+
+[node name="CollectibleImage" parent="CollectibleCollision" index="1"]
+animation = &"potion2"
+
+[node name="Timer" parent="CollectibleCollision" index="2"]
+wait_time = 5.0

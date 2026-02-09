@@ -1,10 +1,14 @@
 extends "res://scripts/potion.gd"
+const POWER_UP = preload("uid://b3bnv0bcurjfy")
 
 const scale_size=1.5
 var scale_arr=[]
 var time_passed=0
 var speed=2
 func apply_effect(targeted, reversed: bool):
+	super(targeted,reversed)
+	if not reversed:
+		play_sound(POWER_UP)
 	if(scale_arr.size()>0):
 		for entry in scale_arr:
 			var targetable=entry[0]
@@ -14,6 +18,7 @@ func apply_effect(targeted, reversed: bool):
 		scale_arr=[]
 	time_passed=0
 	for targetable in targeted:
+		targetable.emit_particles(get_meta("color"), 0.5, -1 if reversed else 1)
 		if targetable.is_class("RigidBody2D"):
 			targetable.mass*=1.0/(scale_size*scale_size) if reversed else scale_size*scale_size
 			for child in targetable.get_children():

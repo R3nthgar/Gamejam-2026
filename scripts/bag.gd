@@ -1,6 +1,7 @@
 @tool
 extends Node2D
-@onready var bag_area_collision: CollisionPolygon2D = $BagArea/BagAreaCollision
+@onready var bag_area_collision1: CollisionPolygon2D = $BagArea1/BagAreaCollision
+@onready var bag_area_collision2: CollisionPolygon2D = $BagArea2/BagAreaCollision
 @onready var bag_visual: Line2D = $BagVisual
 @onready var bag_collision_inside: StaticBody2D = $BagCollisionInside
 @onready var bag_outside_collision: CollisionPolygon2D = $BagCollisionOutside/BagOutsideCollision
@@ -25,7 +26,8 @@ func _ready() -> void:
 		new_child.position=vector
 		new_child.rotation=vector.angle_to_point(Vector2(0,0))-PI/2*3
 		bag_collision_inside.add_child(new_child)
-	bag_area_collision.polygon=polygon2
+	bag_area_collision1.polygon=polygon2
+	bag_area_collision2.polygon=polygon4
 	bag_visual_inside.polygon=polygon4
 	bag_visual.points=polygon3
 	bag_outside_collision.polygon=polygon4

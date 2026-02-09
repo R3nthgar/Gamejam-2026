@@ -1,7 +1,8 @@
-[gd_scene load_steps=18 format=3 uid="uid://b88olwn04j8oe"]
+[gd_scene load_steps=20 format=3 uid="uid://b88olwn04j8oe"]
 
 [ext_resource type="Script" uid="uid://du87gobbk75b4" path="res://scripts/collectible.gd" id="1_bkg8t"]
 [ext_resource type="Texture2D" uid="uid://bbnqvji3npki0" path="res://assets/brackeys_platformer_assets/sprites/fruit.png" id="2_1pg6c"]
+[ext_resource type="AudioStream" uid="uid://qxb77221bpq" path="res://assets/brackeys_platformer_assets/sounds/jump.wav" id="3_61c27"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_k2x07"]
 radius = 3.75
@@ -37,6 +38,10 @@ region = Rect2(16, 32, 16, 16)
 [sub_resource type="AtlasTexture" id="AtlasTexture_72l5o"]
 atlas = ExtResource("2_1pg6c")
 region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_udoxq"]
+atlas = ExtResource("2_1pg6c")
+region = Rect2(16, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_61c27"]
 atlas = ExtResource("2_1pg6c")
@@ -99,6 +104,14 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_udoxq")
+}],
+"loop": true,
+"name": &"potion3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_61c27")
 }],
 "loop": true,
@@ -114,25 +127,25 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_1pg6c"]
+[sub_resource type="Gradient" id="Gradient_61c27"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_61c27"]
-gradient = SubResource("Gradient_1pg6c")
+gradient = SubResource("Gradient_61c27")
 width = 10
 height = 10
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_61c27"]
 lifetime_randomness = 0.5
 emission_shape_scale = Vector3(10, 10, 10)
+emission_shape = 1
+emission_sphere_radius = 0.01
 spread = 180.0
-initial_velocity_min = 25.0
-initial_velocity_max = 50.0
 angular_velocity_min = -1.6093254e-05
 angular_velocity_max = -1.6093254e-05
-radial_velocity_min = -2.2351742e-05
-radial_velocity_max = -2.2351742e-05
+radial_velocity_min = 24.999977
+radial_velocity_max = 49.999977
 gravity = Vector3(0, 10, 0)
 linear_accel_min = -10.000002
 linear_accel_max = 9.999997
@@ -157,7 +170,7 @@ shape = SubResource("CircleShape2D_k2x07")
 position = Vector2(0, -1.75)
 scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_61c27")
-animation = &"potion2"
+animation = &"apple"
 autoplay = "apple"
 
 [node name="Particles" type="GPUParticles2D" parent="CollectibleCollision"]
@@ -166,6 +179,10 @@ amount = 100
 texture = SubResource("GradientTexture2D_61c27")
 one_shot = true
 explosiveness = 1.0
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_61c27")
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="CollectibleCollision"]
+stream = ExtResource("3_61c27")
 
 [connection signal="input_event" from="." to="." method="_on_input_event"]

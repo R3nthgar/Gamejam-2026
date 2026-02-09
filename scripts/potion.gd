@@ -4,6 +4,7 @@ extends "res://scripts/collectible.gd"
 @onready var potion_effect: Area2D = $CollectibleCollision/PotionEffect
 
 func apply_effect(targeted, reversed: bool):
+	emit_particles(get_meta("color"), 1, -1 if reversed else 1)
 	pass
 const shatter_speed=250
 var exploded=false
@@ -18,7 +19,6 @@ func _on_body_entered(body: Node) -> void:
 		print("kablooey")
 		exploded=true
 		timer.start()
-		emit_particles(get_meta("color"), 1)
 		affected=potion_effect.get_overlapping_bodies()
 		affected.erase(potion)
 		apply_effect(affected, false)

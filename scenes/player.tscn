@@ -1,9 +1,10 @@
-[gd_scene load_steps=27 format=3 uid="uid://bf5sevjvdfpd2"]
+[gd_scene load_steps=31 format=3 uid="uid://bf5sevjvdfpd2"]
 
 [ext_resource type="Texture2D" uid="uid://drp1dpik8182f" path="res://assets/brackeys_platformer_assets/sprites/knight.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bebpwsogjuf1m" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://dlcas0h2bnkd3" path="res://scripts/bag.gd" id="3_qhqgy"]
 [ext_resource type="FontFile" uid="uid://bch710uus3txx" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="4_dqkch"]
+[ext_resource type="AudioStream" uid="uid://qxb77221bpq" path="res://assets/brackeys_platformer_assets/sounds/jump.wav" id="5_qlg0r"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_g2els"]
 atlas = ExtResource("1_3vyb7")
@@ -160,6 +161,33 @@ animations = [{
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_fjrip"]
 
+[sub_resource type="Gradient" id="Gradient_1pg6c"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qlg0r"]
+gradient = SubResource("Gradient_1pg6c")
+width = 10
+height = 10
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tuyoq"]
+lifetime_randomness = 0.5
+emission_shape_scale = Vector3(10, 10, 10)
+emission_shape = 1
+emission_sphere_radius = 0.01
+spread = 180.0
+angular_velocity_min = -1.6093254e-05
+angular_velocity_max = -1.6093254e-05
+radial_velocity_min = 24.999977
+radial_velocity_max = 49.999977
+gravity = Vector3(0, 10, 0)
+linear_accel_min = -10.000002
+linear_accel_max = 9.999997
+scale_min = 0.099999994
+scale_max = 0.19999999
+scale_over_velocity_min = 1.0
+scale_over_velocity_max = 2.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 17
 script = ExtResource("1_g2els")
@@ -170,7 +198,7 @@ position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_tuyoq")
 animation = &"walk"
 autoplay = "idle"
-frame_progress = 0.5885037
+frame_progress = 0.7798652
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
 position = Vector2(0, -10)
@@ -187,12 +215,19 @@ script = ExtResource("3_qhqgy")
 collision_layer = 8
 collision_mask = 0
 
-[node name="BagArea" type="Area2D" parent="Bag"]
+[node name="BagArea1" type="Area2D" parent="Bag"]
 collision_layer = 0
 collision_mask = 64
 
-[node name="BagAreaCollision" type="CollisionPolygon2D" parent="Bag/BagArea"]
+[node name="BagAreaCollision" type="CollisionPolygon2D" parent="Bag/BagArea1"]
 polygon = PackedVector2Array(-2.0705523, 7.7274065, -5.656854, 5.656854, -7.7274065, 2.0705526, -7.7274065, -2.0705523, -5.656854, -5.656854, -2.070553, -7.7274065, 2.0705526, -7.7274065, 5.6568537, -5.6568546, 7.727407, -2.0705519, 7.7274065, 2.070552, 5.656855, 5.656853, 2.0705507, 7.727407)
+
+[node name="BagArea2" type="Area2D" parent="Bag"]
+collision_layer = 0
+collision_mask = 64
+
+[node name="BagAreaCollision" type="CollisionPolygon2D" parent="Bag/BagArea2"]
+polygon = PackedVector2Array(-2.5881906, 9.659258, -7.071068, 7.071068, -9.659258, 2.5881908, -9.659258, -2.5881906, -7.071068, -7.071068, -2.5881913, -9.659258, 2.5881908, -9.659258, 7.071067, -7.0710683, 9.659259, -2.5881898, 9.659258, 2.58819, 7.071069, 7.0710664, 2.5881884, 9.659259)
 
 [node name="BagVisual" type="Line2D" parent="Bag"]
 z_index = -1
@@ -220,7 +255,19 @@ polygon = PackedVector2Array(-2.5881906, 9.659258, -7.071068, 7.071068, -9.65925
 
 [node name="BagVisualInside" type="Polygon2D" parent="Bag"]
 color = Color(0.5019608, 0.2509804, 0, 0.5019608)
-polygon = PackedVector2Array(-2.0705523, 7.7274065, -5.656854, 5.656854, -7.7274065, 2.0705526, -7.7274065, -2.0705523, -5.656854, -5.656854, -2.070553, -7.7274065, 2.0705526, -7.7274065, 5.6568537, -5.6568546, 7.727407, -2.0705519, 7.7274065, 2.070552, 5.656855, 5.656853, 2.0705507, 7.727407)
+polygon = PackedVector2Array(-2.5881906, 9.659258, -7.071068, 7.071068, -9.659258, 2.5881908, -9.659258, -2.5881906, -7.071068, -7.071068, -2.5881913, -9.659258, 2.5881908, -9.659258, 7.071067, -7.0710683, 9.659259, -2.5881898, 9.659258, 2.58819, 7.071069, 7.0710664, 2.5881884, 9.659259)
 
-[connection signal="body_entered" from="Bag/BagArea" to="." method="_on_bag_area_body_entered"]
-[connection signal="body_exited" from="Bag/BagArea" to="." method="_on_bag_area_body_exited"]
+[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_qlg0r")
+
+[node name="Particles" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 100
+texture = SubResource("GradientTexture2D_qlg0r")
+one_shot = true
+explosiveness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_tuyoq")
+
+[connection signal="body_entered" from="Bag/BagArea1" to="." method="_on_bag_area_body_entered"]
+[connection signal="body_exited" from="Bag/BagArea2" to="." method="_on_bag_area_body_exited"]
