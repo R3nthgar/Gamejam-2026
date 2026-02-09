@@ -1,0 +1,67 @@
+[gd_scene load_steps=3 format=3 uid="uid://diacnvuwoca2w"]
+
+[ext_resource type="FontFile" uid="uid://bch710uus3txx" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="1_1syo6"]
+[ext_resource type="Script" uid="uid://cly5e3tcm4cu0" path="res://scripts/container.gd" id="1_cjjsl"]
+
+[node name="Container" type="Node2D"]
+z_index = 1
+script = ExtResource("1_cjjsl")
+metadata/points = 4
+metadata/is_bag = false
+metadata/closed = false
+metadata/color = Color(0, 0, 0, 1)
+metadata/size = 10.0
+metadata/border_thickness = 2.0
+metadata/container_size = 5
+
+[node name="ContainerCollisionInside" type="StaticBody2D" parent="."]
+collision_mask = 0
+
+[node name="ContainerInsideCollision" type="CollisionPolygon2D" parent="ContainerCollisionInside"]
+polygon = PackedVector2Array(-7.071068, 7.071068, -7.071068, -7.071068, 7.071067, -7.0710683, 7.071069, 7.0710664, 5.656854, 5.656854, 5.656854, -5.656854, -5.6568537, -5.6568546, -5.656855, 5.656853)
+
+[node name="ContainerArea1" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="ContainerAreaCollision" type="CollisionPolygon2D" parent="ContainerArea1"]
+polygon = PackedVector2Array(-5.656854, 5.656854, -5.656854, -5.656854, 5.6568537, -5.6568546, 5.656855, 5.656853)
+
+[node name="ContainerArea2" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="ContainerAreaCollision" type="CollisionPolygon2D" parent="ContainerArea2"]
+polygon = PackedVector2Array(-7.071068, 7.071068, -7.071068, -7.071068, 7.071067, -7.0710683, 7.071069, 7.0710664)
+
+[node name="ContainerVisual" type="Line2D" parent="."]
+z_index = -1
+points = PackedVector2Array(-6.3639607, 6.3639607, -6.3639607, -6.3639607, 6.3639603, -6.363961, 6.363962, 6.36396)
+width = 1.4142135
+default_color = Color(0, 0, 0, 1)
+
+[node name="ContainerAlarm" type="RichTextLabel" parent="."]
+visible = false
+z_index = 1
+offset_left = -5.0
+offset_top = -25.0
+offset_right = 5.0
+offset_bottom = -9.0
+theme_override_fonts/normal_font = ExtResource("1_1syo6")
+text = "!"
+
+[node name="ContainerCollisionOutside" type="StaticBody2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="ContainerOutsideCollision" type="CollisionPolygon2D" parent="ContainerCollisionOutside"]
+polygon = PackedVector2Array(-7.071068, 7.071068, -7.071068, -7.071068, 7.071067, -7.0710683, 7.071069, 7.0710664)
+
+[node name="ContainerVisualInside" type="Polygon2D" parent="."]
+modulate = Color(1, 1, 1, 0.5019608)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-7.071068, 7.071068, -7.071068, -7.071068, 7.071067, -7.0710683, 7.071069, 7.0710664)
+
+[connection signal="body_entered" from="ContainerArea1" to="." method="_on_container_area_body_entered"]
+[connection signal="body_exited" from="ContainerArea2" to="." method="_on_container_area_body_exited"]
+[connection signal="gui_input" from="ContainerAlarm" to="." method="_on_container_alarm_gui_input"]

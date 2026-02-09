@@ -39,16 +39,22 @@ scale_over_velocity_max = 2.0
 collision_layer = 36
 collision_mask = 23
 input_pickable = true
+sleeping = true
 can_sleep = false
+contact_monitor = true
+max_contacts_reported = 1
 angular_damp = 25.0
 script = ExtResource("1_bkg8t")
-metadata/collectible = "purple_grape"
+metadata/start_static = false
+metadata/collectible = ""
+metadata/start_inside = false
 
 [node name="CollectibleCollision" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_k2x07")
 
 [node name="CollectibleImage" type="AnimatedSprite2D" parent="CollectibleCollision"]
-position = Vector2(0, -2)
+z_index = 1
+position = Vector2(0, -1.75)
 scale = Vector2(0.75, 0.75)
 sprite_frames = ExtResource("2_61c27")
 animation = &"apple"
@@ -66,4 +72,5 @@ process_material = SubResource("ParticleProcessMaterial_61c27")
 [node name="Audio" type="AudioStreamPlayer2D" parent="CollectibleCollision"]
 stream = ExtResource("3_61c27")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]

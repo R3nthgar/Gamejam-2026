@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://dvxwosa016ah4"]
+
+[ext_resource type="PackedScene" uid="uid://diacnvuwoca2w" path="res://scenes/container.tscn" id="1_bi80w"]
+[ext_resource type="Script" uid="uid://dit2a7odcne7i" path="res://scripts/cauldron.gd" id="2_8jqlm"]
+
+[node name="Cauldron" instance=ExtResource("1_bi80w")]
+rotation = 3.1415927
+script = ExtResource("2_8jqlm")
+metadata/color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+metadata/size = 15.0
+metadata/container_size = 3
+
+[node name="ContainerInsideCollision" parent="ContainerCollisionInside" index="0"]
+polygon = PackedVector2Array(-10.606602, 10.606602, -10.606602, -10.606602, 10.606601, -10.606603, 10.606604, 10.6066, 9.192388, 9.192388, 9.192388, -9.192388, -9.192388, -9.192389, -9.1923895, 9.192387)
+
+[node name="ContainerAreaCollision" parent="ContainerArea1" index="0"]
+polygon = PackedVector2Array(-9.192388, 9.192388, -9.192388, -9.192388, 9.192388, -9.192389, 9.1923895, 9.192387)
+
+[node name="ContainerAreaCollision" parent="ContainerArea2" index="0"]
+polygon = PackedVector2Array(-10.606602, 10.606602, -10.606602, -10.606602, 10.606601, -10.606603, 10.606604, 10.6066)
+
+[node name="ContainerVisual" parent="." index="3"]
+points = PackedVector2Array(-9.899495, 9.899495, -9.899495, -9.899495, 9.899494, -9.899496, 9.899496, 9.899493)
+default_color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+
+[node name="ContainerAlarm" parent="." index="4"]
+offset_left = 5.000003
+offset_top = 27.0
+offset_right = 15.000003
+offset_bottom = 43.0
+rotation = -3.1415927
+
+[node name="ContainerCollisionOutside" parent="." index="5"]
+collision_layer = 0
+
+[node name="ContainerOutsideCollision" parent="ContainerCollisionOutside" index="0"]
+polygon = PackedVector2Array(-10.606602, 10.606602, -10.606602, -10.606602, 10.606601, -10.606603, 10.606604, 10.6066)
+
+[node name="ContainerVisualInside" parent="." index="6"]
+color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+polygon = PackedVector2Array(-10.606602, 10.606602, -10.606602, -10.606602, 10.606601, -10.606603, 10.606604, 10.6066)

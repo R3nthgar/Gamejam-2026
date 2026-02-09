@@ -26,9 +26,6 @@ scale_over_velocity_min = 1.0
 scale_over_velocity_max = 2.0
 
 [node name="Potion" instance=ExtResource("1_ym5ma")]
-collision_layer = 4
-contact_monitor = true
-max_contacts_reported = 1
 script = ExtResource("1_le10y")
 metadata/collectible = "potion"
 metadata/color = Color(0, 0, 0, 1)
@@ -47,5 +44,4 @@ one_shot = true
 [node name="Particles" parent="CollectibleCollision" index="3"]
 process_material = SubResource("ParticleProcessMaterial_le10y")
 
-[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="CollectibleCollision/Timer" to="." method="_on_timer_timeout"]

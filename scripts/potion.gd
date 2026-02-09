@@ -11,7 +11,7 @@ func apply_effect(targeted, reversed: bool):
 	pass
 
 #Controls the speed needed to shatter a potion
-const shatter_speed=250
+const shatter_speed=200
 
 #Stops potions from shattering twice.
 var exploded=false
@@ -28,7 +28,7 @@ func _on_body_entered(body: Node) -> void:
 	else:
 		dif_velocity=prev_velocity[0].length()
 	
-	if(dif_velocity>=shatter_speed and not in_bag and not held and ((not body.is_held()) if body.is_class("RigidBody2D") else true) and not exploded):
+	if(dif_velocity>=shatter_speed and not container and not held and ((not body.is_held()) if body.is_class("RigidBody2D") else true) and not exploded):
 		emit_particles(get_meta("color"), 1)
 		exploded=true
 		#Starts timer for end of potion
