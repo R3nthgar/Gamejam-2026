@@ -82,7 +82,7 @@ func change_shape():
 			collision_inside_polygon.append(Vector2(0,size).rotated(PI*2/points*(i+0.5)))
 		#This gets the vertices of the polygon of the container, minus the line thickness.
 		inside_polygon.append(Vector2(0,size-border_thickness).rotated(PI*2/points*(i+0.5)))
-		#This gets the vertices of the polygon of the container, minus the half line thickness.
+		#This gets the vertices of the polygon of the container, minus half the line thickness.
 		container_visual_polygon.append(Vector2(0,size-border_thickness*0.5).rotated(PI*2/points*(i+0.5)))
 		#This gets the vertices of the polygon of the container.
 		container_outside_polygon.append(Vector2(0,size).rotated(PI*2/points*(i+0.5)))
@@ -92,6 +92,7 @@ func change_shape():
 		if closed:
 			collision_inside_polygon.append(Vector2(0,size-border_thickness).rotated(PI*2/points*(-0.5)))
 			collision_inside_polygon.append(Vector2(0,size).rotated(PI*2/points*(-0.5)))
+	
 	
 	container_collision_outside.set_collision_layer_value(5,closed)
 	#Resets inside border

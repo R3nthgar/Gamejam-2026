@@ -6,7 +6,7 @@
 [node name="Container" type="Node2D"]
 z_index = 1
 script = ExtResource("1_cjjsl")
-metadata/points = 4
+metadata/points = 8
 metadata/is_bag = false
 metadata/closed = false
 metadata/color = Color(0, 0, 0, 1)
@@ -18,27 +18,21 @@ metadata/container_size = 5
 collision_mask = 0
 
 [node name="ContainerInsideCollision" type="CollisionPolygon2D" parent="ContainerCollisionInside"]
-polygon = PackedVector2Array(-7.071068, 7.071068, -7.071068, -7.071068, 7.071067, -7.0710683, 7.071069, 7.0710664, 5.656854, 5.656854, 5.656854, -5.656854, -5.6568537, -5.6568546, -5.656855, 5.656853)
+polygon = PackedVector2Array(-3.8268347, 9.238795, -9.238795, 3.8268342, -9.238795, -3.826834, -3.826835, -9.238795, 3.8268342, -9.238795, 9.238795, -3.8268356, 9.238794, 3.826836, 3.8268342, 9.238795, 3.0614676, 7.391036, 7.391036, 3.0614674, 7.3910365, -3.0614672, 3.061468, -7.391036, -3.0614674, -7.391036, -7.391036, -3.0614686, -7.3910356, 3.0614688, -3.0614674, 7.3910365)
 
 [node name="ContainerArea1" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 
 [node name="ContainerAreaCollision" type="CollisionPolygon2D" parent="ContainerArea1"]
-polygon = PackedVector2Array(-5.656854, 5.656854, -5.656854, -5.656854, 5.6568537, -5.6568546, 5.656855, 5.656853)
+polygon = PackedVector2Array(-3.0614676, 7.391036, -7.391036, 3.0614674, -7.3910365, -3.0614672, -3.061468, -7.391036, 3.0614674, -7.391036, 7.391036, -3.0614686, 7.3910356, 3.0614688, 3.0614674, 7.3910365)
 
 [node name="ContainerArea2" type="Area2D" parent="."]
 collision_layer = 0
 collision_mask = 4
 
 [node name="ContainerAreaCollision" type="CollisionPolygon2D" parent="ContainerArea2"]
-polygon = PackedVector2Array(-7.071068, 7.071068, -7.071068, -7.071068, 7.071067, -7.0710683, 7.071069, 7.0710664)
-
-[node name="ContainerVisual" type="Line2D" parent="."]
-z_index = -1
-points = PackedVector2Array(-6.3639607, 6.3639607, -6.3639607, -6.3639607, 6.3639603, -6.363961, 6.363962, 6.36396)
-width = 1.4142135
-default_color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-3.8268347, 9.238795, -9.238795, 3.8268342, -9.238795, -3.826834, -3.826835, -9.238795, 3.8268342, -9.238795, 9.238795, -3.8268356, 9.238794, 3.826836, 3.8268342, 9.238795)
 
 [node name="ContainerAlarm" type="RichTextLabel" parent="."]
 visible = false
@@ -51,17 +45,23 @@ theme_override_fonts/normal_font = ExtResource("1_1syo6")
 text = "!"
 
 [node name="ContainerCollisionOutside" type="StaticBody2D" parent="."]
-collision_layer = 16
+collision_layer = 0
 collision_mask = 0
 
 [node name="ContainerOutsideCollision" type="CollisionPolygon2D" parent="ContainerCollisionOutside"]
-polygon = PackedVector2Array(-7.071068, 7.071068, -7.071068, -7.071068, 7.071067, -7.0710683, 7.071069, 7.0710664)
+polygon = PackedVector2Array(-3.8268347, 9.238795, -9.238795, 3.8268342, -9.238795, -3.826834, -3.826835, -9.238795, 3.8268342, -9.238795, 9.238795, -3.8268356, 9.238794, 3.826836, 3.8268342, 9.238795)
+
+[node name="ContainerVisual" type="Line2D" parent="."]
+z_index = -1
+points = PackedVector2Array(-3.4441512, 8.314916, -8.314916, 3.444151, -8.314916, -3.4441504, -3.4441514, -8.314916, 3.444151, -8.314916, 8.314916, -3.444152, 8.314915, 3.4441524, 3.444151, 8.314916)
+width = 1.847759
+default_color = Color(0, 0, 0, 1)
 
 [node name="ContainerVisualInside" type="Polygon2D" parent="."]
 modulate = Color(1, 1, 1, 0.5019608)
 z_index = 1
 color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-7.071068, 7.071068, -7.071068, -7.071068, 7.071067, -7.0710683, 7.071069, 7.0710664)
+polygon = PackedVector2Array(-3.8268347, 9.238795, -9.238795, 3.8268342, -9.238795, -3.826834, -3.826835, -9.238795, 3.8268342, -9.238795, 9.238795, -3.8268356, 9.238794, 3.826836, 3.8268342, 9.238795)
 
 [connection signal="body_entered" from="ContainerArea1" to="." method="_on_container_area_body_entered"]
 [connection signal="body_exited" from="ContainerArea2" to="." method="_on_container_area_body_exited"]

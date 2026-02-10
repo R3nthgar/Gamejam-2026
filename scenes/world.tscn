@@ -74,6 +74,7 @@ position = Vector2(113, -11)
 [node name="Crate" parent="." instance=ExtResource("9_w7kh3")]
 position = Vector2(170, -14)
 rotation = 3.1415927
+metadata/points = 4
 metadata/closed = true
 metadata/size = 20.0
 metadata/container_size = 20
@@ -81,11 +82,11 @@ metadata/container_size = 20
 [connection signal="body_entered" from="WorldBorder" to="WorldBorder" method="_on_body_entered"]
 [connection signal="body_entered" from="Collectibles/Collectible" to="Collectibles/Collectible" method="_on_body_entered"]
 [connection signal="input_event" from="Collectibles/Collectible" to="Collectibles/Collectible" method="_on_input_event"]
-[connection signal="body_entered" from="Collectibles/@RigidBody2D@251356" to="Collectibles/@RigidBody2D@251356" method="_on_body_entered"]
-[connection signal="input_event" from="Collectibles/@RigidBody2D@251356" to="Collectibles/@RigidBody2D@251356" method="_on_input_event"]
-[connection signal="body_entered" from="Collectibles/@RigidBody2D@251357" to="Collectibles/@RigidBody2D@251357" method="_on_body_entered"]
-[connection signal="input_event" from="Collectibles/@RigidBody2D@251357" to="Collectibles/@RigidBody2D@251357" method="_on_input_event"]
-[connection signal="body_entered" from="Collectibles/@RigidBody2D@251358" to="Collectibles/@RigidBody2D@251358" method="_on_body_entered"]
-[connection signal="input_event" from="Collectibles/@RigidBody2D@251358" to="Collectibles/@RigidBody2D@251358" method="_on_input_event"]
-[connection signal="body_entered" from="Collectibles/@RigidBody2D@251359" to="Collectibles/@RigidBody2D@251359" method="_on_body_entered"]
-[connection signal="input_event" from="Collectibles/@RigidBody2D@251359" to="Collectibles/@RigidBody2D@251359" method="_on_input_event"]
+[connection signal="body_entered" from="Collectibles/@RigidBody2D@257612" to="Collectibles/@RigidBody2D@257612" method="_on_body_entered"]
+[connection signal="input_event" from="Collectibles/@RigidBody2D@257612" to="Collectibles/@RigidBody2D@257612" method="_on_input_event"]
+[connection signal="body_entered" from="Collectibles/@RigidBody2D@257613" to="Collectibles/@RigidBody2D@257613" method="_on_body_entered"]
+[connection signal="input_event" from="Collectibles/@RigidBody2D@257613" to="Collectibles/@RigidBody2D@257613" method="_on_input_event"]
+[connection signal="body_entered" from="Collectibles/@RigidBody2D@257614" to="Collectibles/@RigidBody2D@257614" method="_on_body_entered"]
+[connection signal="input_event" from="Collectibles/@RigidBody2D@257614" to="Collectibles/@RigidBody2D@257614" method="_on_input_event"]
+[connection signal="body_entered" from="Collectibles/@RigidBody2D@257615" to="Collectibles/@RigidBody2D@257615" method="_on_body_entered"]
+[connection signal="input_event" from="Collectibles/@RigidBody2D@257615" to="Collectibles/@RigidBody2D@257615" method="_on_input_event"]
