@@ -2,7 +2,8 @@
 extends Node2D
 @onready var timer: Timer = $Timer
 @onready var collectibles: Node2D = %Collectibles
-@onready var collectible_transparent: AnimatedSprite2D = $CollectibleTransparent
+@onready var collectible_transparent: AnimatedSprite2D = $ScaleEasy/CollectibleTransparent
+@onready var scale_easy: Node2D = $ScaleEasy
 const COLLECTIBLE = preload("uid://b88olwn04j8oe")
 var collectible
 func _ready() -> void:
@@ -12,6 +13,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if not Engine.is_editor_hint():
 		if not timer.is_stopped():
+			scale_easy.scale=lerp(Vector2(1,1),Vector2(0.01,0.01),timer.time_left/timer.wait_time)
 			collectible_transparent.modulate=Color.from_rgba8(255,255,255,lerp(255,0,timer.time_left/timer.wait_time))
 		if timer.is_stopped() and not collectible.is_still():
 			timer.start()

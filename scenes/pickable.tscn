@@ -12,7 +12,9 @@ metadata/timer = 5.0
 wait_time = 5.0
 one_shot = true
 
-[node name="CollectibleTransparent" type="AnimatedSprite2D" parent="."]
+[node name="ScaleEasy" type="Node2D" parent="."]
+
+[node name="CollectibleTransparent" type="AnimatedSprite2D" parent="ScaleEasy"]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(0, -1.75)
 scale = Vector2(0.75, 0.75)
