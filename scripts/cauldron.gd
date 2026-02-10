@@ -8,13 +8,21 @@ const recipes: Array = [[{
 	"purple_grapes": 3
 }, COLOR_POTION], [{
 	"red_apple": 3
-}, GRAVITY_POTION], [{
+}, GRAVITY_POTION, {"gravity": 0.166}], [{
+	"red_apple": 2,
+	"gold_apple": 1
+}, GRAVITY_POTION, {"gravity": -0.5}], [{
 	"gold_apple": 3
-}, SCALING_POTION]]
-func create_potion(potion):
+}, SCALING_POTION, {"scale": 1.5}], [{
+	"gold_apple": 2,
+	"red_apple": 1
+}, SCALING_POTION, {"scale": 0.5}]]
+func create_potion(potion, metadata: Dictionary = {}):
 	for item in contained:
 		item.queue_free()
 	var new_child=potion.instantiate()
+	for meta in metadata:
+		new_child.set_meta(meta, metadata[meta])
 	new_child.global_position=global_position
 	collectibles.add_child(new_child)
 func container_effect():
@@ -27,4 +35,4 @@ func container_effect():
 				current_recipe[collectible.get_meta("collectible")]=1
 		for recipe in recipes:
 			if(recipe[0]==current_recipe):
-				create_potion(recipe[1])
+				create_potion(recipe[1], {} if recipe.size()<3 else recipe[2])

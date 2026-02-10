@@ -36,16 +36,16 @@ tile_set = ExtResource("2_rwgxs")
 unique_name_in_owner = true
 
 [node name="ScalingPotion" parent="Collectibles" instance=ExtResource("4_k0juu")]
-position = Vector2(164, -18)
+position = Vector2(167, -17)
 metadata/start_inside = true
 metadata/timer_length = 5.0
 
 [node name="ColorPotion" parent="Collectibles" instance=ExtResource("5_71j4m")]
-position = Vector2(173, -18)
+position = Vector2(177, -12)
 metadata/start_inside = true
 
 [node name="GravityPotion" parent="Collectibles" instance=ExtResource("6_qfnet")]
-position = Vector2(168, -7)
+position = Vector2(166, -7)
 metadata/start_inside = true
 
 [node name="Pickable" parent="." instance=ExtResource("7_i7141")]
@@ -81,11 +81,11 @@ metadata/container_size = 20
 [connection signal="body_entered" from="WorldBorder" to="WorldBorder" method="_on_body_entered"]
 [connection signal="body_entered" from="Collectibles/Collectible" to="Collectibles/Collectible" method="_on_body_entered"]
 [connection signal="input_event" from="Collectibles/Collectible" to="Collectibles/Collectible" method="_on_input_event"]
-[connection signal="body_entered" from="Collectibles/@RigidBody2D@189223" to="Collectibles/@RigidBody2D@189223" method="_on_body_entered"]
-[connection signal="input_event" from="Collectibles/@RigidBody2D@189223" to="Collectibles/@RigidBody2D@189223" method="_on_input_event"]
-[connection signal="body_entered" from="Collectibles/@RigidBody2D@189224" to="Collectibles/@RigidBody2D@189224" method="_on_body_entered"]
-[connection signal="input_event" from="Collectibles/@RigidBody2D@189224" to="Collectibles/@RigidBody2D@189224" method="_on_input_event"]
-[connection signal="body_entered" from="Collectibles/@RigidBody2D@189225" to="Collectibles/@RigidBody2D@189225" method="_on_body_entered"]
-[connection signal="input_event" from="Collectibles/@RigidBody2D@189225" to="Collectibles/@RigidBody2D@189225" method="_on_input_event"]
-[connection signal="body_entered" from="Collectibles/@RigidBody2D@189226" to="Collectibles/@RigidBody2D@189226" method="_on_body_entered"]
-[connection signal="input_event" from="Collectibles/@RigidBody2D@189226" to="Collectibles/@RigidBody2D@189226" method="_on_input_event"]
+[connection signal="body_entered" from="Collectibles/@RigidBody2D@227083" to="Collectibles/@RigidBody2D@227083" method="_on_body_entered"]
+[connection signal="input_event" from="Collectibles/@RigidBody2D@227083" to="Collectibles/@RigidBody2D@227083" method="_on_input_event"]
+[connection signal="body_entered" from="Collectibles/@RigidBody2D@227084" to="Collectibles/@RigidBody2D@227084" method="_on_body_entered"]
+[connection signal="input_event" from="Collectibles/@RigidBody2D@227084" to="Collectibles/@RigidBody2D@227084" method="_on_input_event"]
+[connection signal="body_entered" from="Collectibles/@RigidBody2D@227085" to="Collectibles/@RigidBody2D@227085" method="_on_body_entered"]
+[connection signal="input_event" from="Collectibles/@RigidBody2D@227085" to="Collectibles/@RigidBody2D@227085" method="_on_input_event"]
+[connection signal="body_entered" from="Collectibles/@RigidBody2D@227086" to="Collectibles/@RigidBody2D@227086" method="_on_body_entered"]
+[connection signal="input_event" from="Collectibles/@RigidBody2D@227086" to="Collectibles/@RigidBody2D@227086" method="_on_input_event"]

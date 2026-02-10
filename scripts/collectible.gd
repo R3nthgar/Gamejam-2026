@@ -8,8 +8,8 @@ extends RigidBody2D
 
 @onready var player: CharacterBody2D = %Player
 @onready var collectible_image: AnimatedSprite2D = $CollectibleCollision/CollectibleImage
-@onready var particles: GPUParticles2D = $CollectibleCollision/Particles
 @onready var audio: AudioStreamPlayer2D = $CollectibleCollision/Audio
+@onready var particles: GPUParticles2D = $CollectibleCollision/Particles
 const COLLECTIBLE_SPRITES = preload("uid://ccpt5fwr0bfx8")
 
 #Prevents bugs from incorrectly labeled animations
@@ -51,16 +51,15 @@ func is_still():
 func stop_still():
 	if still:
 		still=false
-		gravity_scale=1.0
-		gravity=1.0
+		gravity_scale=gravity
 
 func _ready() -> void:
 	allowable_collectibles=COLLECTIBLE_SPRITES.get_animation_names()
 	refresh_image()
 	still=get_meta("start_static")
+	gravity=gravity_scale
 	if still:
 		gravity_scale=0
-	gravity=gravity_scale
 	if get_meta("start_inside"):
 		set_collision_mask_value(1,false)
 		set_collision_mask_value(4,false)

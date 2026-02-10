@@ -3,10 +3,13 @@
 extends "res://scripts/potion.gd"
 const POWER_UP = preload("uid://b3bnv0bcurjfy")
 
-const gravity_multiplier=0.5
+var gravity_multiplier=0.166
 var gravity_arr=[]
 var time_passed=0
 var speed=2
+func _ready() -> void:
+	super()
+	gravity_multiplier=get_meta("gravity")
 func apply_effect(targeted, reversed: bool):
 	if not reversed:
 		play_sound(POWER_UP)

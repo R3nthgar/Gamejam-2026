@@ -23,14 +23,14 @@ scale_over_velocity_min = 1.0
 scale_over_velocity_max = 2.0
 
 [node name="GravityPotion" instance=ExtResource("1_5p0ni")]
-sleeping = false
 script = ExtResource("2_baej5")
 metadata/collectible = "potion3"
 metadata/color = Color(0.53737485, 0.00020749167, 0.5373711, 1)
+metadata/gravity = 0.166
 
 [node name="CollectibleImage" parent="CollectibleCollision" index="1"]
-position = Vector2(0, -2)
-animation = &"potion3"
+z_index = 0
+animation = &"potion2"
 
 [node name="Timer" parent="CollectibleCollision" index="2"]
 wait_time = 10.0

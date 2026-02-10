@@ -3,10 +3,13 @@
 extends "res://scripts/potion.gd"
 const POWER_UP = preload("uid://b3bnv0bcurjfy")
 
-const scale_size=1.5
+var scale_size=1.5
 var scale_arr=[]
 var time_passed=0
 var speed=2
+func _ready() -> void:
+	super()
+	scale_size=get_meta("scale")
 func apply_effect(targeted, reversed: bool):
 	if not reversed:
 		play_sound(POWER_UP)

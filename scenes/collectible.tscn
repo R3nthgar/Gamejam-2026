@@ -39,7 +39,6 @@ scale_over_velocity_max = 2.0
 collision_layer = 36
 collision_mask = 23
 input_pickable = true
-sleeping = true
 can_sleep = false
 contact_monitor = true
 max_contacts_reported = 1
@@ -60,6 +59,9 @@ sprite_frames = ExtResource("2_61c27")
 animation = &"apple"
 autoplay = "apple"
 
+[node name="Audio" type="AudioStreamPlayer2D" parent="CollectibleCollision"]
+stream = ExtResource("3_61c27")
+
 [node name="Particles" type="GPUParticles2D" parent="CollectibleCollision"]
 emitting = false
 amount = 100
@@ -68,9 +70,6 @@ one_shot = true
 explosiveness = 1.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_61c27")
-
-[node name="Audio" type="AudioStreamPlayer2D" parent="CollectibleCollision"]
-stream = ExtResource("3_61c27")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="input_event" from="." to="." method="_on_input_event"]

@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://cak5vk61bn28p"]
+[gd_scene load_steps=3 format=3 uid="uid://cak5vk61bn28p"]
 
 [ext_resource type="Script" uid="uid://is7go1ek3fwg" path="res://scripts/pickable.gd" id="1_7w8xg"]
+[ext_resource type="SpriteFrames" uid="uid://ccpt5fwr0bfx8" path="res://scenes/collectible_sprites.tres" id="2_tr2q0"]
 
 [node name="Pickable" type="Node2D"]
 script = ExtResource("1_7w8xg")
@@ -10,5 +11,12 @@ metadata/timer = 5.0
 [node name="Timer" type="Timer" parent="."]
 wait_time = 5.0
 one_shot = true
+
+[node name="CollectibleTransparent" type="AnimatedSprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -1.75)
+scale = Vector2(0.75, 0.75)
+sprite_frames = ExtResource("2_tr2q0")
+animation = &"potion2"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
