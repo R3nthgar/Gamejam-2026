@@ -8,7 +8,7 @@ func apply_effect(targeted, reversed: bool):
 	#Ensures that the apples don't switch colors when the effect ends. Remove this for functions that
 	#reverse an effect
 	if not reversed:
-		play_sound(EXPLOSION)
+		play_sound(EXPLOSION, 2)
 		for targetable in targeted:
 			if targetable.get_meta("collectible") == "red_apple":
 				targetable.set_meta("collectible", "gold_apple")

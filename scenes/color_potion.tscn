@@ -34,5 +34,5 @@ animation = &"potion"
 [node name="Timer" parent="CollectibleCollision" index="2"]
 wait_time = 0.25
 
-[node name="Particles" parent="CollectibleCollision" index="3"]
+[node name="Particles" parent="CollectibleCollision" index="4"]
 process_material = SubResource("ParticleProcessMaterial_61c27")
