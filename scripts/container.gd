@@ -4,7 +4,6 @@
 @tool
 extends Node2D
 
-@onready var container: Node2D = $"."
 @onready var container_area_collision1: CollisionPolygon2D = $ContainerArea1/ContainerAreaCollision
 @onready var container_area_collision2: CollisionPolygon2D = $ContainerArea2/ContainerAreaCollision
 @onready var container_visual: Line2D = $ContainerVisual
@@ -63,6 +62,7 @@ func change_shape():
 	container_inside_collision.disabled=is_bag
 	container_collision_inside.set_collision_layer_value(4,is_bag)
 	container_collision_inside.set_collision_layer_value(1,not is_bag)
+	container_collision_inside.set_collision_layer_value(7,not is_bag)
 	
 	var collision_inside_polygon=[]
 	#This contains the polygon for ContainerCollisionInside
@@ -129,31 +129,32 @@ func _ready() -> void:
 	border_thickness=get_meta("border_thickness")
 	change_shape()
 
+func fix_alarm():
+	container_alarm.visible=contained.size()>=container_size-1
+	if(contained.size()>=container_size):
+		container_alarm.modulate=Color("red")
+		container_collision_outside.set_collision_layer_value(2,true)
+	else:
+		container_alarm.modulate=Color("yellow")
+
 #Handles objects entering the container
 func _on_container_area_body_entered(body: Node2D) -> void:
 	#Prevents objects from entering via glitches
 	if (true if ((not closed) or body.get_meta("start_inside")) else body.is_held()) and not contained.has(body) and contained.size()<container_size and not body.get_container():
 		if body.get_meta("start_inside"):
-			body.set_collision_mask_value(1,true)
 			body.set_meta("start_inside",false)
 		
 		#Fixes collision
 		body.set_collision_mask_value(2,false)
 		contained.append(body)
-		body.set_container(container)
+		body.set_container(self)
 
 		#Changes size of object
 		for child in body.get_children():
 			child.scale*=container_scale_mod
 
 		#Makes exclamation mark appear when container is full or close to full
-		if(contained.size()>=container_size-1):
-			container_alarm.visible=true
-			if(contained.size()>=container_size):
-				container_alarm.modulate=Color("red")
-				container_collision_outside.set_collision_layer_value(2,true)
-			else:
-				container_alarm.modulate=Color("yellow")
+		fix_alarm()
 
 func _on_container_area_body_exited(body: Node2D) -> void:
 	#Prevents objects from exiting via moving, unless the container is open
@@ -169,12 +170,9 @@ func _on_container_area_body_exited(body: Node2D) -> void:
 		body.set_collision_mask_value(2,true)
 		
 		#Makes exclamation mark disappear when container isn't close to full, and changes exclamation mark color
+		fix_alarm()
 		if(contained.size()<container_size):
 			container_collision_outside.set_collision_layer_value(2,false)
-			if(contained.size()<container_size-1):
-				container_alarm.visible=false
-			else:
-				container_alarm.modulate=Color("yellow")
 		body.set_container(null)
 
 func container_effect():

@@ -15,7 +15,6 @@ one_shot = true
 [node name="ScaleEasy" type="Node2D" parent="."]
 
 [node name="CollectibleTransparent" type="AnimatedSprite2D" parent="ScaleEasy"]
-modulate = Color(1, 1, 1, 0)
 position = Vector2(0, -1.75)
 scale = Vector2(0.75, 0.75)
 sprite_frames = ExtResource("2_tr2q0")

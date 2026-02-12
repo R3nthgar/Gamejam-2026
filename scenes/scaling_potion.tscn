@@ -26,14 +26,13 @@ scale_over_velocity_max = 2.0
 script = ExtResource("2_tdmsy")
 metadata/collectible = "potion2"
 metadata/color = Color(0.3019608, 0.7411765, 0.15294118, 1)
+metadata/potion_duration = 15.0
+metadata/price = 10.0
 metadata/scale = 1.5
 
 [node name="CollectibleImage" parent="CollectibleCollision" index="1"]
 z_index = 0
-animation = &"potion2"
+animation = &"gold_apple"
 
-[node name="Timer" parent="CollectibleCollision" index="2"]
-wait_time = 5.0
-
-[node name="Particles" parent="CollectibleCollision" index="3"]
+[node name="Particles" parent="CollectibleCollision" index="4"]
 process_material = SubResource("ParticleProcessMaterial_61c27")

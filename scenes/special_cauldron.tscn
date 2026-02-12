@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bpcampaxeku1t"]
+
+[ext_resource type="PackedScene" uid="uid://dvxwosa016ah4" path="res://scenes/cauldron.tscn" id="1_8vm6k"]
+
+[node name="Special_Cauldron" instance=ExtResource("1_8vm6k")]
+metadata/closed = true
+metadata/color = Color(1, 0.78431374, 0, 1)

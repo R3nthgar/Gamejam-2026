@@ -1,6 +1,7 @@
 #Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
 
 extends "res://scripts/potion.gd"
+class_name gravity_potion
 const POWER_UP = preload("uid://b3bnv0bcurjfy")
 
 var gravity_multiplier=0.166

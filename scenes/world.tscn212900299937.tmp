@@ -1,0 +1,129 @@
+[gd_scene load_steps=11 format=4 uid="uid://bl3f24mqhcpvy"]
+
+[ext_resource type="Script" uid="uid://bbk0iwlrnlqdv" path="res://scripts/world_border.gd" id="1_4mrxx"]
+[ext_resource type="PackedScene" uid="uid://bf5sevjvdfpd2" path="res://scenes/player.tscn" id="1_nnsk1"]
+[ext_resource type="TileSet" uid="uid://i3epakq5p5r1" path="res://assets/maptiles.tres" id="2_rwgxs"]
+[ext_resource type="PackedScene" uid="uid://cw7n3rs8rqofs" path="res://scenes/scaling_potion.tscn" id="4_k0juu"]
+[ext_resource type="PackedScene" uid="uid://ci8k3jtruhyx" path="res://scenes/color_potion.tscn" id="5_71j4m"]
+[ext_resource type="PackedScene" uid="uid://bpwhckui1x7uj" path="res://scenes/gravity_potion.tscn" id="6_qfnet"]
+[ext_resource type="PackedScene" uid="uid://cak5vk61bn28p" path="res://scenes/pickable.tscn" id="7_i7141"]
+[ext_resource type="PackedScene" uid="uid://dvxwosa016ah4" path="res://scenes/cauldron.tscn" id="9_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://diacnvuwoca2w" path="res://scenes/container.tscn" id="9_w7kh3"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i7141"]
+
+[node name="World" type="Node2D"]
+metadata/_edit_horizontal_guides_ = [-91.0]
+
+[node name="WorldBorder" type="Area2D" parent="."]
+position = Vector2(165, 295)
+collision_layer = 0
+collision_mask = 5
+script = ExtResource("1_4mrxx")
+
+[node name="BorderCollision" type="CollisionShape2D" parent="WorldBorder"]
+shape = SubResource("WorldBoundaryShape2D_i7141")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD+/wAAAQAAAAAAAAD//wAAAQAAAAAAAAAAAAAAAQAAAAAAAAABAAAAAQAAAAAAAAACAAAAAQAJAAAAAAADAAAAAQAKAAAAAAAEAAAAAQALAAAAAAADAPz/AQAKAAEAAAACAPz/AQAJAAEAAAAEAPz/AQALAAEAAAABAPz/AQACAAAAAAAAAPz/AQACAAAAAAD///z/AQACAAAAAAABAP3/AQACAAEAAAAAAP3/AQACAAEAAAD///3/AQACAAEAAAAFAAAAAQAAAAAAAAAHAAAAAQAAAAAAAAAGAAAAAQAAAAAAAAAFAAEAAQAAAAEAAAABAAEAAQAAAAEAAAAAAAEAAQAAAAEAAAD//wEAAQAAAAEAAAD+/wEAAQAAAAEAAAAHAAEAAQAAAAEAAAAGAAEAAQAAAAEAAAAIAAAAAQACAAAAAAALAAAAAQAAAAEAAAAMAAAAAQAGAAEAAAANAAAAAQAAAAEAAAAOAAAAAQAGAAEAAAAPAAAAAQAAAAEAAAAQAAAAAQAGAAEAAAARAAAAAQAAAAEAAAASAAAAAQAGAAEAAAATAAAAAQAAAAEAAAAUAAAAAQAGAAEAAAAVAAAAAQAAAAEAAAAWAAAAAQAGAAEAAAAXAAAAAQAAAAEAAAAYAAAAAQAGAAEAAAAZAAAAAQAAAAEAAAAaAAAAAQAGAAEAAAAbAAAAAQAAAAEAAAAcAAAAAQAGAAEAAAAdAAAAAQAAAAEAAAAeAAAAAQAGAAEAAAAfAAAAAQAAAAEAAAAgAAAAAQAGAAEAAAAhAAAAAQAAAAEAAAAiAAAAAQAGAAEAAAAjAAAAAQAAAAEAAAAKAAAAAQAGAAEAAAAJAAAAAQAAAAEAAAD///v/AQADAAgAAAD///r/AQADAAcAAAD///j/AQACAAQAAAD9/wAAAQAAAAAAAAD8/wAAAQAAAAAAAAD7/wAAAQAAAAAAAAD9/wEAAQAAAAEAAAD8/wEAAQAAAAEAAAD7/wEAAQAAAAEAAAD8////AQAAAAUAAAD8//7/AQAAAAQAAAD8//3/AQAAAAQAAAD8//z/AQAAAAMAAAA=")
+tile_set = ExtResource("2_rwgxs")
+
+[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+position = Vector2(0, -519)
+scale = Vector2(1, -1)
+tile_map_data = PackedByteArray("AAD+/wAAAQAEAAAAAAD//wAAAQAEAAAAAAAAAAAAAQAEAAAAAAABAAAAAQAEAAAAAAACAAAAAQAJAAIAAAADAAAAAQAKAAIAAAAEAAAAAQALAAIAAAAFAAAAAQAGAAAAAAAHAAAAAQAGAAAAAAAGAAAAAQAGAAAAAAAFAAEAAQAGAAEAAAABAAEAAQAEAAEAAAAAAAEAAQAEAAEAAAD//wEAAQAEAAEAAAD+/wEAAQAEAAEAAAAHAAEAAQAGAAEAAAAGAAEAAQAGAAEAAAD9/wAAAQAEAAAAAAD8/wAAAQAEAAAAAAD7/wAAAQAEAAAAAAD9/wEAAQAEAAEAAAD8/wEAAQAEAAEAAAD7/wEAAQAEAAEAAAD8////AQAFAAUAAAD8//7/AQAFAAQAAAD8//3/AQAFAAQAAAD8//z/AQAFAAMAAAAIAAAAAQAGAAEAAAAKAAAAAQAGAAIAAAAIAP//AQAHAAEAAAAJAP//AQAHAAEAAAAKAP//AQAHAAAAAAAKAAEAAQAGAAIAAAAIAAEAAQAGAAEAAAAJAAEAAQAGAAIAAAAJAAAAAQAGAAEAAAALAP//AQAGAAIAAAALAAAAAQAGAAIAAAALAAEAAQAGAAIAAAALAP7/AQAHAAAAAAAMAP7/AQAHAAAAAAANAP7/AQAHAAAAAAAMAP//AQAGAAIAAAAMAAAAAQAGAAIAAAAMAAEAAQAGAAIAAAANAAEAAQAGAAIAAAANAAAAAQAGAAIAAAANAP//AQAGAAIAAAAMAP3/AQAGAAUAAAAMAPz/AQAGAAQAAAAMAPv/AQAGAAQAAAAMAPr/AQAGAAMAAAA=")
+tile_set = ExtResource("2_rwgxs")
+
+[node name="Player" parent="." instance=ExtResource("1_nnsk1")]
+unique_name_in_owner = true
+z_index = 1
+
+[node name="Collectibles" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="ScalingPotion" parent="Collectibles" instance=ExtResource("4_k0juu")]
+position = Vector2(167, -17)
+metadata/start_inside = true
+metadata/timer_length = 5.0
+
+[node name="ColorPotion" parent="Collectibles" instance=ExtResource("5_71j4m")]
+position = Vector2(177, -12)
+metadata/start_inside = true
+
+[node name="GravityPotion" parent="Collectibles" instance=ExtResource("6_qfnet")]
+position = Vector2(166, -7)
+metadata/start_inside = true
+metadata/gravity = -1.0
+
+[node name="Pickable" parent="." instance=ExtResource("7_i7141")]
+position = Vector2(-1, -109)
+metadata/collectible = "purple_grapes"
+
+[node name="Pickable3" parent="." instance=ExtResource("7_i7141")]
+position = Vector2(-59, -51)
+metadata/collectible = "red_apple"
+
+[node name="Pickable4" parent="." instance=ExtResource("7_i7141")]
+position = Vector2(-53, -43)
+metadata/collectible = "red_apple"
+
+[node name="Pickable5" parent="." instance=ExtResource("7_i7141")]
+position = Vector2(-59, -35)
+metadata/collectible = "red_apple"
+
+[node name="Pickable6" parent="." instance=ExtResource("7_i7141")]
+position = Vector2(-59, -481)
+rotation = 3.1415927
+metadata/collectible = "apples"
+
+[node name="Pickable7" parent="." instance=ExtResource("7_i7141")]
+position = Vector2(-53, -473)
+rotation = 3.1415927
+metadata/collectible = "apples"
+
+[node name="Pickable8" parent="." instance=ExtResource("7_i7141")]
+position = Vector2(-59, -465)
+rotation = 3.1415927
+metadata/collectible = "apples"
+
+[node name="Pickable9" parent="." instance=ExtResource("7_i7141")]
+position = Vector2(197, -450)
+rotation = 3.1415927
+metadata/collectible = "ever_berries"
+
+[node name="Pickable10" parent="." instance=ExtResource("7_i7141")]
+position = Vector2(203, -442)
+rotation = 3.1415927
+metadata/collectible = "ever_berries"
+
+[node name="Pickable11" parent="." instance=ExtResource("7_i7141")]
+position = Vector2(197, -434)
+rotation = 3.1415927
+metadata/collectible = "ever_berries"
+
+[node name="Pickable2" parent="." instance=ExtResource("7_i7141")]
+position = Vector2(-15, -109)
+metadata/collectible = "purple_grapes"
+
+[node name="Cauldron" parent="." instance=ExtResource("9_7r4gi")]
+position = Vector2(113, -11)
+
+[node name="Crate" parent="." instance=ExtResource("9_w7kh3")]
+position = Vector2(170, -14)
+rotation = 3.1415927
+metadata/points = 4
+metadata/closed = true
+metadata/size = 20.0
+metadata/container_size = 20
+
+[connection signal="body_entered" from="WorldBorder" to="WorldBorder" method="_on_body_entered"]
+[connection signal="body_entered" from="Collectibles/Collectible" to="Collectibles/Collectible" method="_on_body_entered"]
+[connection signal="input_event" from="Collectibles/Collectible" to="Collectibles/Collectible" method="_on_input_event"]
+[connection signal="body_entered" from="Collectibles/@RigidBody2D@291948" to="Collectibles/@RigidBody2D@291948" method="_on_body_entered"]
+[connection signal="input_event" from="Collectibles/@RigidBody2D@291948" to="Collectibles/@RigidBody2D@291948" method="_on_input_event"]
+[connection signal="body_entered" from="Collectibles/@RigidBody2D@291949" to="Collectibles/@RigidBody2D@291949" method="_on_body_entered"]
+[connection signal="input_event" from="Collectibles/@RigidBody2D@291949" to="Collectibles/@RigidBody2D@291949" method="_on_input_event"]
+[connection signal="body_entered" from="Collectibles/@RigidBody2D@291950" to="Collectibles/@RigidBody2D@291950" method="_on_body_entered"]
+[connection signal="input_event" from="Collectibles/@RigidBody2D@291950" to="Collectibles/@RigidBody2D@291950" method="_on_input_event"]
+[connection signal="body_entered" from="Collectibles/@RigidBody2D@291951" to="Collectibles/@RigidBody2D@291951" method="_on_body_entered"]
+[connection signal="input_event" from="Collectibles/@RigidBody2D@291951" to="Collectibles/@RigidBody2D@291951" method="_on_input_event"]

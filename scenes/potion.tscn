@@ -29,6 +29,8 @@ scale_over_velocity_max = 2.0
 script = ExtResource("1_le10y")
 metadata/collectible = "potion"
 metadata/color = Color(0, 0, 0, 1)
+metadata/potion_duration = 5.0
+metadata/price = 0.0
 
 [node name="PotionEffect" type="Area2D" parent="CollectibleCollision" index="0"]
 collision_layer = 0

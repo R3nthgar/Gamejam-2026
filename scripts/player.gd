@@ -16,7 +16,8 @@ const JUMP_VELOCITY = -350.0
 #Allows air jumping if max jumps is greater than 1, or preventing jumps altogether if max jumps is 0
 var max_jumps=1
 var jumps=0
-var is_falling=false
+
+var falling_through=0
 
 #This makes it so you don't have to change the camera zoom in the code
 var zoom
@@ -71,7 +72,11 @@ func set_animation(animation: String, reset: bool = false):
 func _physics_process(delta: float) -> void:
 	#Makes the zoom scale with the player's size.
 	player_camera.zoom=zoom/scale
-	
+	#Makes the player's sprite flip when gravity is reversed
+	up_direction=Vector2(0,-1*abs(gravity)/gravity)
+	animated_player_sprite.offset.y=-2*abs(gravity)/gravity
+	animated_player_sprite.flip_v=gravity<0
+
 	#Fixes bagged variable and makes coin sound when a collectible is collected
 	var contained=bag.get_contained().duplicate(true)
 	if(bagged!=contained):
@@ -79,15 +84,15 @@ func _physics_process(delta: float) -> void:
 			play_sound(COIN)
 		bagged=contained
 	#Adds the default gravity multiplied by the gravity modifier. Also allows jumping when on the roof
-	if ((not is_on_ceiling()) if gravity<0 else (not is_on_floor())):
-		if not is_falling:
-			is_falling=true
-			if jumps==0:
-				jumps+=1
+	if not is_on_floor():
+		if jumps==0:
+			jumps+=1
 		velocity += get_gravity() * delta * gravity
+		#Changes bagged objects' velocity to prevent visual glitching from temporarily falling out of the bag
+		for obj in bag.get_contained():
+			obj.linear_velocity.y+=get_gravity().y * delta * gravity
 	#Resets jumps when on the ground
 	else:
-		is_falling=false
 		jumps=0
 	#Jump functionality, modified to play sounds and allow air jumping
 	if Input.is_action_just_pressed("up") and jumps<max_jumps:
@@ -99,6 +104,15 @@ func _physics_process(delta: float) -> void:
 		for obj in bag.get_contained():
 			obj.linear_velocity.y+=JUMP_VELOCITY
 	
+	#Allows falling through bridges
+	if Input.is_action_just_pressed("down"):
+		set_collision_mask_value(1,false)
+		falling_through=0.01
+	elif falling_through>=0.25:
+		set_collision_mask_value(1,true)
+		falling_through=0
+	elif falling_through>0:
+		falling_through+=delta
 	#Movement functionality
 	var direction := Input.get_axis("left", "right")
 	if direction:

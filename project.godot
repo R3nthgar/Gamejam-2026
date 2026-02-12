@@ -15,6 +15,11 @@ run/main_scene="uid://bl3f24mqhcpvy"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+potion_crafting="*res://scripts/potion_crafting.gd"
+shop_handler="*res://scripts/shop_handler.gd"
+
 [display]
 
 window/stretch/mode="canvas_items"

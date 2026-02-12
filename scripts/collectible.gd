@@ -5,12 +5,14 @@
 #The @tool allows code to be run in the editor
 @tool
 extends RigidBody2D
+class_name collectible
 
 @onready var player: CharacterBody2D = %Player
 @onready var collectible_image: AnimatedSprite2D = $CollectibleCollision/CollectibleImage
 @onready var audio: AudioStreamPlayer2D = $CollectibleCollision/Audio
 @onready var particles: GPUParticles2D = $CollectibleCollision/Particles
 const COLLECTIBLE_SPRITES = preload("uid://ccpt5fwr0bfx8")
+
 
 #Prevents bugs from incorrectly labeled animations
 var allowable_collectibles=[]
@@ -61,9 +63,8 @@ func _ready() -> void:
 	if still:
 		gravity_scale=0
 	if get_meta("start_inside"):
-		set_collision_mask_value(1,false)
-		set_collision_mask_value(4,false)
 		set_collision_mask_value(5,false)
+		set_collision_mask_value(2,false)
 #This lets you create a sound, with sound being a specific file (look above to the preloaded consts),
 #and pitch letting you change the pitch of the sound, currently used so that when you're big,
 #the jump sound is lower

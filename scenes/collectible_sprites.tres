@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=13 format=3 uid="uid://ccpt5fwr0bfx8"]
+[gd_resource type="SpriteFrames" load_steps=16 format=3 uid="uid://ccpt5fwr0bfx8"]
 
 [ext_resource type="Texture2D" uid="uid://bbnqvji3npki0" path="res://assets/brackeys_platformer_assets/sprites/fruit.png" id="1_l7o0y"]
 
@@ -22,9 +22,17 @@ region = Rect2(0, 16, 16, 16)
 atlas = ExtResource("1_l7o0y")
 region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ma10x"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcus4"]
+atlas = ExtResource("1_l7o0y")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oggdr"]
 atlas = ExtResource("1_l7o0y")
 region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu2q4"]
+atlas = ExtResource("1_l7o0y")
+region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mh687"]
 atlas = ExtResource("1_l7o0y")
@@ -32,11 +40,15 @@ region = Rect2(16, 32, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l7o0y"]
 atlas = ExtResource("1_l7o0y")
-region = Rect2(16, 16, 16, 16)
+region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_udoxq"]
 atlas = ExtResource("1_l7o0y")
 region = Rect2(16, 48, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kre1"]
+atlas = ExtResource("1_l7o0y")
+region = Rect2(16, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_61c27"]
 atlas = ExtResource("1_l7o0y")
@@ -75,10 +87,26 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ma10x")
+"texture": SubResource("AtlasTexture_dcus4")
+}],
+"loop": true,
+"name": &"ever_berries",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oggdr")
 }],
 "loop": true,
 "name": &"gold_apple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vu2q4")
+}],
+"loop": true,
+"name": &"green_apple",
 "speed": 5.0
 }, {
 "frames": [{
@@ -103,6 +131,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"potion3",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6kre1")
+}],
+"loop": true,
+"name": &"potion4",
 "speed": 5.0
 }, {
 "frames": [{

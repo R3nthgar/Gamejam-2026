@@ -190,28 +190,28 @@ scale_over_velocity_max = 2.0
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 33
+collision_mask = 65
 script = ExtResource("1_g2els")
 
 [node name="AnimatedPlayerSprite" type="AnimatedSprite2D" parent="."]
 z_index = 1
-position = Vector2(0, -12)
 sprite_frames = SubResource("SpriteFrames_tuyoq")
 animation = &"walk"
 autoplay = "idle"
 frame_progress = 0.7798652
+offset = Vector2(0, -2)
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
-position = Vector2(0, -10)
 shape = SubResource("RectangleShape2D_dqkch")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
+ignore_rotation = false
 zoom = Vector2(3, 3)
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("5_qlg0r")
 
 [node name="Particles" type="GPUParticles2D" parent="."]
-position = Vector2(0, -10)
 emitting = false
 amount = 100
 texture = SubResource("GradientTexture2D_qlg0r")
@@ -221,7 +221,7 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tuyoq")
 
 [node name="Bag" parent="." instance=ExtResource("4_dqkch")]
-position = Vector2(-15, -10)
+position = Vector2(-15, 0)
 metadata/points = 12
 metadata/is_bag = true
 metadata/closed = true

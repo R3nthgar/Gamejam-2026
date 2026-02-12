@@ -1,7 +1,7 @@
 #Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
 
 extends "res://scripts/collectible.gd"
-@onready var potion: RigidBody2D = $"."
+class_name potion
 @onready var timer: Timer = $CollectibleCollision/Timer
 @onready var potion_effect: Area2D = $CollectibleCollision/PotionEffect
 @onready var collectible_collision: CollisionShape2D = $CollectibleCollision
@@ -23,6 +23,9 @@ var remove=false
 #Contains objects affected by the potion
 var affected=[]
 
+func _ready() -> void:
+	super()
+	timer.wait_time=get_meta("potion_duration")
 
 #Function that shatters potion when it collides at a greater speed than the shattering speed
 func _on_body_entered(body: Node) -> void:
@@ -48,7 +51,7 @@ func _on_body_entered(body: Node) -> void:
 		#Starts timer for end of potion
 		timer.start()
 		affected=potion_effect.get_overlapping_bodies()
-		affected.erase(potion)
+		affected.erase(self)
 		apply_effect(affected, false)
 
 #When potion ends, it calls the apply effect function but reversed. It will also delete the potion after twice

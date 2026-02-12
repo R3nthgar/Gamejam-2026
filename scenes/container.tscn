@@ -15,6 +15,7 @@ metadata/border_thickness = 2.0
 metadata/container_size = 5
 
 [node name="ContainerCollisionInside" type="StaticBody2D" parent="."]
+collision_layer = 65
 collision_mask = 0
 
 [node name="ContainerInsideCollision" type="CollisionPolygon2D" parent="ContainerCollisionInside"]
