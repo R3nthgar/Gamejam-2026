@@ -18,7 +18,11 @@ var max_jumps=1
 var jumps=0
 
 var falling_through=0
-
+var health = 100.0
+func hurt (damage):
+	health -=damage
+	if health <=0:
+		get_tree().reload_current_scene()
 #This makes it so you don't have to change the camera zoom in the code
 var zoom
 func _ready() -> void:

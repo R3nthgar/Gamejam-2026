@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=4 uid="uid://bl3f24mqhcpvy"]
+[gd_scene load_steps=16 format=4 uid="uid://bl3f24mqhcpvy"]
 
 [ext_resource type="Script" uid="uid://bbk0iwlrnlqdv" path="res://scripts/world_border.gd" id="1_4mrxx"]
 [ext_resource type="PackedScene" uid="uid://bf5sevjvdfpd2" path="res://scenes/player.tscn" id="1_nnsk1"]
@@ -11,11 +11,14 @@
 [ext_resource type="PackedScene" uid="uid://diacnvuwoca2w" path="res://scenes/container.tscn" id="9_w7kh3"]
 [ext_resource type="PackedScene" uid="uid://dwbuedjeyiila" path="res://scenes/gold_potion.tscn" id="10_w7kh3"]
 [ext_resource type="PackedScene" uid="uid://bpcampaxeku1t" path="res://scenes/special_cauldron.tscn" id="11_e3hyu"]
+[ext_resource type="Script" uid="uid://cekc7s0xsn4iq" path="res://scripts/hurt_box.gd" id="12_q5onr"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i7141"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_7r4gi"]
 normal = Vector2(0, 1)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jhx03"]
 
 [node name="World" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [-91.0]
@@ -47,6 +50,7 @@ tile_set = ExtResource("2_rwgxs")
 unique_name_in_owner = true
 z_index = 1
 position = Vector2(3, -10)
+collision_layer = 161
 
 [node name="Collectibles" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -153,5 +157,13 @@ metadata/container_size = 20
 
 [node name="Special_Cauldron" parent="." instance=ExtResource("11_e3hyu")]
 position = Vector2(162, -11)
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_mask = 128
+script = ExtResource("12_q5onr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(19, -81)
+shape = SubResource("CapsuleShape2D_jhx03")
 
 [connection signal="body_entered" from="WorldBorder" to="WorldBorder" method="_on_body_entered"]
