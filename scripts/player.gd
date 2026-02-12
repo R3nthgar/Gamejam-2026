@@ -23,6 +23,9 @@ func hurt (damage):
 	health -=damage
 	if health <=0:
 		get_tree().reload_current_scene()
+		
+func get_health():
+	return health
 #This makes it so you don't have to change the camera zoom in the code
 var zoom
 func _ready() -> void:
