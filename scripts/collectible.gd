@@ -100,16 +100,22 @@ func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.is_pressed() and held:
 		held=false
 		set_collision_mask_value(3,true)
+		set_collision_mask_value(5,true)
 		if container:
 			if container.get_meta("is_bag"):
 				set_collision_mask_value(4,true)
-			else:
+				set_collision_mask_value(9,false)
+				set_collision_mask_value(5,false)
+			elif not container.get_meta("walkthrough"):
 				set_collision_mask_value(1,true)
+				set_collision_mask_value(9,false)
+			else:
+				set_collision_mask_value(9,true)
+				set_collision_mask_value(5,false)
 			set_collision_mask_value(2,false)
 		else:
 			set_collision_mask_value(1,true)
 			set_collision_mask_value(2,true)
-			set_collision_mask_value(5,true)
 		gravity_scale=gravity
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event.is_pressed():
@@ -122,6 +128,7 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		set_collision_mask_value(3,false)
 		set_collision_mask_value(4,false)
 		set_collision_mask_value(5,false)
+		set_collision_mask_value(9,false)
 
 func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	particles.rotation=rotation*-1
