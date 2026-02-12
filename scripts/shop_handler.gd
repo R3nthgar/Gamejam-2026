@@ -1,7 +1,7 @@
 extends Node
 
 
-var ingredients=[]
+var ingredients:={}
 var potions=[]
 
 # Called when the node enters the scene tree for the first time.

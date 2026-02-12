@@ -32,6 +32,7 @@ var closed
 #Modify container size metadata to change the number of objects the container is able to hold
 var container_size=0
 
+var walkthrough=false
 
 const container_scale_mod=0.66
 
@@ -61,9 +62,11 @@ func change_shape():
 	container_visual.closed=closed
 	container_inside_collision.disabled=is_bag
 	container_collision_inside.set_collision_layer_value(4,is_bag)
-	container_collision_inside.set_collision_layer_value(1,not is_bag)
-	container_collision_inside.set_collision_layer_value(7,not is_bag)
-	
+	container_collision_inside.set_collision_layer_value(5,not is_bag)
+	container_collision_inside.set_collision_layer_value(1,not (walkthrough or is_bag))
+	container_collision_inside.set_collision_layer_value(7,not (walkthrough or is_bag))
+	container_collision_inside.set_collision_layer_value(9,walkthrough)
+	container_visual_inside.z_index=0 if walkthrough else 1
 	var collision_inside_polygon=[]
 	#This contains the polygon for ContainerCollisionInside
 	var inside_polygon=[]
@@ -94,7 +97,7 @@ func change_shape():
 			collision_inside_polygon.append(Vector2(0,size).rotated(PI*2/points*(-0.5)))
 	
 	
-	container_collision_outside.set_collision_layer_value(5,closed)
+	container_collision_outside.set_collision_layer_value(5,closed and not walkthrough)
 	#Resets inside border
 	for child in container_collision_inside.get_children():
 		if child != container_inside_collision:
@@ -120,6 +123,7 @@ func change_shape():
 #Sets appropriate variables
 func _ready() -> void:
 	container_alarm.rotation=-rotation
+	walkthrough=get_meta("walkthrough")
 	points=get_meta("points")
 	is_bag=get_meta("is_bag")
 	color=get_meta("color")
