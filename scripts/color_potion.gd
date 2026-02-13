@@ -12,8 +12,8 @@ func apply_effect(targeted, reversed: bool):
 		play_sound(EXPLOSION, 2)
 		for targetable in targeted:
 			if targetable.get_meta("collectible") == "red_apple":
-				targetable.set_meta("collectible", "green_apple")
-				targetable.emit_particles(Color("green"), 0.5)
-			elif targetable.get_meta("collectible") == "green_apple":
+				targetable.set_meta("collectible", "pink_apple")
+				targetable.emit_particles(Color(1,0.5,1), 0.5)
+			elif targetable.get_meta("collectible") == "pink_apple":
 				targetable.set_meta("collectible", "red_apple")
 				targetable.emit_particles(Color("red"), 0.5)

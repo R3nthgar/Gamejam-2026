@@ -24,12 +24,13 @@ scale_over_velocity_max = 2.0
 
 [node name="KaboomPotion" instance=ExtResource("1_5xxiy")]
 script = ExtResource("2_e60rm")
+metadata/color = Color(0, 1, 0, 1)
 
 [node name="PotionEffect" parent="CollectibleCollision" index="0"]
 collision_mask = 128
 
 [node name="CollectibleImage" parent="CollectibleCollision" index="1"]
-animation = &"potion5"
+frame_progress = 0.0
 
 [node name="Particles" parent="CollectibleCollision" index="4"]
 process_material = SubResource("ParticleProcessMaterial_e60rm")

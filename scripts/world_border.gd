@@ -4,7 +4,7 @@ extends Area2D
 func _on_body_entered(body: Node2D) -> void:
 	if not body.is_class("StaticBody2D"):
 		if body == player:
-			shop_handler.resetting=true
+			global_handler.resetting=true
 			get_tree().reload_current_scene()
 		else:
 			body.queue_free()

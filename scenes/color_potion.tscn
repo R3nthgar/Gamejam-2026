@@ -24,14 +24,13 @@ scale_over_velocity_max = 2.0
 
 [node name="ColorPotion" instance=ExtResource("1_n1b6y")]
 script = ExtResource("2_hd0s4")
-metadata/color = Color(0.9019608, 0.37254903, 0.4117647, 1)
+metadata/color = Color(0.78431374, 0, 1, 1)
 metadata/potion_duration = 1.0
 metadata/price = 5.0
 metadata/timer_length = 0.1
 
 [node name="CollectibleImage" parent="CollectibleCollision" index="1"]
 z_index = 0
-animation = &"potion"
 
 [node name="Particles" parent="CollectibleCollision" index="4"]
 process_material = SubResource("ParticleProcessMaterial_61c27")

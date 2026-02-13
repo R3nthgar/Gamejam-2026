@@ -18,7 +18,7 @@ func container_effect():
 			else:
 				current_recipe[collectible.get_meta("collectible")]=1
 		
-		var potion=potion_crafting.craft_potion(current_recipe)
+		var potion=global_handler.craft_potion(current_recipe)
 		if potion:
 			for item in contained:
 				item.queue_free()

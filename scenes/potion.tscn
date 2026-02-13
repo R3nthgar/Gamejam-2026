@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://cd0jgoajcto8y"]
+[gd_scene load_steps=6 format=3 uid="uid://cd0jgoajcto8y"]
 
 [ext_resource type="Script" uid="uid://bbjqoatuffl5v" path="res://scripts/potion.gd" id="1_le10y"]
 [ext_resource type="PackedScene" uid="uid://b88olwn04j8oe" path="res://scenes/collectible.tscn" id="1_ym5ma"]
+[ext_resource type="Texture2D" uid="uid://do6t0p5yvhlre" path="res://assets/custom/PotionInside1.png" id="3_itmmj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_le10y"]
 radius = 15.0
@@ -26,10 +27,9 @@ scale_over_velocity_min = 1.0
 scale_over_velocity_max = 2.0
 
 [node name="Potion" instance=ExtResource("1_ym5ma")]
-collision_mask = 23
 script = ExtResource("1_le10y")
 metadata/collectible = "potion"
-metadata/color = Color(0, 0, 0, 1)
+metadata/color = Color(0.51718444, 0.5171845, 0.51718444, 1)
 metadata/potion_duration = 5.0
 metadata/price = 0.0
 
@@ -40,8 +40,17 @@ collision_mask = 32
 [node name="PotionEffectCollision" type="CollisionShape2D" parent="CollectibleCollision/PotionEffect" index="0"]
 shape = SubResource("CircleShape2D_le10y")
 
+[node name="CollectibleImage" parent="CollectibleCollision" index="1"]
+position = Vector2(0, 0)
+scale = Vector2(0.5, 0.5)
+animation = &"potion"
+
+[node name="PotionInside" type="Sprite2D" parent="CollectibleCollision/CollectibleImage" index="0"]
+modulate = Color(0.51718444, 0.5171845, 0.51718444, 1)
+texture = ExtResource("3_itmmj")
+
 [node name="Timer" type="Timer" parent="CollectibleCollision" index="2"]
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
 
 [node name="Particles" parent="CollectibleCollision" index="4"]

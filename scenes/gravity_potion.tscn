@@ -24,15 +24,14 @@ scale_over_velocity_max = 2.0
 
 [node name="GravityPotion" instance=ExtResource("1_5p0ni")]
 script = ExtResource("2_baej5")
-metadata/collectible = "potion3"
-metadata/color = Color(0.53737485, 0.00020749167, 0.5373711, 1)
+metadata/color = Color(1, 0, 0, 1)
 metadata/potion_duration = 20.0
 metadata/price = 10.0
 metadata/gravity = 0.33
 
 [node name="CollectibleImage" parent="CollectibleCollision" index="1"]
 z_index = 0
-animation = &"potion3"
+frame_progress = 0.0
 
 [node name="Particles" parent="CollectibleCollision" index="4"]
 process_material = SubResource("ParticleProcessMaterial_baej5")

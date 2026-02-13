@@ -1,6 +1,7 @@
-[gd_resource type="SpriteFrames" load_steps=18 format=3 uid="uid://ccpt5fwr0bfx8"]
+[gd_resource type="SpriteFrames" load_steps=14 format=3 uid="uid://ccpt5fwr0bfx8"]
 
 [ext_resource type="Texture2D" uid="uid://bbnqvji3npki0" path="res://assets/brackeys_platformer_assets/sprites/fruit.png" id="1_l7o0y"]
+[ext_resource type="Texture2D" uid="uid://dk1bxcxqr1v05" path="res://assets/custom/PotionBottle.png" id="2_dcus4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_71j4m"]
 atlas = ExtResource("1_l7o0y")
@@ -32,37 +33,17 @@ region = Rect2(0, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vu2q4"]
 atlas = ExtResource("1_l7o0y")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ccnx0"]
+atlas = ExtResource("2_dcus4")
 region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_mh687"]
-atlas = ExtResource("1_l7o0y")
-region = Rect2(16, 32, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_l7o0y"]
-atlas = ExtResource("1_l7o0y")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_udoxq"]
-atlas = ExtResource("1_l7o0y")
-region = Rect2(16, 48, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_6kre1"]
-atlas = ExtResource("1_l7o0y")
-region = Rect2(16, 16, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_yxky4"]
-atlas = ExtResource("1_l7o0y")
-region = Rect2(16, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_wnltk"]
-atlas = ExtResource("1_l7o0y")
-region = Rect2(16, 48, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_61c27"]
 atlas = ExtResource("1_l7o0y")
 region = Rect2(32, 32, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fuck5"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_6kre1"]
 atlas = ExtResource("1_l7o0y")
 region = Rect2(0, 48, 16, 16)
 
@@ -109,55 +90,25 @@ animations = [{
 "name": &"gold_apple",
 "speed": 5.0
 }, {
+"frames": [],
+"loop": true,
+"name": &"new_animation",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_vu2q4")
 }],
 "loop": true,
-"name": &"green_apple",
+"name": &"pink_apple",
 "speed": 5.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_mh687")
+"texture": SubResource("AtlasTexture_ccnx0")
 }],
 "loop": true,
 "name": &"potion",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_l7o0y")
-}],
-"loop": true,
-"name": &"potion2",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_udoxq")
-}],
-"loop": true,
-"name": &"potion3",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_6kre1")
-}],
-"loop": true,
-"name": &"potion4",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_yxky4")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_wnltk")
-}],
-"loop": true,
-"name": &"potion5",
 "speed": 5.0
 }, {
 "frames": [{
@@ -170,7 +121,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fuck5")
+"texture": SubResource("AtlasTexture_6kre1")
 }],
 "loop": true,
 "name": &"red_apple",

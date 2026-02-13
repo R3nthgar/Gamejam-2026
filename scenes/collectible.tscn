@@ -45,7 +45,7 @@ max_contacts_reported = 1
 angular_damp = 25.0
 script = ExtResource("1_bkg8t")
 metadata/start_static = false
-metadata/collectible = ""
+metadata/collectible = "apple"
 metadata/start_inside = false
 
 [node name="CollectibleCollision" type="CollisionShape2D" parent="."]
@@ -56,7 +56,7 @@ z_index = 1
 position = Vector2(0, -1.75)
 scale = Vector2(0.75, 0.75)
 sprite_frames = ExtResource("2_61c27")
-animation = &"green_apple"
+animation = &"apple"
 autoplay = "apple"
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="CollectibleCollision"]

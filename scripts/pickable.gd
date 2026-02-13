@@ -4,9 +4,12 @@ extends Node2D
 @onready var collectibles: Node2D = %Collectibles
 @onready var collectible_transparent: AnimatedSprite2D = $ScaleEasy/CollectibleTransparent
 @onready var scale_easy: Node2D = $ScaleEasy
+const COLLECTIBLE_SPRITES = preload("uid://ccpt5fwr0bfx8")
 const COLLECTIBLE = preload("uid://b88olwn04j8oe")
+var allowable_collectibles=[]
 var collectible
 func _ready() -> void:
+	allowable_collectibles=COLLECTIBLE_SPRITES.get_animation_names()
 	if not Engine.is_editor_hint():
 		collectible_transparent.animation=get_meta("collectible")
 		timer.wait_time=get_meta("timer")
@@ -18,7 +21,7 @@ func _process(delta: float) -> void:
 			collectible_transparent.modulate=Color.from_rgba8(255,255,255,lerp(255,0,timer.time_left/timer.wait_time))
 		if timer.is_stopped() and not collectible.still:
 			timer.start()
-	elif collectible_transparent.animation!=get_meta("collectible"):
+	elif collectible_transparent.animation!=get_meta("collectible") and allowable_collectibles.has(get_meta("collectible")):
 		collectible_transparent.animation=get_meta("collectible")
 func spawn_new():
 	collectible_transparent.modulate=Color.from_rgba8(255,255,255,0)

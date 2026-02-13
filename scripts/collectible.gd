@@ -7,7 +7,6 @@
 extends RigidBody2D
 class_name collectible
 
-@onready var player: CharacterBody2D = %Player
 @onready var collectible_image: AnimatedSprite2D = $CollectibleCollision/CollectibleImage
 @onready var audio: AudioStreamPlayer2D = $CollectibleCollision/Audio
 @onready var particles: GPUParticles2D = $CollectibleCollision/Particles

@@ -185,6 +185,7 @@ texture = ExtResource("1_gy8r6")
 1:13/0 = 0
 2:13/0 = 0
 3:13/0 = 0
+4:13/animation_columns = 16
 4:13/0 = 0
 5:13/0 = 0
 0:14/0 = 0

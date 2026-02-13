@@ -29,7 +29,7 @@ metadata/color = Color(1, 0.78431374, 0, 1)
 metadata/price = 50.0
 
 [node name="CollectibleImage" parent="CollectibleCollision" index="1"]
-animation = &"potion4"
+frame_progress = 0.0
 
 [node name="Particles" parent="CollectibleCollision" index="4"]
 process_material = SubResource("ParticleProcessMaterial_u6x5v")

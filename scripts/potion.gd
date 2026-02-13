@@ -1,10 +1,12 @@
 #Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
+@tool
 
 extends "res://scripts/collectible.gd"
 class_name potion
 @onready var timer: Timer = $CollectibleCollision/Timer
 @onready var potion_effect: Area2D = $CollectibleCollision/PotionEffect
 @onready var collectible_collision: CollisionShape2D = $CollectibleCollision
+@onready var potion_inside: Sprite2D = $CollectibleCollision/CollectibleImage/PotionInside
 
 #Function that allows you to control what effects a potion applies. You shouldn't modify this directly unless
 #you want to change something for all potions
@@ -23,10 +25,17 @@ var remove=false
 #Contains objects affected by the potion
 var affected=[]
 
+var color: Color
+
 func _ready() -> void:
 	super()
 	timer.wait_time=get_meta("potion_duration")
-
+	color=get_meta("color")
+	potion_inside.modulate=color
+func _process(delta: float) -> void:
+	if color!=get_meta("color"):
+		color=get_meta("color")
+		potion_inside.modulate=color
 #Function that shatters potion when it collides at a greater speed than the shattering speed
 func _on_body_entered(body: Node) -> void:
 	#Makes fast objects colliding with a static potion also shatter it
