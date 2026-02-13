@@ -25,7 +25,7 @@ polygon = PackedVector2Array(-3.8268347, 9.238795, -9.238795, 3.8268342, -9.2387
 
 [node name="ContainerArea1" type="Area2D" parent="."]
 collision_layer = 0
-collision_mask = 4
+collision_mask = 32
 
 [node name="ContainerAreaCollision" type="CollisionPolygon2D" parent="ContainerArea1"]
 polygon = PackedVector2Array(-3.0614676, 7.391036, -7.391036, 3.0614674, -7.3910365, -3.0614672, -3.061468, -7.391036, 3.0614674, -7.391036, 7.391036, -3.0614686, 7.3910356, 3.0614688, 3.0614674, 7.3910365)
