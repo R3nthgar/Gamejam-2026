@@ -97,7 +97,7 @@ metadata/start_inside = true
 [node name="GravityPotion2" parent="Collectibles" instance=ExtResource("6_qfnet")]
 position = Vector2(127, -7)
 metadata/start_inside = true
-metadata/color = Color(1, 0.16470589, 0.32941177, 1)
+metadata/color = Color(0.65882355, 0, 0.32941177, 1)
 metadata/gravity = -1.0
 
 [node name="GoldPotion" parent="Collectibles" instance=ExtResource("10_w7kh3")]
@@ -210,7 +210,8 @@ metadata/walkthrough = false
 
 [node name="Lava" type="Area2D" parent="."]
 position = Vector2(32, 64)
-collision_mask = 128
+collision_layer = 0
+collision_mask = 32
 script = ExtResource("12_q5onr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Lava"]
@@ -247,7 +248,7 @@ metadata/container_size = 10
 tile_map_data = PackedByteArray("AAASAP3/AAAIAAAAAAAVAP7/AAAIAAEAAAAWAP7/AAAIAAAAAAAWAP3/AAAIAAEAAAAUAP7/AAAIAAAAAAAVAP3/AAAIAAAAAAASAP7/AAAIAAEAAAATAP7/AAAIAAAAAAATAP3/AAAIAAEAAAAUAP3/AAAIAAEAAAA=")
 
 [node name="Destructible2" parent="." instance=ExtResource("16_dss4m")]
-position = Vector2(-16, 1)
+position = Vector2(-16, 0)
 tile_map_data = PackedByteArray("AAAOAAEAAAAIAAEAAAAOAAAAAAAIAAEAAAANAAAAAAAIAAAAAAAOAAMAAAAIAAEAAAANAAEAAAAIAAAAAAAOAAIAAAAIAAEAAAAPAAIAAAAIAAAAAAAPAAEAAAAIAAEAAAA=")
 
 [connection signal="body_entered" from="WorldBorder" to="WorldBorder" method="_on_body_entered"]

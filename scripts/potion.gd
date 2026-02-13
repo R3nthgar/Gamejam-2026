@@ -36,6 +36,23 @@ func _process(delta: float) -> void:
 	if color!=get_meta("color"):
 		color=get_meta("color")
 		potion_inside.modulate=color
+func explode():
+	emit_particles(get_meta("color"), 1)
+	
+	#Stops potion from doing anything other than the script
+	exploded=true
+	gravity_scale=0
+	linear_velocity*=0
+	collision_layer=0
+	collision_mask=0
+	collectible_image.visible=false
+	#visible=false
+	
+	#Starts timer for end of potion
+	timer.start()
+	affected=potion_effect.get_overlapping_bodies()
+	affected.erase(self)
+	apply_effect(affected, false)
 #Function that shatters potion when it collides at a greater speed than the shattering speed
 func _on_body_entered(body: Node) -> void:
 	#Makes fast objects colliding with a static potion also shatter it
@@ -46,22 +63,7 @@ func _on_body_entered(body: Node) -> void:
 		dif_velocity=prev_velocity[0].length()
 	
 	if(dif_velocity>=shatter_speed and not container and not held and ((not body.held) if body.is_class("RigidBody2D") else true) and not exploded):
-		emit_particles(get_meta("color"), 1)
-		
-		#Stops potion from doing anything other than the script
-		exploded=true
-		gravity_scale=0
-		linear_velocity*=0
-		collision_layer=0
-		collision_mask=0
-		collectible_image.visible=false
-		#visible=false
-		
-		#Starts timer for end of potion
-		timer.start()
-		affected=potion_effect.get_overlapping_bodies()
-		affected.erase(self)
-		apply_effect(affected, false)
+		explode()
 
 #When potion ends, it calls the apply effect function but reversed. It will also delete the potion after twice
 #its duration has passed for efficiency reasons

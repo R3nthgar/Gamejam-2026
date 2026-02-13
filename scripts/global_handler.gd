@@ -18,9 +18,9 @@ const recipes: Array = [[{
 }, GRAVITY_POTION, {"gravity": 0.33}], [{
 	"red_apple": 2,
 	"pink_apple": 1
-}, GRAVITY_POTION, {"gravity": -1, "color": lerp(Color("red"), Color(1,0.5,1), 0.33)}], [{
+}, GRAVITY_POTION, {"gravity": -1, "color": lerp(Color("red"), Color(0.5,0,1), 0.33)}], [{
 	"pink_apple": 3
-}, SCALING_POTION, {"scale": 1.5, "color": lerp(Color("red"), Color(1,0.5,1), 0.66)}], [{
+}, SCALING_POTION, {"scale": 1.5, "color": lerp(Color("red"), Color(0.5,0,1), 0.66)}], [{
 	"pink_apple": 2,
 	"red_apple": 1
 }, SCALING_POTION, {"scale": 0.5}], [{
@@ -28,10 +28,10 @@ const recipes: Array = [[{
 }, GOLD_POTION], [{
 	"gold_apple": 1,
 	"red_apple": 2
-}, GRAVITY_POTION, {"price": 2}], [{
+}, GRAVITY_POTION, {"price": 2, "color": lerp(Color("red"), Color("gold"), 0.33)}], [{
 	"gold_apple": 1,
 	"pink_apple": 2
-}, SCALING_POTION, {"price": 2}]]
+}, SCALING_POTION, {"price": 2, "color": lerp(Color(1,0.5,1), Color("gold"), 0.33)}]]
 
 var ingredients:={}
 var potions = []

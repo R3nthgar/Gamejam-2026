@@ -25,7 +25,7 @@ var instanced_potions=[]
 
 func _on_container_area_1_body_entered(body: Node2D) -> void:
 	if not body.get_meta("start_inside"):
-		if body.get_meta("color"):
+		if body is potion:
 			instanced_potions.append(body)
 			var metadata:={}
 			for meta in body.get_meta_list():
@@ -37,7 +37,7 @@ func _on_container_area_1_body_entered(body: Node2D) -> void:
 			else:
 				global_handler.ingredients[body.get_meta("collectible")]=1
 func _on_container_area_2_body_exited(body: Node2D) -> void:
-	if body.get_meta("color"):
+	if body is potion:
 		if global_handler.resetting:
 			instanced_potions.erase(body)
 		else:

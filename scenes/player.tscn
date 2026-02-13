@@ -184,8 +184,9 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_dqkch"]
-size = Vector2(14, 20)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dqkch"]
+radius = 7.0
+height = 20.0
 
 [sub_resource type="Gradient" id="Gradient_1pg6c"]
 offsets = PackedFloat32Array(0)
@@ -229,7 +230,7 @@ frame_progress = 1.0
 offset = Vector2(0, -2)
 
 [node name="PlayerCollision" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_dqkch")
+shape = SubResource("CapsuleShape2D_dqkch")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 ignore_rotation = false
