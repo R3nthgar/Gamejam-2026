@@ -48,8 +48,6 @@ func _process(delta: float) -> void:
 
 #Allows objects to start without falling. Change the start static metadata property to allow this
 var still = false
-func is_still():
-	return still
 func stop_still():
 	if still:
 		still=false
@@ -88,12 +86,8 @@ func emit_particles(color: Color, speed: float = 1):
 	particles.emitting=true
 
 #Allows accessing and setting of variables for other nodes
-func is_held():
-	return held
 func set_container(new_container):
 	container=new_container
-func get_container():
-	return container
 
 #This function enables you to click and drag the collectible
 func _input(event):
@@ -106,7 +100,7 @@ func _input(event):
 				set_collision_mask_value(4,true)
 				set_collision_mask_value(9,false)
 				set_collision_mask_value(5,false)
-			elif not container.get_meta("walkthrough"):
+			elif not container.get_meta("is_deposit"):
 				set_collision_mask_value(1,true)
 				set_collision_mask_value(9,false)
 			else:
@@ -122,6 +116,7 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		stop_still()
 		gravity_scale=0
 		held=true
+		set_meta("start_inside",false)
 		set_collision_mask_value(1,false)
 		if container:
 			set_collision_mask_value(2,false)

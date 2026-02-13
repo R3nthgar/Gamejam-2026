@@ -13,10 +13,11 @@ metadata/color = Color(0, 0, 0, 1)
 metadata/size = 10.0
 metadata/border_thickness = 2.0
 metadata/container_size = 5
-metadata/walkthrough = false
+metadata/scale_modifier = 0.66
+metadata/is_deposit = false
 
 [node name="ContainerCollisionInside" type="StaticBody2D" parent="."]
-collision_layer = 65
+collision_layer = 81
 collision_mask = 0
 
 [node name="ContainerInsideCollision" type="CollisionPolygon2D" parent="ContainerCollisionInside"]

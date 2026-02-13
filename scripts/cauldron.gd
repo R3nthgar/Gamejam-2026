@@ -27,6 +27,7 @@ func container_effect():
 			contained=[]
 			fix_alarm()
 			collectibles.add_child(potion)
+			play_sound(POWER_UP,0.5)
 		else:
 			for item in contained:
 				item.queue_free()
@@ -34,4 +35,5 @@ func container_effect():
 
 
 func _on_container_area_1_body_entered(body: collectible) -> void:
-	body.play_sound(COIN,0.5)
+	if contained.has(body) and not body.get_meta("color"):
+		body.play_sound(COIN,0.5)

@@ -32,9 +32,9 @@ var closed
 #Modify container size metadata to change the number of objects the container is able to hold
 var container_size=0
 
-var walkthrough=false
+var is_deposit=false
 
-const container_scale_mod=0.66
+var container_scale_mod=0.66
 
 #This array tracks which objects are in the container
 var contained=[]
@@ -47,10 +47,11 @@ func container_full():
 
 #Changes the containers shape if info has been changed
 func _process(delta: float) -> void:
-	if Engine.is_editor_hint() and (points!=get_meta("points") or is_bag!=get_meta("is_bag") or color!=get_meta("color") or closed!=get_meta("closed") or size!=get_meta("size") or border_thickness!=get_meta("border_thickness")):
+	if Engine.is_editor_hint() and (points!=get_meta("points") or is_bag!=get_meta("is_bag") or is_deposit!=get_meta("is_deposit") or color!=get_meta("color") or closed!=get_meta("closed") or size!=get_meta("size") or border_thickness!=get_meta("border_thickness")):
 		#Sets appropriate variables
 		points=get_meta("points")
 		is_bag=get_meta("is_bag")
+		is_deposit=get_meta("is_deposit")
 		color=get_meta("color")
 		closed=get_meta("closed")
 		size=get_meta("size")
@@ -60,13 +61,13 @@ func change_shape():
 	container_visual.default_color=color
 	container_visual_inside.color=color
 	container_visual.closed=closed
-	container_inside_collision.disabled=is_bag
+	container_inside_collision.disabled=is_bag or is_deposit
 	container_collision_inside.set_collision_layer_value(4,is_bag)
-	container_collision_inside.set_collision_layer_value(5,not is_bag)
-	container_collision_inside.set_collision_layer_value(1,not (walkthrough or is_bag))
-	container_collision_inside.set_collision_layer_value(7,not (walkthrough or is_bag))
-	container_collision_inside.set_collision_layer_value(9,walkthrough)
-	container_visual_inside.z_index=0 if walkthrough else 1
+	container_collision_inside.set_collision_layer_value(5,not (is_bag or is_deposit))
+	container_collision_inside.set_collision_layer_value(1,not (is_deposit or is_bag))
+	container_collision_inside.set_collision_layer_value(7,not (is_deposit or is_bag))
+	container_collision_inside.set_collision_layer_value(9,is_deposit)
+	container_visual_inside.z_index=0 if is_deposit else 1
 	var collision_inside_polygon=[]
 	#This contains the polygon for ContainerCollisionInside
 	var inside_polygon=[]
@@ -79,7 +80,7 @@ func change_shape():
 	#This runs for each point
 	for i in points:
 		#This gets the midpoint of each line if this is a bag, otherwise getting the outside points of the polygon
-		if is_bag:
+		if is_bag or is_deposit:
 			collision_inside_polygon.append(Vector2(0,(size-border_thickness)*cos(PI/points)).rotated(PI*2/points*i))
 		else:
 			collision_inside_polygon.append(Vector2(0,size).rotated(PI*2/points*(i+0.5)))
@@ -89,7 +90,7 @@ func change_shape():
 		container_visual_polygon.append(Vector2(0,size-border_thickness*0.5).rotated(PI*2/points*(i+0.5)))
 		#This gets the vertices of the polygon of the container.
 		container_outside_polygon.append(Vector2(0,size).rotated(PI*2/points*(i+0.5)))
-	if not is_bag:
+	if (not is_bag) and (not is_deposit):
 		for i in points:
 			collision_inside_polygon.append(Vector2(0,size-border_thickness).rotated(PI*2/points*(-0.5-i)))
 		if closed:
@@ -97,12 +98,12 @@ func change_shape():
 			collision_inside_polygon.append(Vector2(0,size).rotated(PI*2/points*(-0.5)))
 	
 	
-	container_collision_outside.set_collision_layer_value(5,closed and not walkthrough)
+	container_collision_outside.set_collision_layer_value(5,closed)
 	#Resets inside border
 	for child in container_collision_inside.get_children():
 		if child != container_inside_collision:
 			container_collision_inside.remove_child(child)
-	if is_bag:
+	if is_bag or is_deposit:
 		container_inside_collision.polygon=[Vector2(0,0),Vector2(0,0),Vector2(0,0)]
 		#Adds a worldborder for each line in the polygon, ensuring that an object can't fall out.
 		for vector in collision_inside_polygon:
@@ -123,7 +124,8 @@ func change_shape():
 #Sets appropriate variables
 func _ready() -> void:
 	container_alarm.rotation=-rotation
-	walkthrough=get_meta("walkthrough")
+	container_scale_mod=get_meta("scale_modifier")
+	is_deposit=get_meta("is_deposit")
 	points=get_meta("points")
 	is_bag=get_meta("is_bag")
 	color=get_meta("color")
@@ -144,10 +146,10 @@ func fix_alarm():
 #Handles objects entering the container
 func _on_container_area_body_entered(body: Node2D) -> void:
 	#Prevents objects from entering via glitches
-	if (true if ((not closed) or body.get_meta("start_inside")) else body.is_held()) and not contained.has(body) and contained.size()<container_size and not body.get_container():
+	if (true if ((not closed) or body.get_meta("start_inside")) else body.held) and not contained.has(body) and contained.size()<container_size and not body.container:
 		if body.get_meta("start_inside"):
-			body.set_meta("start_inside",false)
-		
+			body.set_collision_mask_value(9,is_deposit)
+			body.set_collision_mask_value(1,not is_deposit)
 		#Fixes collision
 		body.set_collision_mask_value(2,false)
 		contained.append(body)
@@ -162,7 +164,7 @@ func _on_container_area_body_entered(body: Node2D) -> void:
 
 func _on_container_area_body_exited(body: Node2D) -> void:
 	#Prevents objects from exiting via moving, unless the container is open
-	if((body.is_held() if closed else true) and contained.has(body)):
+	if((body.held if closed else true) and contained.has(body)):
 		#Removes object from container
 		contained.erase(body)
 		

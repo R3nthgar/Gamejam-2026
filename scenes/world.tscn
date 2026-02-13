@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://bl3f24mqhcpvy"]
+[gd_scene load_steps=23 format=4 uid="uid://bl3f24mqhcpvy"]
 
 [ext_resource type="Script" uid="uid://bbk0iwlrnlqdv" path="res://scripts/world_border.gd" id="1_4mrxx"]
 [ext_resource type="PackedScene" uid="uid://bf5sevjvdfpd2" path="res://scenes/player.tscn" id="1_nnsk1"]
@@ -8,12 +8,13 @@
 [ext_resource type="PackedScene" uid="uid://bpwhckui1x7uj" path="res://scenes/gravity_potion.tscn" id="6_qfnet"]
 [ext_resource type="PackedScene" uid="uid://cak5vk61bn28p" path="res://scenes/pickable.tscn" id="7_i7141"]
 [ext_resource type="PackedScene" uid="uid://dvxwosa016ah4" path="res://scenes/cauldron.tscn" id="9_7r4gi"]
+[ext_resource type="PackedScene" uid="uid://diacnvuwoca2w" path="res://scenes/container.tscn" id="9_w7kh3"]
 [ext_resource type="PackedScene" uid="uid://dwbuedjeyiila" path="res://scenes/gold_potion.tscn" id="10_w7kh3"]
 [ext_resource type="PackedScene" uid="uid://bpcampaxeku1t" path="res://scenes/special_cauldron.tscn" id="11_e3hyu"]
 [ext_resource type="Script" uid="uid://cekc7s0xsn4iq" path="res://scripts/hurt_box.gd" id="12_q5onr"]
 [ext_resource type="PackedScene" uid="uid://n2f0oho2nsq3" path="res://scenes/door.tscn" id="13_jhx03"]
 [ext_resource type="PackedScene" uid="uid://bkfdhiycqjxf4" path="res://scenes/deposit.tscn" id="13_o8fc1"]
-[ext_resource type="Script" uid="uid://da1jpikwb7maq" path="res://scenes/health_bar.gd" id="13_xo05s"]
+[ext_resource type="Script" uid="uid://da1jpikwb7maq" path="res://scripts/health_bar.gd" id="13_xo05s"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i7141"]
 
@@ -22,10 +23,21 @@ normal = Vector2(0, 1)
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_jhx03"]
 
+[sub_resource type="Gradient" id="Gradient_xo05s"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dss4m"]
+gradient = SubResource("Gradient_xo05s")
+width = 138
+height = 74
+
 [sub_resource type="Gradient" id="Gradient_jhx03"]
+colors = PackedColorArray(1, 0, 0, 1, 0, 1, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_o8fc1"]
 gradient = SubResource("Gradient_jhx03")
+width = 128
 
 [node name="World" type="Node2D"]
 metadata/_edit_horizontal_guides_ = [-91.0]
@@ -64,23 +76,19 @@ unique_name_in_owner = true
 
 [node name="ScalingPotion" parent="Collectibles" instance=ExtResource("4_k0juu")]
 position = Vector2(128, -17)
-collision_mask = 23
 metadata/start_inside = true
 metadata/timer_length = 5.0
 
 [node name="ColorPotion" parent="Collectibles" instance=ExtResource("5_71j4m")]
 position = Vector2(138, -12)
-collision_mask = 23
 metadata/start_inside = true
 
 [node name="GravityPotion" parent="Collectibles" instance=ExtResource("6_qfnet")]
 position = Vector2(127, -7)
-collision_mask = 23
 metadata/start_inside = true
 
 [node name="GoldPotion" parent="Collectibles" instance=ExtResource("10_w7kh3")]
 position = Vector2(131, -18)
-collision_mask = 23
 metadata/start_inside = true
 
 [node name="Deposit" parent="." instance=ExtResource("13_o8fc1")]
@@ -175,14 +183,27 @@ shape = SubResource("CapsuleShape2D_jhx03")
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="health amount" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = 30.0
-offset_top = 580.0
-offset_right = 280.0
-offset_bottom = 620.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -64.0
+offset_right = 250.0
+grow_vertical = 0
+size_flags_horizontal = 0
+size_flags_vertical = 8
+texture_under = SubResource("GradientTexture2D_dss4m")
 texture_progress = SubResource("GradientTexture2D_o8fc1")
+texture_progress_offset = Vector2(5, 5)
 script = ExtResource("13_xo05s")
 
 [node name="Door" parent="." instance=ExtResource("13_jhx03")]
 position = Vector2(-207, 1)
+
+[node name="Container" parent="." instance=ExtResource("9_w7kh3")]
+position = Vector2(132, -13)
+metadata/points = 4
+metadata/closed = true
+metadata/size = 20.0
+metadata/container_size = 10
 
 [connection signal="body_entered" from="WorldBorder" to="WorldBorder" method="_on_body_entered"]

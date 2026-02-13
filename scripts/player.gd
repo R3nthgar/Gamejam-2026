@@ -1,6 +1,7 @@
 #Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
 
 extends CharacterBody2D
+class_name player
 @onready var animated_player_sprite: AnimatedSprite2D = $AnimatedPlayerSprite
 @onready var bag: Node2D = $Bag
 @onready var player_camera: Camera2D = $PlayerCamera
@@ -22,14 +23,14 @@ var health = 100.0
 func hurt (damage):
 	health -=damage
 	if health <=0:
+		shop_handler.resetting=true
 		get_tree().reload_current_scene()
-		
-func get_health():
-	return health
+
 #This makes it so you don't have to change the camera zoom in the code
 var zoom
 func _ready() -> void:
 	zoom=player_camera.zoom
+	shop_handler.resetting=false
 
 #This allows the gravity to be changed with the same function as a Rigid Body,
 #making it easier to change it from other nodes

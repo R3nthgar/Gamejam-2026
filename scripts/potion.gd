@@ -36,7 +36,7 @@ func _on_body_entered(body: Node) -> void:
 	else:
 		dif_velocity=prev_velocity[0].length()
 	
-	if(dif_velocity>=shatter_speed and not container and not held and ((not body.is_held()) if body.is_class("RigidBody2D") else true) and not exploded):
+	if(dif_velocity>=shatter_speed and not container and not held and ((not body.held) if body.is_class("RigidBody2D") else true) and not exploded):
 		emit_particles(get_meta("color"), 1)
 		
 		#Stops potion from doing anything other than the script

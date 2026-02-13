@@ -8,7 +8,8 @@ script = ExtResource("2_t637e")
 metadata/points = 4
 metadata/closed = true
 metadata/size = 20.0
-metadata/container_size = 100
+metadata/container_size = 25
+metadata/is_deposit = true
 metadata/walkthrough = true
 
 [node name="ContainerCollisionInside" parent="." index="0"]

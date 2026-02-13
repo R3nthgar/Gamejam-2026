@@ -26,6 +26,7 @@ scale_over_velocity_min = 1.0
 scale_over_velocity_max = 2.0
 
 [node name="Potion" instance=ExtResource("1_ym5ma")]
+collision_mask = 23
 script = ExtResource("1_le10y")
 metadata/collectible = "potion"
 metadata/color = Color(0, 0, 0, 1)
