@@ -69,6 +69,7 @@ texture = SubResource("GradientTexture2D_61c27")
 one_shot = true
 explosiveness = 1.0
 local_coords = true
+trail_lifetime = 1.0
 process_material = SubResource("ParticleProcessMaterial_61c27")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

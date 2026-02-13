@@ -29,8 +29,6 @@ metadata/color = Color(0, 1, 0, 1)
 [node name="PotionEffect" parent="CollectibleCollision" index="0"]
 collision_mask = 128
 
-[node name="CollectibleImage" parent="CollectibleCollision" index="1"]
-frame_progress = 0.0
-
 [node name="Particles" parent="CollectibleCollision" index="4"]
+trail_lifetime = 0.3
 process_material = SubResource("ParticleProcessMaterial_e60rm")

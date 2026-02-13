@@ -74,8 +74,8 @@ func play_sound(sound: AudioStream, pitch: float = 1):
 #This lets you emit particles from the collectible, with color determining the color of the particles,
 #and speed controlling the speed the particles go, allowing you to make particles go in reverse
 func emit_particles(color: Color, speed: float = 1):
-	particles.process_material.radial_velocity_min=25*speed
-	particles.process_material.radial_velocity_max=50*speed
+	particles.process_material.radial_velocity_min=10*speed
+	particles.process_material.radial_velocity_max=20*speed
 	if speed <0:
 		particles.process_material.emission_sphere_radius = 5*abs(speed)
 	else:
@@ -95,16 +95,15 @@ func _input(event):
 		set_collision_mask_value(3,true)
 		set_collision_mask_value(5,true)
 		if container:
+			set_collision_mask_value(5,false)
 			if container.get_meta("is_bag"):
 				set_collision_mask_value(4,true)
 				set_collision_mask_value(9,false)
-				set_collision_mask_value(5,false)
 			elif not container.get_meta("is_deposit"):
 				set_collision_mask_value(1,true)
 				set_collision_mask_value(9,false)
 			else:
 				set_collision_mask_value(9,true)
-				set_collision_mask_value(5,false)
 			set_collision_mask_value(2,false)
 		else:
 			set_collision_mask_value(1,true)
