@@ -61,7 +61,6 @@ func get_good_velocity():
 #and speed controlling the speed the particles go, allowing you to make particles go in reverse
 func emit_particles(color: Color, speed: float = 1, allocate: int = 0):
 	var chosen_particles:=particles
-	print(chosen_particles.capture_rect())
 	if (allocate==0 and not particles_finished) or allocate == 2:
 		particles_finished_2=false
 		chosen_particles=particles_2
@@ -96,7 +95,7 @@ func set_animation(animation: String, reset: bool = false):
 		animated_player_sprite.animation=animation
 		if not animated_player_sprite.is_playing():
 			animated_player_sprite.play(animation)
-
+		
 func _physics_process(delta: float) -> void:
 	if not dead:
 		#Makes the zoom scale with the player's size.

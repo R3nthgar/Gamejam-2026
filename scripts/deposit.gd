@@ -24,7 +24,7 @@ func _ready() -> void:
 var instanced_potions=[]
 
 func _on_container_area_1_body_entered(body: Node2D) -> void:
-	if not body.get_meta("start_inside"):
+	if body is collectible and not body.get_meta("start_inside"):
 		if body is potion:
 			instanced_potions.append(body)
 			var metadata:={}

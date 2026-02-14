@@ -34,6 +34,6 @@ func container_effect():
 			play_sound(EXPLOSION,1)
 
 
-func _on_container_area_1_body_entered(body: collectible) -> void:
-	if contained.has(body) and not body.get_meta("color"):
+func _on_container_area_1_body_entered(body: PhysicsBody2D) -> void:
+	if body is collectible and not body is potion and contained.has(body):
 		body.play_sound(COIN,0.5)
