@@ -310,3 +310,4 @@ shape = SubResource("CapsuleShape2D_qlg0r")
 [connection signal="finished" from="Particles" to="." method="_on_particles_finished"]
 [connection signal="finished" from="Particles2" to="." method="_on_particles_2_finished"]
 [connection signal="body_entered" from="DestructibleDetector" to="." method="_on_destructible_detector_body_entered"]
+[connection signal="body_exited" from="DestructibleDetector" to="." method="_on_destructible_detector_body_exited"]

@@ -29,8 +29,17 @@ metadata/potion_duration = 15.0
 metadata/price = 20.0
 metadata/scale = 1.5
 
+[node name="PotionEffect" parent="CollectibleCollision" index="0"]
+scale = Vector2(20, 20)
+
 [node name="CollectibleImage" parent="CollectibleCollision" index="1"]
 z_index = 0
+
+[node name="PotionInside" parent="CollectibleCollision/CollectibleImage" index="0"]
+modulate = Color(0, 1, 0, 1)
+
+[node name="Timer" parent="CollectibleCollision" index="2"]
+wait_time = 15.0
 
 [node name="Particles" parent="CollectibleCollision" index="4"]
 process_material = SubResource("ParticleProcessMaterial_61c27")

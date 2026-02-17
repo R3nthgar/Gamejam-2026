@@ -178,6 +178,13 @@ func _on_particles_2_finished() -> void:
 
 
 func _on_destructible_detector_body_entered(body: Node2D) -> void:
-	if scale.x>1.1:
+	if body is Destructible and scale.x>1.1:
 		body.destroy(2)
 		play_sound(EXPLOSION,1)
+	elif body is Obscurer and body.get_meta("walk_remove"):
+		print("Hi")
+		body.visible=false
+		
+func _on_destructible_detector_body_exited(body: Node2D) -> void:
+	if body is Obscurer and body.get_meta("walk_remove"):
+		body.visible=true

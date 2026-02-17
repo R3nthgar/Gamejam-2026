@@ -24,7 +24,7 @@ const recipes: Array = [[{
 }, SCALING_POTION], [{
 	"ever_berries": 2,
 	"purple_grapes": 1
-}, SCALING_POTION, {"scale": 0.5}], [{
+}, SCALING_POTION, {"scale": 0.75}], [{
 	"ever_berries": 2,
 	"red_apple": 1
 }, SCALING_POTION, {"scale": 1.25, "size": 1.25}], [{
@@ -36,7 +36,7 @@ var potions = []
 var resetting=false
 var destructibles:={}
 
-var mod_metas=["price", "scale"]
+var mod_metas=["price", "size"]
 
 func craft_potion(current_recipe: Dictionary):
 	var price_mod=1
