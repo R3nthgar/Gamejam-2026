@@ -1,7 +1,7 @@
 #Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
 
 extends CharacterBody2D
-class_name player
+class_name Player
 @onready var animated_player_sprite: AnimatedSprite2D = $AnimatedPlayerSprite
 @onready var bag: Node2D = $Bag
 @onready var player_camera: Camera2D = $PlayerCamera
@@ -12,6 +12,7 @@ var particles_finished=true
 var particles_finished_2=true
 const JUMP = preload("uid://qxb77221bpq")
 const COIN = preload("uid://cpqqhg52cev4j")
+const EXPLOSION = preload("uid://cdu1em1a7wcpj")
 
 #These are the constants, with SPEED determining character speed and jump velocity determining initial jump height
 const SPEED = 150.0
@@ -174,3 +175,9 @@ func _on_particles_finished() -> void:
 
 func _on_particles_2_finished() -> void:
 	particles_finished_2=true
+
+
+func _on_destructible_detector_body_entered(body: Node2D) -> void:
+	if scale.x>1.1:
+		body.destroy(2)
+		play_sound(EXPLOSION,1)

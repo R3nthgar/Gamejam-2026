@@ -5,7 +5,7 @@
 #The @tool allows code to be run in the editor
 @tool
 extends RigidBody2D
-class_name collectible
+class_name Collectible
 
 @onready var collectible_image: AnimatedSprite2D = $CollectibleCollision/CollectibleImage
 @onready var audio: AudioStreamPlayer2D = $CollectibleCollision/Audio

@@ -4,10 +4,10 @@ var damaging:={}
 var constant=false
 func _physics_process(delta: float) -> void:
 	for body in get_overlapping_bodies():
-		if body is player:
+		if body is Player:
 			body.hurt(dps*delta)
 		elif not body.held:
-			if body is potion:
+			if body is Potion:
 				body.explode()
 			else:
 				body.queue_free()

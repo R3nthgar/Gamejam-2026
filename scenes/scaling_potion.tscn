@@ -24,14 +24,13 @@ scale_over_velocity_max = 2.0
 
 [node name="ScalingPotion" instance=ExtResource("1_c8cev")]
 script = ExtResource("2_tdmsy")
-metadata/color = Color(1, 0.5019608, 1, 1)
+metadata/color = Color(0, 1, 0, 1)
 metadata/potion_duration = 15.0
-metadata/price = 10.0
+metadata/price = 20.0
 metadata/scale = 1.5
 
 [node name="CollectibleImage" parent="CollectibleCollision" index="1"]
 z_index = 0
-frame_progress = 0.0
 
 [node name="Particles" parent="CollectibleCollision" index="4"]
 process_material = SubResource("ParticleProcessMaterial_61c27")

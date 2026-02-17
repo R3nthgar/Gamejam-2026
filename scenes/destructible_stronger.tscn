@@ -1,0 +1,7 @@
+[gd_scene load_steps=3 format=3 uid="uid://be2o7y4ru4d4q"]
+
+[ext_resource type="PackedScene" uid="uid://cadx84wyr68tk" path="res://scenes/destructible.tscn" id="1_n0ibo"]
+[ext_resource type="Script" uid="uid://dra5a41rldll2" path="res://scripts/destructible_stronger.gd" id="2_7h8ue"]
+
+[node name="DestructibleStronger" instance=ExtResource("1_n0ibo")]
+script = ExtResource("2_7h8ue")

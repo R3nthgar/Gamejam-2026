@@ -1,7 +1,8 @@
 #Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
+@tool
 
 extends "res://scripts/potion.gd"
-class_name scaling_potion
+class_name ScalingPotion
 const POWER_UP = preload("uid://b3bnv0bcurjfy")
 
 var scale_size=1.5

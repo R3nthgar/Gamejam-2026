@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bf5sevjvdfpd2"]
+[gd_scene load_steps=38 format=3 uid="uid://bf5sevjvdfpd2"]
 
 [ext_resource type="Texture2D" uid="uid://drp1dpik8182f" path="res://assets/brackeys_platformer_assets/sprites/knight.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bebpwsogjuf1m" path="res://scripts/player.gd" id="1_g2els"]
@@ -248,6 +248,10 @@ scale_max = 0.19999999
 scale_over_velocity_min = 1.0
 scale_over_velocity_max = 2.0
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_qlg0r"]
+radius = 8.0
+height = 22.0
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 33
 collision_mask = 65
@@ -296,5 +300,13 @@ metadata/closed = true
 metadata/color = Color(0.5176471, 0.2509804, 0, 1)
 metadata/container_size = 6
 
+[node name="DestructibleDetector" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 128
+
+[node name="DestructibleDetectorCollision" type="CollisionShape2D" parent="DestructibleDetector"]
+shape = SubResource("CapsuleShape2D_qlg0r")
+
 [connection signal="finished" from="Particles" to="." method="_on_particles_finished"]
 [connection signal="finished" from="Particles2" to="." method="_on_particles_2_finished"]
+[connection signal="body_entered" from="DestructibleDetector" to="." method="_on_destructible_detector_body_entered"]

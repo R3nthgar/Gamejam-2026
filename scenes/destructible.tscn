@@ -152,6 +152,10 @@ texture = ExtResource("1_vhtfy")
 3:15/0 = 0
 2:4/size_in_atlas = Vector2i(3, 3)
 2:4/0 = 0
+12:0/0 = 0
+12:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+12:1/0 = 0
+12:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSet" id="TileSet_u70qa"]
 physics_layer_0/collision_layer = 193

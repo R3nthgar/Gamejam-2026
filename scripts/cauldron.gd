@@ -1,3 +1,4 @@
+@tool
 extends "res://scripts/container.gd"
 @onready var audio: AudioStreamPlayer2D = $Audio
 @onready var collectibles: Node2D = %Collectibles
@@ -35,5 +36,5 @@ func container_effect():
 
 
 func _on_container_area_1_body_entered(body: PhysicsBody2D) -> void:
-	if body is collectible and not body is potion and contained.has(body):
+	if body is Collectible and not body is Potion and contained.has(body):
 		body.play_sound(COIN,0.5)

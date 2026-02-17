@@ -1,8 +1,9 @@
 #Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
+@tool
 
 #This potion changes red apples to gold apples and vice versa
 extends "res://scripts/potion.gd"
-class_name color_potion
+class_name ColorPotion
 const EXPLOSION = preload("uid://cdu1em1a7wcpj")
 
 func apply_effect(targeted, reversed: bool):

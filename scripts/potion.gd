@@ -2,7 +2,7 @@
 @tool
 
 extends "res://scripts/collectible.gd"
-class_name potion
+class_name Potion
 @onready var timer: Timer = $CollectibleCollision/Timer
 @onready var potion_effect: Area2D = $CollectibleCollision/PotionEffect
 @onready var collectible_collision: CollisionShape2D = $CollectibleCollision
@@ -30,6 +30,7 @@ var color: Color
 func _ready() -> void:
 	super()
 	timer.wait_time=get_meta("potion_duration")
+	potion_effect.scale=Vector2(1,1)*get_meta("size")
 	color=get_meta("color")
 	potion_inside.modulate=color
 func _process(delta: float) -> void:

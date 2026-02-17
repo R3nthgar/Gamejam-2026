@@ -24,13 +24,22 @@ scale_over_velocity_max = 2.0
 
 [node name="ColorPotion" instance=ExtResource("1_n1b6y")]
 script = ExtResource("2_hd0s4")
-metadata/color = Color(0.78431374, 0, 1, 1)
+metadata/color = Color(0.2509804, 0.5019608, 0.5019608, 1)
 metadata/potion_duration = 1.0
-metadata/price = 5.0
+metadata/price = 25.0
 metadata/timer_length = 0.1
+
+[node name="PotionEffect" parent="CollectibleCollision" index="0"]
+scale = Vector2(20, 20)
 
 [node name="CollectibleImage" parent="CollectibleCollision" index="1"]
 z_index = 0
+
+[node name="PotionInside" parent="CollectibleCollision/CollectibleImage" index="0"]
+modulate = Color(0.2509804, 0.5019608, 0.5019608, 1)
+
+[node name="Timer" parent="CollectibleCollision" index="2"]
+wait_time = 1.0
 
 [node name="Particles" parent="CollectibleCollision" index="4"]
 process_material = SubResource("ParticleProcessMaterial_61c27")

@@ -146,7 +146,7 @@ func fix_alarm():
 #Handles objects entering the container
 func _on_container_area_body_entered(body: Node2D) -> void:
 	#Prevents objects from entering via glitches
-	if body is collectible and (true if ((not closed) or body.get_meta("start_inside")) else body.held) and not contained.has(body) and contained.size()<container_size and not body.container:
+	if body is Collectible and (true if ((not closed) or body.get_meta("start_inside")) else body.held) and not contained.has(body) and contained.size()<container_size and not body.container:
 		if body.get_meta("start_inside"):
 			body.set_collision_mask_value(9,is_deposit)
 			body.set_collision_mask_value(1,not is_deposit)

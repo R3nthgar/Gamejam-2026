@@ -1,3 +1,4 @@
+@tool
 extends "res://scripts/container.gd"
 @onready var collectibles: Node2D = %Collectibles
 const COLLECTIBLE = preload("uid://b88olwn04j8oe")
@@ -24,8 +25,8 @@ func _ready() -> void:
 var instanced_potions=[]
 
 func _on_container_area_1_body_entered(body: Node2D) -> void:
-	if body is collectible and not body.get_meta("start_inside"):
-		if body is potion:
+	if body is Collectible and not body.get_meta("start_inside"):
+		if body is Potion:
 			instanced_potions.append(body)
 			var metadata:={}
 			for meta in body.get_meta_list():
@@ -37,7 +38,7 @@ func _on_container_area_1_body_entered(body: Node2D) -> void:
 			else:
 				global_handler.ingredients[body.get_meta("collectible")]=1
 func _on_container_area_2_body_exited(body: Node2D) -> void:
-	if body is potion:
+	if body is Potion:
 		if global_handler.resetting:
 			instanced_potions.erase(body)
 		else:

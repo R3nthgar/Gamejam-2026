@@ -24,7 +24,8 @@ scale_over_velocity_max = 2.0
 
 [node name="KaboomPotion" instance=ExtResource("1_5xxiy")]
 script = ExtResource("2_e60rm")
-metadata/color = Color(0, 1, 0, 1)
+metadata/color = Color(1, 0, 0, 1)
+metadata/price = 10.0
 
 [node name="PotionEffect" parent="CollectibleCollision" index="0"]
 collision_mask = 128
