@@ -13,6 +13,7 @@ var particles_finished_2=true
 const JUMP = preload("uid://qxb77221bpq")
 const COIN = preload("uid://cpqqhg52cev4j")
 const EXPLOSION = preload("uid://cdu1em1a7wcpj")
+const HURT = preload("uid://cgfb03s61yche")
 
 #These are the constants, with SPEED determining character speed and jump velocity determining initial jump height
 const SPEED = 150.0
@@ -39,6 +40,7 @@ func _ready() -> void:
 	if dead:
 		emit_particles(Color(255,0,255),2)
 		emit_particles(Color(255,200,0),2)
+		play_sound(HURT,0.5)
 	zoom=player_camera.zoom
 	global_handler.resetting=false
 
