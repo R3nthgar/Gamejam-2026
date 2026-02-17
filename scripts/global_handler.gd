@@ -8,7 +8,7 @@ const KABOOM_POTION = preload("uid://b8s870bqq01gw")
 const potion_names := {
 	"color_potion": COLOR_POTION,"gravity_potion": GRAVITY_POTION,"scaling_potion": SCALING_POTION,"gold_potion": GOLD_POTION,"kaboom_potion": KABOOM_POTION
 }
-const collectible_colors:={"red_apple": Color(1,0,0), "pink_apple": Color(1,0.5,1), "purple_grapes": Color(0.5,0,1), "ever_berries": Color(0,1,0), "gold_apple": Color(1,0.75,0)}
+const collectible_colors:={"red_apple": Color(1,0,0), "pink_apple": Color(1,0.5,1), "purple_grapes": Color(0.5,0,1), "ever_berries": Color(0,1,0), "gold_apple": Color(1,0.75,0), "gold_berries": Color(1,0.75,0)}
 const recipes: Array = [[{
 	"red_apple": 3
 }, KABOOM_POTION], [{
@@ -29,6 +29,14 @@ const recipes: Array = [[{
 	"red_apple": 1
 }, SCALING_POTION, {"scale": 1.25, "size": 1.25}], [{
 	"gold_apple": 3,
+}, GOLD_POTION], [{
+	"gold_berries": 3,
+}, GOLD_POTION], [{
+	"gold_apple": 2,
+	"gold_berries": 1
+}, GOLD_POTION], [{
+	"gold_berries": 2,
+	"gold_apple": 1
 }, GOLD_POTION]]
 
 var ingredients:={}
@@ -37,14 +45,19 @@ var resetting=false
 var destructibles:={}
 
 var mod_metas=["price", "size"]
-
+func is_recipe(current_recipe: Dictionary):
+	for recipe in recipes:
+		if(recipe[0]==current_recipe):
+			return true
+	return false
 func craft_potion(current_recipe: Dictionary):
 	var price_mod=1
 	var new_recipe=current_recipe.duplicate(true)
-	if new_recipe.has("gold_apple") and new_recipe["gold_apple"]!=3:
-		var gold_objects = new_recipe["gold_apple"]
+	if not is_recipe(current_recipe) and (new_recipe.has("gold_apple") or new_recipe.has("gold_berries")):
+		var gold_objects = (new_recipe["gold_apple"] if "gold_apple" in new_recipe else 0)+(new_recipe["gold_berries"] if "gold_berries" in new_recipe else 0)
 		new_recipe.erase("gold_apple")
-		if new_recipe[new_recipe.keys()[0]]==3-gold_objects:
+		new_recipe.erase("gold_berries")
+		if new_recipe.keys().size()>0 and new_recipe[new_recipe.keys()[0]]==3-gold_objects:
 			new_recipe[new_recipe.keys()[0]]=3
 			price_mod=1.5*gold_objects
 	for recipe in recipes:
