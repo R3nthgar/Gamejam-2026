@@ -9,7 +9,7 @@ const POTION_CONTROL = preload("uid://25uras5vjp6a")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	global_handler.resetting=false
-	var orig_rand_potion=global_handler.recipes[0]
+	var orig_rand_potion=get_random_potion()
 	var rand_potion = global_handler.craft_potion(orig_rand_potion[0])
 	potion_icon.set_meta("color",rand_potion.get_meta("color"))
 	potion_icon.metadata=orig_rand_potion[2] if orig_rand_potion.size()>2 else {}
@@ -37,6 +37,23 @@ func _ready() -> void:
 	test_for_potion()
 
 func get_random_potion():
+	global_handler.recipes.sort_custom(func (a, b):return a[3]>b[3])
+	var sum=0
+	for recipie in global_handler.recipes:
+		sum+=recipie[3]
+		
+		
+	var selected = global_handler.recipes[0]
+	for recipie in global_handler.recipes:
+		var weight = recipie[3]
+		var r = randi_range(0,sum)
+		if r<weight :
+			selected = recipie
+			break
+		else:
+			sum-=weight
+	
+	
 	var potion=global_handler.recipes.pick_random()
 	return potion
 

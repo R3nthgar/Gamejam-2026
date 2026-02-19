@@ -11,33 +11,33 @@ const potion_names := {
 const collectible_colors:={"red_apple": Color(1,0,0), "pink_apple": Color(1,0.5,1), "purple_grapes": Color(0.5,0,1), "ever_berries": Color(0,1,0), "gold_apple": Color(1,0.75,0), "gold_berries": Color(1,0.75,0)}
 const recipes: Array = [[{
 	"red_apple": 3
-}, "KaboomPotion"], [{
+}, "KaboomPotion",{},100], [{
 	"purple_grapes": 3
-}, "GravityPotion"], [{
+}, "GravityPotion",{},100], [{
 	"purple_grapes": 2,
 	"ever_berries": 1
-}, "GravityPotion", {"gravity": -1}], [{
+}, "GravityPotion", {"gravity": -1},100], [{
 	"purple_grapes": 2,
 	"red_apple": 1
-}, "GravityPotion", {"gravity": 0.75, "size": 1.25}], [{
+}, "GravityPotion", {"gravity": 0.75, "size": 1.25},100], [{
 	"ever_berries": 3
-}, "ScalingPotion"], [{
+}, "ScalingPotion",{},100], [{
 	"ever_berries": 2,
 	"purple_grapes": 1
-}, "ScalingPotion", {"scale": 0.75}], [{
+}, "ScalingPotion",{},100, {"scale": 0.75}], [{
 	"ever_berries": 2,
 	"red_apple": 1
-}, "ScalingPotion", {"scale": 1.25, "size": 1.25}], [{
+}, "ScalingPotion",{},100, {"scale": 1.25, "size": 1.25}], [{
 	"gold_apple": 3,
-}, "GoldPotion"], [{
+}, "GoldPotion",{},100], [{
 	"gold_berries": 3,
-}, "GoldPotion"], [{
+}, "GoldPotion",{},100], [{
 	"gold_apple": 2,
 	"gold_berries": 1
-}, "GoldPotion"], [{
+}, "GoldPotion",{},100], [{
 	"gold_berries": 2,
 	"gold_apple": 1
-}, "GoldPotion"]]
+}, "GoldPotion",{},100]]
 var locations:={
 	"red_apple": Vector2(0,3),
 	"gold_apple": Vector2(0,1),
