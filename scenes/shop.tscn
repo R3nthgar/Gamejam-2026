@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://25uras5vjp6a" path="res://scenes/potion_control.tscn" id="3_1l46r"]
 [ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="3_032fp"]
 [ext_resource type="Material" uid="uid://ba6pg2iqs4kis" path="res://shaders/wood.tres" id="7_ajxib"]
+[ext_resource type="PackedScene" uid="uid://cftqs27h0oy33" path="res://scenes/ingredient_display.tscn" id="7_y6sft"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1l46r"]
 load_path = "res://.godot/imported/coin.png-44fc65ab7ac9365293e147f39c452906.ctex"
@@ -14,6 +15,8 @@ load_path = "res://.godot/imported/coin.png-44fc65ab7ac9365293e147f39c452906.cte
 [sub_resource type="AtlasTexture" id="AtlasTexture_032fp"]
 atlas = SubResource("CompressedTexture2D_1l46r")
 region = Rect2(96, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y6sft"]
 
 [node name="Shop" type="Control" unique_id=689535308]
 layout_mode = 3
@@ -61,9 +64,9 @@ anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -130.0
-offset_top = 48.75
+offset_top = 96.75
 offset_right = 130.0
-offset_bottom = 199.25
+offset_bottom = 247.25
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -79,18 +82,20 @@ offset_left = 12.0
 offset_top = 14.25
 offset_right = 28.0
 offset_bottom = 30.25
-scale = Vector2(3, 3)
+scale = Vector2(4, 4)
 metadata/color = Color(1, 0, 1, 1)
 
 [node name="Coin" type="TextureRect" parent="SpeechBox" unique_id=63332985]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -45.0
-offset_top = 18.25
-offset_right = -5.0
-offset_bottom = 58.25
+offset_left = -66.0
+offset_top = 17.25
+offset_right = -50.0
+offset_bottom = 33.25
+grow_horizontal = 0
+scale = Vector2(4, 4)
 texture = SubResource("AtlasTexture_032fp")
 
 [node name="CoinCount" type="Label" parent="SpeechBox" unique_id=522058686]
@@ -98,10 +103,10 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -88.0
-offset_top = 31.25
-offset_right = -39.0
-offset_bottom = 47.25
+offset_left = -111.0
+offset_top = 41.25
+offset_right = -62.0
+offset_bottom = 57.25
 grow_horizontal = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_032fp")
@@ -114,14 +119,53 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -24.0
-offset_top = 24.0
+offset_top = 35.25
 offset_right = 24.0
-offset_bottom = 56.0
+offset_bottom = 67.25
 grow_horizontal = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_032fp")
 theme_override_font_sizes/font_size = 32
 text = "->"
+
+[node name="CraftingBox" type="Button" parent="." unique_id=524639037]
+clip_children = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.0
+offset_top = 8.75
+offset_right = 130.0
+offset_bottom = 84.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_xfvoa")
+theme_override_styles/normal = ExtResource("2_2fc2m")
+theme_override_styles/pressed = ExtResource("2_2fc2m")
+theme_override_styles/hover = ExtResource("2_2fc2m")
+theme_override_styles/hover_pressed = ExtResource("2_2fc2m")
+
+[node name="FlowContainer" type="FlowContainer" parent="CraftingBox" unique_id=275263327]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 6.25
+offset_right = 72.5
+offset_bottom = 22.25
+scale = Vector2(4, 4)
+
+[node name="Ingredient1" parent="CraftingBox/FlowContainer" unique_id=385556919 instance=ExtResource("7_y6sft")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_y6sft")
+
+[node name="Ingredient2" parent="CraftingBox/FlowContainer" unique_id=1884352480 instance=ExtResource("7_y6sft")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_y6sft")
+
+[node name="Ingredient3" parent="CraftingBox/FlowContainer" unique_id=637733842 instance=ExtResource("7_y6sft")]
+layout_mode = 2
+texture = SubResource("AtlasTexture_y6sft")
 
 [node name="ColorRect" type="ColorRect" parent="." unique_id=1154489698]
 material = ExtResource("7_ajxib")
@@ -136,24 +180,29 @@ grow_vertical = 0
 color = Color(0.5019608, 0.2509804, 0, 1)
 
 [node name="IngredientsContainer" type="HFlowContainer" parent="." unique_id=277938326]
-layout_mode = 0
-offset_top = 91.0
-offset_right = 156.4
-offset_bottom = 187.0
-scale = Vector2(2.5, 2.5)
-theme_override_constants/v_separation = 24
-
-[node name="PotionsContainer" type="HFlowContainer" parent="." unique_id=1070339500]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.9990001
-anchor_right = 0.9990001
-offset_left = -390.84827
-offset_top = 91.0
-offset_right = -234.4483
-offset_bottom = 187.0
-scale = Vector2(2.5, 2.5)
-theme_override_constants/v_separation = 24
+anchor_top = -0.17300001
+anchor_bottom = -0.17300001
+offset_top = 179.104
+offset_right = 98.0
+offset_bottom = 251.354
+scale = Vector2(4, 4)
+theme_override_constants/v_separation = 9
+
+[node name="PotionsContainer" type="HFlowContainer" parent="." unique_id=436721923]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = -0.17400001
+anchor_right = 1.0
+anchor_bottom = -0.17400001
+offset_left = -392.0
+offset_top = 179.75201
+offset_right = -294.0
+offset_bottom = 252.00201
+scale = Vector2(4, 4)
+theme_override_constants/v_separation = 9
 
 [node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1486868786]
 layout_mode = 1

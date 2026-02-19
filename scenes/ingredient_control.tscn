@@ -12,6 +12,7 @@ region = Rect2(0, 0, 16, 16)
 offset_right = 16.0
 offset_bottom = 16.0
 texture = SubResource("AtlasTexture_elobi")
+metadata/type = ""
 
 [node name="Label" type="Label" parent="." unique_id=893951034]
 visible = false
