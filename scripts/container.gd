@@ -123,7 +123,6 @@ func change_shape():
 
 #Sets appropriate variables
 func _ready() -> void:
-	container_alarm.rotation=-rotation
 	container_scale_mod=get_meta("scale_modifier")
 	is_deposit=get_meta("is_deposit")
 	points=get_meta("points")
@@ -134,6 +133,8 @@ func _ready() -> void:
 	container_size=get_meta("container_size")
 	border_thickness=get_meta("border_thickness")
 	change_shape()
+	container_alarm.rotation=-rotation
+	container_alarm.position.y=Vector2(0,-(size+border_thickness)*2*cos(PI/points)-8).rotated(rotation).y
 
 func fix_alarm():
 	container_alarm.visible=contained.size()>=container_size-1
@@ -148,8 +149,16 @@ func _on_container_area_body_entered(body: Node2D) -> void:
 	#Prevents objects from entering via glitches
 	if body is Collectible and (true if ((not closed) or body.get_meta("start_inside")) else body.held) and not contained.has(body) and contained.size()<container_size and not body.container:
 		if body.get_meta("start_inside"):
-			body.set_collision_mask_value(9,is_deposit)
-			body.set_collision_mask_value(1,not is_deposit)
+			body.set_collision_mask_value(5,false)
+			body.set_collision_mask_value(1,false)
+			if is_bag:
+				body.set_collision_mask_value(4,true)
+				body.set_collision_mask_value(9,false)
+			elif not is_deposit:
+				body.set_collision_mask_value(1,true)
+				body.set_collision_mask_value(9,false)
+			else:
+				body.set_collision_mask_value(9,true)
 		#Fixes collision
 		body.set_collision_mask_value(2,false)
 		body.set_collision_layer_value(6,false)

@@ -1,4 +1,4 @@
-[gd_resource type="SpriteFrames" load_steps=15 format=3 uid="uid://ccpt5fwr0bfx8"]
+[gd_resource type="SpriteFrames" format=3 uid="uid://ccpt5fwr0bfx8"]
 
 [ext_resource type="Texture2D" uid="uid://bbnqvji3npki0" path="res://assets/brackeys_platformer_assets/sprites/fruit.png" id="1_l7o0y"]
 [ext_resource type="Texture2D" uid="uid://dk1bxcxqr1v05" path="res://assets/custom/PotionBottle.png" id="2_dcus4"]

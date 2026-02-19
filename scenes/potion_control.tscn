@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://25uras5vjp6a"]
+
+[ext_resource type="Texture2D" uid="uid://dk1bxcxqr1v05" path="res://assets/custom/PotionBottle.png" id="1_5frmf"]
+[ext_resource type="Texture2D" uid="uid://do6t0p5yvhlre" path="res://assets/custom/PotionInside1.png" id="2_50tjo"]
+[ext_resource type="Script" uid="uid://dpyn6ns8ot5sp" path="res://scripts/potion_control.gd" id="2_tr8ic"]
+[ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="4_tr8ic"]
+
+[node name="PotionControl" type="TextureRect" unique_id=676602487]
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("1_5frmf")
+script = ExtResource("2_tr8ic")
+metadata/color = Color(1, 1, 1, 1)
+
+[node name="PotionInside" type="TextureRect" parent="." unique_id=756541981]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = ExtResource("2_50tjo")
+
+[node name="Highlighted" type="Label" parent="." unique_id=1275052971]
+visible = false
+modulate = Color(0, 1, 0, 1)
+layout_mode = 0
+offset_left = 12.0
+offset_top = -1.0
+offset_right = 20.0
+offset_bottom = 7.0
+rotation = 3.1415927
+theme_override_fonts/font = ExtResource("4_tr8ic")
+theme_override_font_sizes/font_size = 8
+text = "^"

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://b8s870bqq01gw"]
+[gd_scene format=3 uid="uid://b8s870bqq01gw"]
 
 [ext_resource type="PackedScene" uid="uid://cd0jgoajcto8y" path="res://scenes/potion.tscn" id="1_5xxiy"]
 [ext_resource type="Script" uid="uid://blt1kvdshky6h" path="res://scripts/kaboom_potion.gd" id="2_e60rm"]
@@ -22,13 +22,17 @@ scale_max = 0.19999999
 scale_over_velocity_min = 1.0
 scale_over_velocity_max = 2.0
 
-[node name="KaboomPotion" instance=ExtResource("1_5xxiy")]
+[node name="KaboomPotion" unique_id=616148971 instance=ExtResource("1_5xxiy")]
 script = ExtResource("2_e60rm")
 metadata/color = Color(1, 0, 0, 1)
 metadata/price = 10.0
 
 [node name="PotionEffect" parent="CollectibleCollision" index="0"]
+scale = Vector2(20, 20)
 collision_mask = 128
+
+[node name="PotionInside" parent="CollectibleCollision/CollectibleImage" index="0"]
+modulate = Color(1, 0, 0, 1)
 
 [node name="Particles" parent="CollectibleCollision" index="4"]
 trail_lifetime = 0.3

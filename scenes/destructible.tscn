@@ -1,6 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://cadx84wyr68tk"]
+[gd_scene format=3 uid="uid://cadx84wyr68tk"]
 
-[ext_resource type="Texture2D" uid="uid://cmh4oie32ox1l" path="res://assets/brackeys_platformer_assets/sprites/world_tileset.png" id="1_vhtfy"]
+[ext_resource type="Texture2D" uid="uid://bm6r003hjkty6" path="res://assets/brackeys_platformer_assets/sprites/world_tileset.png" id="1_vhtfy"]
 [ext_resource type="Script" uid="uid://d2cfcn67ylxlx" path="res://scripts/destructible.gd" id="2_l8yo0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_l8yo0"]
@@ -95,14 +95,18 @@ texture = ExtResource("1_vhtfy")
 7:6/0 = 0
 8:6/0 = 0
 0:7/0 = 0
+0:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -6, 4, -6, 4, 8, -4, 8)
 1:7/0 = 0
+1:7/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -6, 4, -6, 4, 8, -4, 8)
 3:7/0 = 0
 5:7/0 = 0
 6:7/0 = 0
 7:7/0 = 0
 8:7/0 = 0
 0:8/0 = 0
+0:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -6, 4, -6, 4, 8, -4, 8)
 1:8/0 = 0
+1:8/0/physics_layer_0/polygon_0/points = PackedVector2Array(-4, -6, 4, -6, 4, 8, -4, 8)
 2:8/0 = 0
 3:8/0 = 0
 4:8/0 = 0
@@ -162,6 +166,7 @@ physics_layer_0/collision_layer = 193
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_l8yo0")
 
-[node name="Destructible" type="TileMapLayer"]
+[node name="Destructible" type="TileMapLayer" unique_id=889120908]
 tile_set = SubResource("TileSet_u70qa")
 script = ExtResource("2_l8yo0")
+metadata/strength = 1

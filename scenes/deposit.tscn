@@ -1,28 +1,32 @@
-[gd_scene load_steps=3 format=3 uid="uid://bkfdhiycqjxf4"]
+[gd_scene format=3 uid="uid://bkfdhiycqjxf4"]
 
 [ext_resource type="PackedScene" uid="uid://diacnvuwoca2w" path="res://scenes/container.tscn" id="1_gnh6o"]
 [ext_resource type="Script" uid="uid://bteumrfsxibiy" path="res://scripts/deposit.gd" id="2_t637e"]
 
-[node name="Deposit" instance=ExtResource("1_gnh6o")]
+[node name="Deposit" unique_id=1712186948 instance=ExtResource("1_gnh6o")]
 script = ExtResource("2_t637e")
 metadata/points = 4
 metadata/closed = true
 metadata/size = 20.0
-metadata/container_size = 25
+metadata/container_size = 24
 metadata/is_deposit = true
 metadata/walkthrough = true
 
 [node name="ContainerCollisionInside" parent="." index="0"]
-collision_layer = 272
+collision_layer = 256
 
 [node name="ContainerInsideCollision" parent="ContainerCollisionInside" index="0"]
-polygon = PackedVector2Array(-14.142136, 14.142136, -14.142136, -14.142136, 14.142134, -14.142137, 14.142138, 14.142133, 12.7279215, 12.7279215, 12.7279215, -12.7279215, -12.727921, -12.727922, -12.727924, 12.72792, 12.7279215, 12.7279215, 14.142136, 14.142136)
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
+disabled = true
 
 [node name="ContainerAreaCollision" parent="ContainerArea1" index="0"]
 polygon = PackedVector2Array(-12.7279215, 12.7279215, -12.7279215, -12.7279215, 12.727921, -12.727922, 12.727924, 12.72792)
 
 [node name="ContainerAreaCollision" parent="ContainerArea2" index="0"]
 polygon = PackedVector2Array(-14.142136, 14.142136, -14.142136, -14.142136, 14.142134, -14.142137, 14.142138, 14.142133)
+
+[node name="ContainerCollisionOutside" parent="." index="4"]
+collision_layer = 16
 
 [node name="ContainerOutsideCollision" parent="ContainerCollisionOutside" index="0"]
 polygon = PackedVector2Array(-14.142136, 14.142136, -14.142136, -14.142136, 14.142134, -14.142137, 14.142138, 14.142133)

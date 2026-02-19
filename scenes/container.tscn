@@ -1,9 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://diacnvuwoca2w"]
+[gd_scene format=3 uid="uid://diacnvuwoca2w"]
 
 [ext_resource type="FontFile" uid="uid://bch710uus3txx" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="1_1syo6"]
 [ext_resource type="Script" uid="uid://cly5e3tcm4cu0" path="res://scripts/container.gd" id="1_cjjsl"]
 
-[node name="Container" type="Node2D"]
+[node name="Container" type="Node2D" unique_id=2144347158]
 z_index = 1
 script = ExtResource("1_cjjsl")
 metadata/points = 8
@@ -16,51 +16,51 @@ metadata/container_size = 5
 metadata/scale_modifier = 0.66
 metadata/is_deposit = false
 
-[node name="ContainerCollisionInside" type="StaticBody2D" parent="."]
+[node name="ContainerCollisionInside" type="StaticBody2D" parent="." unique_id=966322775]
 collision_layer = 81
 collision_mask = 0
 
-[node name="ContainerInsideCollision" type="CollisionPolygon2D" parent="ContainerCollisionInside"]
+[node name="ContainerInsideCollision" type="CollisionPolygon2D" parent="ContainerCollisionInside" unique_id=1862507838]
 polygon = PackedVector2Array(-3.8268347, 9.238795, -9.238795, 3.8268342, -9.238795, -3.826834, -3.826835, -9.238795, 3.8268342, -9.238795, 9.238795, -3.8268356, 9.238794, 3.826836, 3.8268342, 9.238795, 3.0614676, 7.391036, 7.391036, 3.0614674, 7.3910365, -3.0614672, 3.061468, -7.391036, -3.0614674, -7.391036, -7.391036, -3.0614686, -7.3910356, 3.0614688, -3.0614674, 7.3910365)
 
-[node name="ContainerArea1" type="Area2D" parent="."]
+[node name="ContainerArea1" type="Area2D" parent="." unique_id=600963838]
 collision_layer = 0
 collision_mask = 32
 
-[node name="ContainerAreaCollision" type="CollisionPolygon2D" parent="ContainerArea1"]
+[node name="ContainerAreaCollision" type="CollisionPolygon2D" parent="ContainerArea1" unique_id=546676120]
 polygon = PackedVector2Array(-3.0614676, 7.391036, -7.391036, 3.0614674, -7.3910365, -3.0614672, -3.061468, -7.391036, 3.0614674, -7.391036, 7.391036, -3.0614686, 7.3910356, 3.0614688, 3.0614674, 7.3910365)
 
-[node name="ContainerArea2" type="Area2D" parent="."]
+[node name="ContainerArea2" type="Area2D" parent="." unique_id=1500633576]
 collision_layer = 0
 collision_mask = 4
 
-[node name="ContainerAreaCollision" type="CollisionPolygon2D" parent="ContainerArea2"]
+[node name="ContainerAreaCollision" type="CollisionPolygon2D" parent="ContainerArea2" unique_id=1631117263]
 polygon = PackedVector2Array(-3.8268347, 9.238795, -9.238795, 3.8268342, -9.238795, -3.826834, -3.826835, -9.238795, 3.8268342, -9.238795, 9.238795, -3.8268356, 9.238794, 3.826836, 3.8268342, 9.238795)
 
-[node name="ContainerAlarm" type="RichTextLabel" parent="."]
+[node name="ContainerAlarm" type="RichTextLabel" parent="." unique_id=342496269]
 visible = false
 z_index = 1
 offset_left = -5.0
-offset_top = -25.0
+offset_top = 24.0
 offset_right = 5.0
-offset_bottom = -9.0
+offset_bottom = 40.0
 theme_override_fonts/normal_font = ExtResource("1_1syo6")
 text = "!"
 
-[node name="ContainerCollisionOutside" type="StaticBody2D" parent="."]
+[node name="ContainerCollisionOutside" type="StaticBody2D" parent="." unique_id=48240725]
 collision_layer = 0
 collision_mask = 0
 
-[node name="ContainerOutsideCollision" type="CollisionPolygon2D" parent="ContainerCollisionOutside"]
+[node name="ContainerOutsideCollision" type="CollisionPolygon2D" parent="ContainerCollisionOutside" unique_id=1205873909]
 polygon = PackedVector2Array(-3.8268347, 9.238795, -9.238795, 3.8268342, -9.238795, -3.826834, -3.826835, -9.238795, 3.8268342, -9.238795, 9.238795, -3.8268356, 9.238794, 3.826836, 3.8268342, 9.238795)
 
-[node name="ContainerVisual" type="Line2D" parent="."]
+[node name="ContainerVisual" type="Line2D" parent="." unique_id=173241459]
 z_index = -1
 points = PackedVector2Array(-3.4441512, 8.314916, -8.314916, 3.444151, -8.314916, -3.4441504, -3.4441514, -8.314916, 3.444151, -8.314916, 8.314916, -3.444152, 8.314915, 3.4441524, 3.444151, 8.314916)
 width = 1.847759
 default_color = Color(0, 0, 0, 1)
 
-[node name="ContainerVisualInside" type="Polygon2D" parent="."]
+[node name="ContainerVisualInside" type="Polygon2D" parent="." unique_id=572874347]
 modulate = Color(1, 1, 1, 0.5019608)
 z_index = 1
 color = Color(0, 0, 0, 1)

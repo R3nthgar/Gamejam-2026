@@ -1,0 +1,27 @@
+[gd_scene format=3 uid="uid://dvbhvu7p6ccca"]
+
+[ext_resource type="Texture2D" uid="uid://bbnqvji3npki0" path="res://assets/brackeys_platformer_assets/sprites/fruit.png" id="1_puicv"]
+[ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="2_elobi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_elobi"]
+resource_local_to_scene = true
+atlas = ExtResource("1_puicv")
+region = Rect2(0, 0, 16, 16)
+
+[node name="ingredient_control" type="TextureRect" unique_id=2100317259]
+offset_right = 16.0
+offset_bottom = 16.0
+texture = SubResource("AtlasTexture_elobi")
+
+[node name="Label" type="Label" parent="." unique_id=893951034]
+visible = false
+modulate = Color(0, 1, 0, 1)
+layout_mode = 0
+offset_left = 12.0
+offset_top = -1.0
+offset_right = 20.0
+offset_bottom = 7.0
+rotation = 3.1415927
+theme_override_fonts/font = ExtResource("2_elobi")
+theme_override_font_sizes/font_size = 8
+text = "^"

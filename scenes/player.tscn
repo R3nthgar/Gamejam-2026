@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bf5sevjvdfpd2"]
+[gd_scene format=3 uid="uid://bf5sevjvdfpd2"]
 
 [ext_resource type="Texture2D" uid="uid://drp1dpik8182f" path="res://assets/brackeys_platformer_assets/sprites/knight.png" id="1_3vyb7"]
 [ext_resource type="Script" uid="uid://bebpwsogjuf1m" path="res://scripts/player.gd" id="1_g2els"]
@@ -252,29 +252,29 @@ scale_over_velocity_max = 2.0
 radius = 8.0
 height = 22.0
 
-[node name="Player" type="CharacterBody2D"]
-collision_layer = 33
+[node name="Player" type="CharacterBody2D" unique_id=1991176970]
+collision_layer = 545
 collision_mask = 65
 script = ExtResource("1_g2els")
 
-[node name="AnimatedPlayerSprite" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedPlayerSprite" type="AnimatedSprite2D" parent="." unique_id=1144338094]
 z_index = 1
 sprite_frames = SubResource("SpriteFrames_tuyoq")
 animation = &"hurt"
 autoplay = "rebirth"
 offset = Vector2(0, -2)
 
-[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+[node name="PlayerCollision" type="CollisionShape2D" parent="." unique_id=1908898402]
 shape = SubResource("CapsuleShape2D_dqkch")
 
-[node name="PlayerCamera" type="Camera2D" parent="."]
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=722866364]
 ignore_rotation = false
 zoom = Vector2(3, 3)
 
-[node name="Audio" type="AudioStreamPlayer2D" parent="."]
+[node name="Audio" type="AudioStreamPlayer2D" parent="." unique_id=942956266]
 stream = ExtResource("5_qlg0r")
 
-[node name="Particles" type="GPUParticles2D" parent="."]
+[node name="Particles" type="GPUParticles2D" parent="." unique_id=172247004]
 emitting = false
 amount = 100
 texture = SubResource("GradientTexture2D_qlg0r")
@@ -283,7 +283,7 @@ explosiveness = 1.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tuyoq")
 
-[node name="Particles2" type="GPUParticles2D" parent="."]
+[node name="Particles2" type="GPUParticles2D" parent="." unique_id=1584473886]
 emitting = false
 amount = 100
 texture = SubResource("GradientTexture2D_qlg0r")
@@ -292,7 +292,7 @@ explosiveness = 1.0
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_tuyoq")
 
-[node name="Bag" parent="." instance=ExtResource("4_dqkch")]
+[node name="Bag" parent="." unique_id=1892559595 instance=ExtResource("4_dqkch")]
 position = Vector2(-15, 0)
 metadata/points = 12
 metadata/is_bag = true
@@ -300,11 +300,11 @@ metadata/closed = true
 metadata/color = Color(0.5176471, 0.2509804, 0, 1)
 metadata/container_size = 6
 
-[node name="DestructibleDetector" type="Area2D" parent="."]
+[node name="DestructibleDetector" type="Area2D" parent="." unique_id=548185584]
 collision_layer = 0
 collision_mask = 128
 
-[node name="DestructibleDetectorCollision" type="CollisionShape2D" parent="DestructibleDetector"]
+[node name="DestructibleDetectorCollision" type="CollisionShape2D" parent="DestructibleDetector" unique_id=115394439]
 shape = SubResource("CapsuleShape2D_qlg0r")
 
 [connection signal="finished" from="Particles" to="." method="_on_particles_finished"]

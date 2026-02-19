@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://ba6pg2iqs4kis"]
+
+[ext_resource type="Shader" uid="uid://cql83ww4l66y5" path="res://shaders/wood.gdshader" id="1_mvo64"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mvo64"]
+width = 1152
+
+[resource]
+shader = ExtResource("1_mvo64")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_mvo64")
+shader_parameter/noise_strength = 0.1

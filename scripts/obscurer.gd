@@ -12,7 +12,7 @@ func _ready():
 		if !editor_selection.is_connected("selection_changed", Callable(self, "_on_editor_selection_changed")):
 			editor_selection.connect("selection_changed", Callable(self, "_on_editor_selection_changed"))
 	else:
-		if get_meta("walk_remove"):
+		if get_meta("hidden"):
 			material=null
 			modulate=Color(1,1,1)
 		visible=true

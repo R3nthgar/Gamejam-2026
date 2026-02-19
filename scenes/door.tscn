@@ -1,23 +1,38 @@
-[gd_scene load_steps=2 format=4 uid="uid://n2f0oho2nsq3"]
+[gd_scene format=4 uid="uid://n2f0oho2nsq3"]
 
 [ext_resource type="TileSet" uid="uid://i3epakq5p5r1" path="res://assets/maptiles.tres" id="1_hpvv5"]
+[ext_resource type="Script" uid="uid://dmx30q6ch6ft5" path="res://scripts/door.gd" id="1_uvdjg"]
 
-[node name="Door" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hpvv5"]
+size = Vector2(14, 46)
 
-[node name="TileMapLayer3" type="TileMapLayer" parent="."]
+[node name="Door" type="Node2D" unique_id=467095628]
+script = ExtResource("1_uvdjg")
+
+[node name="TileMapLayer3" type="TileMapLayer" parent="." unique_id=2117658024]
 modulate = Color(1, 1, 1, 0)
 z_index = -1
 tile_map_data = PackedByteArray("AAABAPz/AQAGAAEAAAAAAPz/AQAGAAEAAAD///z/AQAGAAEAAAD+//z/AQAGAAEAAAD9//z/AQAGAAEAAAD8//3/AQAGAAEAAAD8//7/AQAGAAEAAAD8////AQAGAAEAAAA=")
 tile_set = ExtResource("1_hpvv5")
 
-[node name="TileMapLayer" type="TileMapLayer" parent="."]
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=979331115]
 z_index = -1
 tile_map_data = PackedByteArray("AAD/////AQAHAAMAAFD///7/AQAHAAMAAFAAAP//AQAGAAEAAAAAAP7/AQAIAAEAAAAAAP3/AQAGAAEAAAD///3/AQAIAAAAAAABAP//AQAIAAEAAAABAP7/AQAGAAEAAAABAP3/AQAIAAEAAAACAP//AQAIAAEAAAACAP7/AQAIAAAAAAD///z/AQAIAAEAAAAAAPz/AQAGAAEAAAABAPz/AQAIAAAAAAACAP3/AQAIAAEAAAA=")
 tile_set = ExtResource("1_hpvv5")
 collision_enabled = false
 
-[node name="TileMapLayer2" type="TileMapLayer" parent="."]
+[node name="TileMapLayer2" type="TileMapLayer" parent="." unique_id=156779628]
 z_index = 3
 tile_map_data = PackedByteArray("AAD+//z/AQAIAAEAAAD9//z/AQAGAAEAAAD8//3/AQAIAAEAAAD9//3/AQAIAAAAAAD+//3/AQAGAAEAAAD+//7/AQAIAAAAAAD9//7/AQAIAAEAAAD+////AQAGAAEAAAD9////AQAIAAEAAAD8//7/AQAIAAAAAAD8////AQAGAAEAAAABAP//AQAIAAMAAAA=")
 tile_set = ExtResource("1_hpvv5")
 collision_enabled = false
+
+[node name="DoorArea" type="Area2D" parent="." unique_id=1414132546]
+collision_layer = 0
+collision_mask = 512
+
+[node name="DoorCollision" type="CollisionShape2D" parent="DoorArea" unique_id=683593420]
+position = Vector2(-40, -24)
+shape = SubResource("RectangleShape2D_hpvv5")
+
+[connection signal="body_entered" from="DoorArea" to="." method="_on_door_area_body_entered"]

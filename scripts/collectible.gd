@@ -51,6 +51,9 @@ func stop_still():
 	if still:
 		still=false
 		gravity_scale=gravity
+		if not held:
+			set_collision_mask_value(1,true)
+			set_collision_mask_value(5,true)
 
 func _ready() -> void:
 	allowable_collectibles=COLLECTIBLE_SPRITES.get_animation_names()
@@ -59,9 +62,8 @@ func _ready() -> void:
 	gravity=gravity_scale
 	if still:
 		gravity_scale=0
-	if get_meta("start_inside"):
+		set_collision_mask_value(1,false)
 		set_collision_mask_value(5,false)
-		set_collision_mask_value(2,false)
 #This lets you create a sound, with sound being a specific file (look above to the preloaded consts),
 #and pitch letting you change the pitch of the sound, currently used so that when you're big,
 #the jump sound is lower
@@ -92,10 +94,13 @@ func set_container(new_container):
 func _input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.is_pressed() and held:
 		held=false
+		z_index=0
 		set_collision_mask_value(3,true)
 		set_collision_mask_value(5,true)
 		if container:
 			set_collision_mask_value(5,false)
+			set_collision_mask_value(2,false)
+			set_collision_mask_value(6,false)
 			if container.get_meta("is_bag"):
 				set_collision_mask_value(4,true)
 				set_collision_mask_value(9,false)
@@ -104,7 +109,6 @@ func _input(event):
 				set_collision_mask_value(9,false)
 			else:
 				set_collision_mask_value(9,true)
-			set_collision_mask_value(2,false)
 		else:
 			set_collision_mask_value(1,true)
 			set_collision_mask_value(2,true)
@@ -114,6 +118,7 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		stop_still()
 		gravity_scale=0
 		held=true
+		z_index=5
 		set_meta("start_inside",false)
 		set_collision_mask_value(1,false)
 		if container:

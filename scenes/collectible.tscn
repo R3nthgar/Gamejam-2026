@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://b88olwn04j8oe"]
+[gd_scene format=3 uid="uid://b88olwn04j8oe"]
 
 [ext_resource type="Script" uid="uid://du87gobbk75b4" path="res://scripts/collectible.gd" id="1_bkg8t"]
 [ext_resource type="SpriteFrames" uid="uid://ccpt5fwr0bfx8" path="res://scenes/collectible_sprites.tres" id="2_61c27"]
@@ -35,7 +35,7 @@ scale_max = 0.19999999
 scale_over_velocity_min = 1.0
 scale_over_velocity_max = 2.0
 
-[node name="Collectible" type="RigidBody2D"]
+[node name="Collectible" type="RigidBody2D" unique_id=463139275]
 collision_layer = 36
 collision_mask = 23
 input_pickable = true
@@ -48,10 +48,10 @@ metadata/start_static = false
 metadata/collectible = "apple"
 metadata/start_inside = false
 
-[node name="CollectibleCollision" type="CollisionShape2D" parent="."]
+[node name="CollectibleCollision" type="CollisionShape2D" parent="." unique_id=1715786320]
 shape = SubResource("CircleShape2D_k2x07")
 
-[node name="CollectibleImage" type="AnimatedSprite2D" parent="CollectibleCollision"]
+[node name="CollectibleImage" type="AnimatedSprite2D" parent="CollectibleCollision" unique_id=2106104259]
 z_index = 1
 position = Vector2(0, -1.75)
 scale = Vector2(0.75, 0.75)
@@ -59,10 +59,10 @@ sprite_frames = ExtResource("2_61c27")
 animation = &"apple"
 autoplay = "apple"
 
-[node name="Audio" type="AudioStreamPlayer2D" parent="CollectibleCollision"]
+[node name="Audio" type="AudioStreamPlayer2D" parent="CollectibleCollision" unique_id=1660529650]
 stream = ExtResource("3_61c27")
 
-[node name="Particles" type="GPUParticles2D" parent="CollectibleCollision"]
+[node name="Particles" type="GPUParticles2D" parent="CollectibleCollision" unique_id=1260813385]
 emitting = false
 amount = 100
 texture = SubResource("GradientTexture2D_61c27")

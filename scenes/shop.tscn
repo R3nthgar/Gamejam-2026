@@ -1,0 +1,219 @@
+[gd_scene format=4 uid="uid://jqne00y23hno"]
+
+[ext_resource type="Script" uid="uid://cv1behlswcp77" path="res://scripts/shop.gd" id="1_8r1wq"]
+[ext_resource type="FontFile" uid="uid://bch710uus3txx" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="1_xfvoa"]
+[ext_resource type="StyleBox" uid="uid://bcg78rh5d8f80" path="res://assets/buttonstyle.tres" id="2_2fc2m"]
+[ext_resource type="TileSet" uid="uid://i3epakq5p5r1" path="res://assets/maptiles.tres" id="2_ajxib"]
+[ext_resource type="PackedScene" uid="uid://25uras5vjp6a" path="res://scenes/potion_control.tscn" id="3_1l46r"]
+[ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="3_032fp"]
+[ext_resource type="Material" uid="uid://ba6pg2iqs4kis" path="res://shaders/wood.tres" id="7_ajxib"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1l46r"]
+load_path = "res://.godot/imported/coin.png-44fc65ab7ac9365293e147f39c452906.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_032fp"]
+atlas = SubResource("CompressedTexture2D_1l46r")
+region = Rect2(96, 0, 16, 16)
+
+[node name="Shop" type="Control" unique_id=689535308]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8r1wq")
+
+[node name="ColorRect2" type="ColorRect" parent="." unique_id=29584709]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.13725491, 0.10980392, 0.09803922, 1)
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1583239456]
+position = Vector2(0, -111.99999)
+scale = Vector2(14.42, 14.42)
+tile_map_data = PackedByteArray("AAAAAAAAAAAIAAAAAAABAAAAAAAGAAEAAAACAAAAAAAIAAAAAAADAAAAAAAGAAEAAAACAAEAAQAHAAMAAFACAAIAAQAHAAMAAFAEAAAAAAAIAAEAAAAAAAEAAAAIAAEAAAADAAEAAAAIAAEAAAAEAAEAAAAGAAEAAAABAAEAAAAIAAAAAAAAAAIAAAAIAAEAAAABAAIAAAAGAAEAAAADAAIAAAAGAAEAAAAEAAIAAAAGAAEAAAA=")
+tile_set = ExtResource("2_ajxib")
+
+[node name="Door" type="Button" parent="." unique_id=1306014175]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.54300004
+anchor_right = 0.5
+anchor_bottom = 0.54300004
+offset_left = -96.0
+offset_top = -191.86401
+offset_right = 96.0
+offset_bottom = 192.13593
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SpeechBox" type="Button" parent="." unique_id=1602255925]
+clip_children = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.0
+offset_top = 48.75
+offset_right = 130.0
+offset_bottom = 199.25
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_xfvoa")
+theme_override_styles/normal = ExtResource("2_2fc2m")
+theme_override_styles/pressed = ExtResource("2_2fc2m")
+theme_override_styles/hover = ExtResource("2_2fc2m")
+theme_override_styles/hover_pressed = ExtResource("2_2fc2m")
+
+[node name="Potion" parent="SpeechBox" unique_id=676602487 instance=ExtResource("3_1l46r")]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 14.25
+offset_right = 28.0
+offset_bottom = 30.25
+scale = Vector2(3, 3)
+metadata/color = Color(1, 0, 1, 1)
+
+[node name="Coin" type="TextureRect" parent="SpeechBox" unique_id=63332985]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -45.0
+offset_top = 18.25
+offset_right = -5.0
+offset_bottom = 58.25
+texture = SubResource("AtlasTexture_032fp")
+
+[node name="CoinCount" type="Label" parent="SpeechBox" unique_id=522058686]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -88.0
+offset_top = 31.25
+offset_right = -39.0
+offset_bottom = 47.25
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_032fp")
+text = "0"
+horizontal_alignment = 2
+
+[node name="Arrow" type="Label" parent="SpeechBox" unique_id=1753968389]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -24.0
+offset_top = 24.0
+offset_right = 24.0
+offset_bottom = 56.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_032fp")
+theme_override_font_sizes/font_size = 32
+text = "->"
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1154489698]
+material = ExtResource("7_ajxib")
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -200.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.5019608, 0.2509804, 0, 1)
+
+[node name="IngredientsContainer" type="HFlowContainer" parent="." unique_id=277938326]
+layout_mode = 0
+offset_top = 91.0
+offset_right = 156.4
+offset_bottom = 187.0
+scale = Vector2(2.5, 2.5)
+theme_override_constants/v_separation = 24
+
+[node name="PotionsContainer" type="HFlowContainer" parent="." unique_id=1070339500]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.9990001
+anchor_right = 0.9990001
+offset_left = -390.84827
+offset_top = 91.0
+offset_right = -234.4483
+offset_bottom = 187.0
+scale = Vector2(2.5, 2.5)
+theme_override_constants/v_separation = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1486868786]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -193.25
+offset_right = 392.0
+offset_bottom = 193.25
+grow_vertical = 2
+theme_override_constants/separation = 75
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer" unique_id=1208001527]
+material = ExtResource("7_ajxib")
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(0.5019608, 0.2509804, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer" unique_id=1898127767]
+material = ExtResource("7_ajxib")
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(0.5019608, 0.2509804, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="VBoxContainer" unique_id=235917884]
+material = ExtResource("7_ajxib")
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(0.5019608, 0.2509804, 0, 1)
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1172342132]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -392.0
+offset_top = -193.0
+offset_bottom = 193.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 75
+
+[node name="ColorRect" type="ColorRect" parent="VBoxContainer2" unique_id=161350542]
+material = ExtResource("7_ajxib")
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(0.5019608, 0.2509804, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="VBoxContainer2" unique_id=2068437525]
+material = ExtResource("7_ajxib")
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(0.5019608, 0.2509804, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="VBoxContainer2" unique_id=1332894697]
+material = ExtResource("7_ajxib")
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+color = Color(0.5019608, 0.2509804, 0, 1)
+
+[connection signal="pressed" from="Door" to="." method="_on_door_pressed"]
