@@ -6,7 +6,6 @@ class_name Potion
 @onready var timer: Timer = $CollectibleCollision/Timer
 @onready var potion_effect: Area2D = $CollectibleCollision/PotionEffect
 @onready var collectible_collision: CollisionShape2D = $CollectibleCollision
-@onready var potion_inside: Sprite2D = $CollectibleCollision/CollectibleImage/PotionInside
 
 #Function that allows you to control what effects a potion applies. You shouldn't modify this directly unless
 #you want to change something for all potions
@@ -31,12 +30,6 @@ func _ready() -> void:
 	super()
 	timer.wait_time=get_meta("potion_duration")
 	potion_effect.scale=Vector2(1,1)*get_meta("size")
-	color=get_meta("color")
-	potion_inside.modulate=color
-func _process(delta: float) -> void:
-	if color!=get_meta("color"):
-		color=get_meta("color")
-		potion_inside.modulate=color
 func explode():
 	emit_particles(get_meta("color"), 1)
 	

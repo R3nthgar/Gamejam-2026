@@ -1,23 +1,28 @@
-[gd_scene load_steps=3 format=3 uid="uid://cak5vk61bn28p"]
+[gd_scene format=3 uid="uid://cak5vk61bn28p"]
 
 [ext_resource type="Script" uid="uid://is7go1ek3fwg" path="res://scripts/pickable.gd" id="1_7w8xg"]
-[ext_resource type="SpriteFrames" uid="uid://ccpt5fwr0bfx8" path="res://scenes/collectible_sprites.tres" id="2_tr2q0"]
+[ext_resource type="SpriteFrames" uid="uid://dasltgdh8n3bx" path="res://assets/collectible_sprites.tres" id="2_tr2q0"]
+[ext_resource type="SpriteFrames" uid="uid://ccpt5fwr0bfx8" path="res://assets/collectible_sprites_inside.tres" id="3_ue70n"]
 
-[node name="Pickable" type="Node2D"]
+[node name="Pickable" type="Node2D" unique_id=608764266]
 script = ExtResource("1_7w8xg")
 metadata/collectible = ""
 metadata/timer = 5.0
 
-[node name="Timer" type="Timer" parent="."]
+[node name="Timer" type="Timer" parent="." unique_id=1857944781]
 wait_time = 5.0
 one_shot = true
 
-[node name="ScaleEasy" type="Node2D" parent="."]
+[node name="ScaleEasy" type="Node2D" parent="." unique_id=1981653902]
 
-[node name="CollectibleTransparent" type="AnimatedSprite2D" parent="ScaleEasy"]
+[node name="CollectibleTransparent" type="AnimatedSprite2D" parent="ScaleEasy" unique_id=1724469003]
 position = Vector2(0, -1.75)
 scale = Vector2(0.75, 0.75)
 sprite_frames = ExtResource("2_tr2q0")
+animation = &"apple"
+
+[node name="CollectibleTransparentInside" type="AnimatedSprite2D" parent="ScaleEasy/CollectibleTransparent" unique_id=639221328]
+sprite_frames = ExtResource("3_ue70n")
 animation = &"apple"
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

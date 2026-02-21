@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://cd0jgoajcto8y"]
+[gd_scene format=3 uid="uid://cd0jgoajcto8y"]
 
 [ext_resource type="Script" uid="uid://bbjqoatuffl5v" path="res://scripts/potion.gd" id="1_le10y"]
 [ext_resource type="PackedScene" uid="uid://b88olwn04j8oe" path="res://scenes/collectible.tscn" id="1_ym5ma"]
-[ext_resource type="Texture2D" uid="uid://do6t0p5yvhlre" path="res://assets/custom/PotionInside1.png" id="3_itmmj"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_le10y"]
 radius = 0.99999994
@@ -26,7 +25,7 @@ scale_max = 0.19999999
 scale_over_velocity_min = 1.0
 scale_over_velocity_max = 2.0
 
-[node name="Potion" instance=ExtResource("1_ym5ma")]
+[node name="Potion" unique_id=1197210693 instance=ExtResource("1_ym5ma")]
 script = ExtResource("1_le10y")
 metadata/collectible = "potion"
 metadata/color = Color(0.51718444, 0.5171845, 0.51718444, 1)
@@ -34,27 +33,27 @@ metadata/potion_duration = 5.0
 metadata/price = 0.0
 metadata/size = 20.0
 
-[node name="PotionEffect" type="Area2D" parent="CollectibleCollision" index="0"]
+[node name="PotionEffect" type="Area2D" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="0" unique_id=1868471482]
+scale = Vector2(20, 20)
 collision_layer = 0
 collision_mask = 32
 
-[node name="PotionEffectCollision" type="CollisionShape2D" parent="CollectibleCollision/PotionEffect" index="0"]
+[node name="PotionEffectCollision" type="CollisionShape2D" parent="CollectibleCollision/PotionEffect" index="0" unique_id=1398821704]
 shape = SubResource("CircleShape2D_le10y")
 
-[node name="CollectibleImage" parent="CollectibleCollision" index="1"]
+[node name="CollectibleImage" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="1" unique_id=2106104259]
 position = Vector2(0, 0)
 scale = Vector2(0.5, 0.5)
 animation = &"potion"
 
-[node name="PotionInside" type="Sprite2D" parent="CollectibleCollision/CollectibleImage" index="0"]
-modulate = Color(0.51718444, 0.5171845, 0.51718444, 1)
-texture = ExtResource("3_itmmj")
+[node name="CollectibleInside" parent="CollectibleCollision/CollectibleImage" index="0" unique_id=1147470510]
+animation = &"potion"
 
-[node name="Timer" type="Timer" parent="CollectibleCollision" index="2"]
+[node name="Timer" type="Timer" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="2" unique_id=1294265648]
 wait_time = 5.0
 one_shot = true
 
-[node name="Particles" parent="CollectibleCollision" index="4"]
+[node name="Particles" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="4" unique_id=1260813385]
 process_material = SubResource("ParticleProcessMaterial_le10y")
 
 [connection signal="timeout" from="CollectibleCollision/Timer" to="." method="_on_timer_timeout"]

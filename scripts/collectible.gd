@@ -2,12 +2,11 @@
 
 #Change collectible metadata property to change the collectible's sprite
 
-#The @tool allows code to be run in the editor
-@tool
 extends RigidBody2D
 class_name Collectible
 
 @onready var collectible_image: AnimatedSprite2D = $CollectibleCollision/CollectibleImage
+@onready var collectible_inside: AnimatedSprite2D = $CollectibleCollision/CollectibleImage/CollectibleInside
 @onready var audio: AudioStreamPlayer2D = $CollectibleCollision/Audio
 @onready var particles: GPUParticles2D = $CollectibleCollision/Particles
 const COLLECTIBLE_SPRITES = preload("uid://ccpt5fwr0bfx8")
@@ -35,15 +34,17 @@ func get_good_velocity():
 var held=false
 var container
 
+var collectible_color: Color
+
 #Allows modifying the collectible's sprite, and tests if the animation exists to prevent bugs
 func refresh_image():
-	if(allowable_collectibles.has(get_meta("collectible"))):
-		collectible_image.animation=get_meta("collectible")
-
+	var detailed_collectible=global_handler.detailed_collectibles[get_meta("collectible")]
+	collectible_image.animation=detailed_collectible.type
+	collectible_image.transform=global_handler.transforms[detailed_collectible.type]
+	collectible_inside.animation=detailed_collectible.type
+	collectible_color=detailed_collectible.color if not self is Potion else get_meta("color")
+	collectible_inside.modulate=collectible_color
 #Ensures the sprite is up to date in the editor
-func _process(delta: float) -> void:
-	if collectible_image.animation!=get_meta("collectible"):
-		refresh_image()
 
 #Allows objects to start without falling. Change the start static metadata property to allow this
 var still = false

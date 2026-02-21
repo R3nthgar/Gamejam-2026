@@ -8,36 +8,35 @@ const KABOOM_POTION = preload("uid://b8s870bqq01gw")
 const potion_names := {
 	"ColorPotion": COLOR_POTION,"GravityPotion": GRAVITY_POTION,"ScalingPotion": SCALING_POTION,"GoldPotion": GOLD_POTION,"KaboomPotion": KABOOM_POTION
 }
-const collectible_colors:={"red_apple": Color(1,0,0), "pink_apple": Color(1,0.5,1), "purple_grapes": Color(0.5,0,1), "ever_berries": Color(0,1,0), "gold_apple": Color(1,0.75,0), "gold_berries": Color(1,0.75,0)}
 const recipes: Array = [[{
 	"red_apple": 3
 }, "KaboomPotion",{},100], [{
 	"purple_grapes": 3
-}, "GravityPotion",{},100], [{
+}, "GravityPotion",{},50], [{
 	"purple_grapes": 2,
 	"ever_berries": 1
-}, "GravityPotion", {"gravity": -1},100], [{
+}, "GravityPotion", {"gravity": -1},10], [{
 	"purple_grapes": 2,
 	"red_apple": 1
-}, "GravityPotion", {"gravity": 0.75, "size": 1.25},100], [{
+}, "GravityPotion", {"gravity": 0.75, "size": 1.25},10], [{
 	"ever_berries": 3
-}, "ScalingPotion",{},100], [{
+}, "ScalingPotion",{},50], [{
 	"ever_berries": 2,
 	"purple_grapes": 1
-}, "ScalingPotion",{},100, {"scale": 0.75}], [{
+}, "ScalingPotion",{"scale": 0.75},10], [{
 	"ever_berries": 2,
 	"red_apple": 1
-}, "ScalingPotion",{},100, {"scale": 1.25, "size": 1.25}], [{
+}, "ScalingPotion",{"scale": 1.25, "size": 1.25},10], [{
 	"gold_apple": 3,
-}, "GoldPotion",{},100], [{
+}, "GoldPotion",{},10], [{
 	"gold_berries": 3,
-}, "GoldPotion",{},100], [{
+}, "GoldPotion",{},0], [{
 	"gold_apple": 2,
 	"gold_berries": 1
-}, "GoldPotion",{},100], [{
+}, "GoldPotion",{},0], [{
 	"gold_berries": 2,
 	"gold_apple": 1
-}, "GoldPotion",{},100]]
+}, "GoldPotion",{},0]]
 var locations:={
 	"red_apple": Vector2(0,3),
 	"gold_apple": Vector2(0,1),
@@ -50,7 +49,10 @@ var potions = []
 var resetting=false
 var destructibles:={}
 
-var mod_metas=["price", "size"]
+const mod_metas=["price", "size"]
+const transforms:={"apple": Transform2D(0, Vector2(1,1), 0, Vector2(0.5,-1.5)),"grapes": Transform2D(0, Vector2(0.75,0.75), 0, Vector2(0.5,-0.5)),"potion": Transform2D(0, Vector2(0.75,0.75), 0, Vector2(0,-1.75))}
+const detailed_collectibles:={"red_apple": {"color": Color(1,0,0), "type": "apple"}, "pink_apple": {"color": Color(1,0.5,1), "type": "apple"}, "ever_berries": {"color": Color(0,1,0), "type": "grapes"}, "purple_grapes": {"color": Color(0.5,0,1), "type": "grapes"}, "gold_apple": {"color": Color(1,0.75,0), "type": "apple"}, "gold_berries": {"color": Color(1,0.75,0), "type": "grapes"}, "potion": {"color": Color.BLACK, "type": "potion"}}
+
 func get_recipe(current_recipe: Dictionary) -> Variant:
 	for recipe in recipes:
 		if(recipe[0]==current_recipe):
@@ -77,7 +79,7 @@ func craft_potion(current_recipe: Dictionary):
 		var new_color=Color(0,0,0)
 		potion.set_meta("price", potion.get_meta("price")*price_mod)
 		for ingredient in current_recipe:
-			new_color+=collectible_colors[ingredient]/3*current_recipe[ingredient] if collectible_colors.has(ingredient) else Color(0,0,0)
+			new_color+=detailed_collectibles[ingredient].color/3*current_recipe[ingredient]
 		potion.set_meta("color", new_color)
 		return potion
 	else:

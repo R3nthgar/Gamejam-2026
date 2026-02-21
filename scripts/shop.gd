@@ -8,7 +8,7 @@ extends Control
 @onready var ingredient_3: TextureRect = $CraftingBox/FlowContainer/Ingredient3
 const INGREDIENT_CONTROL = preload("uid://dvbhvu7p6ccca")
 const POTION_CONTROL = preload("uid://25uras5vjp6a")
-const FRUIT_ATLAS = preload("uid://bu0ku1xiba0s6")
+const FRUIT_ATLAS = preload("uid://b41n42rnp73gh")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -43,36 +43,31 @@ func _ready() -> void:
 	test_for_potion_and_ingredients()
 
 func get_random_potion():
-	global_handler.recipes.sort_custom(func (a, b):return a[3]>b[3])
+	global_handler.recipes
 	var sum=0
-	for recipie in global_handler.recipes:
-		sum+=recipie[3]
-		
-		
+	for recipe in global_handler.recipes:
+		sum+=recipe[3]
 	var selected = global_handler.recipes[0]
-	for recipie in global_handler.recipes:
-		var weight = recipie[3]
+	for recipe in global_handler.recipes:
+		var weight = recipe[3]
 		var r = randi_range(0,sum)
+		print(weight," ",r," ",sum)
 		if r<weight :
-			selected = recipie
-			break
+			return recipe
 		else:
 			sum-=weight
-	
-	
-	var potion=global_handler.recipes.pick_random()
-	return potion
 
 func test_for_potion_and_ingredients():
 	for child in ingredients_container.get_children():
 		if child.get_meta("color"):
 			child.highlighted.visible=child.check_match(potion_icon.metadata) and potion_icon.potion_type==child.potion_type
 		else:
-			child.highlighted.visible=current_recipe.has(child.get_meta("type"))
+			child.highlighted.visible=current_recipe.ingredients.has(child.get_meta("type"))
 	for child in potions_container.get_children():
 		if child.get_meta("color"):
 			child.highlighted.visible=child.check_match(potion_icon.metadata) and potion_icon.potion_type==child.potion_type
-	
+		else:
+			child.highlighted.visible=current_recipe.ingredients.has(child.get_meta("type"))
 var current_recipe: Dictionary={
 	ingredients=[],
 	recipes=[]
@@ -83,19 +78,19 @@ func set_recipe(recipe):
 	var temp=[0,0,0]
 	var ingredients_ui=[ingredient_1,ingredient_2,ingredient_3]
 	for possible_recipe in global_handler.recipes:
-		if possible_recipe[1]==recipe[1] and (({} if possible_recipe.size()<3 else possible_recipe[2])==({} if recipe.size()<3 else recipe[2])):
+		if possible_recipe[1]==recipe[1] and possible_recipe[2]==recipe[2]:
+			print(possible_recipe[2],recipe[2])
 			current_recipe.recipes.append(recipe[0])
 			var i=0
 			for ingredient in possible_recipe[0]:
 				for t in possible_recipe[0][ingredient]:
 					var fruit_atlas=FRUIT_ATLAS.duplicate()
 					fruit_atlas.region=Rect2(global_handler.locations[ingredient].x*16.0,global_handler.locations[ingredient].y*16.0,16.0,16.0)
-					ingredients_ui[t+i].frames.append(fruit_atlas)
-					ingredients_ui[t+i].start()
-					temp[t+i]+=1
+					ingredients_ui[i].frames.append(fruit_atlas)
+					ingredients_ui[i].start()
+					i+=1
 				if not current_recipe.ingredients.has(ingredient):
 					current_recipe.ingredients.append(ingredient)
-				i+=1
 func change_scene(new_scene: String):
 	get_tree().change_scene_to_file(new_scene)
 func _on_door_pressed() -> void:

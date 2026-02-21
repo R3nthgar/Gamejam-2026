@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://dvbhvu7p6ccca"]
 
 [ext_resource type="Texture2D" uid="uid://bbnqvji3npki0" path="res://assets/brackeys_platformer_assets/sprites/fruit.png" id="1_puicv"]
+[ext_resource type="Script" uid="uid://ddjuyspkcdwph" path="res://scripts/ingredient_control.gd" id="2_4cpy8"]
 [ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="2_elobi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_elobi"]
@@ -12,9 +13,10 @@ region = Rect2(0, 0, 16, 16)
 offset_right = 16.0
 offset_bottom = 16.0
 texture = SubResource("AtlasTexture_elobi")
+script = ExtResource("2_4cpy8")
 metadata/type = ""
 
-[node name="Label" type="Label" parent="." unique_id=893951034]
+[node name="Highlighted" type="Label" parent="." unique_id=893951034]
 visible = false
 modulate = Color(0, 1, 0, 1)
 layout_mode = 0

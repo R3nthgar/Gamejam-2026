@@ -1,0 +1,42 @@
+[gd_resource type="SpriteFrames" format=3 uid="uid://dasltgdh8n3bx"]
+
+[ext_resource type="Texture2D" uid="uid://cw3y3et6kdukm" path="res://assets/custom/gamejam_tileset_collectibles.png" id="1_otv50"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vu2q4"]
+atlas = ExtResource("1_otv50")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oggdr"]
+atlas = ExtResource("1_otv50")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dcus4"]
+atlas = ExtResource("1_otv50")
+region = Rect2(0, 0, 16, 16)
+
+[resource]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vu2q4")
+}],
+"loop": true,
+"name": &"apple",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oggdr")
+}],
+"loop": true,
+"name": &"grapes",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dcus4")
+}],
+"loop": true,
+"name": &"potion",
+"speed": 5.0
+}]

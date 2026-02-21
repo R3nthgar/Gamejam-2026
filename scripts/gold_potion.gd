@@ -1,5 +1,4 @@
 #Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
-@tool
 #This potion makes a noise when dropped. Only used for selling.
 class_name GoldPotion
 extends "res://scripts/potion.gd"

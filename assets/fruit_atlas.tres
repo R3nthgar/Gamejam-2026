@@ -1,7 +1,6 @@
-[gd_resource type="AtlasTexture" format=3 uid="uid://bu0ku1xiba0s6"]
+[gd_resource type="AtlasTexture" format=3 uid="uid://b41n42rnp73gh"]
 
 [ext_resource type="Texture2D" uid="uid://bbnqvji3npki0" path="res://assets/brackeys_platformer_assets/sprites/fruit.png" id="1_4nth8"]
 
 [resource]
 atlas = ExtResource("1_4nth8")
-region = Rect2(0, 0, 16, 16)

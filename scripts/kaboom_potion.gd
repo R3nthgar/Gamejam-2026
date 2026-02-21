@@ -1,4 +1,3 @@
-@tool
 extends "res://scripts/potion.gd"
 class_name KaboomPotion
 const EXPLOSION = preload("uid://cdu1em1a7wcpj")

@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://bksxp3neqdywd"]
+
+[ext_resource type="TileSet" uid="uid://bhvt33rlx5iue" path="res://assets/borders.tres" id="1_xr47j"]
+
+[node name="Borderer" type="TileMapLayer" unique_id=1751358209]
+top_level = true
+tile_set = ExtResource("1_xr47j")

@@ -3,15 +3,20 @@ extends Node2D
 @onready var timer: Timer = $Timer
 @onready var collectibles: Node2D = %Collectibles
 @onready var collectible_transparent: AnimatedSprite2D = $ScaleEasy/CollectibleTransparent
+@onready var collectible_transparent_inside: AnimatedSprite2D = $ScaleEasy/CollectibleTransparent/CollectibleTransparentInside
 @onready var scale_easy: Node2D = $ScaleEasy
 const COLLECTIBLE_SPRITES = preload("uid://ccpt5fwr0bfx8")
 const COLLECTIBLE = preload("uid://b88olwn04j8oe")
 var allowable_collectibles=[]
 var collectible
 func _ready() -> void:
-	allowable_collectibles=COLLECTIBLE_SPRITES.get_animation_names()
+	var detailed_collectible=global_handler.detailed_collectibles[get_meta("collectible")]
+	collectible_transparent.animation=detailed_collectible.type
+	collectible_transparent.transform=global_handler.transforms[detailed_collectible.type]
+	collectible_transparent_inside.animation=detailed_collectible.type
+	collectible_transparent_inside.modulate=detailed_collectible.color
+	collectible_transparent.modulate=Color.WHITE
 	if not Engine.is_editor_hint():
-		collectible_transparent.animation=get_meta("collectible")
 		timer.wait_time=get_meta("timer")
 		spawn_new()
 func _process(delta: float) -> void:

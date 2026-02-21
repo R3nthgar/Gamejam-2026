@@ -1,5 +1,4 @@
 #Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
-@tool
 
 #This potion changes red apples to gold apples and vice versa
 extends "res://scripts/potion.gd"

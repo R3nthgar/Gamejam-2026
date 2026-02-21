@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bf2yti5mtiviy"
-path="res://.godot/imported/gamejam_tileset.png-9b56c6dd10ece5b903491b714b3b96b0.ctex"
+uid="uid://7a8m7ncx1h3n"
+path="res://.godot/imported/gamejam_map_tileset.png-fb72cab61e71bf0c5b390191b50bfee1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/custom/gamejam_tileset.png"
-dest_files=["res://.godot/imported/gamejam_tileset.png-9b56c6dd10ece5b903491b714b3b96b0.ctex"]
+source_file="res://assets/custom/gamejam_map_tileset.png"
+dest_files=["res://.godot/imported/gamejam_map_tileset.png-fb72cab61e71bf0c5b390191b50bfee1.ctex"]
 
 [params]
 

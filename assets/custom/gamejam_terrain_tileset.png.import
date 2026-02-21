@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dbpsh325snohb"
-path="res://.godot/imported/world_tileset_updated.png-3135b01413f852fee698567f974f5b96.ctex"
+uid="uid://dgymna4o80q8b"
+path="res://.godot/imported/gamejam_terrain_tileset.png-d526b968b8069c70761a123ec0905b24.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/brackeys_platformer_assets/sprites/world_tileset_updated.png"
-dest_files=["res://.godot/imported/world_tileset_updated.png-3135b01413f852fee698567f974f5b96.ctex"]
+source_file="res://assets/custom/gamejam_terrain_tileset.png"
+dest_files=["res://.godot/imported/gamejam_terrain_tileset.png-d526b968b8069c70761a123ec0905b24.ctex"]
 
 [params]
 

@@ -24,7 +24,8 @@ const JUMP_VELOCITY = -350.0
 var max_jumps=1
 var jumps=0
 
-var falling_through=0
+var fall_through_timer=0
+var fall_through=false
 var health = 100.0
 func hurt (damage):
 	health -=damage
@@ -138,13 +139,18 @@ func _physics_process(delta: float) -> void:
 		
 		#Allows falling through bridges
 		if Input.is_action_just_pressed("down"):
+			fall_through_timer=0
 			set_collision_mask_value(1,false)
-			falling_through=0.01
-		elif falling_through>=0.25:
+			fall_through=true
+		if Input.is_action_just_released("down"):
+			fall_through=false
+			if fall_through_timer>=0.25:
+				set_collision_mask_value(1,true)
+		if not fall_through and fall_through_timer>=0.25:
 			set_collision_mask_value(1,true)
-			falling_through=0
-		elif falling_through>0:
-			falling_through+=delta
+			fall_through_timer=0
+		if fall_through or fall_through_timer!=0:
+			fall_through_timer+=delta
 		#Movement functionality
 		var direction := Input.get_axis("left", "right")
 		if direction:
@@ -184,7 +190,6 @@ func _on_destructible_detector_body_entered(body: Node2D) -> void:
 	if body is Destructible:
 		if body.strength<=(2 if scale.x>1 else 0 if scale.x==1 else -1):
 			play_sound(EXPLOSION,1)
-		print(body.strength)
 		body.destroy(2 if scale.x>1 else 0 if scale.x==1 else -1)
 	elif body is Obscurer and body.get_meta("walk_remove"):
 		body.visible=false
