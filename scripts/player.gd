@@ -8,6 +8,8 @@ class_name Player
 @onready var audio: AudioStreamPlayer2D = $Audio
 @onready var particles: GPUParticles2D = $Particles
 @onready var particles_2: GPUParticles2D = $Particles2
+@onready var particles_3: GPUParticles2D = $Particles3
+@onready var timer: Timer = $Timer
 var particles_finished=true
 var particles_finished_2=true
 const JUMP = preload("uid://qxb77221bpq")
@@ -43,6 +45,7 @@ func _ready() -> void:
 		emit_particles(Color(255,0,255),2)
 		emit_particles(Color(255,200,0),2)
 		play_sound(POWER_UP,0.25)
+		particles_3.emitting=true
 	zoom=player_camera.zoom
 	global_handler.resetting=false
 
@@ -130,7 +133,7 @@ func _physics_process(delta: float) -> void:
 		#Jump functionality, modified to play sounds and allow air jumping
 		if Input.is_action_just_pressed("up") and jumps<max_jumps:
 			jumps+=1
-			play_sound(JUMP, 1/(scale.x*scale.x))
+			play_sound(JUMP, 1/scale.x)
 			velocity.y = JUMP_VELOCITY if gravity>=0 else -JUMP_VELOCITY
 			
 			#Changes bagged objects' velocity to prevent visual glitching from temporarily falling out of the bag
@@ -173,9 +176,7 @@ func _physics_process(delta: float) -> void:
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 		prev_velocity.append(velocity)
 		prev_velocity.remove_at(0)
-		move_and_slide()
-	elif not animated_player_sprite.is_playing():
-		dead=false
+	move_and_slide()
 
 
 func _on_particles_finished() -> void:
@@ -197,3 +198,7 @@ func _on_destructible_detector_body_entered(body: Node2D) -> void:
 func _on_destructible_detector_body_exited(body: Node2D) -> void:
 	if body is Obscurer and body.get_meta("walk_remove"):
 		body.visible=true
+
+
+func _on_timer_timeout() -> void:
+	dead=false

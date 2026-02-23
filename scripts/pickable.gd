@@ -12,7 +12,8 @@ var collectible
 func _ready() -> void:
 	var detailed_collectible=global_handler.detailed_collectibles[get_meta("collectible")]
 	collectible_transparent.animation=detailed_collectible.type
-	collectible_transparent.transform=global_handler.transforms[detailed_collectible.type]
+	collectible_transparent.position=global_handler.transforms[detailed_collectible.type].position
+	collectible_transparent.scale=global_handler.transforms[detailed_collectible.type].scale
 	collectible_transparent_inside.animation=detailed_collectible.type
 	collectible_transparent_inside.modulate=detailed_collectible.color
 	collectible_transparent.modulate=Color.WHITE

@@ -23,7 +23,7 @@ const recipes: Array = [[{
 }, "ScalingPotion",{},50], [{
 	"ever_berries": 2,
 	"purple_grapes": 1
-}, "ScalingPotion",{"scale": 0.75},10], [{
+}, "ScalingPotion",{"scale": 0.5},10], [{
 	"ever_berries": 2,
 	"red_apple": 1
 }, "ScalingPotion",{"scale": 1.25, "size": 1.25},10], [{
@@ -48,9 +48,9 @@ var ingredients:={}
 var potions = []
 var resetting=false
 var destructibles:={}
-
+var coins=0
 const mod_metas=["price", "size"]
-const transforms:={"apple": Transform2D(0, Vector2(1,1), 0, Vector2(0.5,-1.5)),"grapes": Transform2D(0, Vector2(0.75,0.75), 0, Vector2(0.5,-0.5)),"potion": Transform2D(0, Vector2(0.75,0.75), 0, Vector2(0,-1.75))}
+const transforms:={"apple": {"scale": Vector2(1,1), "position": Vector2(0.5,-1.5)},"grapes": {"scale": Vector2(0.75,0.75), "position": Vector2(0.5,-0.5)},"potion": {"scale": Vector2(0.75,0.75), "position": Vector2(0,-1.75)}}
 const detailed_collectibles:={"red_apple": {"color": Color(1,0,0), "type": "apple"}, "pink_apple": {"color": Color(1,0.5,1), "type": "apple"}, "ever_berries": {"color": Color(0,1,0), "type": "grapes"}, "purple_grapes": {"color": Color(0.5,0,1), "type": "grapes"}, "gold_apple": {"color": Color(1,0.75,0), "type": "apple"}, "gold_berries": {"color": Color(1,0.75,0), "type": "grapes"}, "potion": {"color": Color.BLACK, "type": "potion"}}
 
 func get_recipe(current_recipe: Dictionary) -> Variant:

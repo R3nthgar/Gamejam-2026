@@ -1,0 +1,70 @@
+[gd_scene format=3 uid="uid://cps0eo4ijhn16"]
+
+[ext_resource type="Texture2D" uid="uid://cw3y3et6kdukm" path="res://assets/custom/gamejam_tileset_collectibles.png" id="1_2kk36"]
+[ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="2_gryil"]
+[ext_resource type="Script" uid="uid://1pjbnuol6y0i" path="res://scripts/collectible_control.gd" id="2_nw52a"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nw52a"]
+resource_local_to_scene = true
+atlas = ExtResource("1_2kk36")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_020fn"]
+resource_local_to_scene = true
+atlas = ExtResource("1_2kk36")
+region = Rect2(32, 16, 16, 16)
+
+[node name="CollectibleControl" type="Control" unique_id=1017974709]
+custom_minimum_size = Vector2(16, 16)
+layout_mode = 3
+anchors_preset = 0
+offset_right = 16.0
+offset_bottom = 16.0
+script = ExtResource("2_nw52a")
+
+[node name="collectible" type="TextureRect" parent="." unique_id=1174347698]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -5.5
+offset_top = -6.5
+offset_right = 10.5
+offset_bottom = 9.5
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.75, 0.75)
+texture = SubResource("AtlasTexture_nw52a")
+
+[node name="collectible_inside" type="TextureRect" parent="collectible" unique_id=1885288050]
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+texture = SubResource("AtlasTexture_020fn")
+
+[node name="Highlighted" type="Label" parent="." unique_id=1655657601]
+visible = false
+modulate = Color(0, 1, 0, 1)
+layout_mode = 0
+offset_left = 12.0
+offset_top = 1.0
+offset_right = 20.0
+offset_bottom = 9.0
+rotation = 3.1415927
+theme_override_fonts/font = ExtResource("2_gryil")
+theme_override_font_sizes/font_size = 8
+text = "^"
+
+[node name="Button" type="Button" parent="." unique_id=1596381829]
+modulate = Color(0, 0, 0, 0)
+layout_mode = 0
+offset_left = 3.0
+offset_top = 3.0
+offset_right = 13.0
+offset_bottom = 13.0
+action_mode = 0
+
+[connection signal="button_down" from="Button" to="." method="_on_button_button_down"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

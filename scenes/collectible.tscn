@@ -60,7 +60,6 @@ sprite_frames = ExtResource("3_6gns2")
 animation = &"apple"
 
 [node name="CollectibleInside" type="AnimatedSprite2D" parent="CollectibleCollision/CollectibleImage" unique_id=1147470510]
-z_index = 1
 sprite_frames = ExtResource("2_ga2k0")
 animation = &"apple"
 

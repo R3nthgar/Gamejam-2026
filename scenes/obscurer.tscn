@@ -7,7 +7,7 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0byvy"]
 shader = ExtResource("1_rccmn")
-shader_parameter/blend_factor = 0.5
+shader_parameter/blend_factor = 0.33
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_omahl"]
 texture = ExtResource("3_1bnwd")
@@ -238,7 +238,7 @@ sources/2 = SubResource("TileSetAtlasSource_qpnri")
 
 [node name="Obscurer" type="TileMapLayer" unique_id=1105421495]
 clip_children = 1
-z_index = -2
+z_index = 5
 material = SubResource("ShaderMaterial_0byvy")
 tile_set = SubResource("TileSet_qpnri")
 script = ExtResource("3_0byvy")

@@ -40,7 +40,8 @@ var collectible_color: Color
 func refresh_image():
 	var detailed_collectible=global_handler.detailed_collectibles[get_meta("collectible")]
 	collectible_image.animation=detailed_collectible.type
-	collectible_image.transform=global_handler.transforms[detailed_collectible.type]
+	collectible_image.position=global_handler.transforms[detailed_collectible.type].position
+	collectible_image.scale=global_handler.transforms[detailed_collectible.type].scale
 	collectible_inside.animation=detailed_collectible.type
 	collectible_color=detailed_collectible.color if not self is Potion else get_meta("color")
 	collectible_inside.modulate=collectible_color

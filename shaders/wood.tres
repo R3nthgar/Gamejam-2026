@@ -2,10 +2,27 @@
 
 [ext_resource type="Shader" uid="uid://cql83ww4l66y5" path="res://shaders/wood.gdshader" id="1_mvo64"]
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mvo64"]
+
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mvo64"]
 width = 1152
+height = 1096
+noise = SubResource("FastNoiseLite_mvo64")
+bump_strength = 50.0
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_h0e0e"]
+seed = 1
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_t5px3"]
+width = 1152
+height = 1152
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_h0e0e")
+as_normal_map = true
+bump_strength = 25.0
 
 [resource]
 shader = ExtResource("1_mvo64")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_mvo64")
-shader_parameter/noise_strength = 0.1
+shader_parameter/normal_texture = SubResource("NoiseTexture2D_t5px3")

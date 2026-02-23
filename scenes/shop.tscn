@@ -1,22 +1,62 @@
-[gd_scene format=4 uid="uid://jqne00y23hno"]
+[gd_scene format=3 uid="uid://jqne00y23hno"]
 
 [ext_resource type="Script" uid="uid://cv1behlswcp77" path="res://scripts/shop.gd" id="1_8r1wq"]
 [ext_resource type="FontFile" uid="uid://bch710uus3txx" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="1_xfvoa"]
 [ext_resource type="StyleBox" uid="uid://bcg78rh5d8f80" path="res://assets/buttonstyle.tres" id="2_2fc2m"]
-[ext_resource type="TileSet" uid="uid://i3epakq5p5r1" path="res://assets/maptiles.tres" id="2_ajxib"]
-[ext_resource type="PackedScene" uid="uid://25uras5vjp6a" path="res://scenes/potion_control.tscn" id="3_1l46r"]
+[ext_resource type="PackedScene" uid="uid://bxtojffj0jj2" path="res://scenes/potion_control.tscn" id="3_1l46r"]
 [ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="3_032fp"]
 [ext_resource type="Material" uid="uid://ba6pg2iqs4kis" path="res://shaders/wood.tres" id="7_ajxib"]
-[ext_resource type="PackedScene" path="res://scenes/ingredient_display.tscn" id="7_y6sft"]
+[ext_resource type="PackedScene" uid="uid://dvbhvu7p6ccca" path="res://scenes/ingredient_control.tscn" id="7_y6sft"]
+[ext_resource type="Script" uid="uid://df6t5w07whx3y" path="res://scripts/mouse_follow.gd" id="9_heatd"]
+[ext_resource type="PackedScene" uid="uid://cps0eo4ijhn16" path="res://scenes/collectible_control.tscn" id="9_m4ofw"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_1l46r"]
+[sub_resource type="Gradient" id="Gradient_y6sft"]
+offsets = PackedFloat32Array(0.84615386, 1)
+colors = PackedColorArray(0.2509804, 0.2509804, 0.2509804, 1, 0.1882353, 0.1882353, 0.1882353, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1v8qu"]
+gradient = SubResource("Gradient_y6sft")
+fill = 1
+
+[sub_resource type="SphereMesh" id="SphereMesh_y6sft"]
+radius = 25.0
+height = 50.0
+
+[sub_resource type="Gradient" id="Gradient_m4ofw"]
+offsets = PackedFloat32Array(0.6282051, 0.78205127, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.2509804, 0.2509804, 0.2509804, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y6sft"]
+gradient = SubResource("Gradient_m4ofw")
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_heatd"]
+gradient = SubResource("Gradient_m4ofw")
+
+[sub_resource type="Gradient" id="Gradient_ajxib"]
+offsets = PackedFloat32Array(0.65384614, 1)
+colors = PackedColorArray(0.5019608, 0.2509804, 0, 1, 0.3764706, 0.1882353, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_m4ofw"]
+gradient = SubResource("Gradient_ajxib")
+width = 392
+height = 25
+fill = 1
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_ajxib"]
 load_path = "res://.godot/imported/coin.png-44fc65ab7ac9365293e147f39c452906.ctex"
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_032fp"]
-atlas = SubResource("CompressedTexture2D_1l46r")
+atlas = SubResource("CompressedTexture2D_ajxib")
 region = Rect2(96, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y6sft"]
+[sub_resource type="Gradient" id="Gradient_heatd"]
+offsets = PackedFloat32Array(0.42307693, 1)
+colors = PackedColorArray(0.5019608, 0.2509804, 0, 1, 0.2509804, 0.1254902, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_44xle"]
+gradient = SubResource("Gradient_heatd")
+fill = 1
+fill_to = Vector2(1.1, 0)
 
 [node name="Shop" type="Control" unique_id=689535308]
 layout_mode = 3
@@ -27,46 +67,243 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8r1wq")
 
-[node name="ColorRect2" type="ColorRect" parent="." unique_id=29584709]
+[node name="Shopfront" type="Control" parent="." unique_id=1229288640]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.13725491, 0.10980392, 0.09803922, 1)
 
-[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1583239456]
-position = Vector2(0, -111.99999)
-scale = Vector2(14.42, 14.42)
-tile_map_data = PackedByteArray("AAAAAAAAAgACAAEAAAABAAAAAgABAAEAAAACAAAAAgACAAEAAAADAAAAAgABAAEAAAACAAEAAQAHAAMAAFACAAIAAQAHAAMAAFAEAAAAAgACAAEAAAAAAAEAAgACAAEAAAADAAEAAgACAAEAAAAEAAEAAgABAAEAAAABAAEAAgACAAEAAAAAAAIAAgACAAEAAAABAAIAAgABAAEAAAADAAIAAgABAAEAAAAEAAIAAgABAAEAAAA=")
-tile_set = ExtResource("2_ajxib")
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Shopfront" unique_id=2022452743]
+material = ExtResource("7_ajxib")
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
 
-[node name="Door" type="Button" parent="." unique_id=1306014175]
+[node name="SubViewport" type="SubViewport" parent="Shopfront/SubViewportContainer" unique_id=762920948]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Background" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport" unique_id=840073745]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_1v8qu")
+
+[node name="Door" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport" unique_id=42053629]
+custom_minimum_size = Vector2(250, 450)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -450.0
+offset_right = 125.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.1882353, 0.09411765, 0, 1)
+
+[node name="DoorInside" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/Door" unique_id=368180587]
+custom_minimum_size = Vector2(226, 426)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -213.0
+offset_right = 113.0
+offset_bottom = 213.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.5019608, 0.2509804, 0, 1)
+
+[node name="DoorHandle" type="MeshInstance2D" parent="Shopfront/SubViewportContainer/SubViewport/Door" unique_id=1164587076]
+position = Vector2(204, 216)
+mesh = SubResource("SphereMesh_y6sft")
+texture = SubResource("GradientTexture2D_y6sft")
+
+[node name="Shadow" type="MeshInstance2D" parent="Shopfront/SubViewportContainer/SubViewport/Door/DoorHandle" unique_id=967547884]
+modulate = Color(1, 1, 1, 0.5019608)
+show_behind_parent = true
+position = Vector2(3, 3)
+mesh = SubResource("SphereMesh_y6sft")
+texture = SubResource("GradientTexture2D_heatd")
+
+[node name="Door" type="Button" parent="Shopfront/SubViewportContainer/SubViewport/Door" unique_id=1306014175]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.54300004
-anchor_right = 0.5
-anchor_bottom = 0.54300004
-offset_left = -96.0
-offset_top = -191.86401
-offset_right = 96.0
-offset_bottom = 192.13593
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SpeechBox" type="Button" parent="." unique_id=1602255925]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Shopfront/SubViewportContainer/SubViewport" unique_id=1172342132]
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -392.0
+offset_top = -146.75
+offset_bottom = 178.25
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_constants/separation = 75
+
+[node name="Shelf" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2" unique_id=2026006134]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_m4ofw")
+
+[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2/Shelf" unique_id=1617812407]
+modulate = Color(1, 1, 1, 0.5019608)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 392.0
+offset_bottom = 30.0
+color = Color(0, 0, 0, 1)
+
+[node name="Shelf2" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2" unique_id=1597185940]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_m4ofw")
+
+[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2/Shelf2" unique_id=328538970]
+modulate = Color(1, 1, 1, 0.5019608)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 392.0
+offset_bottom = 30.0
+color = Color(0, 0, 0, 1)
+
+[node name="Shelf3" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2" unique_id=973140632]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_m4ofw")
+
+[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2/Shelf3" unique_id=301213581]
+modulate = Color(1, 1, 1, 0.5019608)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 392.0
+offset_bottom = 30.0
+color = Color(0, 0, 0, 1)
+
+[node name="Shelf4" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2" unique_id=2894878]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_m4ofw")
+
+[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2/Shelf4" unique_id=193905390]
+modulate = Color(1, 1, 1, 0.5019608)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 0
+offset_left = 5.0
+offset_top = 5.0
+offset_right = 392.0
+offset_bottom = 30.0
+color = Color(0, 0, 0, 1)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Shopfront/SubViewportContainer/SubViewport" unique_id=1486868786]
+use_parent_material = true
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -147.0
+offset_right = 392.0
+offset_bottom = 178.0
+grow_vertical = 2
+theme_override_constants/separation = 75
+
+[node name="Shelf" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer" unique_id=1429531940]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_m4ofw")
+
+[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer/Shelf" unique_id=1800157021]
+modulate = Color(1, 1, 1, 0.5019608)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 0
+offset_top = 5.0
+offset_right = 397.0
+offset_bottom = 30.0
+color = Color(0, 0, 0, 1)
+
+[node name="Shelf2" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer" unique_id=408588293]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_m4ofw")
+
+[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer/Shelf2" unique_id=848190687]
+modulate = Color(1, 1, 1, 0.5019608)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 0
+offset_top = 5.0
+offset_right = 397.0
+offset_bottom = 30.0
+color = Color(0, 0, 0, 1)
+
+[node name="Shelf3" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer" unique_id=1113209856]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_m4ofw")
+
+[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer/Shelf3" unique_id=977475812]
+modulate = Color(1, 1, 1, 0.5019608)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 0
+offset_top = 5.0
+offset_right = 397.0
+offset_bottom = 30.0
+color = Color(0, 0, 0, 1)
+
+[node name="Shelf4" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer" unique_id=1994008021]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+texture = SubResource("GradientTexture2D_m4ofw")
+
+[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer/Shelf4" unique_id=785165059]
+modulate = Color(1, 1, 1, 0.5019608)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 0
+offset_top = 5.0
+offset_right = 397.0
+offset_bottom = 30.0
+color = Color(0, 0, 0, 1)
+
+[node name="SpeechBox" type="Button" parent="Shopfront" unique_id=1602255925]
 clip_children = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -130.0
-offset_top = 96.75
-offset_right = 130.0
-offset_bottom = 247.25
+offset_left = 254.0
+offset_top = 16.75
+offset_right = 514.0
+offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -76,68 +313,70 @@ theme_override_styles/pressed = ExtResource("2_2fc2m")
 theme_override_styles/hover = ExtResource("2_2fc2m")
 theme_override_styles/hover_pressed = ExtResource("2_2fc2m")
 
-[node name="Potion" parent="SpeechBox" unique_id=676602487 instance=ExtResource("3_1l46r")]
+[node name="Potion" parent="Shopfront/SpeechBox" unique_id=1017974709 instance=ExtResource("3_1l46r")]
 layout_mode = 0
-offset_left = 12.0
-offset_top = 14.25
-offset_right = 28.0
-offset_bottom = 30.25
-scale = Vector2(4, 4)
-metadata/color = Color(1, 0, 1, 1)
+offset_left = 2.0
+offset_top = -4.7500005
+offset_right = 18.0
+offset_bottom = 11.25
+scale = Vector2(5, 5)
 
-[node name="Coin" type="TextureRect" parent="SpeechBox" unique_id=63332985]
+[node name="Coin" type="TextureRect" parent="Shopfront/SpeechBox" unique_id=63332985]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -66.0
-offset_top = 17.25
+offset_top = 6.25
 offset_right = -50.0
-offset_bottom = 33.25
+offset_bottom = 22.25
 grow_horizontal = 0
 scale = Vector2(4, 4)
 texture = SubResource("AtlasTexture_032fp")
 
-[node name="CoinCount" type="Label" parent="SpeechBox" unique_id=522058686]
+[node name="CoinCount" type="Label" parent="Shopfront/SpeechBox" unique_id=522058686]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
 offset_left = -111.0
-offset_top = 41.25
+offset_top = 30.25
 offset_right = -62.0
-offset_bottom = 57.25
+offset_bottom = 46.25
 grow_horizontal = 0
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_032fp")
 text = "0"
 horizontal_alignment = 2
 
-[node name="Arrow" type="Label" parent="SpeechBox" unique_id=1753968389]
+[node name="Arrow" type="Label" parent="Shopfront/SpeechBox" unique_id=1753968389]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -24.0
-offset_top = 35.25
+offset_top = -16.0
 offset_right = 24.0
-offset_bottom = 67.25
+offset_bottom = 16.0
 grow_horizontal = 2
+grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_032fp")
 theme_override_font_sizes/font_size = 32
 text = "->"
 
-[node name="CraftingBox" type="Button" parent="." unique_id=524639037]
+[node name="CraftingBox" type="Button" parent="Shopfront" unique_id=524639037]
 clip_children = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -130.0
-offset_top = 8.75
-offset_right = 130.0
-offset_bottom = 84.0
+offset_left = -506.0
+offset_top = 16.75
+offset_right = -246.0
+offset_bottom = 92.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0, 0, 0, 1)
@@ -147,7 +386,7 @@ theme_override_styles/pressed = ExtResource("2_2fc2m")
 theme_override_styles/hover = ExtResource("2_2fc2m")
 theme_override_styles/hover_pressed = ExtResource("2_2fc2m")
 
-[node name="FlowContainer" type="FlowContainer" parent="CraftingBox" unique_id=275263327]
+[node name="FlowContainer" type="FlowContainer" parent="Shopfront/CraftingBox" unique_id=275263327]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 6.25
@@ -155,42 +394,27 @@ offset_right = 72.5
 offset_bottom = 22.25
 scale = Vector2(4, 4)
 
-[node name="Ingredient1" parent="CraftingBox/FlowContainer" unique_id=385556919 instance=ExtResource("7_y6sft")]
+[node name="IngredientControl" parent="Shopfront/CraftingBox/FlowContainer" unique_id=287638166 instance=ExtResource("7_y6sft")]
 layout_mode = 2
-texture = SubResource("AtlasTexture_y6sft")
 
-[node name="Ingredient2" parent="CraftingBox/FlowContainer" unique_id=1884352480 instance=ExtResource("7_y6sft")]
+[node name="IngredientControl2" parent="Shopfront/CraftingBox/FlowContainer" unique_id=435034627 instance=ExtResource("7_y6sft")]
 layout_mode = 2
-texture = SubResource("AtlasTexture_y6sft")
 
-[node name="Ingredient3" parent="CraftingBox/FlowContainer" unique_id=637733842 instance=ExtResource("7_y6sft")]
+[node name="IngredientControl3" parent="Shopfront/CraftingBox/FlowContainer" unique_id=1637469542 instance=ExtResource("7_y6sft")]
 layout_mode = 2
-texture = SubResource("AtlasTexture_y6sft")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1154489698]
-material = ExtResource("7_ajxib")
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -200.0
-grow_horizontal = 2
-grow_vertical = 0
-color = Color(0.5019608, 0.2509804, 0, 1)
-
-[node name="IngredientsContainer" type="HFlowContainer" parent="." unique_id=277938326]
+[node name="IngredientsContainer" type="HFlowContainer" parent="Shopfront" unique_id=277938326]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = -0.17300001
 anchor_bottom = -0.17300001
-offset_top = 179.104
+offset_top = 239.104
 offset_right = 98.0
-offset_bottom = 251.354
+offset_bottom = 320.354
 scale = Vector2(4, 4)
 theme_override_constants/v_separation = 9
 
-[node name="PotionsContainer" type="HFlowContainer" parent="." unique_id=436721923]
+[node name="PotionsContainer" type="HFlowContainer" parent="Shopfront" unique_id=436721923]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -198,71 +422,232 @@ anchor_top = -0.17400001
 anchor_right = 1.0
 anchor_bottom = -0.17400001
 offset_left = -392.0
-offset_top = 179.75201
+offset_top = 239.75201
 offset_right = -294.0
-offset_bottom = 252.00201
+offset_bottom = 321.002
 scale = Vector2(4, 4)
 theme_override_constants/v_separation = 9
 
-[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1486868786]
+[node name="Back" type="Control" parent="." unique_id=2089626179]
 layout_mode = 1
-anchors_preset = 4
-anchor_top = 0.5
-anchor_bottom = 0.5
-offset_top = -193.25
-offset_right = 392.0
-offset_bottom = 193.25
-grow_vertical = 2
-theme_override_constants/separation = 75
-
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer" unique_id=1208001527]
-material = ExtResource("7_ajxib")
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-color = Color(0.5019608, 0.2509804, 0, 1)
-
-[node name="ColorRect2" type="ColorRect" parent="VBoxContainer" unique_id=1898127767]
-material = ExtResource("7_ajxib")
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-color = Color(0.5019608, 0.2509804, 0, 1)
-
-[node name="ColorRect3" type="ColorRect" parent="VBoxContainer" unique_id=235917884]
-material = ExtResource("7_ajxib")
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-color = Color(0.5019608, 0.2509804, 0, 1)
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="." unique_id=1172342132]
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
+anchors_preset = 15
 anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -392.0
-offset_top = -193.0
-offset_bottom = 193.5
-grow_horizontal = 0
+anchor_bottom = 1.0
+offset_left = 1152.0
+offset_right = 1152.0
+grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/separation = 75
 
-[node name="ColorRect" type="ColorRect" parent="VBoxContainer2" unique_id=161350542]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Back" unique_id=1639585117]
 material = ExtResource("7_ajxib")
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="Back/SubViewportContainer" unique_id=1006694816]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(1152, 648)
+render_target_update_mode = 4
+
+[node name="Background" type="TextureRect" parent="Back/SubViewportContainer/SubViewport" unique_id=1269383239]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_44xle")
+
+[node name="Door" type="ColorRect" parent="Back/SubViewportContainer/SubViewport" unique_id=1925664983]
+custom_minimum_size = Vector2(250, 450)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -125.0
+offset_top = -450.0
+offset_right = 125.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0.1882353, 0.09411765, 0, 1)
+
+[node name="DoorInside" type="ColorRect" parent="Back/SubViewportContainer/SubViewport/Door" unique_id=356228215]
+custom_minimum_size = Vector2(226, 426)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -113.0
+offset_top = -213.0
+offset_right = 113.0
+offset_bottom = 213.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.5019608, 0.2509804, 0, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="VBoxContainer2" unique_id=2068437525]
-material = ExtResource("7_ajxib")
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-color = Color(0.5019608, 0.2509804, 0, 1)
+[node name="DoorHandle" type="MeshInstance2D" parent="Back/SubViewportContainer/SubViewport/Door" unique_id=265908852]
+position = Vector2(204, 216)
+mesh = SubResource("SphereMesh_y6sft")
+texture = SubResource("GradientTexture2D_y6sft")
 
-[node name="ColorRect3" type="ColorRect" parent="VBoxContainer2" unique_id=1332894697]
-material = ExtResource("7_ajxib")
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-color = Color(0.5019608, 0.2509804, 0, 1)
+[node name="Shadow" type="MeshInstance2D" parent="Back/SubViewportContainer/SubViewport/Door/DoorHandle" unique_id=647716412]
+modulate = Color(1, 1, 1, 0.5019608)
+show_behind_parent = true
+position = Vector2(3, 3)
+mesh = SubResource("SphereMesh_y6sft")
+texture = SubResource("GradientTexture2D_heatd")
 
-[connection signal="pressed" from="Door" to="." method="_on_door_pressed"]
+[node name="Door" type="Button" parent="Back/SubViewportContainer/SubViewport/Door" unique_id=1363302047]
+self_modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Shelf" type="TextureRect" parent="Back/SubViewportContainer/SubViewport" unique_id=600143264]
+custom_minimum_size = Vector2(0, 150)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -25.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = SubResource("GradientTexture2D_m4ofw")
+
+[node name="Shadow" type="ColorRect" parent="Back/SubViewportContainer/SubViewport/Shelf" unique_id=539113100]
+modulate = Color(1, 1, 1, 0.5019608)
+show_behind_parent = true
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -155.0
+offset_bottom = -130.0
+grow_horizontal = 2
+grow_vertical = 0
+color = Color(0, 0, 0, 1)
+
+[node name="SpeechBox" type="Button" parent="Back" unique_id=1054830678]
+clip_children = 2
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -130.0
+offset_top = 104.0
+offset_right = 130.0
+offset_bottom = 179.25
+grow_horizontal = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("1_xfvoa")
+theme_override_styles/normal = ExtResource("2_2fc2m")
+theme_override_styles/pressed = ExtResource("2_2fc2m")
+theme_override_styles/hover = ExtResource("2_2fc2m")
+theme_override_styles/hover_pressed = ExtResource("2_2fc2m")
+
+[node name="Potion" parent="Back/SpeechBox" unique_id=1070358131 instance=ExtResource("3_1l46r")]
+layout_mode = 0
+offset_left = 2.0
+offset_top = -4.7500005
+offset_right = 18.0
+offset_bottom = 11.25
+scale = Vector2(5, 5)
+
+[node name="Coin" type="TextureRect" parent="Back/SpeechBox" unique_id=263356624]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -66.0
+offset_top = 6.25
+offset_right = -50.0
+offset_bottom = 22.25
+grow_horizontal = 0
+scale = Vector2(4, 4)
+texture = SubResource("AtlasTexture_032fp")
+
+[node name="CoinCount" type="Label" parent="Back/SpeechBox" unique_id=1601798851]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -111.0
+offset_top = 30.25
+offset_right = -62.0
+offset_bottom = 46.25
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_032fp")
+text = "0"
+horizontal_alignment = 2
+
+[node name="Arrow" type="Label" parent="Back/SpeechBox" unique_id=1687589584]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -24.0
+offset_top = -16.0
+offset_right = 24.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_032fp")
+theme_override_font_sizes/font_size = 32
+text = "->"
+
+[node name="Coin" type="TextureRect" parent="." unique_id=51351709]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -128.0
+offset_top = 522.0
+offset_right = -96.0
+offset_bottom = 554.0
+grow_horizontal = 0
+scale = Vector2(4, 4)
+texture = SubResource("AtlasTexture_032fp")
+
+[node name="CoinCount" type="Label" parent="." unique_id=648338155]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -221.0
+offset_top = 570.0
+offset_right = -123.0
+offset_bottom = 602.0
+grow_horizontal = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_032fp")
+theme_override_font_sizes/font_size = 32
+text = "0"
+horizontal_alignment = 2
+
+[node name="MouseFollow" parent="." unique_id=1101478635 instance=ExtResource("9_m4ofw")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 0
+offset_left = 127.0
+offset_top = 344.0
+offset_right = 143.0
+offset_bottom = 360.0
+scale = Vector2(4, 4)
+script = ExtResource("9_heatd")
+
+[connection signal="pressed" from="Shopfront/SubViewportContainer/SubViewport/Door/Door" to="." method="_on_door_pressed"]
