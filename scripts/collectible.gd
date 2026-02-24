@@ -56,6 +56,7 @@ func stop_still():
 		if not held:
 			set_collision_mask_value(1,true)
 			set_collision_mask_value(5,true)
+			set_collision_mask_value(3,true)
 
 func _ready() -> void:
 	allowable_collectibles=COLLECTIBLE_SPRITES.get_animation_names()
@@ -66,6 +67,8 @@ func _ready() -> void:
 		gravity_scale=0
 		set_collision_mask_value(1,false)
 		set_collision_mask_value(5,false)
+		set_collision_mask_value(3,false)
+		
 #This lets you create a sound, with sound being a specific file (look above to the preloaded consts),
 #and pitch letting you change the pitch of the sound, currently used so that when you're big,
 #the jump sound is lower
@@ -140,4 +143,5 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 	prev_velocity.remove_at(0)
 
 func _on_body_entered(body: Node) -> void:
-	stop_still()
+	if still and body.collision_layer>4:
+		stop_still()

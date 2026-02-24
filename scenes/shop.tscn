@@ -7,8 +7,6 @@
 [ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="3_032fp"]
 [ext_resource type="Material" uid="uid://ba6pg2iqs4kis" path="res://shaders/wood.tres" id="7_ajxib"]
 [ext_resource type="PackedScene" uid="uid://dvbhvu7p6ccca" path="res://scenes/ingredient_control.tscn" id="7_y6sft"]
-[ext_resource type="Script" uid="uid://df6t5w07whx3y" path="res://scripts/mouse_follow.gd" id="9_heatd"]
-[ext_resource type="PackedScene" uid="uid://cps0eo4ijhn16" path="res://scenes/collectible_control.tscn" id="9_m4ofw"]
 
 [sub_resource type="Gradient" id="Gradient_y6sft"]
 offsets = PackedFloat32Array(0.84615386, 1)
@@ -295,7 +293,6 @@ offset_bottom = 30.0
 color = Color(0, 0, 0, 1)
 
 [node name="SpeechBox" type="Button" parent="Shopfront" unique_id=1602255925]
-clip_children = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -368,7 +365,6 @@ theme_override_font_sizes/font_size = 32
 text = "->"
 
 [node name="CraftingBox" type="Button" parent="Shopfront" unique_id=524639037]
-clip_children = 2
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -532,14 +528,13 @@ anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_top = -155.0
-offset_bottom = -130.0
+offset_top = -153.0
+offset_bottom = -128.0
 grow_horizontal = 2
 grow_vertical = 0
 color = Color(0, 0, 0, 1)
 
 [node name="SpeechBox" type="Button" parent="Back" unique_id=1054830678]
-clip_children = 2
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -610,8 +605,9 @@ theme_override_fonts/font = ExtResource("3_032fp")
 theme_override_font_sizes/font_size = 32
 text = "->"
 
-[node name="Coin" type="TextureRect" parent="." unique_id=51351709]
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1189328627]
+
+[node name="Coin" type="TextureRect" parent="CanvasLayer" unique_id=51351709]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -623,8 +619,7 @@ grow_horizontal = 0
 scale = Vector2(4, 4)
 texture = SubResource("AtlasTexture_032fp")
 
-[node name="CoinCount" type="Label" parent="." unique_id=648338155]
-layout_mode = 1
+[node name="CoinCount" type="Label" parent="CanvasLayer" unique_id=648338155]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -639,15 +634,5 @@ theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 2
 
-[node name="MouseFollow" parent="." unique_id=1101478635 instance=ExtResource("9_m4ofw")]
-unique_name_in_owner = true
-visible = false
-layout_mode = 0
-offset_left = 127.0
-offset_top = 344.0
-offset_right = 143.0
-offset_bottom = 360.0
-scale = Vector2(4, 4)
-script = ExtResource("9_heatd")
-
 [connection signal="pressed" from="Shopfront/SubViewportContainer/SubViewport/Door/Door" to="." method="_on_door_pressed"]
+[connection signal="pressed" from="Back/SpeechBox" to="." method="_on_speech_box_pressed"]

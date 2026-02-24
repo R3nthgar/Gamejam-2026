@@ -6,8 +6,8 @@ extends Control
 var type="red_apple"
 var color: Color
 var temp:={"potion": 0, "apple": 1, "grapes": 2}
-var extra:={"potion":Vector2(0,2), "apple":Vector2(0,0.25), "grapes":Vector2(0,0)}
-var mouse_follow
+var extra:={"potion":Vector2(0,1), "apple":Vector2(0,1), "grapes":Vector2(0,0)}
+var shop: Shop
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	var detailed_collectible=global_handler.detailed_collectibles[type]
@@ -22,17 +22,9 @@ func _process(delta: float) -> void:
 	if collectible_inside.modulate!=color:
 		collectible_inside.modulate=color
 
-func _on_button_button_down() -> void:
-	if mouse_follow:
-		print("Hi")
-		modulate=Color(0,0,0,0)
-		mouse_follow.visible=true
-		mouse_follow.held=self
-
-
-func _on_button_button_up() -> void:
-	if mouse_follow:
-		print("Hey")
-		modulate=Color(1,1,1)
-		mouse_follow.visible=false
-		mouse_follow.held=self
+func _on_button_pressed() -> void:
+	if shop and highlighted.visible:
+		if type!="potion":
+			modulate=Color(0,0,0,0)
+			shop.statics.append(self)
+			shop.set_statics()

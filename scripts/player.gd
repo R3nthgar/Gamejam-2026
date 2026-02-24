@@ -10,6 +10,7 @@ class_name Player
 @onready var particles_2: GPUParticles2D = $Particles2
 @onready var particles_3: GPUParticles2D = $Particles3
 @onready var timer: Timer = $Timer
+@onready var coin_count: Label = $"../CanvasLayer/CoinCount"
 var particles_finished=true
 var particles_finished_2=true
 const JUMP = preload("uid://qxb77221bpq")
@@ -40,6 +41,7 @@ var dead=false
 #This makes it so you don't have to change the camera zoom in the code
 var zoom
 func _ready() -> void:
+	coin_count.text=str(global_handler.coins)
 	dead=global_handler.resetting
 	if dead:
 		emit_particles(Color(255,0,255),2)
@@ -112,7 +114,7 @@ func _physics_process(delta: float) -> void:
 		up_direction=Vector2(0,-1*abs(gravity)/gravity)
 		animated_player_sprite.offset.y=-2*abs(gravity)/gravity
 		animated_player_sprite.flip_v=gravity<0
-
+		bag.container_scale_mod=0.66*scale.x
 		#Fixes bagged variable and makes coin sound when a collectible is collected
 		var contained=bag.get_contained().duplicate(true)
 		if(bagged!=contained):

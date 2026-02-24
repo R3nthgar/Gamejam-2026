@@ -4,12 +4,12 @@
 [ext_resource type="Script" uid="uid://cgwqqb575wnu4" path="res://scripts/ingredient_control.gd" id="2_4cpy8"]
 [ext_resource type="Texture2D" uid="uid://cw3y3et6kdukm" path="res://assets/custom/gamejam_tileset_collectibles.png" id="3_4cpy8"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ynpqm"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_4cpy8"]
 resource_local_to_scene = true
 atlas = ExtResource("3_4cpy8")
 region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_o0bw8"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ynpqm"]
 resource_local_to_scene = true
 atlas = ExtResource("3_4cpy8")
 region = Rect2(32, 16, 16, 16)
@@ -18,10 +18,10 @@ region = Rect2(32, 16, 16, 16)
 script = ExtResource("2_4cpy8")
 
 [node name="collectible" parent="." index="0" unique_id=1174347698]
-texture = SubResource("AtlasTexture_ynpqm")
+texture = SubResource("AtlasTexture_4cpy8")
 
 [node name="collectible_inside" parent="collectible" index="0" unique_id=1885288050]
-texture = SubResource("AtlasTexture_o0bw8")
+texture = SubResource("AtlasTexture_ynpqm")
 
 [node name="Timer" type="Timer" parent="." index="2" unique_id=2015175122]
 autostart = true

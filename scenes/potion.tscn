@@ -42,11 +42,10 @@ collision_mask = 32
 shape = SubResource("CircleShape2D_le10y")
 
 [node name="CollectibleImage" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="1" unique_id=2106104259]
-position = Vector2(0, 0)
-scale = Vector2(0.5, 0.5)
 animation = &"potion"
 
 [node name="CollectibleInside" parent="CollectibleCollision/CollectibleImage" index="0" unique_id=1147470510]
+modulate = Color(0.51718444, 0.5171845, 0.51718444, 1)
 animation = &"potion"
 
 [node name="Timer" type="Timer" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="2" unique_id=1294265648]

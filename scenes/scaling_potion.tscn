@@ -1,9 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://cw7n3rs8rqofs"]
+[gd_scene format=3 uid="uid://cw7n3rs8rqofs"]
 
 [ext_resource type="PackedScene" uid="uid://cd0jgoajcto8y" path="res://scenes/potion.tscn" id="1_c8cev"]
 [ext_resource type="Script" uid="uid://u7qguokrk4ww" path="res://scripts/scaling_potion.gd" id="2_tdmsy"]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_61c27"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tdmsy"]
 resource_local_to_scene = true
 lifetime_randomness = 0.5
 emission_shape_scale = Vector3(10, 10, 10)
@@ -22,24 +22,18 @@ scale_max = 0.19999999
 scale_over_velocity_min = 1.0
 scale_over_velocity_max = 2.0
 
-[node name="ScalingPotion" instance=ExtResource("1_c8cev")]
+[node name="ScalingPotion" unique_id=1172248294 instance=ExtResource("1_c8cev")]
 script = ExtResource("2_tdmsy")
 metadata/color = Color(0, 1, 0, 1)
 metadata/potion_duration = 15.0
 metadata/price = 20.0
 metadata/scale = 1.5
 
-[node name="PotionEffect" parent="CollectibleCollision" index="0"]
-scale = Vector2(20, 20)
-
-[node name="CollectibleImage" parent="CollectibleCollision" index="1"]
+[node name="CollectibleImage" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="1" unique_id=2106104259]
 z_index = 0
 
-[node name="PotionInside" parent="CollectibleCollision/CollectibleImage" index="0"]
-modulate = Color(0, 1, 0, 1)
-
-[node name="Timer" parent="CollectibleCollision" index="2"]
+[node name="Timer" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="2" unique_id=1294265648]
 wait_time = 15.0
 
-[node name="Particles" parent="CollectibleCollision" index="4"]
-process_material = SubResource("ParticleProcessMaterial_61c27")
+[node name="Particles" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="4" unique_id=1260813385]
+process_material = SubResource("ParticleProcessMaterial_tdmsy")

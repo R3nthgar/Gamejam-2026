@@ -27,13 +27,9 @@ script = ExtResource("2_e60rm")
 metadata/color = Color(1, 0, 0, 1)
 metadata/price = 10.0
 
-[node name="PotionEffect" parent="CollectibleCollision" index="0"]
-scale = Vector2(20, 20)
+[node name="PotionEffect" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="0" unique_id=1868471482]
 collision_mask = 128
 
-[node name="PotionInside" parent="CollectibleCollision/CollectibleImage" index="0"]
-modulate = Color(1, 0, 0, 1)
-
-[node name="Particles" parent="CollectibleCollision" index="4"]
+[node name="Particles" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="4" unique_id=1260813385]
 trail_lifetime = 0.3
 process_material = SubResource("ParticleProcessMaterial_e60rm")

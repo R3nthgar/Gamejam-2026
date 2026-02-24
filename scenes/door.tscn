@@ -9,12 +9,6 @@ size = Vector2(14, 46)
 [node name="Door" type="Node2D" unique_id=467095628]
 script = ExtResource("1_uvdjg")
 
-[node name="TileMapLayer3" type="TileMapLayer" parent="." unique_id=2117658024]
-visible = false
-z_index = -1
-tile_map_data = PackedByteArray("AAABAPz/AgABAAEAAAAAAPz/AgABAAEAAAD///z/AgABAAEAAAD+//z/AgABAAEAAAD9//z/AgABAAEAAAD8//3/AgABAAEAAAD8//7/AgABAAEAAAD8////AgABAAEAAAA=")
-tile_set = ExtResource("1_hpvv5")
-
 [node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=979331115]
 z_index = -1
 tile_map_data = PackedByteArray("AAD/////AQAHAAMAAFD///7/AQAHAAMAAFAAAP//AgABAAEAAAAAAP7/AgACAAEAAAAAAP3/AgABAAEAAAD///3/AgACAAEAAAABAP//AgACAAEAAAABAP7/AgABAAEAAAABAP3/AgACAAEAAAACAP//AgACAAEAAAACAP7/AgACAAEAAAD///z/AgACAAEAAAAAAPz/AgABAAEAAAABAPz/AgACAAEAAAACAP3/AgACAAEAAAA=")

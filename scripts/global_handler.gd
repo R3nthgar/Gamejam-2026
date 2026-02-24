@@ -18,7 +18,7 @@ const recipes: Array = [[{
 }, "GravityPotion", {"gravity": -1},10], [{
 	"purple_grapes": 2,
 	"red_apple": 1
-}, "GravityPotion", {"gravity": 0.75, "size": 1.25},10], [{
+}, "GravityPotion", {"gravity": 0.75, "size": 30},10], [{
 	"ever_berries": 3
 }, "ScalingPotion",{},50], [{
 	"ever_berries": 2,
@@ -26,7 +26,7 @@ const recipes: Array = [[{
 }, "ScalingPotion",{"scale": 0.5},10], [{
 	"ever_berries": 2,
 	"red_apple": 1
-}, "ScalingPotion",{"scale": 1.25, "size": 1.25},10], [{
+}, "ScalingPotion",{"scale": 1.25, "size": 30},10], [{
 	"gold_apple": 3,
 }, "GoldPotion",{},10], [{
 	"gold_berries": 3,
@@ -49,7 +49,7 @@ var potions = []
 var resetting=false
 var destructibles:={}
 var coins=0
-const mod_metas=["price", "size"]
+var currently_selling
 const transforms:={"apple": {"scale": Vector2(1,1), "position": Vector2(0.5,-1.5)},"grapes": {"scale": Vector2(0.75,0.75), "position": Vector2(0.5,-0.5)},"potion": {"scale": Vector2(0.75,0.75), "position": Vector2(0,-1.75)}}
 const detailed_collectibles:={"red_apple": {"color": Color(1,0,0), "type": "apple"}, "pink_apple": {"color": Color(1,0.5,1), "type": "apple"}, "ever_berries": {"color": Color(0,1,0), "type": "grapes"}, "purple_grapes": {"color": Color(0.5,0,1), "type": "grapes"}, "gold_apple": {"color": Color(1,0.75,0), "type": "apple"}, "gold_berries": {"color": Color(1,0.75,0), "type": "grapes"}, "potion": {"color": Color.BLACK, "type": "potion"}}
 
@@ -72,11 +72,8 @@ func craft_potion(current_recipe: Dictionary):
 	if recipe:
 		var potion=potion_names[recipe[1]].instantiate()
 		for meta in recipe[2] if recipe.size()>=3 else {}:
-			if meta in mod_metas:
-				potion.set_meta(meta, potion.get_meta(meta) * recipe[2][meta])
-			else:
-				potion.set_meta(meta, recipe[2][meta])
-		var new_color=Color(0,0,0)
+			potion.set_meta(meta, recipe[2][meta])
+		var new_color=Color(0,0,0,0)
 		potion.set_meta("price", potion.get_meta("price")*price_mod)
 		for ingredient in current_recipe:
 			new_color+=detailed_collectibles[ingredient].color/3*current_recipe[ingredient]

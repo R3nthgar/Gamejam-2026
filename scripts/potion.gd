@@ -1,6 +1,4 @@
 #Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
-@tool
-
 extends "res://scripts/collectible.gd"
 class_name Potion
 @onready var timer: Timer = $CollectibleCollision/Timer

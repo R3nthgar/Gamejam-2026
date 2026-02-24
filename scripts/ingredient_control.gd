@@ -17,3 +17,15 @@ func _on_timer_timeout() -> void:
 	if not frozen:
 		frame=(frame+1)%(frames.size())
 		refresh()
+func _on_button_pressed() -> void:
+	if shop:
+		if self == shop.ingredient_control:
+			highlighted.visible=false
+			shop.statics[0].modulate=Color(1,1,1)
+			shop.statics.erase(shop.statics[0])
+			shop.set_statics()
+		if self == shop.ingredient_control_2:
+			highlighted.visible=false
+			shop.statics[1].modulate=Color(1,1,1)
+			shop.statics.erase(shop.statics[1])
+			shop.set_statics()

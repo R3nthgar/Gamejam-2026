@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dwbuedjeyiila"]
+[gd_scene format=3 uid="uid://dwbuedjeyiila"]
 
 [ext_resource type="PackedScene" uid="uid://cd0jgoajcto8y" path="res://scenes/potion.tscn" id="1_e6vvb"]
 [ext_resource type="Script" uid="uid://bfbwwua7ycmqe" path="res://scripts/gold_potion.gd" id="2_u6x5v"]
@@ -22,16 +22,10 @@ scale_max = 0.19999999
 scale_over_velocity_min = 1.0
 scale_over_velocity_max = 2.0
 
-[node name="GoldPotion" instance=ExtResource("1_e6vvb")]
+[node name="GoldPotion" unique_id=395042707 instance=ExtResource("1_e6vvb")]
 script = ExtResource("2_u6x5v")
 metadata/color = Color(1, 0.78431374, 0, 1)
 metadata/price = 100.0
 
-[node name="PotionEffect" parent="CollectibleCollision" index="0"]
-scale = Vector2(20, 20)
-
-[node name="PotionInside" parent="CollectibleCollision/CollectibleImage" index="0"]
-modulate = Color(1, 0.78431374, 0, 1)
-
-[node name="Particles" parent="CollectibleCollision" index="4"]
+[node name="Particles" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="4" unique_id=1260813385]
 process_material = SubResource("ParticleProcessMaterial_u6x5v")
