@@ -48,7 +48,7 @@ var ingredients:={}
 var potions = []
 var resetting=false
 var in_shop=false
-var instruction_step=19
+var instruction_step=0
 var destructibles:={}
 var coins=0
 var currently_selling
