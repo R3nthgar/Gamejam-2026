@@ -1,7 +1,5 @@
 #Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
 
-#The @tool allows code to be run in the editor
-@tool
 extends Node2D
 
 @onready var container_area_collision1: CollisionPolygon2D = $ContainerArea1/ContainerAreaCollision
@@ -43,18 +41,6 @@ var contained: Array[Collectible]=[]
 func container_full():
 	return contained.size()>=container_size
 
-#Changes the containers shape if info has been changed
-func _process(delta: float) -> void:
-	if Engine.is_editor_hint() and (points!=get_meta("points") or is_bag!=get_meta("is_bag") or is_deposit!=get_meta("is_deposit") or color!=get_meta("color") or closed!=get_meta("closed") or size!=get_meta("size") or border_thickness!=get_meta("border_thickness")):
-		#Sets appropriate variables
-		points=get_meta("points")
-		is_bag=get_meta("is_bag")
-		is_deposit=get_meta("is_deposit")
-		color=get_meta("color")
-		closed=get_meta("closed")
-		size=get_meta("size")
-		border_thickness=get_meta("border_thickness")
-		change_shape()
 func change_shape():
 	container_visual.default_color=color
 	container_visual_inside.color=color

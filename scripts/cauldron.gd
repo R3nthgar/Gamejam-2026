@@ -1,4 +1,3 @@
-@tool
 extends "res://scripts/container.gd"
 @onready var collectibles: Node2D = %Collectibles
 @onready var instructions: Instructions = %Instructions

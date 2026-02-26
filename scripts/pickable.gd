@@ -1,4 +1,3 @@
-@tool
 extends Node2D
 @onready var timer: Timer = $Timer
 @onready var collectibles: Node2D = %Collectibles
@@ -17,18 +16,14 @@ func _ready() -> void:
 	collectible_transparent_inside.animation=detailed_collectible.type
 	collectible_transparent_inside.modulate=detailed_collectible.color
 	collectible_transparent.modulate=Color.WHITE
-	if not Engine.is_editor_hint():
-		timer.wait_time=get_meta("timer")
-		spawn_new()
+	timer.wait_time=get_meta("timer")
+	spawn_new()
 func _process(delta: float) -> void:
-	if not Engine.is_editor_hint():
-		if not timer.is_stopped():
-			scale_easy.scale=lerp(Vector2(1,1),Vector2(0.25,0.25),timer.time_left/timer.wait_time)
-			collectible_transparent.modulate=Color.from_rgba8(255,255,255,lerp(255,0,timer.time_left/timer.wait_time))
-		if timer.is_stopped() and not collectible.still:
-			timer.start()
-	elif collectible_transparent.animation!=get_meta("collectible") and allowable_collectibles.has(get_meta("collectible")):
-		collectible_transparent.animation=get_meta("collectible")
+	if not timer.is_stopped():
+		scale_easy.scale=lerp(Vector2(1,1),Vector2(0.25,0.25),timer.time_left/timer.wait_time)
+		collectible_transparent.modulate=Color.from_rgba8(255,255,255,lerp(255,0,timer.time_left/timer.wait_time))
+	if timer.is_stopped() and not collectible.still:
+		timer.start()
 func spawn_new():
 	collectible_transparent.modulate=Color.from_rgba8(255,255,255,0)
 	var new_child=COLLECTIBLE.instantiate()
