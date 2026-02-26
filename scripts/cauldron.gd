@@ -42,8 +42,6 @@ func container_effect():
 
 func _on_container_area_1_body_entered(body: PhysicsBody2D) -> void:
 	if body is Collectible and not body is Potion and contained.has(body):
-		if global_handler.instruction_step<6:
-			instructions.change_instructions(6)
-		if contained.size()>2:
+		if global_handler.instruction_step<17 and contained.size()>2:
 			instructions.change_temp_instructions(1)
 		body.play_sound(COIN,0.5)
