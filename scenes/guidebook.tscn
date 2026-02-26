@@ -1,0 +1,94 @@
+[gd_scene format=3 uid="uid://c773gnh1a784n"]
+
+[ext_resource type="Shader" uid="uid://cql83ww4l66y5" path="res://shaders/wood.gdshader" id="1_qj66b"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qj66b"]
+frequency = 0.005
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qlhff"]
+width = 1152
+height = 648
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_qj66b")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qlhff"]
+frequency = 0.05
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mrtdy"]
+width = 1152
+height = 648
+generate_mipmaps = false
+noise = SubResource("FastNoiseLite_qlhff")
+as_normal_map = true
+bump_strength = 5.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dq3i5"]
+shader = ExtResource("1_qj66b")
+shader_parameter/noise_texture = SubResource("NoiseTexture2D_qlhff")
+shader_parameter/normal_texture = SubResource("NoiseTexture2D_mrtdy")
+
+[sub_resource type="Gradient" id="Gradient_1vs02"]
+offsets = PackedFloat32Array(0.51282054, 1)
+colors = PackedColorArray(1.353256, 1.353256, 0.8036162, 1, 1, 1, 0.5882353, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qj66b"]
+gradient = SubResource("Gradient_1vs02")
+
+[node name="Guidebook" type="Control" unique_id=1205957903]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1305559372]
+material = SubResource("ShaderMaterial_dq3i5")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=47712512]
+transparent_bg = true
+size = Vector2i(1152, 648)
+
+[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=1043688057]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -488.5
+offset_top = -286.5
+offset_right = 488.5
+offset_bottom = 286.5
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+color = Color(0.5019608, 0.2509804, 0, 1)
+
+[node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=127082979]
+custom_minimum_size = Vector2(476, 548)
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 50.0
+offset_right = -100.0
+offset_bottom = -50.0
+texture = SubResource("GradientTexture2D_qj66b")
+
+[node name="TextureRect2" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=1140245254]
+custom_minimum_size = Vector2(476, 548)
+anchors_preset = -1
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 100.0
+offset_top = 50.0
+offset_bottom = -50.0
+texture = SubResource("GradientTexture2D_qj66b")
+flip_h = true

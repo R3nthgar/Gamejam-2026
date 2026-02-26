@@ -51,7 +51,7 @@ func add_to_deposit(body: Node2D):
 		var metadata:={}
 		for meta in body.get_meta_list():
 			metadata[meta]=body.get_meta(meta)
-		global_handler.potions.append([body.get_script().get_global_name(), metadata])
+		global_handler.potions.append([body.potion_type, metadata])
 	else:
 		if body.get_meta("collectible") in global_handler.ingredients:
 			global_handler.ingredients[body.get_meta("collectible")]+=1

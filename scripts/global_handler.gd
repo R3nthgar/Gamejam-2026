@@ -47,12 +47,13 @@ var locations:={
 var ingredients:={}
 var potions = []
 var resetting=false
+var in_shop=false
+var instruction_step=0
 var destructibles:={}
 var coins=0
 var currently_selling
 const transforms:={"apple": {"scale": Vector2(1,1), "position": Vector2(0.5,-1.5)},"grapes": {"scale": Vector2(0.75,0.75), "position": Vector2(0.5,-0.5)},"potion": {"scale": Vector2(0.75,0.75), "position": Vector2(0,-1.75)}}
 const detailed_collectibles:={"red_apple": {"color": Color(1,0,0), "type": "apple"}, "pink_apple": {"color": Color(1,0.5,1), "type": "apple"}, "ever_berries": {"color": Color(0,1,0), "type": "grapes"}, "purple_grapes": {"color": Color(0.5,0,1), "type": "grapes"}, "gold_apple": {"color": Color(1,0.75,0), "type": "apple"}, "gold_berries": {"color": Color(1,0.75,0), "type": "grapes"}, "potion": {"color": Color.BLACK, "type": "potion"}}
-
 func get_recipe(current_recipe: Dictionary) -> Variant:
 	for recipe in recipes:
 		if(recipe[0]==current_recipe):

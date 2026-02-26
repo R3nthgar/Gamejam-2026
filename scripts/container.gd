@@ -13,6 +13,7 @@ extends Node2D
 @onready var container_inside_collision: CollisionPolygon2D = $ContainerCollisionInside/ContainerInsideCollision
 @onready var container_alarm: RichTextLabel = $ContainerAlarm
 @onready var container_collision_outside: StaticBody2D = $ContainerCollisionOutside
+@onready var audio: AudioStreamPlayer2D = $Audio
 
 const one_way_collider=preload("res://scenes/one_way_collider.tscn")
 
@@ -37,10 +38,7 @@ var is_deposit=false
 var container_scale_mod=0.66
 
 #This array tracks which objects are in the container
-var contained=[]
-#Allows contained objects to be seen from other nodes
-func get_contained():
-	return contained
+var contained: Array[Collectible]=[]
 #Gets whether the container is full for use by other nodes
 func container_full():
 	return contained.size()>=container_size

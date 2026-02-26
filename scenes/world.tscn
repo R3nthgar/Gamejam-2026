@@ -9,7 +9,9 @@
 [ext_resource type="Texture2D" uid="uid://7a8m7ncx1h3n" path="res://assets/custom/gamejam_map_tileset.png" id="6_7iits"]
 [ext_resource type="PackedScene" uid="uid://bpwhckui1x7uj" path="res://scenes/gravity_potion.tscn" id="6_qfnet"]
 [ext_resource type="PackedScene" uid="uid://cak5vk61bn28p" path="res://scenes/pickable.tscn" id="7_i7141"]
+[ext_resource type="PackedScene" uid="uid://bljd1wq88lip" path="res://scenes/instructions.tscn" id="8_7iits"]
 [ext_resource type="PackedScene" uid="uid://b8s870bqq01gw" path="res://scenes/kaboom_potion.tscn" id="8_7t5mc"]
+[ext_resource type="PackedScene" uid="uid://c3qb85eg8ik4n" path="res://scenes/instruction_trigger.tscn" id="8_oo54l"]
 [ext_resource type="PackedScene" uid="uid://dvxwosa016ah4" path="res://scenes/cauldron.tscn" id="9_7r4gi"]
 [ext_resource type="PackedScene" uid="uid://diacnvuwoca2w" path="res://scenes/container.tscn" id="9_w7kh3"]
 [ext_resource type="PackedScene" uid="uid://dwbuedjeyiila" path="res://scenes/gold_potion.tscn" id="10_w7kh3"]
@@ -282,6 +284,12 @@ sources/3 = SubResource("TileSetAtlasSource_ctatt")
 shader = ExtResource("5_pm21f")
 shader_parameter/blend_factor = 0.33
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kpybi"]
+size = Vector2(57, 36)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oo54l"]
+size = Vector2(62, 103)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dss4m"]
 size = Vector2(48, 30)
 
@@ -374,10 +382,56 @@ tile_map_data = PackedByteArray("AAAQAAEAAgABAAEAAAAQAAIAAgABAAEAAAAQAAMAAgABAAE
 tile_map_data = PackedByteArray("AAASAPz/AQACAAQAAAAUAP3/AQACAAQAAAAWAP7/AQACAAQAAAATAPz/AQACAAQAAAAVAP3/AQACAAQAAAASAP7/AQACAAQAAAAUAPz/AQACAAQAAAATAP7/AQACAAQAAAAWAP3/AQACAAQAAAAVAPz/AQACAAQAAAAUAP7/AQACAAQAAAASAP3/AQACAAQAAAAVAP7/AQACAAQAAAATAP3/AQACAAQAAAAWAPz/AQACAAQAAAA=")
 metadata/strength = 2
 
+[node name="InstructionTriggers" type="Node2D" parent="." unique_id=1005881709]
+
+[node name="InstructionTrigger" parent="InstructionTriggers" unique_id=523070327 instance=ExtResource("8_oo54l")]
+metadata/prev_instructions = 5
+metadata/new_instructions = 6
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InstructionTriggers/InstructionTrigger" unique_id=1533862483]
+position = Vector2(128.5, -18)
+shape = SubResource("RectangleShape2D_kpybi")
+
+[node name="InstructionTrigger2" parent="InstructionTriggers" unique_id=1471927797 instance=ExtResource("8_oo54l")]
+metadata/prev_instructions = 8
+metadata/new_instructions = 9
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InstructionTriggers/InstructionTrigger2" unique_id=1176209561]
+position = Vector2(233, 34)
+shape = SubResource("RectangleShape2D_kpybi")
+
+[node name="InstructionTrigger3" parent="InstructionTriggers" unique_id=867925474 instance=ExtResource("8_oo54l")]
+metadata/prev_instructions = 12
+metadata/new_instructions = 13
+metadata/all_before = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InstructionTriggers/InstructionTrigger3" unique_id=1475094628]
+position = Vector2(394, -186)
+shape = SubResource("RectangleShape2D_oo54l")
+
+[node name="InstructionTrigger4" parent="InstructionTriggers" unique_id=2009555770 instance=ExtResource("8_oo54l")]
+metadata/prev_instructions = 14
+metadata/new_instructions = 15
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InstructionTriggers/InstructionTrigger4" unique_id=68008649]
+position = Vector2(258, -186)
+shape = SubResource("RectangleShape2D_oo54l")
+
 [node name="Player" parent="." unique_id=875532499 instance=ExtResource("1_nnsk1")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(-197, -10)
+position = Vector2(-13, -12.5)
+
+[node name="Instructions" parent="." unique_id=476044125 instance=ExtResource("8_7iits")]
+unique_name_in_owner = true
+offset_left = -46.0
+offset_top = -115.0
+offset_right = 129.0
+offset_bottom = -18.0
+text = "You have completed the tutorial.
+You can craft more potions and return to the shop to sell them.
+Try combining different ingredients to make unique potions that let you unlock hidden areas.
+Press C to close this notification, and to skip the tutorial"
 
 [node name="Collectibles" type="Node2D" parent="." unique_id=843014347]
 unique_name_in_owner = true

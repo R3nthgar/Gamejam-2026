@@ -4,7 +4,7 @@ class_name Potion
 @onready var timer: Timer = $CollectibleCollision/Timer
 @onready var potion_effect: Area2D = $CollectibleCollision/PotionEffect
 @onready var collectible_collision: CollisionShape2D = $CollectibleCollision
-
+@onready var potion_type = get_script().get_global_name()
 #Function that allows you to control what effects a potion applies. You shouldn't modify this directly unless
 #you want to change something for all potions
 func apply_effect(targeted, reversed: bool):

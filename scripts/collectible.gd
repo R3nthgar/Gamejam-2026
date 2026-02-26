@@ -9,6 +9,7 @@ class_name Collectible
 @onready var collectible_inside: AnimatedSprite2D = $CollectibleCollision/CollectibleImage/CollectibleInside
 @onready var audio: AudioStreamPlayer2D = $CollectibleCollision/Audio
 @onready var particles: GPUParticles2D = $CollectibleCollision/Particles
+@onready var instructions: Instructions = get_tree().current_scene.get_node("Instructions")
 const COLLECTIBLE_SPRITES = preload("uid://ccpt5fwr0bfx8")
 
 

@@ -1,7 +1,7 @@
 @tool
 extends "res://scripts/container.gd"
-@onready var audio: AudioStreamPlayer2D = $Audio
 @onready var collectibles: Node2D = %Collectibles
+@onready var instructions: Instructions = %Instructions
 const POWER_UP = preload("uid://b3bnv0bcurjfy")
 const EXPLOSION = preload("uid://cdu1em1a7wcpj")
 const COIN = preload("uid://cpqqhg52cev4j")
@@ -18,7 +18,12 @@ func container_effect():
 				current_recipe[collectible.get_meta("collectible")]+=1
 			else:
 				current_recipe[collectible.get_meta("collectible")]=1
-		
+		if global_handler.instruction_step<7 and current_recipe=={"red_apple": 3}:
+			instructions.change_instructions(7)
+		elif global_handler.instruction_step<11 and current_recipe=={"purple_grapes": 3}:
+			instructions.change_instructions(11)
+		elif global_handler.instruction_step<16 and current_recipe=={"ever_berries": 3}:
+			instructions.change_instructions(16)
 		var potion=global_handler.craft_potion(current_recipe)
 		if potion:
 			for item in contained:
@@ -37,4 +42,8 @@ func container_effect():
 
 func _on_container_area_1_body_entered(body: PhysicsBody2D) -> void:
 	if body is Collectible and not body is Potion and contained.has(body):
+		if global_handler.instruction_step<6:
+			instructions.change_instructions(6)
+		if contained.size()>2:
+			instructions.change_temp_instructions(1)
 		body.play_sound(COIN,0.5)

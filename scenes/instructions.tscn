@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://bljd1wq88lip"]
+
+[ext_resource type="FontFile" uid="uid://bch710uus3txx" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="1_nisbi"]
+[ext_resource type="Script" uid="uid://da4rkgrkxrwuc" path="res://scripts/instructions.gd" id="2_njqp3"]
+
+[node name="Instructions" type="RichTextLabel" unique_id=476044125]
+offset_left = -98.0
+offset_top = -113.0
+offset_right = 77.0
+offset_bottom = -60.0
+mouse_filter = 2
+theme_override_fonts/normal_font = ExtResource("1_nisbi")
+theme_override_font_sizes/normal_font_size = 8
+text = "Drag an apple to the brown bag on your back"
+horizontal_alignment = 1
+script = ExtResource("2_njqp3")

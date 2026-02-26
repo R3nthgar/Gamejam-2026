@@ -1,21 +1,24 @@
 extends Control
 class_name Shop
-@onready var ingredients_container: HFlowContainer = $Shopfront/IngredientsContainer
-@onready var potions_container: HFlowContainer = $Shopfront/PotionsContainer
-@onready var potion_icon_1: Control = $Shopfront/SpeechBox/Potion
-@onready var coin_count_1: Label = $Shopfront/SpeechBox/CoinCount
-@onready var ingredient_control: Control = $Shopfront/CraftingBox/FlowContainer/IngredientControl
-@onready var ingredient_control_2: Control = $Shopfront/CraftingBox/FlowContainer/IngredientControl2
-@onready var ingredient_control_3: Control = $Shopfront/CraftingBox/FlowContainer/IngredientControl3
-@onready var potion_icon_2: Control = $Back/SpeechBox/Potion
-@onready var coin_count_2: Label = $Back/SpeechBox/CoinCount
+@onready var ingredients_container: HFlowContainer = $Storage/IngredientsContainer
+@onready var potions_container: HFlowContainer = $Storage/PotionsContainer
+@onready var potion_icon_1: Control = $Storage/SpeechBox/Potion
+@onready var coin_count_1: Label = $Storage/SpeechBox/CoinCount
+@onready var ingredient_control: Control = $Storage/CraftingBox/FlowContainer/IngredientControl
+@onready var ingredient_control_2: Control = $Storage/CraftingBox/FlowContainer/IngredientControl2
+@onready var ingredient_control_3: Control = $Storage/CraftingBox/FlowContainer/IngredientControl3
+@onready var potion_icon_2: Control = $Shopfront/SpeechBox/Potion
+@onready var coin_count_2: Label = $Shopfront/SpeechBox/CoinCount
 @onready var coin_count: Label = $CanvasLayer/CoinCount
+@onready var instructions: Instructions = $CanvasLayer/Instructions
 
 const COLLECTIBLE_CONTROL = preload("uid://cps0eo4ijhn16")
 const POTION_CONTROL = preload("uid://bxtojffj0jj2")
 const FRUIT_ATLAS = preload("uid://b41n42rnp73gh")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	if global_handler.instruction_step==19:
+		instructions.change_instructions(20)
 	coin_count.text=str(global_handler.coins)
 	global_handler.resetting=false
 	if not global_handler.currently_selling:
@@ -53,7 +56,15 @@ func set_selling():
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("right"):
 		position.x=-1152
+		if global_handler.instruction_step==20:
+			instructions.change_temp_instructions(2)
+		if global_handler.instruction_step==21:
+			instructions.change_instructions(22)
 	elif Input.is_action_just_pressed("left"):
+		if global_handler.instruction_step==20:
+			instructions.change_instructions(20)
+		if global_handler.instruction_step==22:
+			instructions.change_instructions(21)
 		position.x=0
 	if Input.is_action_just_pressed("refresh"):
 		global_handler.currently_selling=get_random_potion()
@@ -136,6 +147,8 @@ func set_statics():
 			else:
 				recipe[ingredient.type]+=1
 			ingredient.queue_free()
+		if global_handler.instruction_step==20 and recipe=={"red_apple": 3}:
+			instructions.change_instructions(21)
 		statics=[]
 		ingredient_control.highlighted.visible=false
 		ingredient_control_2.highlighted.visible=false
@@ -189,4 +202,6 @@ func _on_speech_box_pressed() -> void:
 			potion.queue_free()
 			global_handler.currently_selling=get_random_potion()
 			set_selling()
+			if global_handler.instruction_step<23:
+				instructions.change_instructions(23)
 			break

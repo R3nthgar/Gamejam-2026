@@ -25,6 +25,8 @@ func apply_effect(targeted, reversed: bool):
 	time_passed=0
 	for targetable in targeted:
 		if is_instance_valid(targetable):
+			if global_handler.instruction_step<17 and targetable is Player:
+				instructions.change_instructions(17)
 			targetable.emit_particles(get_meta("color"), -0.5 if reversed else 0.5)
 			if targetable.is_class("RigidBody2D"):
 				targetable.mass*=1.0/(scale_size*scale_size) if reversed else scale_size*scale_size

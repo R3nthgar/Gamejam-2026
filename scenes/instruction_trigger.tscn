@@ -1,0 +1,13 @@
+[gd_scene format=3 uid="uid://c3qb85eg8ik4n"]
+
+[ext_resource type="Script" uid="uid://dhihypmn26u3g" path="res://scripts/instruction_trigger.gd" id="1_87umb"]
+
+[node name="InstructionTrigger" type="Area2D" unique_id=523070327]
+collision_layer = 0
+collision_mask = 512
+script = ExtResource("1_87umb")
+metadata/prev_instructions = 0
+metadata/new_instructions = 0
+metadata/all_before = false
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

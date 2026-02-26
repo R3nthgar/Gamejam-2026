@@ -41,9 +41,9 @@ polygon = PackedVector2Array(-3.8268347, 9.238795, -9.238795, 3.8268342, -9.2387
 visible = false
 z_index = 1
 offset_left = -5.0
-offset_top = 24.0
+offset_top = -30.17311
 offset_right = 5.0
-offset_bottom = 40.0
+offset_bottom = -14.173109
 theme_override_fonts/normal_font = ExtResource("1_1syo6")
 text = "!"
 
@@ -65,6 +65,8 @@ modulate = Color(1, 1, 1, 0.5019608)
 z_index = 1
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-3.8268347, 9.238795, -9.238795, 3.8268342, -9.238795, -3.826834, -3.826835, -9.238795, 3.8268342, -9.238795, 9.238795, -3.8268356, 9.238794, 3.826836, 3.8268342, 9.238795)
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="." unique_id=2063128013]
 
 [connection signal="body_entered" from="ContainerArea1" to="." method="_on_container_area_body_entered"]
 [connection signal="body_exited" from="ContainerArea2" to="." method="_on_container_area_body_exited"]

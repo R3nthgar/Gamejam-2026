@@ -11,6 +11,7 @@ class_name Player
 @onready var particles_3: GPUParticles2D = $Particles3
 @onready var timer: Timer = $Timer
 @onready var coin_count: Label = $"../CanvasLayer/CoinCount"
+@onready var instructions: Instructions = %Instructions
 var particles_finished=true
 var particles_finished_2=true
 const JUMP = preload("uid://qxb77221bpq")
@@ -41,6 +42,11 @@ var dead=false
 #This makes it so you don't have to change the camera zoom in the code
 var zoom
 func _ready() -> void:
+	if global_handler.in_shop:
+		position.x=-197.0
+		global_handler.in_shop=false
+	if global_handler.instruction_step==23:
+		instructions.change_instructions(24)
 	coin_count.text=str(global_handler.coins)
 	dead=global_handler.resetting
 	if dead:
@@ -56,7 +62,7 @@ func _ready() -> void:
 var gravity=1.0
 func set_gravity(new_gravity: float):
 	gravity=new_gravity
-	for obj in bag.get_contained():
+	for obj in bag.contained:
 		obj.set_gravity(gravity)
 func gravity_get():
 	return gravity
@@ -116,8 +122,24 @@ func _physics_process(delta: float) -> void:
 		animated_player_sprite.flip_v=gravity<0
 		bag.container_scale_mod=0.66*scale.x
 		#Fixes bagged variable and makes coin sound when a collectible is collected
-		var contained=bag.get_contained().duplicate(true)
+		var contained=bag.contained.duplicate(true)
 		if(bagged!=contained):
+			var bagged_types={}
+			for collectible in contained:
+				if bagged_types.has(collectible.get_meta("collectible")):
+					bagged_types[collectible.get_meta("collectible")]+=1
+				else:
+					bagged_types[collectible.get_meta("collectible")]=1
+			if global_handler.instruction_step<4:
+				instructions.change_instructions(4)
+			if global_handler.instruction_step<5 and contained.size()>2:
+				instructions.change_instructions(5)
+			if global_handler.instruction_step<10 and bagged_types.has("purple_grapes") and bagged_types["purple_grapes"]>2:
+				instructions.change_instructions(10)
+			if global_handler.instruction_step<14 and bagged_types.has("ever_berries") and bagged_types["ever_berries"]>2:
+				instructions.change_instructions(14)
+			if global_handler.instruction_step==18 and bagged_types.has("red_apple") and bagged_types["red_apple"]>2:
+				instructions.change_instructions(19)
 			if(bagged.size()<contained.size()):
 				play_sound(COIN)
 			bagged=contained
@@ -127,19 +149,23 @@ func _physics_process(delta: float) -> void:
 				jumps+=1
 			velocity += get_gravity() * delta * gravity
 			#Changes bagged objects' velocity to prevent visual glitching from temporarily falling out of the bag
-			for obj in bag.get_contained():
+			for obj in bag.contained:
 				obj.linear_velocity.y+=get_gravity().y * delta * gravity
 		#Resets jumps when on the ground
 		else:
 			jumps=0
+		if Input.is_action_just_pressed("close_tutorial"):
+			instructions.change_instructions(instructions.instructions.size())
 		#Jump functionality, modified to play sounds and allow air jumping
 		if Input.is_action_just_pressed("up") and jumps<max_jumps:
+			if global_handler.instruction_step<3:
+				instructions.change_instructions(3)
 			jumps+=1
 			play_sound(JUMP, 1/scale.x)
 			velocity.y = JUMP_VELOCITY if gravity>=0 else -JUMP_VELOCITY
 			
 			#Changes bagged objects' velocity to prevent visual glitching from temporarily falling out of the bag
-			for obj in bag.get_contained():
+			for obj in bag.contained:
 				obj.linear_velocity.y+=JUMP_VELOCITY
 		
 		#Allows falling through bridges
@@ -159,19 +185,21 @@ func _physics_process(delta: float) -> void:
 		#Movement functionality
 		var direction := Input.get_axis("left", "right")
 		if direction:
+			if global_handler.instruction_step<2:
+				instructions.change_instructions(2 if direction==-1 else 1)
 			set_animation("walk")
 			#Flips player sprite
 			animated_player_sprite.flip_h=direction==-1
 			
 			#Fixes bag position and ensures bagged objects move with it
 			if (bag.position.x<0 and direction==-1) or (bag.position.x>0 and direction==1):
-				for item in bag.get_contained():
+				for item in bag.contained:
 					item.position.x+=(item.position.x-bag.global_position.x)*2
 				bag.position.x*=-1
 			velocity.x = direction * SPEED
 			
 			#Fixes visual glitching
-			for obj in bag.get_contained():
+			for obj in bag.contained:
 				obj.linear_velocity.x=direction*SPEED
 		else:
 			set_animation("idle")

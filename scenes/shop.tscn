@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="3_032fp"]
 [ext_resource type="Material" uid="uid://ba6pg2iqs4kis" path="res://shaders/wood.tres" id="7_ajxib"]
 [ext_resource type="PackedScene" uid="uid://dvbhvu7p6ccca" path="res://scenes/ingredient_control.tscn" id="7_y6sft"]
+[ext_resource type="PackedScene" uid="uid://bljd1wq88lip" path="res://scenes/instructions.tscn" id="8_y6sft"]
 
 [sub_resource type="Gradient" id="Gradient_y6sft"]
 offsets = PackedFloat32Array(0.84615386, 1)
@@ -65,7 +66,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8r1wq")
 
-[node name="Shopfront" type="Control" parent="." unique_id=1229288640]
+[node name="Storage" type="Control" parent="." unique_id=1229288640]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -73,19 +74,19 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Shopfront" unique_id=2022452743]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Storage" unique_id=2022452743]
 material = ExtResource("7_ajxib")
 layout_mode = 0
 offset_right = 1152.0
 offset_bottom = 648.0
 
-[node name="SubViewport" type="SubViewport" parent="Shopfront/SubViewportContainer" unique_id=762920948]
+[node name="SubViewport" type="SubViewport" parent="Storage/SubViewportContainer" unique_id=762920948]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Background" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport" unique_id=840073745]
+[node name="Background" type="TextureRect" parent="Storage/SubViewportContainer/SubViewport" unique_id=840073745]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -93,7 +94,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_1v8qu")
 
-[node name="Door" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport" unique_id=42053629]
+[node name="Door" type="ColorRect" parent="Storage/SubViewportContainer/SubViewport" unique_id=42053629]
 custom_minimum_size = Vector2(250, 450)
 anchors_preset = 7
 anchor_left = 0.5
@@ -107,7 +108,7 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.1882353, 0.09411765, 0, 1)
 
-[node name="DoorInside" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/Door" unique_id=368180587]
+[node name="DoorInside" type="ColorRect" parent="Storage/SubViewportContainer/SubViewport/Door" unique_id=368180587]
 custom_minimum_size = Vector2(226, 426)
 layout_mode = 1
 anchors_preset = 8
@@ -123,19 +124,19 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.5019608, 0.2509804, 0, 1)
 
-[node name="DoorHandle" type="MeshInstance2D" parent="Shopfront/SubViewportContainer/SubViewport/Door" unique_id=1164587076]
+[node name="DoorHandle" type="MeshInstance2D" parent="Storage/SubViewportContainer/SubViewport/Door" unique_id=1164587076]
 position = Vector2(204, 216)
 mesh = SubResource("SphereMesh_y6sft")
 texture = SubResource("GradientTexture2D_y6sft")
 
-[node name="Shadow" type="MeshInstance2D" parent="Shopfront/SubViewportContainer/SubViewport/Door/DoorHandle" unique_id=967547884]
+[node name="Shadow" type="MeshInstance2D" parent="Storage/SubViewportContainer/SubViewport/Door/DoorHandle" unique_id=967547884]
 modulate = Color(1, 1, 1, 0.5019608)
 show_behind_parent = true
 position = Vector2(3, 3)
 mesh = SubResource("SphereMesh_y6sft")
 texture = SubResource("GradientTexture2D_heatd")
 
-[node name="Door" type="Button" parent="Shopfront/SubViewportContainer/SubViewport/Door" unique_id=1306014175]
+[node name="Door" type="Button" parent="Storage/SubViewportContainer/SubViewport/Door" unique_id=1306014175]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -144,7 +145,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer2" type="VBoxContainer" parent="Shopfront/SubViewportContainer/SubViewport" unique_id=1172342132]
+[node name="VBoxContainer2" type="VBoxContainer" parent="Storage/SubViewportContainer/SubViewport" unique_id=1172342132]
 anchors_preset = 6
 anchor_left = 1.0
 anchor_top = 0.5
@@ -157,12 +158,12 @@ grow_horizontal = 0
 grow_vertical = 2
 theme_override_constants/separation = 75
 
-[node name="Shelf" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2" unique_id=2026006134]
+[node name="Shelf" type="TextureRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer2" unique_id=2026006134]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 texture = SubResource("GradientTexture2D_m4ofw")
 
-[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2/Shelf" unique_id=1617812407]
+[node name="Shadow" type="ColorRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer2/Shelf" unique_id=1617812407]
 modulate = Color(1, 1, 1, 0.5019608)
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 25)
@@ -173,12 +174,12 @@ offset_right = 392.0
 offset_bottom = 30.0
 color = Color(0, 0, 0, 1)
 
-[node name="Shelf2" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2" unique_id=1597185940]
+[node name="Shelf2" type="TextureRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer2" unique_id=1597185940]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 texture = SubResource("GradientTexture2D_m4ofw")
 
-[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2/Shelf2" unique_id=328538970]
+[node name="Shadow" type="ColorRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer2/Shelf2" unique_id=328538970]
 modulate = Color(1, 1, 1, 0.5019608)
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 25)
@@ -189,12 +190,12 @@ offset_right = 392.0
 offset_bottom = 30.0
 color = Color(0, 0, 0, 1)
 
-[node name="Shelf3" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2" unique_id=973140632]
+[node name="Shelf3" type="TextureRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer2" unique_id=973140632]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 texture = SubResource("GradientTexture2D_m4ofw")
 
-[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2/Shelf3" unique_id=301213581]
+[node name="Shadow" type="ColorRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer2/Shelf3" unique_id=301213581]
 modulate = Color(1, 1, 1, 0.5019608)
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 25)
@@ -205,12 +206,12 @@ offset_right = 392.0
 offset_bottom = 30.0
 color = Color(0, 0, 0, 1)
 
-[node name="Shelf4" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2" unique_id=2894878]
+[node name="Shelf4" type="TextureRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer2" unique_id=2894878]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 texture = SubResource("GradientTexture2D_m4ofw")
 
-[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer2/Shelf4" unique_id=193905390]
+[node name="Shadow" type="ColorRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer2/Shelf4" unique_id=193905390]
 modulate = Color(1, 1, 1, 0.5019608)
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 25)
@@ -221,7 +222,7 @@ offset_right = 392.0
 offset_bottom = 30.0
 color = Color(0, 0, 0, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="Shopfront/SubViewportContainer/SubViewport" unique_id=1486868786]
+[node name="VBoxContainer" type="VBoxContainer" parent="Storage/SubViewportContainer/SubViewport" unique_id=1486868786]
 use_parent_material = true
 anchors_preset = 4
 anchor_top = 0.5
@@ -232,12 +233,12 @@ offset_bottom = 178.0
 grow_vertical = 2
 theme_override_constants/separation = 75
 
-[node name="Shelf" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer" unique_id=1429531940]
+[node name="Shelf" type="TextureRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer" unique_id=1429531940]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 texture = SubResource("GradientTexture2D_m4ofw")
 
-[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer/Shelf" unique_id=1800157021]
+[node name="Shadow" type="ColorRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer/Shelf" unique_id=1800157021]
 modulate = Color(1, 1, 1, 0.5019608)
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 25)
@@ -247,12 +248,12 @@ offset_right = 397.0
 offset_bottom = 30.0
 color = Color(0, 0, 0, 1)
 
-[node name="Shelf2" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer" unique_id=408588293]
+[node name="Shelf2" type="TextureRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer" unique_id=408588293]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 texture = SubResource("GradientTexture2D_m4ofw")
 
-[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer/Shelf2" unique_id=848190687]
+[node name="Shadow" type="ColorRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer/Shelf2" unique_id=848190687]
 modulate = Color(1, 1, 1, 0.5019608)
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 25)
@@ -262,12 +263,12 @@ offset_right = 397.0
 offset_bottom = 30.0
 color = Color(0, 0, 0, 1)
 
-[node name="Shelf3" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer" unique_id=1113209856]
+[node name="Shelf3" type="TextureRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer" unique_id=1113209856]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 texture = SubResource("GradientTexture2D_m4ofw")
 
-[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer/Shelf3" unique_id=977475812]
+[node name="Shadow" type="ColorRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer/Shelf3" unique_id=977475812]
 modulate = Color(1, 1, 1, 0.5019608)
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 25)
@@ -277,12 +278,12 @@ offset_right = 397.0
 offset_bottom = 30.0
 color = Color(0, 0, 0, 1)
 
-[node name="Shelf4" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer" unique_id=1994008021]
+[node name="Shelf4" type="TextureRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer" unique_id=1994008021]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
 texture = SubResource("GradientTexture2D_m4ofw")
 
-[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/VBoxContainer/Shelf4" unique_id=785165059]
+[node name="Shadow" type="ColorRect" parent="Storage/SubViewportContainer/SubViewport/VBoxContainer/Shelf4" unique_id=785165059]
 modulate = Color(1, 1, 1, 0.5019608)
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 25)
@@ -292,7 +293,7 @@ offset_right = 397.0
 offset_bottom = 30.0
 color = Color(0, 0, 0, 1)
 
-[node name="SpeechBox" type="Button" parent="Shopfront" unique_id=1602255925]
+[node name="SpeechBox" type="Button" parent="Storage" unique_id=1602255925]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -310,7 +311,7 @@ theme_override_styles/pressed = ExtResource("2_2fc2m")
 theme_override_styles/hover = ExtResource("2_2fc2m")
 theme_override_styles/hover_pressed = ExtResource("2_2fc2m")
 
-[node name="Potion" parent="Shopfront/SpeechBox" unique_id=1017974709 instance=ExtResource("3_1l46r")]
+[node name="Potion" parent="Storage/SpeechBox" unique_id=1017974709 instance=ExtResource("3_1l46r")]
 layout_mode = 0
 offset_left = 2.0
 offset_top = -4.7500005
@@ -318,7 +319,7 @@ offset_right = 18.0
 offset_bottom = 11.25
 scale = Vector2(5, 5)
 
-[node name="Coin" type="TextureRect" parent="Shopfront/SpeechBox" unique_id=63332985]
+[node name="Coin" type="TextureRect" parent="Storage/SpeechBox" unique_id=63332985]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -331,7 +332,7 @@ grow_horizontal = 0
 scale = Vector2(4, 4)
 texture = SubResource("AtlasTexture_032fp")
 
-[node name="CoinCount" type="Label" parent="Shopfront/SpeechBox" unique_id=522058686]
+[node name="CoinCount" type="Label" parent="Storage/SpeechBox" unique_id=522058686]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -346,7 +347,7 @@ theme_override_fonts/font = ExtResource("3_032fp")
 text = "0"
 horizontal_alignment = 2
 
-[node name="Arrow" type="Label" parent="Shopfront/SpeechBox" unique_id=1753968389]
+[node name="Arrow" type="Label" parent="Storage/SpeechBox" unique_id=1753968389]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -364,7 +365,7 @@ theme_override_fonts/font = ExtResource("3_032fp")
 theme_override_font_sizes/font_size = 32
 text = "->"
 
-[node name="CraftingBox" type="Button" parent="Shopfront" unique_id=524639037]
+[node name="CraftingBox" type="Button" parent="Storage" unique_id=524639037]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -382,7 +383,7 @@ theme_override_styles/pressed = ExtResource("2_2fc2m")
 theme_override_styles/hover = ExtResource("2_2fc2m")
 theme_override_styles/hover_pressed = ExtResource("2_2fc2m")
 
-[node name="FlowContainer" type="FlowContainer" parent="Shopfront/CraftingBox" unique_id=275263327]
+[node name="FlowContainer" type="FlowContainer" parent="Storage/CraftingBox" unique_id=275263327]
 layout_mode = 0
 offset_left = 16.0
 offset_top = 6.25
@@ -390,16 +391,16 @@ offset_right = 72.5
 offset_bottom = 22.25
 scale = Vector2(4, 4)
 
-[node name="IngredientControl" parent="Shopfront/CraftingBox/FlowContainer" unique_id=287638166 instance=ExtResource("7_y6sft")]
+[node name="IngredientControl" parent="Storage/CraftingBox/FlowContainer" unique_id=287638166 instance=ExtResource("7_y6sft")]
 layout_mode = 2
 
-[node name="IngredientControl2" parent="Shopfront/CraftingBox/FlowContainer" unique_id=435034627 instance=ExtResource("7_y6sft")]
+[node name="IngredientControl2" parent="Storage/CraftingBox/FlowContainer" unique_id=435034627 instance=ExtResource("7_y6sft")]
 layout_mode = 2
 
-[node name="IngredientControl3" parent="Shopfront/CraftingBox/FlowContainer" unique_id=1637469542 instance=ExtResource("7_y6sft")]
+[node name="IngredientControl3" parent="Storage/CraftingBox/FlowContainer" unique_id=1637469542 instance=ExtResource("7_y6sft")]
 layout_mode = 2
 
-[node name="IngredientsContainer" type="HFlowContainer" parent="Shopfront" unique_id=277938326]
+[node name="IngredientsContainer" type="HFlowContainer" parent="Storage" unique_id=277938326]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = -0.17300001
@@ -410,7 +411,7 @@ offset_bottom = 320.354
 scale = Vector2(4, 4)
 theme_override_constants/v_separation = 9
 
-[node name="PotionsContainer" type="HFlowContainer" parent="Shopfront" unique_id=436721923]
+[node name="PotionsContainer" type="HFlowContainer" parent="Storage" unique_id=436721923]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0
@@ -424,7 +425,7 @@ offset_bottom = 321.002
 scale = Vector2(4, 4)
 theme_override_constants/v_separation = 9
 
-[node name="Back" type="Control" parent="." unique_id=2089626179]
+[node name="Shopfront" type="Control" parent="." unique_id=2089626179]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -434,7 +435,7 @@ offset_right = 1152.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Back" unique_id=1639585117]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Shopfront" unique_id=1639585117]
 material = ExtResource("7_ajxib")
 layout_mode = 1
 anchors_preset = 15
@@ -443,13 +444,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="SubViewport" type="SubViewport" parent="Back/SubViewportContainer" unique_id=1006694816]
+[node name="SubViewport" type="SubViewport" parent="Shopfront/SubViewportContainer" unique_id=1006694816]
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(1152, 648)
 render_target_update_mode = 4
 
-[node name="Background" type="TextureRect" parent="Back/SubViewportContainer/SubViewport" unique_id=1269383239]
+[node name="Background" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport" unique_id=1269383239]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -457,7 +458,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = SubResource("GradientTexture2D_44xle")
 
-[node name="Door" type="ColorRect" parent="Back/SubViewportContainer/SubViewport" unique_id=1925664983]
+[node name="Door" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport" unique_id=1925664983]
 custom_minimum_size = Vector2(250, 450)
 anchors_preset = 7
 anchor_left = 0.5
@@ -471,7 +472,7 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0.1882353, 0.09411765, 0, 1)
 
-[node name="DoorInside" type="ColorRect" parent="Back/SubViewportContainer/SubViewport/Door" unique_id=356228215]
+[node name="DoorInside" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/Door" unique_id=356228215]
 custom_minimum_size = Vector2(226, 426)
 layout_mode = 1
 anchors_preset = 8
@@ -487,19 +488,19 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.5019608, 0.2509804, 0, 1)
 
-[node name="DoorHandle" type="MeshInstance2D" parent="Back/SubViewportContainer/SubViewport/Door" unique_id=265908852]
+[node name="DoorHandle" type="MeshInstance2D" parent="Shopfront/SubViewportContainer/SubViewport/Door" unique_id=265908852]
 position = Vector2(204, 216)
 mesh = SubResource("SphereMesh_y6sft")
 texture = SubResource("GradientTexture2D_y6sft")
 
-[node name="Shadow" type="MeshInstance2D" parent="Back/SubViewportContainer/SubViewport/Door/DoorHandle" unique_id=647716412]
+[node name="Shadow" type="MeshInstance2D" parent="Shopfront/SubViewportContainer/SubViewport/Door/DoorHandle" unique_id=647716412]
 modulate = Color(1, 1, 1, 0.5019608)
 show_behind_parent = true
 position = Vector2(3, 3)
 mesh = SubResource("SphereMesh_y6sft")
 texture = SubResource("GradientTexture2D_heatd")
 
-[node name="Door" type="Button" parent="Back/SubViewportContainer/SubViewport/Door" unique_id=1363302047]
+[node name="Door" type="Button" parent="Shopfront/SubViewportContainer/SubViewport/Door" unique_id=1363302047]
 self_modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
@@ -508,7 +509,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Shelf" type="TextureRect" parent="Back/SubViewportContainer/SubViewport" unique_id=600143264]
+[node name="Shelf" type="TextureRect" parent="Shopfront/SubViewportContainer/SubViewport" unique_id=600143264]
 custom_minimum_size = Vector2(0, 150)
 anchors_preset = 12
 anchor_top = 1.0
@@ -519,7 +520,7 @@ grow_horizontal = 2
 grow_vertical = 0
 texture = SubResource("GradientTexture2D_m4ofw")
 
-[node name="Shadow" type="ColorRect" parent="Back/SubViewportContainer/SubViewport/Shelf" unique_id=539113100]
+[node name="Shadow" type="ColorRect" parent="Shopfront/SubViewportContainer/SubViewport/Shelf" unique_id=539113100]
 modulate = Color(1, 1, 1, 0.5019608)
 show_behind_parent = true
 custom_minimum_size = Vector2(0, 25)
@@ -534,7 +535,7 @@ grow_horizontal = 2
 grow_vertical = 0
 color = Color(0, 0, 0, 1)
 
-[node name="SpeechBox" type="Button" parent="Back" unique_id=1054830678]
+[node name="SpeechBox" type="Button" parent="Shopfront" unique_id=1054830678]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
@@ -551,7 +552,7 @@ theme_override_styles/pressed = ExtResource("2_2fc2m")
 theme_override_styles/hover = ExtResource("2_2fc2m")
 theme_override_styles/hover_pressed = ExtResource("2_2fc2m")
 
-[node name="Potion" parent="Back/SpeechBox" unique_id=1070358131 instance=ExtResource("3_1l46r")]
+[node name="Potion" parent="Shopfront/SpeechBox" unique_id=1070358131 instance=ExtResource("3_1l46r")]
 layout_mode = 0
 offset_left = 2.0
 offset_top = -4.7500005
@@ -559,7 +560,7 @@ offset_right = 18.0
 offset_bottom = 11.25
 scale = Vector2(5, 5)
 
-[node name="Coin" type="TextureRect" parent="Back/SpeechBox" unique_id=263356624]
+[node name="Coin" type="TextureRect" parent="Shopfront/SpeechBox" unique_id=263356624]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -572,7 +573,7 @@ grow_horizontal = 0
 scale = Vector2(4, 4)
 texture = SubResource("AtlasTexture_032fp")
 
-[node name="CoinCount" type="Label" parent="Back/SpeechBox" unique_id=1601798851]
+[node name="CoinCount" type="Label" parent="Shopfront/SpeechBox" unique_id=1601798851]
 layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
@@ -587,7 +588,7 @@ theme_override_fonts/font = ExtResource("3_032fp")
 text = "0"
 horizontal_alignment = 2
 
-[node name="Arrow" type="Label" parent="Back/SpeechBox" unique_id=1687589584]
+[node name="Arrow" type="Label" parent="Shopfront/SpeechBox" unique_id=1687589584]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -606,6 +607,18 @@ theme_override_font_sizes/font_size = 32
 text = "->"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1189328627]
+
+[node name="Instructions" parent="CanvasLayer" unique_id=476044125 instance=ExtResource("8_y6sft")]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -216.5
+offset_top = 8.0
+offset_right = 216.5
+offset_bottom = 167.0
+grow_horizontal = 2
+theme_override_font_sizes/normal_font_size = 32
+text = "Click on three red apples on the shelf"
 
 [node name="Coin" type="TextureRect" parent="CanvasLayer" unique_id=51351709]
 anchors_preset = 1
@@ -634,5 +647,6 @@ theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 2
 
+[connection signal="pressed" from="Storage/SubViewportContainer/SubViewport/Door/Door" to="." method="_on_door_pressed"]
 [connection signal="pressed" from="Shopfront/SubViewportContainer/SubViewport/Door/Door" to="." method="_on_door_pressed"]
-[connection signal="pressed" from="Back/SpeechBox" to="." method="_on_speech_box_pressed"]
+[connection signal="pressed" from="Shopfront/SpeechBox" to="." method="_on_speech_box_pressed"]
