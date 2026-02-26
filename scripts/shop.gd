@@ -17,8 +17,8 @@ const POTION_CONTROL = preload("uid://bxtojffj0jj2")
 const FRUIT_ATLAS = preload("uid://b41n42rnp73gh")
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	if global_handler.instruction_step==19:
-		instructions.change_instructions(20)
+	if global_handler.instruction_step==20:
+		instructions.change_instructions(21)
 	coin_count.text=str(global_handler.coins)
 	global_handler.resetting=false
 	if not global_handler.currently_selling:
@@ -56,15 +56,15 @@ func set_selling():
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("right"):
 		position.x=-1152
-		if global_handler.instruction_step==20:
-			instructions.change_temp_instructions(2)
 		if global_handler.instruction_step==21:
-			instructions.change_instructions(22)
-	elif Input.is_action_just_pressed("left"):
-		if global_handler.instruction_step==20:
-			instructions.change_instructions(20)
+			instructions.change_temp_instructions(2)
 		if global_handler.instruction_step==22:
+			instructions.change_instructions(23)
+	elif Input.is_action_just_pressed("left"):
+		if global_handler.instruction_step==21:
 			instructions.change_instructions(21)
+		if global_handler.instruction_step==23:
+			instructions.change_instructions(22)
 		position.x=0
 	if Input.is_action_just_pressed("refresh"):
 		global_handler.currently_selling=get_random_potion()
@@ -147,8 +147,8 @@ func set_statics():
 			else:
 				recipe[ingredient.type]+=1
 			ingredient.queue_free()
-		if global_handler.instruction_step==20 and recipe=={"red_apple": 3}:
-			instructions.change_instructions(21)
+		if global_handler.instruction_step==21 and recipe=={"red_apple": 3}:
+			instructions.change_instructions(22)
 		statics=[]
 		ingredient_control.highlighted.visible=false
 		ingredient_control_2.highlighted.visible=false
@@ -202,6 +202,6 @@ func _on_speech_box_pressed() -> void:
 			potion.queue_free()
 			global_handler.currently_selling=get_random_potion()
 			set_selling()
-			if global_handler.instruction_step<23:
-				instructions.change_instructions(23)
+			if global_handler.instruction_step<24:
+				instructions.change_instructions(24)
 			break

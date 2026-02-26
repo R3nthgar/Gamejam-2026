@@ -45,8 +45,8 @@ func _ready() -> void:
 	if global_handler.in_shop:
 		position.x=-197.0
 		global_handler.in_shop=false
-	if global_handler.instruction_step==23:
-		instructions.change_instructions(24)
+	if global_handler.instruction_step==24:
+		instructions.change_instructions(25)
 	coin_count.text=str(global_handler.coins)
 	dead=global_handler.resetting
 	if dead:
@@ -136,10 +136,10 @@ func _physics_process(delta: float) -> void:
 				instructions.change_instructions(5)
 			if global_handler.instruction_step<10 and bagged_types.has("purple_grapes") and bagged_types["purple_grapes"]>2:
 				instructions.change_instructions(10)
-			if global_handler.instruction_step<14 and bagged_types.has("ever_berries") and bagged_types["ever_berries"]>2:
-				instructions.change_instructions(14)
-			if global_handler.instruction_step==18 and bagged_types.has("red_apple") and bagged_types["red_apple"]>2:
-				instructions.change_instructions(19)
+			if global_handler.instruction_step<15 and bagged_types.has("ever_berries") and bagged_types["ever_berries"]>2:
+				instructions.change_instructions(15)
+			if global_handler.instruction_step==19 and bagged_types.has("red_apple") and bagged_types["red_apple"]>2:
+				instructions.change_instructions(20)
 			if(bagged.size()<contained.size()):
 				play_sound(COIN)
 			bagged=contained

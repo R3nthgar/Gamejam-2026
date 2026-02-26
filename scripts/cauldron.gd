@@ -20,10 +20,10 @@ func container_effect():
 				current_recipe[collectible.get_meta("collectible")]=1
 		if global_handler.instruction_step<7 and current_recipe=={"red_apple": 3}:
 			instructions.change_instructions(7)
-		elif global_handler.instruction_step<11 and current_recipe=={"purple_grapes": 3}:
-			instructions.change_instructions(11)
-		elif global_handler.instruction_step<16 and current_recipe=={"ever_berries": 3}:
-			instructions.change_instructions(16)
+		elif global_handler.instruction_step<12 and current_recipe=={"purple_grapes": 3}:
+			instructions.change_instructions(12)
+		elif global_handler.instruction_step<17 and current_recipe=={"ever_berries": 3}:
+			instructions.change_instructions(17)
 		var potion=global_handler.craft_potion(current_recipe)
 		if potion:
 			for item in contained:

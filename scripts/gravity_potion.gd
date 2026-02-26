@@ -24,8 +24,8 @@ func apply_effect(targeted, reversed: bool):
 	time_passed=0
 	for targetable in targeted:
 		if is_instance_valid(targetable):
-			if global_handler.instruction_step<12 and targetable is Player:
-				instructions.change_instructions(12)
+			if global_handler.instruction_step<13 and targetable is Player:
+				instructions.change_instructions(13)
 			targetable.emit_particles(get_meta("color"), -0.5 if reversed else 0.5)
 			gravity_arr.append([targetable, targetable.gravity_get(), targetable.gravity_get()*(1.0/gravity_multiplier if reversed else gravity_multiplier)])
 func _physics_process(delta: float) -> void:

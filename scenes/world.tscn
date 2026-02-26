@@ -400,9 +400,17 @@ metadata/new_instructions = 9
 position = Vector2(233, 34)
 shape = SubResource("RectangleShape2D_kpybi")
 
+[node name="InstructionTrigger5" parent="InstructionTriggers" unique_id=1486130998 instance=ExtResource("8_oo54l")]
+metadata/prev_instructions = 10
+metadata/new_instructions = 11
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InstructionTriggers/InstructionTrigger5" unique_id=89034916]
+position = Vector2(225, -18)
+shape = SubResource("RectangleShape2D_kpybi")
+
 [node name="InstructionTrigger3" parent="InstructionTriggers" unique_id=867925474 instance=ExtResource("8_oo54l")]
-metadata/prev_instructions = 12
-metadata/new_instructions = 13
+metadata/prev_instructions = 13
+metadata/new_instructions = 14
 metadata/all_before = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InstructionTriggers/InstructionTrigger3" unique_id=1475094628]
@@ -410,8 +418,8 @@ position = Vector2(394, -186)
 shape = SubResource("RectangleShape2D_oo54l")
 
 [node name="InstructionTrigger4" parent="InstructionTriggers" unique_id=2009555770 instance=ExtResource("8_oo54l")]
-metadata/prev_instructions = 14
-metadata/new_instructions = 15
+metadata/prev_instructions = 15
+metadata/new_instructions = 16
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InstructionTriggers/InstructionTrigger4" unique_id=68008649]
 position = Vector2(258, -186)
@@ -424,14 +432,11 @@ position = Vector2(-13, -12.5)
 
 [node name="Instructions" parent="." unique_id=476044125 instance=ExtResource("8_7iits")]
 unique_name_in_owner = true
-offset_left = -46.0
+offset_left = 356.0
 offset_top = -115.0
-offset_right = 129.0
+offset_right = 531.0
 offset_bottom = -18.0
-text = "You have completed the tutorial.
-You can craft more potions and return to the shop to sell them.
-Try combining different ingredients to make unique potions that let you unlock hidden areas.
-Press C to close this notification, and to skip the tutorial"
+text = "Jump back over the ice wall"
 
 [node name="Collectibles" type="Node2D" parent="." unique_id=843014347]
 unique_name_in_owner = true
