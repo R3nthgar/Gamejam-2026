@@ -22,7 +22,7 @@ func _process(delta: float) -> void:
 	if not timer.is_stopped():
 		scale_easy.scale=lerp(Vector2(1,1),Vector2(0.25,0.25),timer.time_left/timer.wait_time)
 		collectible_transparent.modulate=Color.from_rgba8(255,255,255,lerp(255,0,timer.time_left/timer.wait_time))
-	if timer.is_stopped() and not collectible.still:
+	if timer.is_stopped() and collectible and not collectible.still:
 		timer.start()
 func spawn_new():
 	collectible_transparent.modulate=Color.from_rgba8(255,255,255,0)

@@ -45,7 +45,6 @@ func _ready() -> void:
 	if global_handler.in_shop:
 		position.x=-197.0
 		global_handler.in_shop=false
-	print(instructions.instructions.size())
 	if global_handler.instruction_step==25:
 		instructions.change_instructions(26)
 	coin_count.text=str(global_handler.coins)
