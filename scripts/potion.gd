@@ -5,6 +5,9 @@ class_name Potion
 @onready var potion_effect: Area2D = $CollectibleCollision/PotionEffect
 @onready var collectible_collision: CollisionShape2D = $CollectibleCollision
 @onready var potion_type = get_script().get_global_name()
+@onready var double_click: Timer = $CollectibleCollision/DoubleClick
+@onready var color: Color = get_meta("color")
+@onready var size: float = get_meta("size")
 #Function that allows you to control what effects a potion applies. You shouldn't modify this directly unless
 #you want to change something for all potions
 func apply_effect(targeted, reversed: bool):
@@ -22,14 +25,13 @@ var remove=false
 #Contains objects affected by the potion
 var affected=[]
 
-var color: Color
-
 func _ready() -> void:
+	collectible="potion"
 	super()
 	timer.wait_time=get_meta("potion_duration")
-	potion_effect.scale=Vector2(1,1)*get_meta("size")
+	potion_effect.scale*=size
 func explode():
-	emit_particles(get_meta("color"), 1)
+	emit_particles(color, 1*size)
 	
 	#Stops potion from doing anything other than the script
 	exploded=true
@@ -44,6 +46,9 @@ func explode():
 	timer.start()
 	affected=potion_effect.get_overlapping_bodies()
 	affected.erase(self)
+	for object in affected:
+		if object is Collectible and object.still:
+			object.stop_still()
 	apply_effect(affected, false)
 #Function that shatters potion when it collides at a greater speed than the shattering speed
 func _on_body_entered(body: Node) -> void:
@@ -67,3 +72,10 @@ func _on_timer_timeout() -> void:
 		timer.start()
 		apply_effect(affected, true)
 		affected=[]
+
+func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
+	super(viewport, event, shape_idx)
+	if event.is_pressed():
+		if not double_click.is_stopped():
+			explode()
+		double_click.start()

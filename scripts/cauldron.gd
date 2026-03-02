@@ -1,28 +1,24 @@
+@tool
 extends "res://scripts/container.gd"
-@onready var collectibles: Node2D = %Collectibles
-@onready var instructions: Instructions = %Instructions
-const POWER_UP = preload("uid://b3bnv0bcurjfy")
-const EXPLOSION = preload("uid://cdu1em1a7wcpj")
-const COIN = preload("uid://cpqqhg52cev4j")
+@onready var collectibles: Node2D = %Collectibles if (true if not OS.is_debug_build() else not Engine.is_editor_hint()) else null
+@onready var instructions: Instructions = %Instructions if (true if not OS.is_debug_build() else not Engine.is_editor_hint()) else null
 
-func play_sound(sound: AudioStream, pitch: float = 1):
-	audio.stream=sound
-	audio.pitch_scale=pitch
-	audio.play()
 func container_effect():
 	if contained.size()==3:
 		var current_recipe:={}
 		for collectible in contained:
-			if(current_recipe.has(collectible.get_meta("collectible"))):
-				current_recipe[collectible.get_meta("collectible")]+=1
+			if(current_recipe.has(collectible.collectible)):
+				current_recipe[collectible.collectible]+=1
 			else:
-				current_recipe[collectible.get_meta("collectible")]=1
+				current_recipe[collectible.collectible]=1
 		if global_handler.instruction_step<7 and current_recipe=={"red_apple": 3}:
 			instructions.change_instructions(7)
 		elif global_handler.instruction_step<12 and current_recipe=={"purple_grapes": 3}:
 			instructions.change_instructions(12)
 		elif global_handler.instruction_step<17 and current_recipe=={"ever_berries": 3}:
 			instructions.change_instructions(17)
+		elif global_handler.instruction_step<instructions.instructions.size():
+			instructions.change_instructions(global_handler.instruction_step)
 		var potion=global_handler.craft_potion(current_recipe)
 		if potion:
 			for item in contained:
@@ -32,15 +28,21 @@ func container_effect():
 			contained=[]
 			fix_alarm()
 			collectibles.add_child(potion)
-			play_sound(POWER_UP,0.5)
+			play_sound(global_handler.POWER_UP,0.5)
 		else:
 			for item in contained:
 				item.queue_free()
-			play_sound(EXPLOSION,1)
-
+			play_sound(global_handler.EXPLOSION,1)
 
 func _on_container_area_1_body_entered(body: PhysicsBody2D) -> void:
 	if body is Collectible and not body is Potion and contained.has(body):
 		if global_handler.instruction_step<17 and contained.size()>2:
 			instructions.change_temp_instructions(1)
-		body.play_sound(COIN,0.5)
+		elif instructions.is_temp_instructions and contained.size()<=2:
+			instructions.change_instructions(global_handler.instruction_step)
+		if global_handler.instruction_step<6 and body.collectible=="red_apple":
+			instructions.change_instructions(6)
+		if global_handler.instruction_step<11 and body.collectible=="purple_grapes":
+			instructions.change_instructions(11)
+		if global_handler.instruction_step<16 and body.collectible=="ever_berries":
+			instructions.change_instructions(16)

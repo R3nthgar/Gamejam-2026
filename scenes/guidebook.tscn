@@ -1,9 +1,10 @@
 [gd_scene format=3 uid="uid://c773gnh1a784n"]
 
+[ext_resource type="Script" uid="uid://djxva5gtclmre" path="res://scripts/guidebook.gd" id="1_mrtdy"]
 [ext_resource type="Shader" uid="uid://cql83ww4l66y5" path="res://shaders/wood.gdshader" id="1_qj66b"]
+[ext_resource type="FontFile" uid="uid://bch710uus3txx" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="2_qlhff"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qj66b"]
-frequency = 0.005
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qlhff"]
 width = 1152
@@ -27,9 +28,16 @@ shader = ExtResource("1_qj66b")
 shader_parameter/noise_texture = SubResource("NoiseTexture2D_qlhff")
 shader_parameter/normal_texture = SubResource("NoiseTexture2D_mrtdy")
 
+[sub_resource type="Gradient" id="Gradient_qlhff"]
+offsets = PackedFloat32Array(0, 0.08974359, 0.51282054, 1)
+colors = PackedColorArray(0.2509804, 0.1254902, 0, 1, 0.6884535, 0.3534348, 0, 1, 0.6884535, 0.3534348, 0, 1, 0.5019608, 0.2509804, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mrtdy"]
+gradient = SubResource("Gradient_qlhff")
+
 [sub_resource type="Gradient" id="Gradient_1vs02"]
-offsets = PackedFloat32Array(0.51282054, 1)
-colors = PackedColorArray(1.353256, 1.353256, 0.8036162, 1, 1, 1, 0.5882353, 1)
+offsets = PackedFloat32Array(0, 0.070512824, 0.51282054, 1)
+colors = PackedColorArray(0.2509804, 0.2509804, 0.1254902, 1, 1, 1, 0.7529412, 1, 1, 1, 0.7529412, 1, 1, 1, 0.5882353, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_qj66b"]
 gradient = SubResource("Gradient_1vs02")
@@ -41,6 +49,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_mrtdy")
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=581071733]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.7529412)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="." unique_id=1305559372]
 material = SubResource("ShaderMaterial_dq3i5")
@@ -53,23 +71,172 @@ grow_vertical = 2
 
 [node name="SubViewport" type="SubViewport" parent="SubViewportContainer" unique_id=47712512]
 transparent_bg = true
+handle_input_locally = false
 size = Vector2i(1152, 648)
+render_target_update_mode = 4
 
-[node name="ColorRect" type="ColorRect" parent="SubViewportContainer/SubViewport" unique_id=1043688057]
+[node name="Hints" type="Control" parent="SubViewportContainer/SubViewport" unique_id=252179776]
+layout_mode = 3
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -488.5
-offset_top = -286.5
-offset_right = 488.5
-offset_bottom = 286.5
+offset_left = -476.0
+offset_top = -274.0
+offset_right = 476.0
+offset_bottom = 274.0
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-color = Color(0.5019608, 0.2509804, 0, 1)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Hints" unique_id=1658993434]
+z_index = 1
+custom_minimum_size = Vector2(456, 528)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48700002
+anchor_top = 0.49500003
+anchor_right = 0.48700002
+anchor_bottom = 0.49500003
+offset_left = -456.12402
+offset_top = -263.76
+offset_right = -0.12402344
+offset_bottom = 264.24
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_qlhff")
+theme_override_font_sizes/normal_font_size = 24
+text = "You can double click on a potion to break it.
+
+You can press R to refresh potion offers in the shop.
+
+Look to the bottom left for a health bar.
+
+Lava is hot.
+
+Press I to open and close the hintbook."
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Hints" unique_id=106557408]
+z_index = 1
+custom_minimum_size = Vector2(456, 528)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.512
+anchor_top = 0.49500003
+anchor_right = 0.512
+anchor_bottom = 0.49500003
+offset_left = 0.07598877
+offset_top = -263.76
+offset_right = 456.076
+offset_bottom = 264.24
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_qlhff")
+theme_override_font_sizes/normal_font_size = 24
+text = "Look at the colors of the mushrooms for a clue to a hidden location.
+
+You can use gold apples or berries to replace ingredients in a potion with three of the same ingredients.
+You can sell these potions instead of the regular variants for more coins."
+horizontal_alignment = 2
+
+[node name="Recipes" type="Control" parent="SubViewportContainer/SubViewport" unique_id=460217269]
+visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -476.0
+offset_top = -274.0
+offset_right = 476.0
+offset_bottom = 274.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(1436, -175)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Recipes" unique_id=1029531630]
+z_index = 1
+custom_minimum_size = Vector2(456, 528)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.48700002
+anchor_top = 0.49500003
+anchor_right = 0.48700002
+anchor_bottom = 0.49500003
+offset_left = -456.12402
+offset_top = -263.76
+offset_right = -0.12402344
+offset_bottom = 264.24
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_qlhff")
+theme_override_font_sizes/normal_font_size = 24
+text = "Two green berry clusters and one purple grape cluster makes a shrinking potion.
+
+Two purple grape clusters and one green berry cluster make a reversed gravity potion.
+
+Three green berry clusters make a biggering potion.
+
+Two red apples and one green berry cluster make a pushing potion.
+
+Two red apples and one purple grape cluster make a pulling potion."
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Recipes" unique_id=719722931]
+z_index = 1
+custom_minimum_size = Vector2(456, 528)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.512
+anchor_top = 0.49500003
+anchor_right = 0.512
+anchor_bottom = 0.49500003
+offset_left = 0.07598877
+offset_top = -263.76
+offset_right = 456.076
+offset_bottom = 264.24
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("2_qlhff")
+theme_override_font_sizes/normal_font_size = 24
+text = "Three red apples make an explosion potion.
+
+Three purple grape clusters make a reduced gravity potion.
+
+Two green berry clusters and one red apple make a speed potion
+
+Two purple grape clusters and one red apple make a double jump potion.
+
+One purple grape cluster, one red apple, and one green berry cluster makes a color changing potion."
+horizontal_alignment = 2
+
+[node name="TextureRect3" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=499869627]
+custom_minimum_size = Vector2(488.5, 573)
+anchors_preset = -1
+anchor_left = 0.5
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = 38.0
+offset_right = -87.5
+offset_bottom = -37.0
+texture = SubResource("GradientTexture2D_mrtdy")
+
+[node name="TextureRect4" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=1572460356]
+custom_minimum_size = Vector2(488.5, 573)
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 87.5
+offset_top = -286.5
+offset_right = 576.0
+offset_bottom = 286.5
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_mrtdy")
+flip_h = true
 
 [node name="TextureRect" type="TextureRect" parent="SubViewportContainer/SubViewport" unique_id=127082979]
 custom_minimum_size = Vector2(476, 548)

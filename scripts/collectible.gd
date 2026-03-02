@@ -10,13 +10,14 @@ class_name Collectible
 @onready var audio: AudioStreamPlayer2D = $CollectibleCollision/Audio
 @onready var particles: GPUParticles2D = $CollectibleCollision/Particles
 @onready var instructions: Instructions = get_tree().current_scene.get_node("Instructions")
+
 const COLLECTIBLE_SPRITES = preload("uid://ccpt5fwr0bfx8")
 
-
+var collectible
 #Prevents bugs from incorrectly labeled animations
 var allowable_collectibles=[]
 #Makes max speed of objects to prevent collision glitches.
-const max_velocity=750.0
+const max_velocity=500.0
 #This allows the gravity to be changed with the same function as a Rigid Body,
 #making it easier to change it from other nodes
 var gravity=1.0
@@ -39,7 +40,7 @@ var collectible_color: Color
 
 #Allows modifying the collectible's sprite, and tests if the animation exists to prevent bugs
 func refresh_image():
-	var detailed_collectible=global_handler.detailed_collectibles[get_meta("collectible")]
+	var detailed_collectible=global_handler.detailed_collectibles[collectible]
 	collectible_image.animation=detailed_collectible.type
 	collectible_image.position=global_handler.transforms[detailed_collectible.type].position
 	collectible_image.scale=global_handler.transforms[detailed_collectible.type].scale
@@ -49,7 +50,7 @@ func refresh_image():
 #Ensures the sprite is up to date in the editor
 
 #Allows objects to start without falling. Change the start static metadata property to allow this
-var still = false
+@onready var still = get_meta("start_static")
 func stop_still():
 	if still:
 		still=false
@@ -58,17 +59,18 @@ func stop_still():
 			set_collision_mask_value(1,true)
 			set_collision_mask_value(5,true)
 			set_collision_mask_value(3,true)
+			set_collision_mask_value(2,true)
 
 func _ready() -> void:
 	allowable_collectibles=COLLECTIBLE_SPRITES.get_animation_names()
 	refresh_image()
-	still=get_meta("start_static")
 	gravity=gravity_scale
 	if still:
 		gravity_scale=0
 		set_collision_mask_value(1,false)
 		set_collision_mask_value(5,false)
 		set_collision_mask_value(3,false)
+		set_collision_mask_value(2,false)
 		
 #This lets you create a sound, with sound being a specific file (look above to the preloaded consts),
 #and pitch letting you change the pitch of the sound, currently used so that when you're big,
@@ -98,7 +100,7 @@ func set_container(new_container):
 
 #This function enables you to click and drag the collectible
 func _input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.is_pressed() and held:
+	if held and event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.is_pressed():
 		held=false
 		z_index=0
 		set_collision_mask_value(3,true)
@@ -129,6 +131,8 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 		set_collision_mask_value(1,false)
 		if container:
 			set_collision_mask_value(2,false)
+		else:
+			set_collision_layer_value(6,true)
 		set_collision_mask_value(3,false)
 		set_collision_mask_value(4,false)
 		set_collision_mask_value(5,false)
@@ -142,7 +146,8 @@ func _integrate_forces(state: PhysicsDirectBodyState2D) -> void:
 		linear_velocity=global_position.direction_to(get_global_mouse_position())*min(max_velocity,global_position.distance_squared_to(get_global_mouse_position()))
 	prev_velocity.append(linear_velocity)
 	prev_velocity.remove_at(0)
+	state.apply_central_force(linear_velocity)
 
 func _on_body_entered(body: Node) -> void:
-	if still and body.collision_layer>4:
+	if still and body is Collectible and body.get_collision_layer_value(6):
 		stop_still()

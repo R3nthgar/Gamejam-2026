@@ -24,7 +24,6 @@ scale_over_velocity_max = 2.0
 
 [node name="ScalingPotion" unique_id=1172248294 instance=ExtResource("1_c8cev")]
 script = ExtResource("2_tdmsy")
-metadata/color = Color(0, 1, 0, 1)
 metadata/potion_duration = 15.0
 metadata/price = 20.0
 metadata/scale = 1.5

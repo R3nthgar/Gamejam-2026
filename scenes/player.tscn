@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://dlo3kyl30jp72" path="res://assets/custom/pixilart-sprite.png" id="2_qlg0r"]
 [ext_resource type="PackedScene" uid="uid://diacnvuwoca2w" path="res://scenes/container.tscn" id="4_dqkch"]
 [ext_resource type="AudioStream" uid="uid://qxb77221bpq" path="res://assets/brackeys_platformer_assets/sounds/jump.wav" id="5_qlg0r"]
+[ext_resource type="PackedScene" uid="uid://c773gnh1a784n" path="res://scenes/guidebook.tscn" id="5_tuyoq"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dqkch"]
 atlas = ExtResource("2_qlg0r")
@@ -165,12 +166,14 @@ local_coords = true
 process_material = SubResource("ParticleProcessMaterial_dqkch")
 
 [node name="Bag" parent="." unique_id=1892559595 instance=ExtResource("4_dqkch")]
-position = Vector2(-14.5, 3)
-metadata/points = 12
+position = Vector2(-14, 2)
+metadata/points = 8
 metadata/is_bag = true
 metadata/closed = true
 metadata/color = Color(0.5176471, 0.2509804, 0, 1)
+metadata/size = 10.0
 metadata/container_size = 6
+metadata/container_type = 0
 
 [node name="DestructibleDetector" type="Area2D" parent="." unique_id=548185584]
 collision_layer = 0
@@ -181,6 +184,11 @@ shape = SubResource("CapsuleShape2D_qlg0r")
 
 [node name="Timer" type="Timer" parent="." unique_id=1471987663]
 autostart = true
+
+[node name="GuidebookHolder" type="CanvasLayer" parent="." unique_id=1032866118]
+visible = false
+
+[node name="Guidebook" parent="GuidebookHolder" unique_id=1205957903 instance=ExtResource("5_tuyoq")]
 
 [connection signal="finished" from="Particles" to="." method="_on_particles_finished"]
 [connection signal="finished" from="Particles2" to="." method="_on_particles_2_finished"]

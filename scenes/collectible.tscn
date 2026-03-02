@@ -46,7 +46,6 @@ max_contacts_reported = 1
 angular_damp = 25.0
 script = ExtResource("1_bkg8t")
 metadata/start_static = false
-metadata/collectible = "red_apple"
 metadata/start_inside = false
 
 [node name="CollectibleCollision" type="CollisionShape2D" parent="." unique_id=1715786320]

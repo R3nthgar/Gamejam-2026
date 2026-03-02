@@ -1,9 +1,9 @@
-[gd_scene format=3 uid="uid://b8s870bqq01gw"]
+[gd_scene format=3 uid="uid://p6gneemvxinl"]
 
-[ext_resource type="PackedScene" uid="uid://cd0jgoajcto8y" path="res://scenes/potion.tscn" id="1_5xxiy"]
-[ext_resource type="Script" uid="uid://blt1kvdshky6h" path="res://scripts/kaboom_potion.gd" id="2_e60rm"]
+[ext_resource type="PackedScene" uid="uid://cd0jgoajcto8y" path="res://scenes/potion.tscn" id="1_dqv2w"]
+[ext_resource type="Script" uid="uid://bjerlhcyfalem" path="res://scripts/enhancement_potion.gd" id="2_o8lhv"]
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_e60rm"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_o8lhv"]
 resource_local_to_scene = true
 lifetime_randomness = 0.5
 emission_shape_scale = Vector3(10, 10, 10)
@@ -22,14 +22,14 @@ scale_max = 0.19999999
 scale_over_velocity_min = 1.0
 scale_over_velocity_max = 2.0
 
-[node name="KaboomPotion" unique_id=616148971 instance=ExtResource("1_5xxiy")]
-script = ExtResource("2_e60rm")
-metadata/price = 10.0
-metadata/push = 0.0
+[node name="EnhancementPotion" unique_id=1197210693 instance=ExtResource("1_dqv2w")]
+script = ExtResource("2_o8lhv")
+metadata/potion_duration = 20.0
+metadata/speed = 1.0
+metadata/jumps = 0
 
 [node name="PotionEffect" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="0" unique_id=1868471482]
-collision_mask = 160
+collision_mask = 512
 
 [node name="Particles" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="4" unique_id=1260813385]
-trail_lifetime = 0.3
-process_material = SubResource("ParticleProcessMaterial_e60rm")
+process_material = SubResource("ParticleProcessMaterial_o8lhv")

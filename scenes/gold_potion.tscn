@@ -24,7 +24,6 @@ scale_over_velocity_max = 2.0
 
 [node name="GoldPotion" unique_id=395042707 instance=ExtResource("1_e6vvb")]
 script = ExtResource("2_u6x5v")
-metadata/color = Color(1, 0.78431374, 0, 1)
 metadata/price = 100.0
 
 [node name="Particles" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="4" unique_id=1260813385]

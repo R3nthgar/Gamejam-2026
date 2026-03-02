@@ -1,5 +1,4 @@
 #Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
-
 extends CharacterBody2D
 class_name Player
 @onready var animated_player_sprite: AnimatedSprite2D = $AnimatedPlayerSprite
@@ -12,17 +11,14 @@ class_name Player
 @onready var timer: Timer = $Timer
 @onready var coin_count: Label = $"../CanvasLayer/CoinCount"
 @onready var instructions: Instructions = %Instructions
+@onready var guidebook_holder: CanvasLayer = $GuidebookHolder
+@onready var guidebook: Control = $GuidebookHolder/Guidebook
 var particles_finished=true
 var particles_finished_2=true
-const JUMP = preload("uid://qxb77221bpq")
-const COIN = preload("uid://cpqqhg52cev4j")
-const EXPLOSION = preload("uid://cdu1em1a7wcpj")
-const HURT = preload("uid://cgfb03s61yche")
-const POWER_UP = preload("uid://b3bnv0bcurjfy")
-
-#These are the constants, with SPEED determining character speed and jump velocity determining initial jump height
-const SPEED = 150.0
-const JUMP_VELOCITY = -350.0
+var speed_mod=1
+#These are the base movement variables, with SPEED determining character speed and jump velocity determining initial jump height
+var SPEED = 150.0
+var JUMP_VELOCITY = -350.0
 
 #Allows air jumping if max jumps is greater than 1, or preventing jumps altogether if max jumps is 0
 var max_jumps=1
@@ -38,7 +34,7 @@ func hurt (damage):
 		get_tree().reload_current_scene()
 
 var dead=false
-
+var knocked_over=false
 #This makes it so you don't have to change the camera zoom in the code
 var zoom
 func _ready() -> void:
@@ -52,7 +48,7 @@ func _ready() -> void:
 	if dead:
 		emit_particles(Color(255,0,255),2)
 		emit_particles(Color(255,200,0),2)
-		play_sound(POWER_UP,0.25)
+		play_sound(global_handler.POWER_UP,0.25)
 		particles_3.emitting=true
 	zoom=player_camera.zoom
 	global_handler.resetting=false
@@ -111,9 +107,32 @@ func set_animation(animation: String, reset: bool = false):
 		animated_player_sprite.animation=animation
 		if not animated_player_sprite.is_playing():
 			animated_player_sprite.play(animation)
-		
+func knockover():
+	knocked_over=true
+	rotation_degrees=90
+	player_camera.rotation_degrees=-90
+	animated_player_sprite.flip_h=animated_player_sprite.flip_v
 func _physics_process(delta: float) -> void:
-	if not dead:
+	if Input.is_action_just_pressed("read"):
+		if global_handler.guidebook_collected or global_handler.recipebook_collected:
+			if instructions.is_temp_instructions:
+				instructions.change_instructions(global_handler.instruction_step)
+			guidebook_holder.visible=not guidebook_holder.visible
+			Engine.time_scale=0 if guidebook_holder.visible else global_handler.time_scale
+	if guidebook_holder.visible:
+		if Input.is_action_just_pressed("right"):
+			guidebook.switch(false)
+		elif Input.is_action_just_pressed("left"):
+			guidebook.switch(true)
+	elif knocked_over:
+		if is_on_floor():
+			velocity.x = move_toward(velocity.x, 0, SPEED * speed_mod / 25)
+		if velocity.length_squared()<10:
+			knocked_over=false
+			rotation=0
+			player_camera.rotation=0
+			animated_player_sprite.flip_v=animated_player_sprite.flip_h
+	elif not dead:
 		#Makes the zoom scale with the player's size.
 		player_camera.zoom=zoom/scale
 		#Makes the player's sprite flip when gravity is reversed
@@ -126,10 +145,10 @@ func _physics_process(delta: float) -> void:
 		if(bagged!=contained):
 			var bagged_types={}
 			for collectible in contained:
-				if bagged_types.has(collectible.get_meta("collectible")):
-					bagged_types[collectible.get_meta("collectible")]+=1
+				if bagged_types.has(collectible.collectible):
+					bagged_types[collectible.collectible]+=1
 				else:
-					bagged_types[collectible.get_meta("collectible")]=1
+					bagged_types[collectible.collectible]=1
 			if global_handler.instruction_step<4:
 				instructions.change_instructions(4)
 			if global_handler.instruction_step<5 and contained.size()>2:
@@ -140,17 +159,15 @@ func _physics_process(delta: float) -> void:
 				instructions.change_instructions(15)
 			if global_handler.instruction_step==20 and bagged_types.has("red_apple") and bagged_types["red_apple"]>2:
 				instructions.change_instructions(21)
-			if(bagged.size()<contained.size()):
-				play_sound(COIN)
 			bagged=contained
 		#Adds the default gravity multiplied by the gravity modifier. Also allows jumping when on the roof
 		if not is_on_floor():
 			if jumps==0:
 				jumps+=1
-			velocity += get_gravity() * delta * gravity
+			velocity += get_gravity() * delta * gravity * speed_mod * speed_mod
 			#Changes bagged objects' velocity to prevent visual glitching from temporarily falling out of the bag
 			for obj in bag.contained:
-				obj.linear_velocity.y+=get_gravity().y * delta * gravity
+				obj.linear_velocity.y+=get_gravity().y * delta * gravity * speed_mod * speed_mod
 		#Resets jumps when on the ground
 		else:
 			jumps=0
@@ -161,12 +178,12 @@ func _physics_process(delta: float) -> void:
 			if global_handler.instruction_step<3:
 				instructions.change_instructions(3)
 			jumps+=1
-			play_sound(JUMP, 1/scale.x)
-			velocity.y = JUMP_VELOCITY if gravity>=0 else -JUMP_VELOCITY
+			play_sound(global_handler.JUMP, 1/scale.x)
+			velocity.y = JUMP_VELOCITY * speed_mod if gravity>=0 else -JUMP_VELOCITY * speed_mod
 			
 			#Changes bagged objects' velocity to prevent visual glitching from temporarily falling out of the bag
 			for obj in bag.contained:
-				obj.linear_velocity.y+=JUMP_VELOCITY
+				obj.linear_velocity.y+=JUMP_VELOCITY * speed_mod
 		
 		#Allows falling through bridges
 		if Input.is_action_just_pressed("down"):
@@ -196,14 +213,15 @@ func _physics_process(delta: float) -> void:
 				for item in bag.contained:
 					item.position.x+=(item.position.x-bag.global_position.x)*2
 				bag.position.x*=-1
-			velocity.x = direction * SPEED
-			
+				
 			#Fixes visual glitching
 			for obj in bag.contained:
-				obj.linear_velocity.x=direction*SPEED
+				obj.linear_velocity.x=(direction*SPEED * speed_mod) if abs(velocity.x)>10 else obj.linear_velocity.x
+			velocity.x = direction * SPEED * speed_mod
+			
 		else:
 			set_animation("idle")
-			velocity.x = move_toward(velocity.x, 0, SPEED)
+			velocity.x = move_toward(velocity.x, 0, SPEED * speed_mod)
 		prev_velocity.append(velocity)
 		prev_velocity.remove_at(0)
 	move_and_slide()
@@ -220,7 +238,7 @@ func _on_particles_2_finished() -> void:
 func _on_destructible_detector_body_entered(body: Node2D) -> void:
 	if body is Destructible:
 		if body.strength<=(2 if scale.x>1 else 0 if scale.x==1 else -1):
-			play_sound(EXPLOSION,1)
+			play_sound(global_handler.EXPLOSION,1)
 		body.destroy(2 if scale.x>1 else 0 if scale.x==1 else -1)
 	elif body is Obscurer and body.get_meta("walk_remove"):
 		body.visible=false

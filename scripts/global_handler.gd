@@ -5,12 +5,28 @@ const GRAVITY_POTION = preload("uid://bpwhckui1x7uj")
 const SCALING_POTION = preload("uid://cw7n3rs8rqofs")
 const GOLD_POTION = preload("uid://dwbuedjeyiila")
 const KABOOM_POTION = preload("uid://b8s870bqq01gw")
+const ENHANCEMENT_POTION = preload("uid://p6gneemvxinl")
 const potion_names := {
-	"ColorPotion": COLOR_POTION,"GravityPotion": GRAVITY_POTION,"ScalingPotion": SCALING_POTION,"GoldPotion": GOLD_POTION,"KaboomPotion": KABOOM_POTION
+	"ColorPotion": COLOR_POTION,"GravityPotion": GRAVITY_POTION,"ScalingPotion": SCALING_POTION,"GoldPotion": GOLD_POTION,"KaboomPotion": KABOOM_POTION, "EnhancementPotion": ENHANCEMENT_POTION
 }
+
+const COIN = preload("uid://cpqqhg52cev4j")
+const EXPLOSION = preload("uid://cdu1em1a7wcpj")
+const HURT = preload("uid://cgfb03s61yche")
+const JUMP = preload("uid://qxb77221bpq")
+const POWER_UP = preload("uid://b3bnv0bcurjfy")
+const TAP = preload("uid://xl0pdmu32cs1")
+
+
 const recipes: Array = [[{
 	"red_apple": 3
-}, "KaboomPotion",{},100], [{
+}, "KaboomPotion",{},100],[{
+	"red_apple": 2,
+	"ever_berries": 1
+}, "KaboomPotion",{"push": 1, "size": 3},25],[{
+	"red_apple": 2,
+	"purple_grapes": 1
+}, "KaboomPotion",{"push": -1, "size": 3},25], [{
 	"purple_grapes": 3
 }, "GravityPotion",{},50], [{
 	"purple_grapes": 2,
@@ -18,7 +34,7 @@ const recipes: Array = [[{
 }, "GravityPotion", {"gravity": -1},10], [{
 	"purple_grapes": 2,
 	"red_apple": 1
-}, "GravityPotion", {"gravity": 0.75, "size": 30},10], [{
+}, "EnhancementPotion", {"jumps": 2},10], [{
 	"ever_berries": 3
 }, "ScalingPotion",{},50], [{
 	"ever_berries": 2,
@@ -26,9 +42,13 @@ const recipes: Array = [[{
 }, "ScalingPotion",{"scale": 0.5},10], [{
 	"ever_berries": 2,
 	"red_apple": 1
-}, "ScalingPotion",{"scale": 1.25, "size": 30},10], [{
+}, "EnhancementPotion",{"speed": 2},10], [{
+	"ever_berries": 1,
+	"purple_grapes": 1,
+	"red_apple": 1,
+}, "ColorPotion",{},10], [{
 	"gold_apple": 3,
-}, "GoldPotion",{},10], [{
+}, "GoldPotion",{},25], [{
 	"gold_berries": 3,
 }, "GoldPotion",{},0], [{
 	"gold_apple": 2,
@@ -52,6 +72,9 @@ var instruction_step=0
 var destructibles:={}
 var coins=0
 var currently_selling
+var guidebook_collected=false
+var recipebook_collected=false
+var time_scale=1
 const transforms:={"apple": {"scale": Vector2(1,1), "position": Vector2(0.5,-1.5)},"grapes": {"scale": Vector2(0.75,0.75), "position": Vector2(0.5,-0.5)},"potion": {"scale": Vector2(0.75,0.75), "position": Vector2(0,-1.75)}}
 const detailed_collectibles:={"red_apple": {"color": Color(1,0,0), "type": "apple"}, "pink_apple": {"color": Color(1,0.5,1), "type": "apple"}, "ever_berries": {"color": Color(0,1,0), "type": "grapes"}, "purple_grapes": {"color": Color(0.5,0,1), "type": "grapes"}, "gold_apple": {"color": Color(1,0.75,0), "type": "apple"}, "gold_berries": {"color": Color(1,0.75,0), "type": "grapes"}, "potion": {"color": Color.BLACK, "type": "potion"}}
 func get_recipe(current_recipe: Dictionary) -> Variant:

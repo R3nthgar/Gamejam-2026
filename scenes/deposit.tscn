@@ -5,40 +5,39 @@
 
 [node name="Deposit" unique_id=1712186948 instance=ExtResource("1_gnh6o")]
 script = ExtResource("2_t637e")
-metadata/points = 4
 metadata/closed = true
 metadata/size = 20.0
 metadata/container_size = 24
 metadata/is_deposit = true
+metadata/container_type = 2
 metadata/walkthrough = true
 
-[node name="ContainerCollisionInside" parent="." index="0"]
+[node name="ContainerCollisionInside" parent="." index="0" unique_id=966322775]
 collision_layer = 256
 
-[node name="ContainerInsideCollision" parent="ContainerCollisionInside" index="0"]
+[node name="ContainerInsideCollision" parent="ContainerCollisionInside" index="0" unique_id=1862507838]
 polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
 disabled = true
 
-[node name="ContainerAreaCollision" parent="ContainerArea1" index="0"]
-polygon = PackedVector2Array(-12.7279215, 12.7279215, -12.7279215, -12.7279215, 12.727921, -12.727922, 12.727924, 12.72792)
+[node name="ContainerAreaCollision" parent="ContainerArea1" parent_id_path=PackedInt32Array(600963838) index="0" unique_id=546676120]
+polygon = PackedVector2Array(-12.374369, 12.374369, -12.374369, -12.374369, 12.374368, -12.37437, 12.374371, 12.374367)
 
-[node name="ContainerAreaCollision" parent="ContainerArea2" index="0"]
+[node name="ContainerAreaCollision" parent="ContainerArea2" parent_id_path=PackedInt32Array(1500633576) index="0" unique_id=1631117263]
 polygon = PackedVector2Array(-14.142136, 14.142136, -14.142136, -14.142136, 14.142134, -14.142137, 14.142138, 14.142133)
 
-[node name="ContainerCollisionOutside" parent="." index="4"]
+[node name="ContainerAlarm" parent="." index="3" unique_id=342496269]
+offset_top = -39.819805
+offset_bottom = -23.819805
+
+[node name="ContainerCollisionOutside" parent="." index="4" unique_id=48240725]
 collision_layer = 16
 
-[node name="ContainerOutsideCollision" parent="ContainerCollisionOutside" index="0"]
+[node name="ContainerOutsideCollision" parent="ContainerCollisionOutside" index="0" unique_id=1205873909]
 polygon = PackedVector2Array(-14.142136, 14.142136, -14.142136, -14.142136, 14.142134, -14.142137, 14.142138, 14.142133)
 
-[node name="ContainerVisual" parent="." index="5"]
-points = PackedVector2Array(-13.435029, 13.435029, -13.435029, -13.435029, 13.435027, -13.43503, 13.435031, 13.435026)
-closed = true
-width = 1.4142135
-
-[node name="ContainerVisualInside" parent="." index="6"]
+[node name="Outside" parent="." index="6" unique_id=406002231]
 z_index = 0
-polygon = PackedVector2Array(-14.142136, 14.142136, -14.142136, -14.142136, 14.142134, -14.142137, 14.142138, 14.142133)
+scale = Vector2(1.767767, 1.767767)
 
 [connection signal="body_entered" from="ContainerArea1" to="." method="_on_container_area_1_body_entered"]
 [connection signal="body_exited" from="ContainerArea2" to="." method="_on_container_area_2_body_exited"]

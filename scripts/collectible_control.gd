@@ -24,6 +24,7 @@ func _process(delta: float) -> void:
 
 func _on_button_pressed() -> void:
 	if shop and highlighted.visible:
+		shop.play_sound(global_handler.TAP, 1)
 		if type!="potion":
 			modulate=Color(0,0,0,0)
 			shop.statics.append(self)

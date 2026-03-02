@@ -2,8 +2,7 @@
 #This potion makes a noise when dropped. Only used for selling.
 class_name GoldPotion
 extends "res://scripts/potion.gd"
-const EXPLOSION = preload("uid://cdu1em1a7wcpj")
 
 func apply_effect(targeted, reversed: bool):
 	if not reversed:
-		play_sound(EXPLOSION, 0.33)
+		play_sound(global_handler.EXPLOSION, 0.33)

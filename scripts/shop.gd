@@ -11,10 +11,17 @@ class_name Shop
 @onready var coin_count_2: Label = $Shopfront/SpeechBox/CoinCount
 @onready var coin_count: Label = $CanvasLayer/CoinCount
 @onready var instructions: Instructions = $CanvasLayer/Instructions
+@onready var audio: AudioStreamPlayer2D = $CanvasLayer/Audio
 
 const COLLECTIBLE_CONTROL = preload("uid://cps0eo4ijhn16")
 const POTION_CONTROL = preload("uid://bxtojffj0jj2")
 const FRUIT_ATLAS = preload("uid://b41n42rnp73gh")
+
+func play_sound(sound: AudioStream, pitch: float = 1):
+	audio.stream=sound
+	audio.pitch_scale=pitch
+	audio.play()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if global_handler.instruction_step==21:
@@ -46,16 +53,21 @@ func _ready() -> void:
 func set_selling():
 	set_recipe(global_handler.currently_selling)
 	var rand_potion = global_handler.craft_potion(global_handler.currently_selling[0])
+	var metadata={}
+	for meta in rand_potion.get_meta_list():
+		metadata[meta]=rand_potion.get_meta(meta)
 	potion_icon_1.color=rand_potion.get_meta("color")
-	potion_icon_1.potion_metadata=global_handler.currently_selling[2]
+	potion_icon_1.potion_metadata=metadata
 	potion_icon_1.potion_type=global_handler.currently_selling[1]
 	potion_icon_2.color=rand_potion.get_meta("color")
-	potion_icon_2.potion_metadata=global_handler.currently_selling[2]
+	potion_icon_2.potion_metadata=metadata
 	potion_icon_2.potion_type=global_handler.currently_selling[1]
 	coin_count_1.text=str(int(rand_potion.get_meta("price")))
 	coin_count_2.text=str(int(rand_potion.get_meta("price")))
 	rand_potion.queue_free()
 func _process(delta: float) -> void:
+	if Input.is_action_just_pressed("close_tutorial"):
+		instructions.change_instructions(instructions.instructions.size())
 	if Input.is_action_just_pressed("right"):
 		position.x=-1152
 		if global_handler.instruction_step==22:
@@ -86,10 +98,30 @@ func get_random_potion():
 var statics=[]
 func test_for_potion_and_ingredients():
 	for child in ingredients_container.get_children():
-		child.highlighted.visible=temp_recipe.ingredients.has(child.type)
+		if (child.type=="gold_apple" or child.type=="gold_berries"):
+			if global_handler.currently_selling[1]=="GoldPotion":
+				child.highlighted.visible=true
+			elif global_handler.currently_selling[0][global_handler.currently_selling[0].keys()[0]]==3:
+				if statics.size()<2:
+					child.highlighted.visible=true
+				else:
+					if (statics[0].type!="gold_apple" and statics[0].type!="gold_berries") or (statics[1].type!="gold_apple" and statics[1].type!="gold_berries"):
+						child.highlighted.visible=true
+					else:
+						child.highlighted.visible=false
+			else:
+				child.highlighted.visible=false
+		else:
+			child.highlighted.visible=temp_recipe.ingredients.has(child.type)
 	for child in potions_container.get_children():
-		print(child.color,potion_icon_1.color)
-		child.highlighted.visible=child.color==potion_icon_1.color
+		if child.potion_type==potion_icon_1.potion_type:
+			var same=true
+			for meta in child.potion_metadata:
+				if (not potion_icon_1.potion_metadata.has(meta) or potion_icon_1.potion_metadata[meta]!=child.potion_metadata[meta]) and not (meta=="price" or meta=="color"):
+					same=false
+			child.highlighted.visible=same
+		else:
+			child.highlighted.visible=false
 var current_recipe: Dictionary={
 	ingredients=[],
 	recipes=[]
@@ -141,6 +173,7 @@ func _on_door_pressed() -> void:
 	call_deferred("change_scene", "res://scenes/world.tscn")
 func set_statics():
 	if statics.size()==3:
+		play_sound(global_handler.POWER_UP, 0.5)
 		var recipe={}
 		for ingredient in statics:
 			global_handler.ingredients[ingredient.type]-=1
@@ -154,15 +187,18 @@ func set_statics():
 		statics=[]
 		ingredient_control.highlighted.visible=false
 		ingredient_control_2.highlighted.visible=false
-		var new_potion=potion_icon_1.duplicate(13)
+		var new_potion_orig=global_handler.craft_potion(recipe)
+		var new_potion=POTION_CONTROL.instantiate()
 		new_potion.shop=self
-		var true_metadata=potion_icon_1.potion_metadata.duplicate(true)
-		true_metadata.color=potion_icon_1.color
-		new_potion.potion_metadata=true_metadata
+		var metadata={}
+		for meta in new_potion_orig.get_meta_list():
+			metadata[meta]=new_potion_orig.get_meta(meta)
+		new_potion.potion_metadata=metadata
 		new_potion.potion_type=potion_icon_1.potion_type
-		new_potion.color=potion_icon_1.color
+		new_potion.color=new_potion_orig.get_meta("color")
 		potions_container.add_child(new_potion)
-		global_handler.potions.append([potion_icon_1.potion_type, true_metadata])
+		global_handler.potions.append([potion_icon_1.potion_type, metadata])
+		new_potion_orig.queue_free()
 	temp_recipe=current_recipe.duplicate(true)
 	var removing=[]
 	if statics.size()==1:
@@ -172,21 +208,24 @@ func set_statics():
 		ingredient_control_2.highlighted.visible=true
 	for recipe in temp_recipe.recipes:
 		if statics.size()==1:
-			if not recipe.has(statics[0].type):
+			if statics[0].type!="gold_berries" and statics[0].type!="gold_apple" and not recipe.has(statics[0].type):
 				removing.append(recipe)
 		if statics.size()==2:
 			if statics[0].type==statics[1].type:
-				if not recipe.has(statics[0].type) or recipe[statics[0].type]<2:
+				if statics[0].type!="gold_berries" and statics[0].type!="gold_apple" and (not recipe.has(statics[0].type) or recipe[statics[0].type]<2):
 					removing.append(recipe)
 			else:
-				if not recipe.has(statics[0].type) or not recipe.has(statics[1].type):
+				if (statics[0].type!="gold_berries" and statics[0].type!="gold_apple" and not recipe.has(statics[0].type)) or (statics[1].type!="gold_berries" and statics[1].type!="gold_apple" and not recipe.has(statics[1].type)):
 					removing.append(recipe)
 	for recipe in removing:
 		temp_recipe.recipes.erase(recipe)
 	temp_recipe.ingredients=[]
 	for recipe in temp_recipe.recipes:
 		for i in statics:
-			recipe[i.type]-=1
+			if i.type!="gold_berries" and i.type!="gold_apple": 
+				recipe[i.type]-=1
+			else:
+				recipe[recipe.keys()[0]]-=1
 		for ingredient in recipe:
 			if recipe[ingredient]>0:
 				if not ingredient in temp_recipe.ingredients:
@@ -197,13 +236,15 @@ func set_statics():
 func _on_speech_box_pressed() -> void:
 	for potion in potions_container.get_children():
 		if potion.highlighted.visible:
-			global_handler.coins+=int(coin_count_1.text)
-			coin_count.text=str(global_handler.coins)
+			play_sound(global_handler.COIN,1)
+			global_handler.coins+=int(potion.potion_metadata.price)
+			coin_count.text=str(int(potion.potion_metadata.price))
 			var index=potions_container.get_children().find(potion)
 			global_handler.potions.remove_at(index)
 			potion.queue_free()
 			global_handler.currently_selling=get_random_potion()
 			set_selling()
+			test_for_potion_and_ingredients()
 			if global_handler.instruction_step<25:
 				instructions.change_instructions(25)
 			break

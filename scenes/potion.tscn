@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://b88olwn04j8oe" path="res://scenes/collectible.tscn" id="1_ym5ma"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_le10y"]
-radius = 0.99999994
+radius = 20.0
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_le10y"]
 resource_local_to_scene = true
@@ -27,14 +27,12 @@ scale_over_velocity_max = 2.0
 
 [node name="Potion" unique_id=1197210693 instance=ExtResource("1_ym5ma")]
 script = ExtResource("1_le10y")
-metadata/collectible = "potion"
 metadata/color = Color(0.51718444, 0.5171845, 0.51718444, 1)
 metadata/potion_duration = 5.0
 metadata/price = 0.0
-metadata/size = 20.0
+metadata/size = 1.0
 
 [node name="PotionEffect" type="Area2D" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="0" unique_id=1868471482]
-scale = Vector2(20, 20)
 collision_layer = 0
 collision_mask = 32
 
@@ -54,5 +52,10 @@ one_shot = true
 
 [node name="Particles" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="4" unique_id=1260813385]
 process_material = SubResource("ParticleProcessMaterial_le10y")
+
+[node name="DoubleClick" type="Timer" parent="CollectibleCollision" parent_id_path=PackedInt32Array(1715786320) index="5" unique_id=1671229477]
+wait_time = 0.5
+one_shot = true
+ignore_time_scale = true
 
 [connection signal="timeout" from="CollectibleCollision/Timer" to="." method="_on_timer_timeout"]

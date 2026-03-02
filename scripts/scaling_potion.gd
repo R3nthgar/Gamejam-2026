@@ -2,7 +2,6 @@
 
 extends "res://scripts/potion.gd"
 class_name ScalingPotion
-const POWER_UP = preload("uid://b3bnv0bcurjfy")
 
 var scale_size=1.5
 var scale_arr=[]
@@ -13,7 +12,7 @@ func _ready() -> void:
 	scale_size=get_meta("scale")
 func apply_effect(targeted, reversed: bool):
 	if not reversed:
-		play_sound(POWER_UP)
+		play_sound(global_handler.POWER_UP)
 	if(scale_arr.size()>0):
 		for entry in scale_arr:
 			var targetable=entry[0]

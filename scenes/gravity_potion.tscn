@@ -24,7 +24,6 @@ scale_over_velocity_max = 2.0
 
 [node name="GravityPotion" unique_id=1613328961 instance=ExtResource("1_5p0ni")]
 script = ExtResource("2_baej5")
-metadata/color = Color(0.5019608, 0, 1, 1)
 metadata/potion_duration = 20.0
 metadata/price = 20.0
 metadata/gravity = 0.5

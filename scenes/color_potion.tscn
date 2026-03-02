@@ -24,7 +24,6 @@ scale_over_velocity_max = 2.0
 
 [node name="ColorPotion" unique_id=529017942 instance=ExtResource("1_n1b6y")]
 script = ExtResource("2_hd0s4")
-metadata/color = Color(0.2509804, 0.5019608, 0.5019608, 1)
 metadata/potion_duration = 1.0
 metadata/price = 25.0
 metadata/timer_length = 0.1

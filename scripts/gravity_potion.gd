@@ -1,7 +1,6 @@
 #Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
 extends "res://scripts/potion.gd"
 class_name GravityPotion
-const POWER_UP = preload("uid://b3bnv0bcurjfy")
 
 var gravity_multiplier=0.166
 var gravity_arr=[]
@@ -12,7 +11,7 @@ func _ready() -> void:
 	gravity_multiplier=get_meta("gravity")
 func apply_effect(targeted, reversed: bool):
 	if not reversed:
-		play_sound(POWER_UP)
+		play_sound(global_handler.POWER_UP)
 	if(gravity_arr.size()>0):
 		for entry in gravity_arr:
 			var targetable=entry[0]

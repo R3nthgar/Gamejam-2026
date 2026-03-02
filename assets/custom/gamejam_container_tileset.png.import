@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://do6t0p5yvhlre"
-path="res://.godot/imported/PotionInside1.png-ac4bcc3b79f95db7d981a6807a1e980e.ctex"
+uid="uid://dn1trvr4gmw8r"
+path="res://.godot/imported/gamejam_container_tileset.png-b57f05c71af737dd0dc7ed8ab132ec9c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/custom/PotionInside1.png"
-dest_files=["res://.godot/imported/PotionInside1.png-ac4bcc3b79f95db7d981a6807a1e980e.ctex"]
+source_file="res://assets/custom/gamejam_container_tileset.png"
+dest_files=["res://.godot/imported/gamejam_container_tileset.png-b57f05c71af737dd0dc7ed8ab132ec9c.ctex"]
 
 [params]
 

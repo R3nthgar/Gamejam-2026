@@ -2,48 +2,59 @@
 
 [ext_resource type="FontFile" uid="uid://bch710uus3txx" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="1_1syo6"]
 [ext_resource type="Script" uid="uid://cly5e3tcm4cu0" path="res://scripts/container.gd" id="1_cjjsl"]
+[ext_resource type="Texture2D" uid="uid://dn1trvr4gmw8r" path="res://assets/custom/gamejam_container_tileset.png" id="3_184ql"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_184ql"]
+resource_local_to_scene = true
+atlas = ExtResource("3_184ql")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4e6r8"]
+resource_local_to_scene = true
+atlas = ExtResource("3_184ql")
+region = Rect2(16, 0, 16, 16)
 
 [node name="Container" type="Node2D" unique_id=2144347158]
 z_index = 1
 script = ExtResource("1_cjjsl")
-metadata/points = 8
+metadata/points = 4
 metadata/is_bag = false
 metadata/closed = false
 metadata/color = Color(0, 0, 0, 1)
-metadata/size = 10.0
-metadata/border_thickness = 2.0
+metadata/size = 16.0
 metadata/container_size = 5
 metadata/scale_modifier = 0.66
 metadata/is_deposit = false
+metadata/container_type = 1
 
 [node name="ContainerCollisionInside" type="StaticBody2D" parent="." unique_id=966322775]
 collision_layer = 81
 collision_mask = 0
 
 [node name="ContainerInsideCollision" type="CollisionPolygon2D" parent="ContainerCollisionInside" unique_id=1862507838]
-polygon = PackedVector2Array(-3.8268347, 9.238795, -9.238795, 3.8268342, -9.238795, -3.826834, -3.826835, -9.238795, 3.8268342, -9.238795, 9.238795, -3.8268356, 9.238794, 3.826836, 3.8268342, 9.238795, 3.0614676, 7.391036, 7.391036, 3.0614674, 7.3910365, -3.0614672, 3.061468, -7.391036, -3.0614674, -7.391036, -7.391036, -3.0614686, -7.3910356, 3.0614688, -3.0614674, 7.3910365)
+polygon = PackedVector2Array(-11.313708, 11.313708, -11.313708, -11.313708, 11.313707, -11.313709, 11.31371, 11.313706, 9.899495, 9.899495, 9.899495, -9.899495, -9.899494, -9.899496, -9.899496, 9.899493)
 
 [node name="ContainerArea1" type="Area2D" parent="." unique_id=600963838]
 collision_layer = 0
 collision_mask = 32
 
 [node name="ContainerAreaCollision" type="CollisionPolygon2D" parent="ContainerArea1" unique_id=546676120]
-polygon = PackedVector2Array(-3.0614676, 7.391036, -7.391036, 3.0614674, -7.3910365, -3.0614672, -3.061468, -7.391036, 3.0614674, -7.391036, 7.391036, -3.0614686, 7.3910356, 3.0614688, 3.0614674, 7.3910365)
+polygon = PackedVector2Array(-9.899495, 9.899495, -9.899495, -9.899495, 9.899494, -9.899496, 9.899496, 9.899493)
 
 [node name="ContainerArea2" type="Area2D" parent="." unique_id=1500633576]
 collision_layer = 0
 collision_mask = 4
 
 [node name="ContainerAreaCollision" type="CollisionPolygon2D" parent="ContainerArea2" unique_id=1631117263]
-polygon = PackedVector2Array(-3.8268347, 9.238795, -9.238795, 3.8268342, -9.238795, -3.826834, -3.826835, -9.238795, 3.8268342, -9.238795, 9.238795, -3.8268356, 9.238794, 3.826836, 3.8268342, 9.238795)
+polygon = PackedVector2Array(-11.313708, 11.313708, -11.313708, -11.313708, 11.313707, -11.313709, 11.31371, 11.313706)
 
 [node name="ContainerAlarm" type="RichTextLabel" parent="." unique_id=342496269]
 visible = false
 z_index = 1
 offset_left = -5.0
-offset_top = -30.17311
+offset_top = -33.455845
 offset_right = 5.0
-offset_bottom = -14.173109
+offset_bottom = -17.455845
 theme_override_fonts/normal_font = ExtResource("1_1syo6")
 text = "!"
 
@@ -52,21 +63,18 @@ collision_layer = 0
 collision_mask = 0
 
 [node name="ContainerOutsideCollision" type="CollisionPolygon2D" parent="ContainerCollisionOutside" unique_id=1205873909]
-polygon = PackedVector2Array(-3.8268347, 9.238795, -9.238795, 3.8268342, -9.238795, -3.826834, -3.826835, -9.238795, 3.8268342, -9.238795, 9.238795, -3.8268356, 9.238794, 3.826836, 3.8268342, 9.238795)
-
-[node name="ContainerVisual" type="Line2D" parent="." unique_id=173241459]
-z_index = -1
-points = PackedVector2Array(-3.4441512, 8.314916, -8.314916, 3.444151, -8.314916, -3.4441504, -3.4441514, -8.314916, 3.444151, -8.314916, 8.314916, -3.444152, 8.314915, 3.4441524, 3.444151, 8.314916)
-width = 1.847759
-default_color = Color(0, 0, 0, 1)
-
-[node name="ContainerVisualInside" type="Polygon2D" parent="." unique_id=572874347]
-modulate = Color(1, 1, 1, 0.5019608)
-z_index = 1
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-3.8268347, 9.238795, -9.238795, 3.8268342, -9.238795, -3.826834, -3.826835, -9.238795, 3.8268342, -9.238795, 9.238795, -3.8268356, 9.238794, 3.826836, 3.8268342, 9.238795)
+polygon = PackedVector2Array(-11.313708, 11.313708, -11.313708, -11.313708, 11.313707, -11.313709, 11.31371, 11.313706)
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="." unique_id=2063128013]
+
+[node name="Outside" type="Sprite2D" parent="." unique_id=406002231]
+z_index = 1
+scale = Vector2(1.4142135, 1.4142135)
+texture = SubResource("AtlasTexture_184ql")
+
+[node name="Inside" type="Sprite2D" parent="Outside" unique_id=93245265]
+modulate = Color(1, 1, 1, 0.5019608)
+texture = SubResource("AtlasTexture_4e6r8")
 
 [connection signal="body_entered" from="ContainerArea1" to="." method="_on_container_area_body_entered"]
 [connection signal="body_exited" from="ContainerArea2" to="." method="_on_container_area_body_exited"]

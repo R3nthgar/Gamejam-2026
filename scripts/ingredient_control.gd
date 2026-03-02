@@ -19,6 +19,7 @@ func _on_timer_timeout() -> void:
 		refresh()
 func _on_button_pressed() -> void:
 	if shop:
+		shop.play_sound(global_handler.TAP, 1)
 		if self == shop.ingredient_control:
 			highlighted.visible=false
 			shop.statics[0].modulate=Color(1,1,1)

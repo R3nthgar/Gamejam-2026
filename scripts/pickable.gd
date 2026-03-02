@@ -1,33 +1,47 @@
+@tool
 extends Node2D
 @onready var timer: Timer = $Timer
 @onready var collectibles: Node2D = %Collectibles
 @onready var collectible_transparent: AnimatedSprite2D = $ScaleEasy/CollectibleTransparent
 @onready var collectible_transparent_inside: AnimatedSprite2D = $ScaleEasy/CollectibleTransparent/CollectibleTransparentInside
 @onready var scale_easy: Node2D = $ScaleEasy
+@onready var pickable = get_meta("collectible")
 const COLLECTIBLE_SPRITES = preload("uid://ccpt5fwr0bfx8")
 const COLLECTIBLE = preload("uid://b88olwn04j8oe")
 var allowable_collectibles=[]
 var collectible
 func _ready() -> void:
-	var detailed_collectible=global_handler.detailed_collectibles[get_meta("collectible")]
+	var detailed_collectible=global_handler.detailed_collectibles[pickable]
 	collectible_transparent.animation=detailed_collectible.type
 	collectible_transparent.position=global_handler.transforms[detailed_collectible.type].position
 	collectible_transparent.scale=global_handler.transforms[detailed_collectible.type].scale
 	collectible_transparent_inside.animation=detailed_collectible.type
 	collectible_transparent_inside.modulate=detailed_collectible.color
 	collectible_transparent.modulate=Color.WHITE
-	timer.wait_time=get_meta("timer")
-	spawn_new()
+	if (true if not OS.is_debug_build() else not Engine.is_editor_hint()):
+		timer.wait_time=get_meta("timer")
+		spawn_new()
 func _process(delta: float) -> void:
-	if not timer.is_stopped():
-		scale_easy.scale=lerp(Vector2(1,1),Vector2(0.25,0.25),timer.time_left/timer.wait_time)
-		collectible_transparent.modulate=Color.from_rgba8(255,255,255,lerp(255,0,timer.time_left/timer.wait_time))
-	if timer.is_stopped() and collectible and not collectible.still:
-		timer.start()
+	if (true if not OS.is_debug_build() else not Engine.is_editor_hint()):
+		if not timer.is_stopped():
+			scale_easy.scale=lerp(Vector2(1,1),Vector2(0.25,0.25),timer.time_left/timer.wait_time)
+			collectible_transparent.modulate=Color.from_rgba8(255,255,255,lerp(255,0,timer.time_left/timer.wait_time))
+		if timer.is_stopped() and collectible and not collectible.still:
+			timer.start()
+	elif pickable!=get_meta("collectible"):
+		pickable=get_meta("collectible")
+		var detailed_collectible=global_handler.detailed_collectibles[pickable]
+		collectible_transparent.animation=detailed_collectible.type
+		collectible_transparent.position=global_handler.transforms[detailed_collectible.type].position
+		collectible_transparent.scale=global_handler.transforms[detailed_collectible.type].scale
+		collectible_transparent_inside.animation=detailed_collectible.type
+		collectible_transparent_inside.modulate=detailed_collectible.color
+		collectible_transparent.modulate=Color.WHITE
+		
 func spawn_new():
 	collectible_transparent.modulate=Color.from_rgba8(255,255,255,0)
 	var new_child=COLLECTIBLE.instantiate()
-	new_child.set_meta("collectible", get_meta("collectible"))
+	new_child.collectible=pickable
 	new_child.set_meta("start_static", true)
 	if(rotation>PI):
 		new_child.set_gravity(-1)

@@ -1,39 +1,30 @@
 #Documentation: docs.google.com/document/d/1kCbnpUemEP7YI1-PUrbTQ0jnLCsttjf01NY-T5T8JT0
-
+@tool
 extends Node2D
 
 @onready var container_area_collision1: CollisionPolygon2D = $ContainerArea1/ContainerAreaCollision
 @onready var container_area_collision2: CollisionPolygon2D = $ContainerArea2/ContainerAreaCollision
-@onready var container_visual: Line2D = $ContainerVisual
 @onready var container_collision_inside: StaticBody2D = $ContainerCollisionInside
 @onready var container_outside_collision: CollisionPolygon2D = $ContainerCollisionOutside/ContainerOutsideCollision
-@onready var container_visual_inside: Polygon2D = $ContainerVisualInside
 @onready var container_inside_collision: CollisionPolygon2D = $ContainerCollisionInside/ContainerInsideCollision
 @onready var container_alarm: RichTextLabel = $ContainerAlarm
 @onready var container_collision_outside: StaticBody2D = $ContainerCollisionOutside
 @onready var audio: AudioStreamPlayer2D = $Audio
+@onready var outside: Sprite2D = $Outside
+@onready var inside: Sprite2D = $Outside/Inside
+
+@onready var container_scale_mod=get_meta("scale_modifier")
+@onready var is_deposit=get_meta("is_deposit")
+@onready var points=get_meta("points")
+@onready var is_bag=get_meta("is_bag")
+@onready var color=get_meta("color")
+@onready var closed=get_meta("closed")
+@onready var size=get_meta("size")
+@onready var container_size=get_meta("container_size")
+@onready var border_thickness=get_meta("size")/8
 
 const one_way_collider=preload("res://scenes/one_way_collider.tscn")
 
-
-#Modify points metadata to change the number of vertices in the container's polygons
-var points
-#Modify size metadata to change the size of the container
-var size
-#Modify border thickness metadata to change the thickness of the container
-var border_thickness
-#Only set the is_bag metadata if its the players bag
-var is_bag
-#Modify color metadata to change the container's color
-var color
-#Modify closed metadata to change whether the container has one side open or not
-var closed
-#Modify container size metadata to change the number of objects the container is able to hold
-var container_size=0
-
-var is_deposit=false
-
-var container_scale_mod=0.66
 
 #This array tracks which objects are in the container
 var contained: Array[Collectible]=[]
@@ -41,17 +32,22 @@ var contained: Array[Collectible]=[]
 func container_full():
 	return contained.size()>=container_size
 
+func play_sound(sound: AudioStream, pitch: float = 1):
+	audio.stream=sound
+	audio.pitch_scale=pitch
+	audio.play()
+	
 func change_shape():
-	container_visual.default_color=color
-	container_visual_inside.color=color
-	container_visual.closed=closed
 	container_inside_collision.disabled=is_bag or is_deposit
 	container_collision_inside.set_collision_layer_value(4,is_bag)
 	container_collision_inside.set_collision_layer_value(5,not (is_bag or is_deposit))
 	container_collision_inside.set_collision_layer_value(1,not (is_deposit or is_bag))
 	container_collision_inside.set_collision_layer_value(7,not (is_deposit or is_bag))
 	container_collision_inside.set_collision_layer_value(9,is_deposit)
-	container_visual_inside.z_index=0 if is_deposit else 1
+	outside.texture.region=Rect2(0,16*get_meta("container_type"),16,16)
+	inside.texture.region=Rect2(16,16*get_meta("container_type"),16,16)
+	outside.z_index=0 if is_deposit else 1
+	outside.scale=Vector2(size/8*cos(PI/points),size/8*cos(PI/points))
 	var collision_inside_polygon=[]
 	#This contains the polygon for ContainerCollisionInside
 	var inside_polygon=[]
@@ -100,22 +96,10 @@ func change_shape():
 	#Sets shapes to their respective polygons
 	container_area_collision1.polygon=inside_polygon
 	container_area_collision2.polygon=container_outside_polygon
-	container_visual_inside.polygon=container_outside_polygon
-	container_visual.points=container_visual_polygon
-	container_visual.width=border_thickness*cos(PI/points)
 	container_outside_collision.polygon=container_outside_polygon
 
 #Sets appropriate variables
 func _ready() -> void:
-	container_scale_mod=get_meta("scale_modifier")
-	is_deposit=get_meta("is_deposit")
-	points=get_meta("points")
-	is_bag=get_meta("is_bag")
-	color=get_meta("color")
-	closed=get_meta("closed")
-	size=get_meta("size")
-	container_size=get_meta("container_size")
-	border_thickness=get_meta("border_thickness")
 	change_shape()
 	container_alarm.rotation=-rotation
 	container_alarm.position.y=Vector2(0,-(size+border_thickness)*2*cos(PI/points)-8).rotated(rotation).y
@@ -143,6 +127,8 @@ func _on_container_area_body_entered(body: Node2D) -> void:
 				body.set_collision_mask_value(9,false)
 			else:
 				body.set_collision_mask_value(9,true)
+		else:
+			play_sound(global_handler.COIN,1 if is_bag else 0.5)
 		#Fixes collision
 		body.set_collision_mask_value(2,false)
 		body.set_collision_layer_value(6,false)
@@ -157,8 +143,9 @@ func _on_container_area_body_entered(body: Node2D) -> void:
 		fix_alarm()
 func _physics_process(delta: float) -> void:
 	for body in contained:
-		for child in body.get_children():
-			child.scale=Vector2(container_scale_mod,container_scale_mod)
+		if is_instance_valid(contained):
+			for child in body.get_children():
+				child.scale=Vector2(container_scale_mod,container_scale_mod)
 func _on_container_area_body_exited(body: Node2D) -> void:
 	#Prevents objects from exiting via moving, unless the container is open
 	if ((body.held if closed else true) and contained.has(body)):
