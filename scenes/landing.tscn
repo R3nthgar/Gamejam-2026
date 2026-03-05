@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://yeairg1lotoh"]
+
+[ext_resource type="TileSet" uid="uid://i3epakq5p5r1" path="res://assets/maptiles.tres" id="1_mfct4"]
+
+[node name="Landing" type="Control" unique_id=157008179]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=2058619548]
+tile_set = ExtResource("1_mfct4")

@@ -120,13 +120,19 @@ func _physics_process(delta: float) -> void:
 			guidebook_holder.visible=not guidebook_holder.visible
 			Engine.time_scale=0 if guidebook_holder.visible else global_handler.time_scale
 	if guidebook_holder.visible:
-		if Input.is_action_just_pressed("right"):
-			guidebook.switch(false)
-		elif Input.is_action_just_pressed("left"):
-			guidebook.switch(true)
+		if Input.is_action_just_pressed("right") or Input.is_action_just_pressed("left"):
+			if global_handler.guidebook_collected and guidebook.recipes.visible:
+				guidebook.switch(true)
+			elif global_handler.recipebook_collected and guidebook.hints.visible:
+				guidebook.switch(false)
 	elif knocked_over:
 		if is_on_floor():
 			velocity.x = move_toward(velocity.x, 0, SPEED * speed_mod / 25)
+		else:
+			velocity += get_gravity() * delta * gravity * speed_mod * speed_mod
+			#Changes bagged objects' velocity to prevent visual glitching from temporarily falling out of the bag
+			for obj in bag.contained:
+				obj.linear_velocity.y+=get_gravity().y * delta * gravity * speed_mod * speed_mod
 		if velocity.length_squared()<10:
 			knocked_over=false
 			rotation=0

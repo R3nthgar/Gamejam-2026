@@ -26,7 +26,6 @@ global_handler="*res://scripts/global_handler.gd"
 [display]
 
 window/stretch/mode="canvas_items"
-window/stretch/aspect="expand"
 
 [input]
 

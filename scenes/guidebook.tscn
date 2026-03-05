@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c773gnh1a784n"]
 
-[ext_resource type="Script" uid="uid://djxva5gtclmre" path="res://scripts/guidebook.gd" id="1_mrtdy"]
+[ext_resource type="Script" path="res://scripts/guidebook.gd" id="1_mrtdy"]
 [ext_resource type="Shader" uid="uid://cql83ww4l66y5" path="res://shaders/wood.gdshader" id="1_qj66b"]
 [ext_resource type="FontFile" uid="uid://bch710uus3txx" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="2_qlhff"]
 
@@ -115,7 +115,9 @@ Look to the bottom left for a health bar.
 
 Lava is hot.
 
-Press I to open and close the hintbook."
+Press I to open and close the hintbook.
+
+When the recipe book is unlocked, press A, D, or the left or right arrow keys to switch pages."
 
 [node name="RichTextLabel2" type="RichTextLabel" parent="SubViewportContainer/SubViewport/Hints" unique_id=106557408]
 z_index = 1
