@@ -1,0 +1,48 @@
+[gd_scene format=3 uid="uid://tur5rxm6k0t1"]
+
+[ext_resource type="Shader" uid="uid://cig2tnly6e5a6" path="res://shaders/lava.gdshader" id="1_a5s42"]
+[ext_resource type="Script" uid="uid://cms4rbmcbqmfp" path="res://scripts/lava.gd" id="2_dw3wf"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dw3wf"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_snnrc"]
+noise = SubResource("FastNoiseLite_dw3wf")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_snnrc"]
+seed = 5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f10td"]
+noise = SubResource("FastNoiseLite_snnrc")
+seamless = true
+
+[sub_resource type="Gradient" id="Gradient_dw3wf"]
+colors = PackedColorArray(1, 0.7529412, 0, 1, 1, 0.2509804, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_snnrc"]
+gradient = SubResource("Gradient_dw3wf")
+fill_to = Vector2(1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dw3wf"]
+shader = ExtResource("1_a5s42")
+shader_parameter/lava_texture = SubResource("GradientTexture2D_snnrc")
+shader_parameter/lava_sprite = SubResource("NoiseTexture2D_snnrc")
+shader_parameter/lava_sprite2 = SubResource("NoiseTexture2D_f10td")
+shader_parameter/texture_size = Vector2(118, 75)
+shader_parameter/texture_pos = Vector2(-24.872314, 27.289335)
+
+[sub_resource type="Gradient" id="Gradient_lkrqy"]
+colors = PackedColorArray(0.36535352, 0.871799, 0.9999998, 1, 0.72917944, 0.34474206, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a5s42"]
+gradient = SubResource("Gradient_lkrqy")
+width = 16
+height = 16
+fill_to = Vector2(1, 1)
+
+[node name="Lava" type="TextureRect" unique_id=674538969]
+material = SubResource("ShaderMaterial_dw3wf")
+offset_right = 118.0
+offset_bottom = 75.0
+texture = SubResource("GradientTexture2D_a5s42")
+script = ExtResource("2_dw3wf")

@@ -1,5 +1,4 @@
 shader_type canvas_item;
-varying vec2 world_pos;
 uniform sampler2D noise_texture;
 uniform sampler2D normal_texture;
 void fragment() {
