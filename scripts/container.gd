@@ -136,8 +136,7 @@ func _on_container_area_body_entered(body: Node2D) -> void:
 		body.set_container(self)
 
 		#Changes size of object
-		for child in body.get_children():
-			child.scale*=container_scale_mod
+		body.change_scale(Vector2(container_scale_mod,container_scale_mod),false)
 
 		#Makes exclamation mark appear when container is full or close to full
 		fix_alarm()
@@ -153,8 +152,8 @@ func _on_container_area_body_exited(body: Node2D) -> void:
 		contained.erase(body)
 		body.set_collision_layer_value(6,true)
 		#Changes size of object
-		for child in body.get_children():
-			child.scale/=container_scale_mod
+		print(body.good_scale)
+		body.change_scale(body.good_scale)
 		
 		#Makes object properly collide
 		body.set_collision_mask_value(2,true)

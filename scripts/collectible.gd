@@ -37,7 +37,16 @@ var held=false
 var container
 
 var collectible_color: Color
-
+@onready var good_scale=scale
+@onready var true_scale=scale
+func change_scale(new_scale: Vector2, set_good: bool = true):
+	for obj in get_children():
+		if obj is Node2D:
+			obj.scale*=new_scale/true_scale
+	mass*=((new_scale*new_scale)/(true_scale*true_scale)).x
+	if set_good:
+		good_scale=new_scale
+	true_scale=new_scale
 #Allows modifying the collectible's sprite, and tests if the animation exists to prevent bugs
 func refresh_image():
 	var detailed_collectible=global_handler.detailed_collectibles[collectible]

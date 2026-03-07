@@ -5,7 +5,6 @@ class_name ScalingPotion
 
 var scale_size=1.5
 var scale_arr=[]
-var time_passed=0
 var speed=2
 func _ready() -> void:
 	super()
@@ -19,28 +18,25 @@ func apply_effect(targeted, reversed: bool):
 			if is_instance_valid(targetable):
 				var old_scale=entry[1]
 				var new_scale=entry[2]
-				targetable.scale=new_scale
+				targetable.change_scale(new_scale)
 		scale_arr=[]
-	time_passed=0
 	for targetable in targeted:
 		if is_instance_valid(targetable):
 			if global_handler.instruction_step<18 and targetable is Player:
 				instructions.change_instructions(18)
 			targetable.emit_particles(get_meta("color"), -0.5 if reversed else 0.5)
-			if targetable.is_class("RigidBody2D"):
-				targetable.mass*=1.0/(scale_size*scale_size) if reversed else scale_size*scale_size
-				for child in targetable.get_children():
-					scale_arr.append([child, child.scale, child.scale*(1.0/scale_size if reversed else scale_size)])
-			else:
-				scale_arr.append([targetable, targetable.scale, targetable.scale*(1.0/scale_size if reversed else scale_size)])
+			scale_arr.append([targetable, targetable.good_scale, targetable.good_scale*(1.0/scale_size if reversed else scale_size)])
+			
 func _physics_process(delta: float) -> void:
 	if(scale_arr.size()>=0):
-		time_passed+=delta*speed
 		for entry in scale_arr:
 			var targetable=entry[0]
 			if is_instance_valid(targetable):
 				var old_scale=entry[1]
 				var new_scale=entry[2]
-				targetable.scale=lerp(old_scale, new_scale, min(time_passed,1))
-		if(time_passed>=1):
+				if targetable.get_collision_layer_value(6):
+					targetable.change_scale(lerp(old_scale, new_scale, min(timer.wait_time-timer.time_left,1)))
+				else:
+					targetable.good_scale=lerp(old_scale, new_scale, min(timer.wait_time-timer.time_left,1))
+		if timer.wait_time-timer.time_left>1:
 			scale_arr=[]

@@ -64,7 +64,7 @@ var locations:={
 	"ever_berries": Vector2(2,0),
 	"gold_berries": Vector2(2,1),
 }
-var ingredients:={}
+var ingredients:={"ever_berries": 6, "purple_grapes": 6}
 var potions = []
 var resetting=false
 var in_shop=false

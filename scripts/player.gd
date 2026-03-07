@@ -56,13 +56,23 @@ func _ready() -> void:
 #This allows the gravity to be changed with the same function as a Rigid Body,
 #making it easier to change it from other nodes
 var gravity=1.0
+@onready var good_scale=scale
+func change_scale(new_scale: Vector2):
+	for obj in bag.contained:
+		obj.change_scale(new_scale*0.66,false)
+	scale=new_scale
+	player_camera.zoom=zoom/scale
+	bag.container_scale_mod=0.66*scale.x
+	good_scale=scale
 func set_gravity(new_gravity: float):
 	gravity=new_gravity
+	up_direction=Vector2(0,-1*abs(gravity)/gravity)
+	animated_player_sprite.offset.y=-2*abs(gravity)/gravity
+	animated_player_sprite.flip_v=gravity<0
 	for obj in bag.contained:
 		obj.set_gravity(gravity)
 func gravity_get():
 	return gravity
-	
 #This allows you to get a more accurate velocity for collisions,
 #since when impacting something, the velocity is set to zero
 var prev_velocity=[Vector2(0,0),Vector2(0,0)]
@@ -139,13 +149,6 @@ func _physics_process(delta: float) -> void:
 			player_camera.rotation=0
 			animated_player_sprite.flip_v=animated_player_sprite.flip_h
 	elif not dead:
-		#Makes the zoom scale with the player's size.
-		player_camera.zoom=zoom/scale
-		#Makes the player's sprite flip when gravity is reversed
-		up_direction=Vector2(0,-1*abs(gravity)/gravity)
-		animated_player_sprite.offset.y=-2*abs(gravity)/gravity
-		animated_player_sprite.flip_v=gravity<0
-		bag.container_scale_mod=0.66*scale.x
 		#Fixes bagged variable and makes coin sound when a collectible is collected
 		var contained=bag.contained.duplicate(true)
 		if(bagged!=contained):
