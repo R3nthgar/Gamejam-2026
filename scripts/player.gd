@@ -123,117 +123,118 @@ func knockover():
 	player_camera.rotation_degrees=-90
 	animated_player_sprite.flip_h=animated_player_sprite.flip_v
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("read"):
-		if global_handler.guidebook_collected or global_handler.recipebook_collected:
-			if instructions.is_temp_instructions:
-				instructions.change_instructions(global_handler.instruction_step)
-			guidebook_holder.visible=not guidebook_holder.visible
-			Engine.time_scale=0 if guidebook_holder.visible else global_handler.time_scale
-	if guidebook_holder.visible:
-		if Input.is_action_just_pressed("right") or Input.is_action_just_pressed("left"):
-			if global_handler.guidebook_collected and guidebook.recipes.visible:
-				guidebook.switch(true)
-			elif global_handler.recipebook_collected and guidebook.hints.visible:
-				guidebook.switch(false)
-	elif knocked_over:
-		if is_on_floor():
-			velocity.x = move_toward(velocity.x, 0, SPEED * speed_mod / 25)
-		else:
-			velocity += get_gravity() * delta * gravity * speed_mod * speed_mod
-			#Changes bagged objects' velocity to prevent visual glitching from temporarily falling out of the bag
-			for obj in bag.contained:
-				obj.linear_velocity.y+=get_gravity().y * delta * gravity * speed_mod * speed_mod
-		if velocity.length_squared()<10:
-			knocked_over=false
-			rotation=0
-			player_camera.rotation=0
-			animated_player_sprite.flip_v=animated_player_sprite.flip_h
-	elif not dead:
-		#Fixes bagged variable and makes coin sound when a collectible is collected
-		var contained=bag.contained.duplicate(true)
-		if(bagged!=contained):
-			var bagged_types={}
-			for collectible in contained:
-				if bagged_types.has(collectible.collectible):
-					bagged_types[collectible.collectible]+=1
-				else:
-					bagged_types[collectible.collectible]=1
-			if global_handler.instruction_step<4:
-				instructions.change_instructions(4)
-			if global_handler.instruction_step<5 and contained.size()>2:
-				instructions.change_instructions(5)
-			if global_handler.instruction_step<10 and bagged_types.has("purple_grapes") and bagged_types["purple_grapes"]>2:
-				instructions.change_instructions(10)
-			if global_handler.instruction_step<15 and bagged_types.has("ever_berries") and bagged_types["ever_berries"]>2:
-				instructions.change_instructions(15)
-			if global_handler.instruction_step==20 and bagged_types.has("red_apple") and bagged_types["red_apple"]>2:
-				instructions.change_instructions(21)
-			bagged=contained
-		#Adds the default gravity multiplied by the gravity modifier. Also allows jumping when on the roof
-		if not is_on_floor():
-			if jumps==0:
+	if not global_handler.paused:
+		if Input.is_action_just_pressed("read"):
+			if global_handler.guidebook_collected or global_handler.recipebook_collected:
+				if instructions.is_temp_instructions:
+					instructions.change_instructions(global_handler.instruction_step)
+				guidebook_holder.visible=not guidebook_holder.visible
+				Engine.time_scale=0 if guidebook_holder.visible else global_handler.time_scale
+		elif guidebook_holder.visible:
+			if Input.is_action_just_pressed("right") or Input.is_action_just_pressed("left"):
+				if global_handler.guidebook_collected and guidebook.recipes.visible:
+					guidebook.switch(true)
+				elif global_handler.recipebook_collected and guidebook.hints.visible:
+					guidebook.switch(false)
+		elif knocked_over:
+			if is_on_floor():
+				velocity.x = move_toward(velocity.x, 0, SPEED * speed_mod / 25)
+			else:
+				velocity += get_gravity() * delta * gravity * speed_mod * speed_mod
+				#Changes bagged objects' velocity to prevent visual glitching from temporarily falling out of the bag
+				for obj in bag.contained:
+					obj.linear_velocity.y+=get_gravity().y * delta * gravity * speed_mod * speed_mod
+			if velocity.length_squared()<10:
+				knocked_over=false
+				rotation=0
+				player_camera.rotation=0
+				animated_player_sprite.flip_v=animated_player_sprite.flip_h
+		elif not dead:
+			#Fixes bagged variable and makes coin sound when a collectible is collected
+			var contained=bag.contained.duplicate(true)
+			if(bagged!=contained):
+				var bagged_types={}
+				for collectible in contained:
+					if bagged_types.has(collectible.collectible):
+						bagged_types[collectible.collectible]+=1
+					else:
+						bagged_types[collectible.collectible]=1
+				if global_handler.instruction_step<4:
+					instructions.change_instructions(4)
+				if global_handler.instruction_step<5 and contained.size()>2:
+					instructions.change_instructions(5)
+				if global_handler.instruction_step<10 and bagged_types.has("purple_grapes") and bagged_types["purple_grapes"]>2:
+					instructions.change_instructions(10)
+				if global_handler.instruction_step<15 and bagged_types.has("ever_berries") and bagged_types["ever_berries"]>2:
+					instructions.change_instructions(15)
+				if global_handler.instruction_step==20 and bagged_types.has("red_apple") and bagged_types["red_apple"]>2:
+					instructions.change_instructions(21)
+				bagged=contained
+			#Adds the default gravity multiplied by the gravity modifier. Also allows jumping when on the roof
+			if not is_on_floor():
+				if jumps==0:
+					jumps+=1
+				velocity += get_gravity() * delta * gravity * speed_mod * speed_mod
+				#Changes bagged objects' velocity to prevent visual glitching from temporarily falling out of the bag
+				for obj in bag.contained:
+					obj.linear_velocity.y+=get_gravity().y * delta * gravity * speed_mod * speed_mod
+			#Resets jumps when on the ground
+			else:
+				jumps=0
+			if Input.is_action_just_pressed("close_tutorial"):
+				instructions.change_instructions(instructions.instructions.size())
+			#Jump functionality, modified to play sounds and allow air jumping
+			if Input.is_action_just_pressed("up") and jumps<max_jumps:
+				if global_handler.instruction_step<3:
+					instructions.change_instructions(3)
 				jumps+=1
-			velocity += get_gravity() * delta * gravity * speed_mod * speed_mod
-			#Changes bagged objects' velocity to prevent visual glitching from temporarily falling out of the bag
-			for obj in bag.contained:
-				obj.linear_velocity.y+=get_gravity().y * delta * gravity * speed_mod * speed_mod
-		#Resets jumps when on the ground
-		else:
-			jumps=0
-		if Input.is_action_just_pressed("close_tutorial"):
-			instructions.change_instructions(instructions.instructions.size())
-		#Jump functionality, modified to play sounds and allow air jumping
-		if Input.is_action_just_pressed("up") and jumps<max_jumps:
-			if global_handler.instruction_step<3:
-				instructions.change_instructions(3)
-			jumps+=1
-			play_sound(global_handler.JUMP, 1/scale.x)
-			velocity.y = JUMP_VELOCITY * speed_mod if gravity>=0 else -JUMP_VELOCITY * speed_mod
-			
-			#Changes bagged objects' velocity to prevent visual glitching from temporarily falling out of the bag
-			for obj in bag.contained:
-				obj.linear_velocity.y+=JUMP_VELOCITY * speed_mod
-		
-		#Allows falling through bridges
-		if Input.is_action_just_pressed("down"):
-			fall_through_timer=0
-			set_collision_mask_value(1,false)
-			fall_through=true
-		if Input.is_action_just_released("down"):
-			fall_through=false
-			if fall_through_timer>=0.25:
-				set_collision_mask_value(1,true)
-		if not fall_through and fall_through_timer>=0.25:
-			set_collision_mask_value(1,true)
-			fall_through_timer=0
-		if fall_through or fall_through_timer!=0:
-			fall_through_timer+=delta
-		#Movement functionality
-		var direction := Input.get_axis("left", "right")
-		if direction:
-			if global_handler.instruction_step<2:
-				instructions.change_instructions(2 if direction==-1 else 1)
-			set_animation("walk")
-			#Flips player sprite
-			animated_player_sprite.flip_h=direction==-1
-			
-			#Fixes bag position and ensures bagged objects move with it
-			if (bag.position.x<0 and direction==-1) or (bag.position.x>0 and direction==1):
-				for item in bag.contained:
-					item.position.x+=(item.position.x-bag.global_position.x)*2
-				bag.position.x*=-1
+				play_sound(global_handler.JUMP, 1/scale.x)
+				velocity.y = JUMP_VELOCITY * speed_mod if gravity>=0 else -JUMP_VELOCITY * speed_mod
 				
-			#Fixes visual glitching
-			for obj in bag.contained:
-				obj.linear_velocity.x=(direction*SPEED * speed_mod) if abs(velocity.x)>10 else obj.linear_velocity.x
-			velocity.x = direction * SPEED * speed_mod
+				#Changes bagged objects' velocity to prevent visual glitching from temporarily falling out of the bag
+				for obj in bag.contained:
+					obj.linear_velocity.y+=JUMP_VELOCITY * speed_mod
 			
-		else:
-			set_animation("idle")
-			velocity.x = move_toward(velocity.x, 0, SPEED * speed_mod)
-		prev_velocity.append(velocity)
-		prev_velocity.remove_at(0)
-	move_and_slide()
+			#Allows falling through bridges
+			if Input.is_action_just_pressed("down"):
+				fall_through_timer=0
+				set_collision_mask_value(1,false)
+				fall_through=true
+			if Input.is_action_just_released("down"):
+				fall_through=false
+				if fall_through_timer>=0.25:
+					set_collision_mask_value(1,true)
+			if not fall_through and fall_through_timer>=0.25:
+				set_collision_mask_value(1,true)
+				fall_through_timer=0
+			if fall_through or fall_through_timer!=0:
+				fall_through_timer+=delta
+			#Movement functionality
+			var direction := Input.get_axis("left", "right")
+			if direction:
+				if global_handler.instruction_step<2:
+					instructions.change_instructions(2 if direction==-1 else 1)
+				set_animation("walk")
+				#Flips player sprite
+				animated_player_sprite.flip_h=direction==-1
+				
+				#Fixes bag position and ensures bagged objects move with it
+				if (bag.position.x<0 and direction==-1) or (bag.position.x>0 and direction==1):
+					for item in bag.contained:
+						item.position.x+=(item.position.x-bag.global_position.x)*2
+					bag.position.x*=-1
+					
+				#Fixes visual glitching
+				for obj in bag.contained:
+					obj.linear_velocity.x=(direction*SPEED * speed_mod) if abs(velocity.x)>10 else obj.linear_velocity.x
+				velocity.x = direction * SPEED * speed_mod
+				
+			else:
+				set_animation("idle")
+				velocity.x = move_toward(velocity.x, 0, SPEED * speed_mod)
+			prev_velocity.append(velocity)
+			prev_velocity.remove_at(0)
+		move_and_slide()
 
 
 func _on_particles_finished() -> void:

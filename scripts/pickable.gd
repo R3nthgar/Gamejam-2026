@@ -47,6 +47,7 @@ func spawn_new():
 		new_child.set_gravity(-1)
 	new_child.global_position=global_position
 	new_child.rotation=rotation
+	new_child.change_scale(scale)
 	collectibles.add_child(new_child)
 	collectible=new_child
 func _on_timer_timeout() -> void:

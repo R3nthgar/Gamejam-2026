@@ -1,0 +1,229 @@
+[gd_scene format=4 uid="uid://2g647vefddpl"]
+
+[ext_resource type="TileSet" uid="uid://i3epakq5p5r1" path="res://assets/maptiles.tres" id="1_knwjy"]
+[ext_resource type="PackedScene" uid="uid://diacnvuwoca2w" path="res://scenes/container.tscn" id="3_2i7sm"]
+[ext_resource type="Texture2D" uid="uid://cw3y3et6kdukm" path="res://assets/custom/gamejam_tileset_collectibles.png" id="3_q1oon"]
+[ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="4_2i7sm"]
+[ext_resource type="StyleBox" uid="uid://doy6ryg51w74n" path="res://assets/intro_button_style.tres" id="5_g5fjw"]
+[ext_resource type="FontFile" uid="uid://bch710uus3txx" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="5_hukxe"]
+[ext_resource type="Script" uid="uid://dnigokud4eor1" path="res://scripts/intro_button.gd" id="6_dc7ax"]
+[ext_resource type="TileSet" uid="uid://vdr61f8v5y40" path="res://assets/landscape.tres" id="8_14uot"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2i7sm"]
+atlas = ExtResource("3_q1oon")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hukxe"]
+atlas = ExtResource("3_q1oon")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_g5fjw"]
+atlas = ExtResource("3_q1oon")
+region = Rect2(32, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dc7ax"]
+atlas = ExtResource("3_q1oon")
+region = Rect2(32, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_14uot"]
+atlas = ExtResource("3_q1oon")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a7v8x"]
+atlas = ExtResource("3_q1oon")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_g5fjw"]
+bg_color = Color(0, 0, 0, 0.7529412)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.36078432, 0.36078432, 0.36078432, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dc7ax"]
+bg_color = Color(0, 0, 0, 0.36078432)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.36078432, 0.36078432, 0.36078432, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[node name="IntroScreen" type="Control" unique_id=1231639211]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=189208664]
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0, 0.627451, 1, 1)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=342878710]
+position = Vector2(576, 324)
+
+[node name="Container" parent="." unique_id=2144347158 instance=ExtResource("3_2i7sm")]
+position = Vector2(577.715, 388.5)
+scale = Vector2(6, 6)
+metadata/color = Color(0.5019608, 0.5019608, 0.5019608, 1)
+
+[node name="RedApple" type="Sprite2D" parent="." unique_id=1287756817]
+z_index = 2
+position = Vector2(548, 417)
+rotation = 0.38261247
+scale = Vector2(5.9975996, 5.9975996)
+texture = SubResource("AtlasTexture_2i7sm")
+
+[node name="Inside" type="Sprite2D" parent="RedApple" unique_id=1845010554]
+modulate = Color(1, 0, 0, 1)
+texture = SubResource("AtlasTexture_hukxe")
+
+[node name="RedApple2" type="Sprite2D" parent="." unique_id=490580766]
+z_index = 2
+position = Vector2(802.00006, 171)
+scale = Vector2(5.9975996, 5.9975996)
+texture = SubResource("AtlasTexture_2i7sm")
+
+[node name="Inside" type="Sprite2D" parent="RedApple2" unique_id=1806184391]
+modulate = Color(1, 0, 0, 1)
+texture = SubResource("AtlasTexture_hukxe")
+
+[node name="RedApple4" type="Sprite2D" parent="." unique_id=114314548]
+z_index = 2
+position = Vector2(802.00006, 331)
+scale = Vector2(5.9975996, 5.9975996)
+texture = SubResource("AtlasTexture_2i7sm")
+
+[node name="Inside" type="Sprite2D" parent="RedApple4" unique_id=1142328920]
+modulate = Color(1, 0, 0, 1)
+texture = SubResource("AtlasTexture_hukxe")
+
+[node name="RedApple3" type="Sprite2D" parent="." unique_id=1130655270]
+z_index = 2
+position = Vector2(831.00006, 250.99997)
+scale = Vector2(5.9975996, 5.9975996)
+texture = SubResource("AtlasTexture_2i7sm")
+
+[node name="Inside" type="Sprite2D" parent="RedApple3" unique_id=1099058972]
+modulate = Color(1, 0, 0, 1)
+texture = SubResource("AtlasTexture_hukxe")
+
+[node name="PurpleGrape" type="Sprite2D" parent="." unique_id=1199747805]
+z_index = 2
+position = Vector2(577, 393)
+rotation = -0.33716306
+scale = Vector2(4.4982, 4.4982)
+texture = SubResource("AtlasTexture_g5fjw")
+
+[node name="Inside" type="Sprite2D" parent="PurpleGrape" unique_id=852656967]
+modulate = Color(0.5019608, 0, 1, 1)
+texture = SubResource("AtlasTexture_dc7ax")
+
+[node name="EverBerries" type="Sprite2D" parent="." unique_id=893165569]
+z_index = 2
+position = Vector2(608, 421.99997)
+rotation = -1.8488665
+scale = Vector2(4.4982004, 4.4982004)
+texture = SubResource("AtlasTexture_g5fjw")
+
+[node name="Inside" type="Sprite2D" parent="EverBerries" unique_id=1420484552]
+modulate = Color(0, 1, 0, 1)
+texture = SubResource("AtlasTexture_dc7ax")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=876517175]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_left = 242.0
+offset_top = 34.0
+offset_right = -246.0
+offset_bottom = 162.0
+grow_horizontal = 2
+theme_override_fonts/normal_font = ExtResource("5_hukxe")
+theme_override_font_sizes/normal_font_size = 64
+text = "Potion Seller"
+fit_content = true
+horizontal_alignment = 1
+
+[node name="Potion" type="Sprite2D" parent="." unique_id=111808019]
+z_index = 2
+position = Vector2(334, 55)
+scale = Vector2(5, 5)
+texture = SubResource("AtlasTexture_14uot")
+
+[node name="Inside" type="Sprite2D" parent="Potion" unique_id=559402906]
+modulate = Color(1, 0, 0, 1)
+texture = SubResource("AtlasTexture_a7v8x")
+
+[node name="Potion2" type="Sprite2D" parent="." unique_id=1930238122]
+z_index = 2
+position = Vector2(478, 55)
+scale = Vector2(5, 5)
+texture = SubResource("AtlasTexture_14uot")
+
+[node name="Inside" type="Sprite2D" parent="Potion2" unique_id=746697132]
+modulate = Color(1, 0.7529412, 0, 1)
+texture = SubResource("AtlasTexture_a7v8x")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="." unique_id=1686315987]
+position = Vector2(96.00001, 72)
+scale = Vector2(6, 6)
+tile_map_data = PackedByteArray("AAAAAAUAAgABAAAAAAABAAUAAgABAAAAAAACAAUAAgABAAAAAAADAAUAAgABAAAAAAAEAAUAAgABAAAAAAAFAAUAAgABAAAAAAAGAAUAAgABAAAAAAAHAAUAAgABAAEAAAAHAAQAAgAAAAAAAAAGAAQAAgAAAAAAAAAFAAQAAgAAAAAAAAAEAAQAAgAAAAAAAAADAAQAAgAAAAAAAAACAAQAAgAAAAAAAAABAAQAAgAAAAAAAAAAAAQAAgAAAAAAAAD//wUAAgABAAAAAAD//wQAAgAAAAAAAAD//wMAAgAFAAAAAAAAAAMAAgABAAEAAAAAAAIAAgACAAEAAAAJAAQAAgABAAQAAAAJAAUAAgADAAQAAAAKAAMAAgABAAQAAAAKAAQAAgABAAQAAAAKAAUAAgABAAQAAAAIAAQAAgAAAAEAAAAIAAUAAgABAAEAAAAJAAMAAgAAAAQAAAAKAAEAAgAAAAQAAAAKAAIAAgABAAQAAAD//wEAAgACAAEAAAAAAAEAAgABAAEAAAABAAMAAgABAAEAAAABAAIAAgABAAEAAAD//wAAAgABAAEAAAAAAAAAAgABAAEAAAABAAEAAgACAAEAAAA=")
+tile_set = ExtResource("1_knwjy")
+
+[node name="Mainlandscape" type="TileMapLayer" parent="." unique_id=538169409]
+position = Vector2(0, 72)
+scale = Vector2(6, 6)
+tile_map_data = PackedByteArray("AAD+/+L/AAAAAAIAACD6/+L/AAAAAAIAACARAOT/AAAAAAAAACAMAOL/AAAAAAIAACAFAOL/AAAAAAAAACABAOL/AAAAAAAAACAJAOP/AAACAAIAACD8/+L/AAACAAIAACAJAOT/AAACAAEAAAAJAOX/AAACAAEAAAD8/+T/AAACAAEAAAD8/+P/AAACAAEAAAAJAOb/AAACAAAAACD8/+X/AAACAAAAACAIAAMAAAACAAIAAAAIAAIAAAACAAEAAAAIAAEAAAACAAEAAAAIAAAAAAACAAAAAAA=")
+tile_set = ExtResource("8_14uot")
+
+[node name="Mainlandsgreen" type="TileMapLayer" parent="Mainlandscape" unique_id=1369431198]
+modulate = Color(0, 0.5019608, 0, 1)
+tile_map_data = PackedByteArray("AAAIAAMAAAADAAIAAAAIAAIAAAADAAEAAAAIAAEAAAADAAEAAAAIAAAAAAADAAAAAAA=")
+tile_set = ExtResource("8_14uot")
+
+[node name="Collectibles" type="Node2D" parent="." unique_id=1266974586]
+unique_name_in_owner = true
+
+[node name="Button" type="Button" parent="." unique_id=1183617697]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = -173.0
+offset_right = 95.0
+offset_bottom = -115.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("4_2i7sm")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = ExtResource("5_g5fjw")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_g5fjw")
+theme_override_styles/hover = SubResource("StyleBoxFlat_dc7ax")
+text = "Play"
+script = ExtResource("6_dc7ax")
+
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]

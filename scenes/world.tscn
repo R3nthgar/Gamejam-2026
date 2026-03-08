@@ -19,6 +19,7 @@
 [ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="17_2lf6f"]
 [ext_resource type="PackedScene" uid="uid://buspb3k4whwwu" path="res://scenes/obscurer.tscn" id="17_lakw3"]
 [ext_resource type="Script" uid="uid://b53ec1ksjpe5j" path="res://scripts/guidebook_collect.gd" id="19_2lf6f"]
+[ext_resource type="PackedScene" uid="uid://bgybj6w4sc0bf" path="res://scenes/menu.tscn" id="19_oo54l"]
 [ext_resource type="PackedScene" uid="uid://c773gnh1a784n" path="res://scenes/guidebook.tscn" id="19_pm21f"]
 [ext_resource type="Script" uid="uid://c5sk00uuu18mj" path="res://scripts/recipebook_collect.gd" id="21_7iits"]
 
@@ -321,7 +322,9 @@ region = Rect2(96, 0, 16, 16)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pm21f"]
 size = Vector2(26, 16)
 
-[node name="World" type="Node2D" unique_id=610572774]
+[node name="World" type="Control" unique_id=1071149893]
+layout_mode = 3
+anchors_preset = 0
 metadata/_edit_horizontal_guides_ = [-91.0]
 
 [node name="Parallax2D" type="Parallax2D" parent="." unique_id=1007890632]
@@ -486,10 +489,11 @@ shape = SubResource("RectangleShape2D_oo54l")
 [node name="Player" parent="." unique_id=875532499 instance=ExtResource("1_nnsk1")]
 unique_name_in_owner = true
 z_index = 1
-position = Vector2(-13, -12.5)
+position = Vector2(-24, -12.5)
 
 [node name="Instructions" parent="." unique_id=476044125 instance=ExtResource("8_7iits")]
 unique_name_in_owner = true
+layout_mode = 0
 offset_left = -142.0
 offset_top = -589.0
 offset_right = 33.0
@@ -663,6 +667,7 @@ metadata/timer = 30.0
 
 [node name="Cauldron" parent="." unique_id=173286215 instance=ExtResource("9_7r4gi")]
 position = Vector2(128, -10.5)
+rotation = -3.1415925
 metadata/border_thickness = 2.0
 metadata/walkthrough = false
 
@@ -721,6 +726,9 @@ theme_override_fonts/font = ExtResource("17_2lf6f")
 theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 2
+
+[node name="Menu" parent="CanvasLayer" unique_id=1380104812 instance=ExtResource("19_oo54l")]
+unique_name_in_owner = true
 
 [node name="GuidebookCollect" type="Area2D" parent="." unique_id=2121507657]
 position = Vector2(-97, 72)

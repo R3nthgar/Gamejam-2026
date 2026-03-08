@@ -37,8 +37,8 @@ var held=false
 var container
 
 var collectible_color: Color
-@onready var good_scale=scale
-@onready var true_scale=scale
+var good_scale=Vector2(1,1)
+var true_scale=Vector2(1,1)
 func change_scale(new_scale: Vector2, set_good: bool = true):
 	for obj in get_children():
 		if obj is Node2D:
@@ -71,6 +71,8 @@ func stop_still():
 			set_collision_mask_value(2,true)
 
 func _ready() -> void:
+	true_scale=scale
+	good_scale=scale
 	allowable_collectibles=COLLECTIBLE_SPRITES.get_animation_names()
 	refresh_image()
 	gravity=gravity_scale

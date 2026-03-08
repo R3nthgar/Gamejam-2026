@@ -2,13 +2,14 @@
 
 [ext_resource type="Script" uid="uid://cv1behlswcp77" path="res://scripts/shop.gd" id="1_8r1wq"]
 [ext_resource type="FontFile" uid="uid://bch710uus3txx" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="1_xfvoa"]
-[ext_resource type="StyleBox" uid="uid://bcg78rh5d8f80" path="res://assets/buttonstyle.tres" id="2_2fc2m"]
+[ext_resource type="StyleBox" uid="uid://bcg78rh5d8f80" path="res://assets/button_style.tres" id="2_2fc2m"]
 [ext_resource type="PackedScene" uid="uid://bxtojffj0jj2" path="res://scenes/potion_control.tscn" id="3_1l46r"]
 [ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="3_032fp"]
 [ext_resource type="Material" uid="uid://ba6pg2iqs4kis" path="res://shaders/wood.tres" id="7_ajxib"]
 [ext_resource type="PackedScene" uid="uid://dvbhvu7p6ccca" path="res://scenes/ingredient_control.tscn" id="7_y6sft"]
 [ext_resource type="PackedScene" uid="uid://bljd1wq88lip" path="res://scenes/instructions.tscn" id="8_y6sft"]
 [ext_resource type="AudioStream" uid="uid://cpqqhg52cev4j" path="res://assets/brackeys_platformer_assets/sounds/coin.wav" id="9_m4ofw"]
+[ext_resource type="PackedScene" uid="uid://bgybj6w4sc0bf" path="res://scenes/menu.tscn" id="10_heatd"]
 
 [sub_resource type="Gradient" id="Gradient_y6sft"]
 offsets = PackedFloat32Array(0.84615386, 1)
@@ -687,6 +688,9 @@ position = Vector2(576, 324)
 [node name="Audio" type="AudioStreamPlayer2D" parent="CanvasLayer" unique_id=1105471592]
 position = Vector2(576, 324)
 stream = ExtResource("9_m4ofw")
+
+[node name="Menu" parent="CanvasLayer" unique_id=1380104812 instance=ExtResource("10_heatd")]
+unique_name_in_owner = true
 
 [connection signal="pressed" from="Storage/SubViewportContainer/SubViewport/Door/Door" to="." method="_on_door_pressed"]
 [connection signal="pressed" from="Shopfront/SubViewportContainer/SubViewport/Door/Door" to="." method="_on_door_pressed"]

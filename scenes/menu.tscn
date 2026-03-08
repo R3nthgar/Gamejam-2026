@@ -1,0 +1,110 @@
+[gd_scene format=3 uid="uid://bgybj6w4sc0bf"]
+
+[ext_resource type="Script" uid="uid://ci1rbgrieabnw" path="res://scripts/menu.gd" id="1_yqeox"]
+[ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="2_mhnvy"]
+[ext_resource type="Script" uid="uid://dnigokud4eor1" path="res://scripts/intro_button.gd" id="4_g3eks"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_con2f"]
+bg_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.36078432, 0.36078432, 0.36078432, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_v86rl"]
+bg_color = Color(0.1254902, 0.1254902, 0.1254902, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.36078432, 0.36078432, 0.36078432, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_13sgg"]
+bg_color = Color(0.2509804, 0.2509804, 0.2509804, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0.36078432, 0.36078432, 0.36078432, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[node name="Menu" type="ColorRect" unique_id=1380104812]
+visible = false
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.8627451)
+script = ExtResource("1_yqeox")
+
+[node name="Resume" type="Button" parent="." unique_id=2137312119]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -152.0
+offset_top = -101.0
+offset_right = 152.0
+offset_bottom = -43.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_mhnvy")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_con2f")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v86rl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_13sgg")
+text = "Resume"
+script = ExtResource("4_g3eks")
+metadata/new_scene = "res://scenes/world.tscn"
+
+[node name="MainMenu" type="Button" parent="." unique_id=113850285]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -209.0
+offset_top = 43.0
+offset_right = 209.0
+offset_bottom = 101.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("2_mhnvy")
+theme_override_font_sizes/font_size = 48
+theme_override_styles/normal = SubResource("StyleBoxFlat_con2f")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_v86rl")
+theme_override_styles/hover = SubResource("StyleBoxFlat_13sgg")
+text = "Main Menu"
+script = ExtResource("4_g3eks")
+metadata/new_scene = "res://scenes/world.tscn"
+
+[connection signal="pressed" from="Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="MainMenu" to="." method="_on_main_menu_pressed"]

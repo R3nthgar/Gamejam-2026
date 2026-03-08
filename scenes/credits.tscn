@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://bndk0qufu4niw"]
+
+[node name="Credits" type="Node2D" unique_id=1626461792]
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=22674665]
+position = Vector2(576, 324)
+
+[node name="ColorRect" type="ColorRect" parent="." unique_id=1222986257]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.2509804, 0.2509804, 0.2509804, 1)
+
+[node name="TextHolder" type="Control" parent="ColorRect" unique_id=978233055]
+layout_mode = 1
+anchors_preset = 0
+
+[node name="RichTextLabel" type="RichTextLabel" parent="ColorRect/TextHolder" unique_id=1699255237]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+fit_content = true

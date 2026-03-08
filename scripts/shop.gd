@@ -66,23 +66,24 @@ func set_selling():
 	coin_count_2.text=str(int(rand_potion.get_meta("price")))
 	rand_potion.queue_free()
 func _process(delta: float) -> void:
-	if Input.is_action_just_pressed("close_tutorial"):
-		instructions.change_instructions(instructions.instructions.size())
-	if Input.is_action_just_pressed("right"):
-		position.x=-1152
-		if global_handler.instruction_step==22:
-			instructions.change_temp_instructions(2)
-		if global_handler.instruction_step==23:
-			instructions.change_instructions(24)
-	elif Input.is_action_just_pressed("left"):
-		if global_handler.instruction_step==22:
-			instructions.change_instructions(22)
-		if global_handler.instruction_step==24:
-			instructions.change_instructions(23)
-		position.x=0
-	if Input.is_action_just_pressed("refresh"):
-		global_handler.currently_selling=get_random_potion()
-		set_selling()
+	if not global_handler.paused:
+		if Input.is_action_just_pressed("close_tutorial"):
+			instructions.change_instructions(instructions.instructions.size())
+		if Input.is_action_just_pressed("right"):
+			position.x=-1152
+			if global_handler.instruction_step==22:
+				instructions.change_temp_instructions(2)
+			if global_handler.instruction_step==23:
+				instructions.change_instructions(24)
+		elif Input.is_action_just_pressed("left"):
+			if global_handler.instruction_step==22:
+				instructions.change_instructions(22)
+			if global_handler.instruction_step==24:
+				instructions.change_instructions(23)
+			position.x=0
+		if Input.is_action_just_pressed("refresh"):
+			global_handler.currently_selling=get_random_potion()
+			set_selling()
 
 func get_random_potion():
 	var sum=0
