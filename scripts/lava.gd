@@ -1,4 +1,3 @@
-@tool
 extends TextureRect
 
 var temp=Vector2(0,0)
