@@ -64,6 +64,7 @@ animation = &"apple"
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="CollectibleCollision" unique_id=1660529650]
 stream = ExtResource("3_61c27")
+bus = &"SFX"
 
 [node name="Particles" type="GPUParticles2D" parent="CollectibleCollision" unique_id=1260813385]
 emitting = false

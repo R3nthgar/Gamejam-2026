@@ -497,7 +497,7 @@ layout_mode = 0
 offset_left = -142.0
 offset_top = -589.0
 offset_right = 33.0
-offset_bottom = -492.0
+offset_bottom = -414.0
 text = ""
 
 [node name="Collectibles" type="Node2D" parent="." unique_id=843014347]
@@ -727,9 +727,6 @@ theme_override_font_sizes/font_size = 32
 text = "0"
 horizontal_alignment = 2
 
-[node name="Menu" parent="CanvasLayer" unique_id=1380104812 instance=ExtResource("19_oo54l")]
-unique_name_in_owner = true
-
 [node name="GuidebookCollect" type="Area2D" parent="." unique_id=2121507657]
 position = Vector2(-97, 72)
 collision_layer = 0
@@ -757,6 +754,12 @@ shape = SubResource("RectangleShape2D_pm21f")
 offset_top = 1.5258789e-05
 offset_bottom = 1.5258789e-05
 scale = Vector2(0.025, 0.025)
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1304818126]
+layer = 3
+
+[node name="Menu" parent="CanvasLayer2" unique_id=1380104812 instance=ExtResource("19_oo54l")]
+unique_name_in_owner = true
 
 [connection signal="body_entered" from="WorldBorder" to="WorldBorder" method="_on_body_entered"]
 [connection signal="body_entered" from="GuidebookCollect" to="GuidebookCollect" method="_on_body_entered"]

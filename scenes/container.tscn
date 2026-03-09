@@ -7,12 +7,12 @@
 [sub_resource type="AtlasTexture" id="AtlasTexture_184ql"]
 resource_local_to_scene = true
 atlas = ExtResource("3_184ql")
-region = Rect2(0, 0, 16, 16)
+region = Rect2(0, 16, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4e6r8"]
 resource_local_to_scene = true
 atlas = ExtResource("3_184ql")
-region = Rect2(16, 0, 16, 16)
+region = Rect2(16, 16, 16, 16)
 
 [node name="Container" type="Node2D" unique_id=2144347158]
 z_index = 1
@@ -66,6 +66,7 @@ collision_mask = 0
 polygon = PackedVector2Array(-11.313708, 11.313708, -11.313708, -11.313708, 11.313707, -11.313709, 11.31371, 11.313706)
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="." unique_id=2063128013]
+bus = &"SFX"
 
 [node name="Outside" type="Sprite2D" parent="." unique_id=406002231]
 z_index = 1

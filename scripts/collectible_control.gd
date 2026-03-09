@@ -23,9 +23,9 @@ func _process(delta: float) -> void:
 		collectible_inside.modulate=color
 
 func _on_button_pressed() -> void:
-	if shop and highlighted.visible:
+	if shop and highlighted.visible and modulate!=Color(1,1,1,0):
 		shop.play_sound(global_handler.TAP, 1)
 		if type!="potion":
-			modulate=Color(0,0,0,0)
+			modulate=Color(1,1,1,0)
 			shop.statics.append(self)
 			shop.set_statics()

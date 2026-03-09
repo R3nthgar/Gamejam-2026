@@ -12,6 +12,7 @@ class_name Shop
 @onready var coin_count: Label = $CanvasLayer/CoinCount
 @onready var instructions: Instructions = $CanvasLayer/Instructions
 @onready var audio: AudioStreamPlayer2D = $CanvasLayer/Audio
+@onready var potion_desk: HBoxContainer = $Shopfront/PotionDesk
 
 const COLLECTIBLE_CONTROL = preload("uid://cps0eo4ijhn16")
 const POTION_CONTROL = preload("uid://bxtojffj0jj2")
@@ -49,7 +50,7 @@ func _ready() -> void:
 		new_potion.potion_metadata=potion[1]
 		new_potion.potion_type=potion[0]
 		potions_container.add_child(new_potion)
-	test_for_potion_and_ingredients()
+	call_deferred("test_for_potion_and_ingredients")
 func set_selling():
 	set_recipe(global_handler.currently_selling)
 	var rand_potion = global_handler.craft_potion(global_handler.currently_selling[0])
@@ -65,6 +66,24 @@ func set_selling():
 	coin_count_1.text=str(int(rand_potion.get_meta("price")))
 	coin_count_2.text=str(int(rand_potion.get_meta("price")))
 	rand_potion.queue_free()
+func sell_potion(potion):
+	play_sound(global_handler.COIN,1)
+	var orig_potion
+	for child in potions_container.get_children():
+		if child.color==potion.color:
+			orig_potion=child
+			break
+	global_handler.coins+=int(potion.potion_metadata.price)
+	coin_count.text=str(int(potion.potion_metadata.price))
+	var index=potions_container.get_children().find(orig_potion)
+	global_handler.potions.remove_at(index)
+	potion.queue_free()
+	orig_potion.queue_free()
+	global_handler.currently_selling=get_random_potion()
+	set_selling()
+	test_for_potion_and_ingredients()
+	if global_handler.instruction_step<25:
+		instructions.change_instructions(25)
 func _process(delta: float) -> void:
 	if not global_handler.paused:
 		if Input.is_action_just_pressed("close_tutorial"):
@@ -98,6 +117,8 @@ func get_random_potion():
 			sum-=weight
 var statics=[]
 func test_for_potion_and_ingredients():
+	for child in potion_desk.get_children():
+		child.queue_free()
 	for child in ingredients_container.get_children():
 		if (child.type=="gold_apple" or child.type=="gold_berries"):
 			if global_handler.currently_selling[1]=="GoldPotion":
@@ -121,6 +142,8 @@ func test_for_potion_and_ingredients():
 				if (not potion_icon_1.potion_metadata.has(meta) or potion_icon_1.potion_metadata[meta]!=child.potion_metadata[meta]) and not (meta=="price" or meta=="color"):
 					same=false
 			child.highlighted.visible=same
+			if same:
+				copy_potion(child)
 		else:
 			child.highlighted.visible=false
 var current_recipe: Dictionary={
@@ -131,6 +154,13 @@ var temp_recipe: Dictionary={
 	ingredients=[],
 	recipes=[]
 }
+func copy_potion(orig_potion):
+	var new_potion=POTION_CONTROL.instantiate()
+	new_potion.shop=self
+	new_potion.potion_metadata=orig_potion.potion_metadata
+	new_potion.potion_type=orig_potion.potion_type
+	new_potion.color=orig_potion.color
+	potion_desk.add_child(new_potion)
 func set_frames():
 	var ingredients_ui=[ingredient_control,ingredient_control_2,ingredient_control_3]
 	for temp in ingredients_ui:
@@ -183,14 +213,13 @@ func set_statics():
 			else:
 				recipe[ingredient.type]+=1
 			ingredient.queue_free()
-		if global_handler.instruction_step==22 and recipe=={"red_apple": 3}:
+		if global_handler.instruction_step<22 and recipe=={"red_apple": 3}:
 			instructions.change_instructions(23)
 		statics=[]
 		ingredient_control.highlighted.visible=false
 		ingredient_control_2.highlighted.visible=false
 		var new_potion_orig=global_handler.craft_potion(recipe)
 		var new_potion=POTION_CONTROL.instantiate()
-		new_potion.shop=self
 		var metadata={}
 		for meta in new_potion_orig.get_meta_list():
 			metadata[meta]=new_potion_orig.get_meta(meta)
@@ -235,17 +264,5 @@ func set_statics():
 	test_for_potion_and_ingredients()
 
 func _on_speech_box_pressed() -> void:
-	for potion in potions_container.get_children():
-		if potion.highlighted.visible:
-			play_sound(global_handler.COIN,1)
-			global_handler.coins+=int(potion.potion_metadata.price)
-			coin_count.text=str(int(potion.potion_metadata.price))
-			var index=potions_container.get_children().find(potion)
-			global_handler.potions.remove_at(index)
-			potion.queue_free()
-			global_handler.currently_selling=get_random_potion()
-			set_selling()
-			test_for_potion_and_ingredients()
-			if global_handler.instruction_step<25:
-				instructions.change_instructions(25)
-			break
+	if potion_desk.get_child_count()>0:
+		sell_potion(potion_desk.get_child(0))

@@ -18,7 +18,7 @@ func _on_timer_timeout() -> void:
 		frame=(frame+1)%(frames.size())
 		refresh()
 func _on_button_pressed() -> void:
-	if shop:
+	if shop and shop.statics.size()>0:
 		shop.play_sound(global_handler.TAP, 1)
 		if self == shop.ingredient_control:
 			highlighted.visible=false

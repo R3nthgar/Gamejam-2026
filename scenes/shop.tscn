@@ -641,6 +641,14 @@ theme_override_fonts/font = ExtResource("3_032fp")
 theme_override_font_sizes/font_size = 32
 text = "->"
 
+[node name="PotionDesk" type="HBoxContainer" parent="Shopfront" unique_id=544760158]
+layout_mode = 0
+offset_top = 445.0
+offset_right = 276.0
+offset_bottom = 461.0
+scale = Vector2(4, 4)
+theme_override_constants/separation = -3
+
 [node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1189328627]
 
 [node name="Instructions" parent="CanvasLayer" unique_id=476044125 instance=ExtResource("8_y6sft")]
@@ -688,8 +696,12 @@ position = Vector2(576, 324)
 [node name="Audio" type="AudioStreamPlayer2D" parent="CanvasLayer" unique_id=1105471592]
 position = Vector2(576, 324)
 stream = ExtResource("9_m4ofw")
+bus = &"SFX"
 
-[node name="Menu" parent="CanvasLayer" unique_id=1380104812 instance=ExtResource("10_heatd")]
+[node name="CanvasLayer2" type="CanvasLayer" parent="." unique_id=1090814081]
+layer = 3
+
+[node name="Menu" parent="CanvasLayer2" unique_id=1380104812 instance=ExtResource("10_heatd")]
 unique_name_in_owner = true
 
 [connection signal="pressed" from="Storage/SubViewportContainer/SubViewport/Door/Door" to="." method="_on_door_pressed"]

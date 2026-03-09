@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c773gnh1a784n"]
 
-[ext_resource type="Script" path="res://scripts/guidebook.gd" id="1_mrtdy"]
+[ext_resource type="Script" uid="uid://djxva5gtclmre" path="res://scripts/guidebook.gd" id="1_mrtdy"]
 [ext_resource type="Shader" uid="uid://cql83ww4l66y5" path="res://shaders/wood.gdshader" id="1_qj66b"]
 [ext_resource type="FontFile" uid="uid://bch710uus3txx" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="2_qlhff"]
 
@@ -140,7 +140,9 @@ theme_override_font_sizes/normal_font_size = 24
 text = "Look at the colors of the mushrooms for a clue to a hidden location.
 
 You can use gold apples or berries to replace ingredients in a potion with three of the same ingredients.
-You can sell these potions instead of the regular variants for more coins."
+You can sell these potions instead of the regular variants for more coins.
+
+You can click on the potions on the store's desk to sell them."
 horizontal_alignment = 2
 
 [node name="Recipes" type="Control" parent="SubViewportContainer/SubViewport" unique_id=460217269]

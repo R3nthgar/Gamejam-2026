@@ -136,6 +136,7 @@ zoom = Vector2(3, 3)
 
 [node name="Audio" type="AudioStreamPlayer2D" parent="." unique_id=942956266]
 stream = ExtResource("5_qlg0r")
+bus = &"SFX"
 
 [node name="Particles" type="GPUParticles2D" parent="." unique_id=172247004]
 emitting = false

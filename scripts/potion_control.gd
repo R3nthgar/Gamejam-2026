@@ -6,3 +6,7 @@ var potion_metadata
 func _ready() -> void:
 	type="potion"
 	super()
+
+func _on_button_pressed() -> void:
+	if shop:
+		shop.sell_potion(self)
