@@ -26,7 +26,6 @@ buses/default_bus_layout="uid://07oadmunjoaq"
 [autoload]
 
 global_handler="*res://scripts/global_handler.gd"
-Music="*uid://c701ivb328xay"
 
 [display]
 

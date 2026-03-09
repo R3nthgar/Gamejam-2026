@@ -140,7 +140,7 @@ bus = &"SFX"
 
 [node name="Particles" type="GPUParticles2D" parent="." unique_id=172247004]
 emitting = false
-amount = 100
+amount = 50
 texture = SubResource("GradientTexture2D_qlg0r")
 one_shot = true
 explosiveness = 1.0
@@ -149,7 +149,7 @@ process_material = SubResource("ParticleProcessMaterial_tuyoq")
 
 [node name="Particles2" type="GPUParticles2D" parent="." unique_id=1584473886]
 emitting = false
-amount = 100
+amount = 50
 texture = SubResource("GradientTexture2D_qlg0r")
 one_shot = true
 explosiveness = 1.0
@@ -159,7 +159,7 @@ process_material = SubResource("ParticleProcessMaterial_tuyoq")
 [node name="Particles3" type="GPUParticles2D" parent="." unique_id=451383776]
 scale = Vector2(4, 4)
 emitting = false
-amount = 50
+amount = 25
 texture = SubResource("AtlasTexture_qlg0r")
 one_shot = true
 explosiveness = 1.0

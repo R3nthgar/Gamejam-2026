@@ -68,7 +68,7 @@ bus = &"SFX"
 
 [node name="Particles" type="GPUParticles2D" parent="CollectibleCollision" unique_id=1260813385]
 emitting = false
-amount = 100
+amount = 50
 texture = SubResource("GradientTexture2D_61c27")
 one_shot = true
 explosiveness = 1.0
