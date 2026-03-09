@@ -308,7 +308,7 @@ shader = ExtResource("7_ctatt")
 shader_parameter/lava_sprite = SubResource("NoiseTexture2D_snnrc")
 shader_parameter/lava_sprite2 = SubResource("NoiseTexture2D_f10td")
 shader_parameter/texture_size = Vector2(1, 1)
-shader_parameter/texture_pos = Vector2(566.50775, 566.50775)
+shader_parameter/texture_pos = Vector2(406.28192, 406.28192)
 shader_parameter/color = Vector4(1, 0.5, 0, 1)
 
 [sub_resource type="Gradient" id="Gradient_lkrqy"]
@@ -327,7 +327,7 @@ shader = ExtResource("7_ctatt")
 shader_parameter/lava_sprite = SubResource("NoiseTexture2D_snnrc")
 shader_parameter/lava_sprite2 = SubResource("NoiseTexture2D_f10td")
 shader_parameter/texture_size = Vector2(1, 1)
-shader_parameter/texture_pos = Vector2(566.50775, 566.50775)
+shader_parameter/texture_pos = Vector2(406.28192, 406.28192)
 shader_parameter/color = Vector4(0.5, 0.25, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ts3gi"]

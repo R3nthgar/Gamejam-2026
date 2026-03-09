@@ -16,8 +16,8 @@ void vertex() {
 void fragment() {
 	float temp1 = 16.0;
 	vec2 temp = vec2(temp1,temp1);
-    vec2 grid = mod(floor((world_pos-texture_pos)*temp/vec2(16,16))/temp,1); // Size of squares in pixels
-    vec2 grid2 = mod(floor((world_pos+texture_pos)*temp/vec2(16,16))/temp,1); // Size of squares in pixels
+    vec2 grid = mod(floor((world_pos-texture_pos)*temp/vec2(24,24))/temp,1); // Size of squares in pixels
+    vec2 grid2 = mod(floor((world_pos+texture_pos)*temp/vec2(24,24))/temp,1); // Size of squares in pixels
 	vec4 screen_col = texture(lava_sprite, grid);
 	vec4 screen_col2 = texture(lava_sprite2, grid2);
 	COLOR = vec4(((screen_col.rgb/vec3(2,2,2)+screen_col2.rgb/vec3(2,2,2))/vec3(2,2,2) + color.rgb), color.a);
