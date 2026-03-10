@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://ci1rbgrieabnw" path="res://scripts/menu.gd" id="1_yqeox"]
 [ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="2_mhnvy"]
 [ext_resource type="Script" uid="uid://dnigokud4eor1" path="res://scripts/intro_button.gd" id="4_g3eks"]
+[ext_resource type="PackedScene" uid="uid://bm2a3o8ox3ldr" path="res://scenes/audio_meter.tscn" id="4_v86rl"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_con2f"]
 bg_color = Color(0.1882353, 0.1882353, 0.1882353, 1)
@@ -70,9 +71,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -152.0
-offset_top = -101.0
+offset_top = -245.0
 offset_right = 152.0
-offset_bottom = -43.0
+offset_bottom = -187.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_mhnvy")
@@ -92,9 +93,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -209.0
-offset_top = 43.0
+offset_top = 187.0
 offset_right = 209.0
-offset_bottom = 101.0
+offset_bottom = 245.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_mhnvy")
@@ -105,6 +106,26 @@ theme_override_styles/hover = SubResource("StyleBoxFlat_13sgg")
 text = "Main Menu"
 script = ExtResource("4_g3eks")
 metadata/new_scene = "res://scenes/world.tscn"
+
+[node name="Master" parent="." unique_id=1042606242 instance=ExtResource("4_v86rl")]
+layout_mode = 0
+offset_top = 192.0
+offset_bottom = 258.0
+text = "Master Volume"
+
+[node name="Music" parent="." unique_id=605866983 instance=ExtResource("4_v86rl")]
+layout_mode = 0
+offset_top = 288.0
+offset_bottom = 354.0
+text = "Music"
+metadata/index = 2
+
+[node name="SFX" parent="." unique_id=290421005 instance=ExtResource("4_v86rl")]
+layout_mode = 0
+offset_top = 384.0
+offset_bottom = 450.0
+text = "SFX"
+metadata/index = 1
 
 [connection signal="pressed" from="Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="MainMenu" to="." method="_on_main_menu_pressed"]

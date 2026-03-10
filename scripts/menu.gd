@@ -13,10 +13,7 @@ func unpause():
 		if not already_paused:
 			Engine.time_scale=global_handler.time_scale
 func _notification(what):
-	if what == NOTIFICATION_WM_WINDOW_FOCUS_IN:
-		print("Player is back! Game has focus.")
-	elif what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
-		print("Player left the game. Lost focus.")
+	if what == NOTIFICATION_WM_WINDOW_FOCUS_OUT:
 		pause()
 func _process(delta: float) -> void:
 	if Input.is_action_just_pressed("open_menu"):

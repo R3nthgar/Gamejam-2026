@@ -300,7 +300,7 @@ seed = 1
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f10td"]
 noise = SubResource("FastNoiseLite_snnrc")
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xgqkh"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctatt"]
 resource_local_to_scene = true
 shader = ExtResource("7_ctatt")
 shader_parameter/lava_sprite = SubResource("NoiseTexture2D_snnrc")
@@ -312,14 +312,14 @@ shader_parameter/noise_color = Vector4(0, 0.75, 0, 0)
 [sub_resource type="Gradient" id="Gradient_lkrqy"]
 colors = PackedColorArray(0.36535352, 0.871799, 0.9999998, 1, 0.72917944, 0.34474206, 1, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_munwf"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xgqkh"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_lkrqy")
 width = 16
 height = 16
 fill_to = Vector2(1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ts3gi"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_munwf"]
 resource_local_to_scene = true
 shader = ExtResource("7_ctatt")
 shader_parameter/lava_sprite = SubResource("NoiseTexture2D_snnrc")
@@ -328,7 +328,7 @@ shader_parameter/texture_pos = Vector2(0.1, 0.1)
 shader_parameter/color = Vector4(0.5, 0, 1, 1)
 shader_parameter/noise_color = Vector4(1, 1, 1, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_0nbtd"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ts3gi"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_lkrqy")
 width = 16
@@ -432,21 +432,21 @@ tile_map_data = PackedByteArray("AAAEAB4AAgADAAIAABADAB4AAgAEAAIAAAACAB4AAgADAAI
 tile_set = ExtResource("2_rwgxs")
 
 [node name="Lava" parent="WorldEnvironment" unique_id=674538969 instance=ExtResource("23_kpybi")]
-material = SubResource("ShaderMaterial_xgqkh")
+material = SubResource("ShaderMaterial_ctatt")
 offset_left = -48.0
 offset_top = 96.0
 offset_right = 0.0
 offset_bottom = 128.0
-texture = SubResource("GradientTexture2D_munwf")
+texture = SubResource("GradientTexture2D_xgqkh")
 metadata/color = Vector4(1, 0.4, 0, 1)
 
 [node name="Lava2" parent="WorldEnvironment" unique_id=1067854969 instance=ExtResource("23_kpybi")]
-material = SubResource("ShaderMaterial_ts3gi")
+material = SubResource("ShaderMaterial_munwf")
 offset_left = -48.0
 offset_top = -608.0
 offset_right = 0.0
 offset_bottom = -576.0
-texture = SubResource("GradientTexture2D_0nbtd")
+texture = SubResource("GradientTexture2D_ts3gi")
 metadata/color = Vector4(0.5, 0.25, 1, 1)
 
 [node name="Polygon2D" type="Polygon2D" parent="WorldEnvironment" unique_id=377309806]
@@ -576,8 +576,10 @@ unique_name_in_owner = true
 layout_mode = 0
 offset_left = -142.0
 offset_top = -589.0
-offset_right = 33.0
-offset_bottom = -414.0
+offset_right = 558.0
+offset_bottom = 111.0
+scale = Vector2(0.25, 0.25)
+theme_override_font_sizes/normal_font_size = 32
 text = ""
 
 [node name="Collectibles" type="Node2D" parent="." unique_id=843014347]

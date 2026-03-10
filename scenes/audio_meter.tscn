@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://bm2a3o8ox3ldr"]
+
+[ext_resource type="FontFile" uid="uid://bch710uus3txx" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8.ttf" id="1_f3exf"]
+[ext_resource type="Script" uid="uid://qrss00dj7hu5" path="res://scripts/audio_meter.gd" id="2_gb1s2"]
+[ext_resource type="StyleBox" uid="uid://doy6ryg51w74n" path="res://assets/intro_button_style.tres" id="3_xcy06"]
+
+[node name="MasterAudio" type="RichTextLabel" unique_id=1042606242]
+clip_contents = false
+custom_minimum_size = Vector2(1152, 66)
+offset_top = 128.0
+offset_right = 1152.0
+offset_bottom = 194.0
+theme_override_fonts/normal_font = ExtResource("1_f3exf")
+theme_override_font_sizes/normal_font_size = 32
+text = "Master Audio"
+fit_content = true
+horizontal_alignment = 1
+script = ExtResource("2_gb1s2")
+metadata/index = 0
+
+[node name="Slider" type="HSlider" parent="." unique_id=224905949]
+layout_mode = 0
+offset_left = 376.0
+offset_top = 48.0
+offset_right = 776.0
+offset_bottom = 64.0
+theme_override_styles/slider = ExtResource("3_xcy06")
+max_value = 1.0
+value = 1.0
+tick_count = 10
+ticks_on_borders = true
+ticks_position = 3
+
+[connection signal="value_changed" from="Slider" to="." method="_on_slider_value_changed"]
