@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" format=3 uid="uid://bc8ttl5uljeq4"]
+
+[ext_resource type="Shader" uid="uid://cig2tnly6e5a6" path="res://shaders/lava.gdshader" id="1_no3ft"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_dw3wf"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_snnrc"]
+noise = SubResource("FastNoiseLite_dw3wf")
+seamless = true
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_snnrc"]
+seed = 5
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f10td"]
+noise = SubResource("FastNoiseLite_snnrc")
+seamless = true
+
+[resource]
+resource_local_to_scene = true
+shader = ExtResource("1_no3ft")
+shader_parameter/lava_sprite = SubResource("NoiseTexture2D_snnrc")
+shader_parameter/lava_sprite2 = SubResource("NoiseTexture2D_f10td")
+shader_parameter/texture_pos = Vector2(24.02575, 24.02575)
+shader_parameter/color = Vector4(0, 0, 0, 1)
+shader_parameter/noise_color = Vector4(1, 1, 1, 0)

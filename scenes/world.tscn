@@ -31,7 +31,7 @@
 normal = Vector2(0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dss4m"]
-size = Vector2(48, 32)
+size = Vector2(48, 28)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oo54l"]
 texture = ExtResource("4_2lf6f")
@@ -293,44 +293,42 @@ shader_parameter/blend_factor = 0.33
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_snnrc"]
 noise = SubResource("FastNoiseLite_dw3wf")
-seamless = true
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_snnrc"]
-seed = 5
+seed = 1
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f10td"]
 noise = SubResource("FastNoiseLite_snnrc")
-seamless = true
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctatt"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xgqkh"]
 resource_local_to_scene = true
 shader = ExtResource("7_ctatt")
 shader_parameter/lava_sprite = SubResource("NoiseTexture2D_snnrc")
 shader_parameter/lava_sprite2 = SubResource("NoiseTexture2D_f10td")
-shader_parameter/texture_size = Vector2(1, 1)
-shader_parameter/texture_pos = Vector2(264.59186, 264.59186)
-shader_parameter/color = Vector4(1, 0.5, 0, 1)
+shader_parameter/texture_pos = Vector2(0.1, 0.1)
+shader_parameter/color = Vector4(1, 0.4, 0, 1)
+shader_parameter/noise_color = Vector4(0, 0.75, 0, 0)
 
 [sub_resource type="Gradient" id="Gradient_lkrqy"]
 colors = PackedColorArray(0.36535352, 0.871799, 0.9999998, 1, 0.72917944, 0.34474206, 1, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_xgqkh"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_munwf"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_lkrqy")
 width = 16
 height = 16
 fill_to = Vector2(1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_munwf"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ts3gi"]
 resource_local_to_scene = true
 shader = ExtResource("7_ctatt")
 shader_parameter/lava_sprite = SubResource("NoiseTexture2D_snnrc")
 shader_parameter/lava_sprite2 = SubResource("NoiseTexture2D_f10td")
-shader_parameter/texture_size = Vector2(1, 1)
-shader_parameter/texture_pos = Vector2(264.59186, 264.59186)
-shader_parameter/color = Vector4(0.5, 0.25, 1, 1)
+shader_parameter/texture_pos = Vector2(0.1, 0.1)
+shader_parameter/color = Vector4(0.5, 0, 1, 1)
+shader_parameter/noise_color = Vector4(1, 1, 1, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ts3gi"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0nbtd"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_lkrqy")
 width = 16
@@ -406,11 +404,11 @@ position = Vector2(-48, 128)
 metadata/damage_per_second = 50.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Lava" unique_id=845796291]
-position = Vector2(24, -16)
+position = Vector2(24, -14)
 shape = SubResource("RectangleShape2D_dss4m")
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Lava" unique_id=1128050891]
-position = Vector2(24, -720)
+position = Vector2(24, -722)
 shape = SubResource("RectangleShape2D_dss4m")
 
 [node name="WorldEnvironment" type="TileMapLayer" parent="." unique_id=254891500]
@@ -433,22 +431,25 @@ scale = Vector2(1, -1)
 tile_map_data = PackedByteArray("AAAEAB4AAgADAAIAABADAB4AAgAEAAIAAAACAB4AAgADAAIAAAA=")
 tile_set = ExtResource("2_rwgxs")
 
-[node name="Lava2" parent="WorldEnvironment" unique_id=674538969 instance=ExtResource("23_kpybi")]
-material = SubResource("ShaderMaterial_ctatt")
+[node name="Lava" parent="WorldEnvironment" unique_id=674538969 instance=ExtResource("23_kpybi")]
+material = SubResource("ShaderMaterial_xgqkh")
 offset_left = -48.0
 offset_top = 96.0
 offset_right = 0.0
 offset_bottom = 128.0
-texture = SubResource("GradientTexture2D_xgqkh")
+texture = SubResource("GradientTexture2D_munwf")
+metadata/color = Vector4(1, 0.4, 0, 1)
 
-[node name="Lava3" parent="WorldEnvironment" unique_id=1067854969 instance=ExtResource("23_kpybi")]
-material = SubResource("ShaderMaterial_munwf")
+[node name="Lava2" parent="WorldEnvironment" unique_id=1067854969 instance=ExtResource("23_kpybi")]
+material = SubResource("ShaderMaterial_ts3gi")
 offset_left = -48.0
 offset_top = -608.0
 offset_right = 0.0
 offset_bottom = -576.0
-texture = SubResource("GradientTexture2D_ts3gi")
+texture = SubResource("GradientTexture2D_0nbtd")
 metadata/color = Vector4(0.5, 0.25, 1, 1)
+
+[node name="Polygon2D" type="Polygon2D" parent="WorldEnvironment" unique_id=377309806]
 
 [node name="Mainlandscape" type="TileMapLayer" parent="." unique_id=1811201444]
 tile_map_data = PackedByteArray("AAD6////AAAAAAIAAAABAP//AAAAAAAAAAAFAP//AAAAAAAAAAAMAP//AAAAAAEAAAAOAAUAAAAAAAEAAAASAAgAAAAAAAEAAAAbAAgAAAAAAAEAAAAfAAgAAAAAAAEAAAD8////AAACAAIAAAD8//7/AAACAAEAAAD8//3/AAACAAEAAAD8//z/AAACAAAAAAAgAPv/AAACAAAAAAAgAPz/AAACAAEAAAAgAP3/AAACAAEAAAAgAP7/AAACAAIAAAAYAP7/AAAAAAAAAAAfAP7/AAAAAAAAAAAaAP//AAAAAAIAAAD+/+L/AAAAAAIAACD6/+L/AAAAAAIAACARAOT/AAAAAAAAACAMAOL/AAAAAAIAACAFAOL/AAAAAAAAACABAOL/AAAAAAAAACAJAOP/AAACAAIAACD8/+L/AAACAAIAACAJAOT/AAACAAEAAAAJAOX/AAACAAEAAAD8/+T/AAACAAEAAAD8/+P/AAACAAEAAAAJAOb/AAACAAAAACD8/+X/AAACAAAAACAUAAYAAAAAAAEAAAAQAP7/AAAAAAAAAAARAAIAAAAEAAAAAAARAAMAAAAEAAEAAAARAAQAAAAEAAEAAAARAAUAAAAEAAIAAAASAAMAAAAEAAAAAAASAAQAAAAEAAEAAAASAAUAAAAEAAEAAAASAAYAAAAEAAIAAAAbAAMAAAAEAAAAAAAbAAQAAAAEAAEAAAAbAAUAAAAEAAEAAAAbAAYAAAAEAAIAAAAdAAMAAAAEAAAAAAAdAAQAAAAEAAEAAAAdAAUAAAAEAAEAAAAdAAYAAAAEAAIAAAD/////AAACAAIAAAD///7/AAACAAEAAAD///3/AAACAAEAAAD///z/AAACAAAAAAAdAP//AAAAAAIAAAAjAP7/AAACAAIAAAAjAP3/AAACAAEAAAAjAPz/AAACAAEAAAAjAPv/AAACAAAAAAAkAP7/AAAAAAAAAAA=")
