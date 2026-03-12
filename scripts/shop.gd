@@ -142,7 +142,7 @@ func test_for_potion_and_ingredients():
 				if (not potion_icon_1.potion_metadata.has(meta) or potion_icon_1.potion_metadata[meta]!=child.potion_metadata[meta]) and not (meta=="price" or meta=="color"):
 					same=false
 			child.highlighted.visible=same
-			if same:
+			if same and not child.is_queued_for_deletion():
 				copy_potion(child)
 		else:
 			child.highlighted.visible=false
