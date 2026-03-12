@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bm6r003hjkty6" path="res://assets/brackeys_platformer_assets/sprites/world_tileset.png" id="4_2lf6f"]
 [ext_resource type="Shader" uid="uid://cuqnnxy8c1cu1" path="res://shaders/obscurer.gdshader" id="5_pm21f"]
 [ext_resource type="Texture2D" uid="uid://7a8m7ncx1h3n" path="res://assets/custom/gamejam_map_tileset.png" id="6_7iits"]
-[ext_resource type="Shader" uid="uid://cig2tnly6e5a6" path="res://shaders/lava.gdshader" id="7_ctatt"]
 [ext_resource type="PackedScene" uid="uid://cak5vk61bn28p" path="res://scenes/pickable.tscn" id="7_i7141"]
 [ext_resource type="TileSet" uid="uid://vdr61f8v5y40" path="res://assets/landscape.tres" id="7_lakw3"]
 [ext_resource type="PackedScene" uid="uid://bljd1wq88lip" path="res://scenes/instructions.tscn" id="8_7iits"]
@@ -19,11 +18,10 @@
 [ext_resource type="PackedScene" uid="uid://cadx84wyr68tk" path="res://scenes/destructible.tscn" id="16_dss4m"]
 [ext_resource type="FontFile" uid="uid://bokuuf26dk8u1" path="res://assets/brackeys_platformer_assets/fonts/PixelOperator8-Bold.ttf" id="17_2lf6f"]
 [ext_resource type="PackedScene" uid="uid://buspb3k4whwwu" path="res://scenes/obscurer.tscn" id="17_lakw3"]
-[ext_resource type="Script" uid="uid://b53ec1ksjpe5j" path="res://scripts/guidebook_collect.gd" id="19_2lf6f"]
+[ext_resource type="Script" path="res://scripts/guidebook_collect.gd" id="19_2lf6f"]
 [ext_resource type="PackedScene" uid="uid://bgybj6w4sc0bf" path="res://scenes/menu.tscn" id="19_oo54l"]
 [ext_resource type="PackedScene" uid="uid://c773gnh1a784n" path="res://scenes/guidebook.tscn" id="19_pm21f"]
-[ext_resource type="Script" uid="uid://c5sk00uuu18mj" path="res://scripts/recipebook_collect.gd" id="21_7iits"]
-[ext_resource type="PackedScene" uid="uid://in54nw60xegh" path="res://scenes/lava.tscn" id="23_kpybi"]
+[ext_resource type="Script" path="res://scripts/recipebook_collect.gd" id="21_7iits"]
 
 [sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_i7141"]
 
@@ -289,52 +287,6 @@ sources/3 = SubResource("TileSetAtlasSource_ctatt")
 shader = ExtResource("5_pm21f")
 shader_parameter/blend_factor = 0.33
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_dw3wf"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_snnrc"]
-noise = SubResource("FastNoiseLite_dw3wf")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_snnrc"]
-seed = 1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f10td"]
-noise = SubResource("FastNoiseLite_snnrc")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ctatt"]
-resource_local_to_scene = true
-shader = ExtResource("7_ctatt")
-shader_parameter/lava_sprite = SubResource("NoiseTexture2D_snnrc")
-shader_parameter/lava_sprite2 = SubResource("NoiseTexture2D_f10td")
-shader_parameter/texture_pos = Vector2(0.1, 0.1)
-shader_parameter/color = Vector4(1, 0.4, 0, 1)
-shader_parameter/noise_color = Vector4(0, 0.75, 0, 0)
-
-[sub_resource type="Gradient" id="Gradient_lkrqy"]
-colors = PackedColorArray(0.36535352, 0.871799, 0.9999998, 1, 0.72917944, 0.34474206, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_xgqkh"]
-resource_local_to_scene = true
-gradient = SubResource("Gradient_lkrqy")
-width = 16
-height = 16
-fill_to = Vector2(1, 1)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_munwf"]
-resource_local_to_scene = true
-shader = ExtResource("7_ctatt")
-shader_parameter/lava_sprite = SubResource("NoiseTexture2D_snnrc")
-shader_parameter/lava_sprite2 = SubResource("NoiseTexture2D_f10td")
-shader_parameter/texture_pos = Vector2(0.1, 0.1)
-shader_parameter/color = Vector4(0.5, 0, 1, 1)
-shader_parameter/noise_color = Vector4(1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ts3gi"]
-resource_local_to_scene = true
-gradient = SubResource("Gradient_lkrqy")
-width = 16
-height = 16
-fill_to = Vector2(1, 1)
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kpybi"]
 size = Vector2(57, 36)
 
@@ -430,24 +382,6 @@ collision_enabled = false
 scale = Vector2(1, -1)
 tile_map_data = PackedByteArray("AAAEAB4AAgADAAIAABADAB4AAgAEAAIAAAACAB4AAgADAAIAAAA=")
 tile_set = ExtResource("2_rwgxs")
-
-[node name="Lava" parent="WorldEnvironment" unique_id=674538969 instance=ExtResource("23_kpybi")]
-material = SubResource("ShaderMaterial_ctatt")
-offset_left = -48.0
-offset_top = 96.0
-offset_right = 0.0
-offset_bottom = 128.0
-texture = SubResource("GradientTexture2D_xgqkh")
-metadata/color = Vector4(1, 0.4, 0, 1)
-
-[node name="Lava2" parent="WorldEnvironment" unique_id=1067854969 instance=ExtResource("23_kpybi")]
-material = SubResource("ShaderMaterial_munwf")
-offset_left = -48.0
-offset_top = -608.0
-offset_right = 0.0
-offset_bottom = -576.0
-texture = SubResource("GradientTexture2D_ts3gi")
-metadata/color = Vector4(0.5, 0.25, 1, 1)
 
 [node name="Polygon2D" type="Polygon2D" parent="WorldEnvironment" unique_id=377309806]
 

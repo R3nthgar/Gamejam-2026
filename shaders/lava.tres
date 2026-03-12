@@ -1,6 +1,6 @@
-[gd_resource type="ShaderMaterial" format=3 uid="uid://bc8ttl5uljeq4"]
+[gd_resource type="ShaderMaterial" format=3 uid="uid://d4i78vqnyg83m"]
 
-[ext_resource type="Shader" uid="uid://cig2tnly6e5a6" path="res://shaders/lava.gdshader" id="1_no3ft"]
+[ext_resource type="Shader" path="res://shaders/lava.gdshader" id="1_no3ft"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_dw3wf"]
 

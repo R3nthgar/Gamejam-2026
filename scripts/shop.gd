@@ -213,7 +213,7 @@ func set_statics():
 			else:
 				recipe[ingredient.type]+=1
 			ingredient.queue_free()
-		if global_handler.instruction_step<22 and recipe=={"red_apple": 3}:
+		if global_handler.instruction_step<23 and recipe=={"red_apple": 3}:
 			instructions.change_instructions(23)
 		statics=[]
 		ingredient_control.highlighted.visible=false
