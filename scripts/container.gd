@@ -103,7 +103,7 @@ func _ready() -> void:
 	change_shape()
 	container_alarm.rotation=-rotation
 	container_alarm.position.y=Vector2(0,-(size+border_thickness)*2*cos(PI/points)-8).rotated(rotation).y
-
+	container_alarm.size=Vector2(40,70)
 func fix_alarm():
 	container_alarm.visible=contained.size()>=container_size-1
 	if(contained.size()>=container_size):
@@ -140,11 +140,6 @@ func _on_container_area_body_entered(body: Node2D) -> void:
 
 		#Makes exclamation mark appear when container is full or close to full
 		fix_alarm()
-func _physics_process(delta: float) -> void:
-	for body in contained:
-		if is_instance_valid(contained):
-			for child in body.get_children():
-				child.scale=Vector2(container_scale_mod,container_scale_mod)
 func _on_container_area_body_exited(body: Node2D) -> void:
 	#Prevents objects from exiting via moving, unless the container is open
 	if ((body.held if closed else true) and contained.has(body)):

@@ -26,6 +26,7 @@ offset_right = 776.0
 offset_bottom = 64.0
 theme_override_styles/slider = ExtResource("3_xcy06")
 max_value = 1.0
+step = 0.009
 value = 1.0
 tick_count = 10
 ticks_on_borders = true

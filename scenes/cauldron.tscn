@@ -2,6 +2,17 @@
 
 [ext_resource type="PackedScene" uid="uid://diacnvuwoca2w" path="res://scenes/container.tscn" id="1_bi80w"]
 [ext_resource type="Script" uid="uid://dit2a7odcne7i" path="res://scripts/cauldron.gd" id="2_8jqlm"]
+[ext_resource type="Texture2D" uid="uid://dn1trvr4gmw8r" path="res://assets/custom/gamejam_container_tileset.png" id="3_l3ke8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_au12p"]
+resource_local_to_scene = true
+atlas = ExtResource("3_l3ke8")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7mkqr"]
+resource_local_to_scene = true
+atlas = ExtResource("3_l3ke8")
+region = Rect2(16, 16, 16, 16)
 
 [node name="Cauldron" unique_id=1883418583 instance=ExtResource("1_bi80w")]
 rotation = 3.1415927
@@ -12,11 +23,15 @@ metadata/container_size = 3
 [node name="ContainerAlarm" parent="." index="3" unique_id=342496269]
 offset_left = 5.000003
 offset_top = 33.455845
-offset_right = 15.000003
-offset_bottom = 49.455845
+offset_right = 45.000004
+offset_bottom = 103.45584
 rotation = -3.1415927
 
 [node name="Outside" parent="." index="6" unique_id=406002231]
 rotation = 3.1415927
+texture = SubResource("AtlasTexture_au12p")
+
+[node name="Inside" parent="Outside" index="0" unique_id=93245265]
+texture = SubResource("AtlasTexture_7mkqr")
 
 [connection signal="body_entered" from="ContainerArea1" to="." method="_on_container_area_1_body_entered"]
