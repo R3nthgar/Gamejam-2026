@@ -71,9 +71,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -152.0
-offset_top = -245.0
+offset_top = -165.0
 offset_right = 152.0
-offset_bottom = -187.0
+offset_bottom = -107.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_mhnvy")
@@ -93,9 +93,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -209.0
-offset_top = 187.0
+offset_top = 107.0
 offset_right = 209.0
-offset_bottom = 245.0
+offset_bottom = 165.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("2_mhnvy")
@@ -109,11 +109,12 @@ metadata/new_scene = "res://scenes/world.tscn"
 
 [node name="Master" parent="." unique_id=1042606242 instance=ExtResource("4_v86rl")]
 layout_mode = 0
-offset_top = 192.0
-offset_bottom = 258.0
-text = "Master Volume"
+offset_top = 272.0
+offset_bottom = 338.0
+text = "Volume"
 
 [node name="Music" parent="." unique_id=605866983 instance=ExtResource("4_v86rl")]
+visible = false
 layout_mode = 0
 offset_top = 288.0
 offset_bottom = 354.0
@@ -121,6 +122,7 @@ text = "Music"
 metadata/index = 2
 
 [node name="SFX" parent="." unique_id=290421005 instance=ExtResource("4_v86rl")]
+visible = false
 layout_mode = 0
 offset_top = 384.0
 offset_bottom = 450.0
